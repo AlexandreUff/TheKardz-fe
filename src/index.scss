@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@100;200;600;800&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-size: 62.5%;
+    list-style: none;
+}
+
+$firstColor: #EEE2DE;
+$secondColor: #EA906C;
+$thirthColor: #B31312;
+$fourthColor: #2B2A4C;
+
+.App {
+  display: flex;
+  flex-direction: column;
+  background-color: $fourthColor;
+  height: 100vh;
+  color: $secondColor;
+  font-family: 'Geologica';
+
+  header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Geologica';
+    
+    h1 {
+        font-size: 9rem;
+        -webkit-text-stroke-color: $secondColor;
+        -webkit-text-stroke-width: 2px;
+        color: $fourthColor;
+
+        span {
+            font-size: inherit;
+            color: $secondColor;
+        }
+
+        small {
+            font-size: 25%;
+        }
+    }
+  }
+
+  main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+        margin: 0px 50px;
+        font-size: 6rem;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* background-color: yellow; */
+        }
+
+        input {
+            margin-left: 10px;
+            background-color: $fourthColor;
+            border: 2px solid $secondColor;
+            border-radius: 10px;
+            color: $firstColor;
+            padding: 0 5px;
+        }
+
+        input[type="text"]{
+            margin: 15px 0;
+        }
+
+        input[type="submit"]{
+            background-color: $secondColor;
+            color: $fourthColor;
+            width: 150px;
+        }
+
+        
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px 50px;
+    color: $secondColor;
+    text-align: center;
+    font-family: 'Geologica';
+
+    nav {
+        ul {
+            display: flex;
+
+            li {
+                a {
+                    color: $secondColor;
+                }
+
+                svg {
+                    width: 24px;
+                    margin: 0px 5px;
+                }
+            }
+        }    
+    }
+
+    div {
+            font-size: 2rem;
+            line-height: 1;
+        }
+  }
+}

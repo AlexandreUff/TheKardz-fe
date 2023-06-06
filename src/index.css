@@ -1,13 +1,90 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@100;200;600;800&display=swap");
+* {
+  margin: 0px;
+  padding: 0px;
+  font-size: 62.5%;
+  list-style: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App {
+  display: flex;
+  flex-direction: column;
+  background-color: #2B2A4C;
+  height: 100vh;
+  color: #EA906C;
+  font-family: "Geologica";
 }
+.App header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Geologica";
+}
+.App header h1 {
+  font-size: 9rem;
+  -webkit-text-stroke-color: #EA906C;
+  -webkit-text-stroke-width: 2px;
+  color: #2B2A4C;
+}
+.App header h1 span {
+  font-size: inherit;
+  color: #EA906C;
+}
+.App header h1 small {
+  font-size: 25%;
+}
+.App main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  margin: 0px 50px;
+  font-size: 6rem;
+}
+.App main form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: yellow; */
+}
+.App main input {
+  margin-left: 10px;
+  background-color: #2B2A4C;
+  border: 2px solid #EA906C;
+  border-radius: 10px;
+  color: #EEE2DE;
+  padding: 0 5px;
+}
+.App main input[type=text] {
+  margin: 15px 0;
+}
+.App main input[type=submit] {
+  background-color: #EA906C;
+  color: #2B2A4C;
+  width: 150px;
+}
+.App footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px 50px;
+  color: #EA906C;
+  text-align: center;
+  font-family: "Geologica";
+}
+.App footer nav ul {
+  display: flex;
+}
+.App footer nav ul li a {
+  color: #EA906C;
+}
+.App footer nav ul li svg {
+  width: 24px;
+  margin: 0px 5px;
+}
+.App footer div {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+/*# sourceMappingURL=index.css.map */
