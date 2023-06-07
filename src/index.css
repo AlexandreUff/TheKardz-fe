@@ -34,6 +34,41 @@
   font-size: 25%;
   -webkit-text-stroke-width: 1px;
 }
+.App header .main-ico {
+  width: 120px;
+  height: 100%;
+  position: relative;
+}
+.App header .main-ico .card-style {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border: 2px solid #EA906C;
+  background-color: #2B2A4C;
+  width: 50px;
+  height: 70px;
+  border-radius: 10%;
+}
+.App header .main-ico .card-style[index="1"] {
+  left: 15px;
+  top: 15px;
+  transform: rotate(-25deg);
+}
+.App header .main-ico .card-style[index="2"] {
+  left: 35px;
+  top: 5px;
+  z-index: 1;
+}
+.App header .main-ico .card-style[index="3"] {
+  left: 55px;
+  top: 15px;
+  z-index: 2;
+  transform: rotate(25deg);
+}
+.App header .main-ico .card-style svg {
+  width: 90%;
+}
 .App main {
   display: flex;
   align-items: center;
@@ -61,6 +96,7 @@
 }
 .App main input[type=submit] {
   background-color: #EA906C;
+  font-weight: 600;
   color: #2B2A4C;
   width: 150px;
 }
