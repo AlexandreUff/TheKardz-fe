@@ -90,6 +90,7 @@ $fourthColor: #2B2A4C;
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
         flex-grow: 1;
         margin: 0px 50px;
         font-size: 6rem;
@@ -98,7 +99,10 @@ $fourthColor: #2B2A4C;
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* background-color: yellow; */
+        }
+
+        a {
+            color: $secondColor;
         }
 
         input {
@@ -119,6 +123,11 @@ $fourthColor: #2B2A4C;
             font-weight: 600;
             color: $fourthColor;
             width: 150px;
+            cursor: pointer;
+
+            &:hover{
+                transform: scale(1.2);
+            }
         }
 
         
