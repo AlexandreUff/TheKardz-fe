@@ -131,4 +131,41 @@
   line-height: 1;
 }
 
+@media (max-width: 500px) {
+  .App header h1 {
+    font-size: 6rem;
+    -webkit-text-stroke-color: #EA906C;
+    -webkit-text-stroke-width: 2px;
+    color: #2B2A4C;
+  }
+  .App header h1 span {
+    font-size: inherit;
+    color: #EA906C;
+  }
+  .App header h1 small {
+    font-size: 25%;
+    -webkit-text-stroke-width: 1px;
+  }
+  .App header .main-ico {
+    width: 70px;
+    top: -12px;
+    transform: scale(0.65);
+    /* left: -12px; */
+  }
+  .App header .main-ico .card-style[index="1"] {
+    left: -5px;
+  }
+  .App header .main-ico .card-style[index="2"] {
+    left: 25px;
+  }
+  .App header .main-ico .card-style[index="3"] {
+    left: 45px;
+  }
+}
+@media (max-width: 400px) {
+  .App footer {
+    flex-direction: column;
+  }
+}
+
 /*# sourceMappingURL=index.css.map */

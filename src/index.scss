@@ -165,3 +165,56 @@ $fourthColor: #2B2A4C;
         }
   }
 }
+
+@media (max-width: 500px){
+    .App{
+        header {
+            h1 {
+                font-size: 6rem;
+                -webkit-text-stroke-color: $secondColor;
+                -webkit-text-stroke-width: 2px;
+                color: $fourthColor;
+        
+                span {
+                    font-size: inherit;
+                    color: $secondColor;
+                }
+        
+                small {
+                    font-size: 25%;
+                    -webkit-text-stroke-width: 1px;
+                }
+            }
+
+            .main-ico{
+                width: 70px;
+                top: -12px;
+                transform: scale(0.65);
+                /* left: -12px; */
+
+                .card-style{
+                    &[index="1"]{
+                    left: -5px;
+                }
+    
+                &[index="2"]{
+                    left: 25px;
+                }
+    
+                &[index="3"]{
+                    left: 45px;
+                }
+                }
+                
+            }
+        }
+    }    
+}
+
+@media(max-width: 400px){
+    .App{
+        footer{
+            flex-direction: column;
+        }
+    }
+}
