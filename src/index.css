@@ -103,6 +103,7 @@
   color: #2B2A4C;
   width: 150px;
   cursor: pointer;
+  transition: 0.2s;
 }
 .App main input[type=submit]:hover {
   transform: scale(1.2);

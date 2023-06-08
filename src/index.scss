@@ -124,6 +124,7 @@ $fourthColor: #2B2A4C;
             color: $fourthColor;
             width: 150px;
             cursor: pointer;
+            transition: .2s;
 
             &:hover{
                 transform: scale(1.2);

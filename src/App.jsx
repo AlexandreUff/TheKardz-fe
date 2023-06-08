@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import './index.css';
 import Home from './pages/Home';
+import UserName from './pages/UserName';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Router>
         <Routes>
           <Route index element={<Home/>}/>
+          <Route path="/username" element={<UserName/>}/>
         </Routes>
       </Router>
     </div>
