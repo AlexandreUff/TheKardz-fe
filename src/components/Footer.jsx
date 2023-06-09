@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { IcoGHBs, IcoLIn, IcoPDF } from "./Icons";
 
 export default function Footer(){
@@ -21,6 +22,11 @@ export default function Footer(){
                         </a>
                     </li>
                 </ul>
+            </nav>
+            <nav>
+                <Link to="/howtoplay" target="_blank">
+                    <h3>COMO JOGAR!</h3>
+                </Link>
             </nav>
             <div>
                 <small>
