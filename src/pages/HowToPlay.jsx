@@ -9,7 +9,9 @@ export default function UserName() {
       <Main>
         <h2>[AQUI VOCÊ DEIXA DE SER BURRO E APRENDE A JOGAR]</h2>
       </Main>
-      <Footer />
+      <h3 style={{textAlign:"center", fontSize:"2rem"}}>
+        Footer removido temporariamente.
+      </h3>
     </>
   );
 }

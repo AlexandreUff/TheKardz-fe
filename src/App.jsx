@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import UserName from './pages/UserName';
 import NotFound from './pages/NotFound';
 import HowToPlay from './pages/HowToPlay';
+import Game from './pages/Game';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route index element={<Home/>}/>
           <Route path="/username" element={<UserName/>}/>
           <Route path="/howtoplay" element={<HowToPlay/>}/>
+          <Route path="/game" element={<Game/>}/>
           <Route path ="*" element={<NotFound/>}/>
         </Routes>
       </Router>
