@@ -174,10 +174,10 @@
     left: -5px;
   }
   .App header .main-ico .card-style[index="2"] {
-    left: 25px;
+    left: 35px;
   }
   .App header .main-ico .card-style[index="3"] {
-    left: 45px;
+    left: 55px;
   }
 }
 @media (max-width: 400px) {

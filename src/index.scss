@@ -220,17 +220,17 @@ $fourthColor: #2B2A4C;
                 }
     
                 &[index="2"]{
-                    left: 25px;
+                    left: 35px;
                 }
     
                 &[index="3"]{
-                    left: 45px;
+                    left: 55px;
                 }
                 }
                 
             }
         }
-    }    
+    }
 }
 
 @media(max-width: 400px){
@@ -238,7 +238,7 @@ $fourthColor: #2B2A4C;
         footer{
             flex-direction: column;
         }
-    }
+    }   
 }
 
 /* KeyFrames */
