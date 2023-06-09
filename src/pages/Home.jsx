@@ -9,8 +9,8 @@ export default function Home() {
       <Header />
       <Main>
         <form>
-          <label htmlFor="name">Digite abaixo o número da sala:</label>
-          <input type="text" id="name" />
+          <label htmlFor="hall">Digite abaixo o número da sala:</label>
+          <input type="text" id="hall" />
           <input type="submit" value="ENTRAR" title="Criar sala" />
         </form>
         <div>
