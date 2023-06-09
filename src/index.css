@@ -96,6 +96,7 @@
 }
 .App main input[type=text] {
   margin: 15px 0;
+  text-align: center;
 }
 .App main input[type=submit] {
   background-color: #EA906C;
