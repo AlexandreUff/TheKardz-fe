@@ -63,7 +63,7 @@ $fourthColor: #2B2A4C;
             animation-duration: 1s;
             animation-delay: 2s;
             animation-timing-function: ease;
-            animation-direction: alternate-reverse;
+            animation-direction: alternate;
             animation-iteration-count: infinite;
 
             &[index="1"]{
@@ -144,7 +144,13 @@ $fourthColor: #2B2A4C;
             }
         }
 
-        
+        .not-found-ico{
+            margin-top: 16px;
+
+            svg {
+                width: 96px;
+            }
+        }
   }
 
   footer {

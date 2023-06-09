@@ -52,7 +52,7 @@
   animation-duration: 1s;
   animation-delay: 2s;
   animation-timing-function: ease;
-  animation-direction: alternate-reverse;
+  animation-direction: alternate;
   animation-iteration-count: infinite;
 }
 .App header .main-ico .card-style[index="1"] {
@@ -116,6 +116,12 @@
 }
 .App main input[type=submit]:hover {
   transform: scale(1.2);
+}
+.App main .not-found-ico {
+  margin-top: 16px;
+}
+.App main .not-found-ico svg {
+  width: 96px;
 }
 .App footer {
   display: flex;

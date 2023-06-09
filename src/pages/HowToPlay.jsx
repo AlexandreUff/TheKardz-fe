@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { IcoNotFound } from "../components/Icons";
 import Main from "../components/Main";
 
 export default function UserName() {
@@ -9,12 +7,7 @@ export default function UserName() {
     <>
       <Header />
       <Main>
-        <h2>Ops! Página não encontrada.</h2>
-        <div className="not-found-ico">
-          <IcoNotFound/>
-        </div>
-
-        <Link to="/">Voltar</Link>
+        <h2>[AQUI VOCÊ DEIXA DE SER BURRO E APRENDE A JOGAR]</h2>
       </Main>
       <Footer />
     </>
