@@ -60,16 +60,26 @@ $fourthColor: #2B2A4C;
             height: 70px;
             border-radius: 10%;
 
+            animation-duration: 1s;
+            animation-delay: 2s;
+            animation-timing-function: ease;
+            animation-direction: alternate-reverse;
+            animation-iteration-count: infinite;
+
             &[index="1"]{
                 left: 15px;
                 top: 15px;
                 transform: rotate(-25deg);
+
+                animation-name: card1-moviment;
             }
 
             &[index="2"]{
                 left: 35px;
                 top: 5px;
                 z-index: 1;
+
+                animation-name: card2-moviment;
             }
 
             &[index="3"]{
@@ -77,6 +87,8 @@ $fourthColor: #2B2A4C;
                 top: 15px;
                 z-index: 2;
                 transform: rotate(25deg);
+
+                animation-name: card3-moviment;   
             }
 
             svg {
@@ -166,6 +178,28 @@ $fourthColor: #2B2A4C;
             line-height: 1;
         }
   }
+}
+
+@keyframes card1-moviment {
+    to {
+        left: 25px;
+        top: 22px;
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes card2-moviment {
+    to {
+        top: 22px;
+    }
+}
+
+@keyframes card3-moviment {
+    to {
+        left: 45px;
+        top: 22px;
+        transform: rotate(0deg);
+    }
 }
 
 @media (max-width: 500px){
