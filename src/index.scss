@@ -180,28 +180,7 @@ $fourthColor: #2B2A4C;
   }
 }
 
-@keyframes card1-moviment {
-    to {
-        left: 25px;
-        top: 22px;
-        transform: rotate(0deg);
-    }
-}
-
-@keyframes card2-moviment {
-    to {
-        top: 22px;
-    }
-}
-
-@keyframes card3-moviment {
-    to {
-        left: 45px;
-        top: 22px;
-        transform: rotate(0deg);
-    }
-}
-
+/* Media Query */
 @media (max-width: 500px){
     .App{
         header {
@@ -252,5 +231,28 @@ $fourthColor: #2B2A4C;
         footer{
             flex-direction: column;
         }
+    }
+}
+
+/* KeyFrames */
+@keyframes card1-moviment {
+    to {
+        left: 25px;
+        top: 22px;
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes card2-moviment {
+    to {
+        top: 22px;
+    }
+}
+
+@keyframes card3-moviment {
+    to {
+        left: 45px;
+        top: 22px;
+        transform: rotate(0deg);
     }
 }

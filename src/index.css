@@ -141,25 +141,7 @@
   line-height: 1;
 }
 
-@keyframes card1-moviment {
-  to {
-    left: 25px;
-    top: 22px;
-    transform: rotate(0deg);
-  }
-}
-@keyframes card2-moviment {
-  to {
-    top: 22px;
-  }
-}
-@keyframes card3-moviment {
-  to {
-    left: 45px;
-    top: 22px;
-    transform: rotate(0deg);
-  }
-}
+/* Media Query */
 @media (max-width: 500px) {
   .App header h1 {
     font-size: 6rem;
@@ -194,6 +176,26 @@
 @media (max-width: 400px) {
   .App footer {
     flex-direction: column;
+  }
+}
+/* KeyFrames */
+@keyframes card1-moviment {
+  to {
+    left: 25px;
+    top: 22px;
+    transform: rotate(0deg);
+  }
+}
+@keyframes card2-moviment {
+  to {
+    top: 22px;
+  }
+}
+@keyframes card3-moviment {
+  to {
+    left: 45px;
+    top: 22px;
+    transform: rotate(0deg);
   }
 }
 
