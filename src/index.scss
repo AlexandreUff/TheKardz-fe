@@ -205,6 +205,16 @@ $fourthColor: #2B2A4C;
             padding: 15px 0;
             border-bottom: $firstColor solid 2px;
 
+            .position{
+                position: absolute;
+                top: 10%;
+                left: -8px;
+                font-weight: 600;
+                font-size: 1.3rem;
+                color: $firstColor;
+                
+            }
+
             .isFighting{
                 position: absolute;
                 top: 25%;

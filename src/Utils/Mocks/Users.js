@@ -31,7 +31,7 @@ export const Users = [
     loses: 51,
     hall: "778899",
     ping: true,
-    fighting: true,
+    fighting: false,
     moviments: [
       {
         name: "recharging",
@@ -475,7 +475,7 @@ export const Users = [
     loses: 10,
     hall: "778899",
     ping: true,
-    fighting: false,
+    fighting: true,
     moviments: [
       {
         name: "recharging",

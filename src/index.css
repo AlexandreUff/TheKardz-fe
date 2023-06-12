@@ -166,6 +166,14 @@
   padding: 15px 0;
   border-bottom: #EEE2DE solid 2px;
 }
+.App .game-area .aside-players .players-score-scope .position {
+  position: absolute;
+  top: 10%;
+  left: -8px;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: #EEE2DE;
+}
 .App .game-area .aside-players .players-score-scope .isFighting {
   position: absolute;
   top: 25%;
