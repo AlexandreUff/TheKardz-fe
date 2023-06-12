@@ -265,12 +265,6 @@ $fourthColor: #2B2A4C;
             align-items: center;
             justify-content: center;
         }
-
-        position: absolute; /* GPT */
-        backface-visibility: hidden; /* GPT */
-
-        transform: rotateY(0deg); /* GPT */
-        transition: transform 0.5s; /* GPT */
     }
 
     &:hover .frontface {

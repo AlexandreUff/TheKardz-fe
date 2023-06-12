@@ -203,10 +203,6 @@
   height: 100%;
   border: #2B2A4C solid 2px;
   border-radius: 10%;
-  position: absolute; /* GPT */
-  backface-visibility: hidden; /* GPT */
-  transform: rotateY(0deg); /* GPT */
-  transition: transform 0.5s; /* GPT */
 }
 .card-game .frontface[type=bronze] {
   background-color: rgb(233, 98, 98);
