@@ -185,44 +185,102 @@ $fourthColor: #2B2A4C;
             line-height: 1;
         }
   }
+
+  .game-area{
+    width: 100vw;
+    height: 100vh;
+    background-color: $firstColor;
+  }
 }
 
 .card-game{
-    display: flex;
+ /*    display: flex;
     justify-content: center;
     align-items: center;
-    border: $secondColor solid 2px;
+    border: $fourthColor solid 2px;
+    
+    border-radius: 10%; */
+    perspective: 1000px; /* gpt */
     width: 50px;
     height: 75px;
-    border-radius: 10%;
-
-
-    .backface.frontface{
-        display: flex;
-        border: $secondColor solid 1px;
-        width: 90%;
-        height: 92%;
-        border-radius: 10%;
-        font-size: 3.5rem;
-    }
 
     .backface{
-        flex-wrap: wrap;
-        border: $secondColor solid 1px;
-        font-size: 3.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute; /* GPT */
+        backface-visibility: hidden; /* GPT */
+        transform: rotateY(-180deg); /* GPT */
+        transition: transform 0.5s; /* GPT */
+        width: 100%;
+        height: 100%;
+        border: $fourthColor solid 2px;
+        border-radius: 10%;
+            
+        div {
+            display: flex;
+            flex-wrap: wrap;
+            border: $fourthColor solid 1px;
+            width: 89%;
+            height: 90%;
+            border-radius: 10%;
 
-        svg {
-            color: $secondColor;
-            width: 16.65%;
-            height: 16.65%;
+            svg {
+                color: $fourthColor;
+                width: 16.65%;
+                height: 16.65%;
+            } 
         }
     }
 
     .frontface{
-        justify-content: center;
+        display: flex;
         align-items: center;
-        font-size: 3.5rem;
+        justify-content: center;
+        position: absolute; /* GPT */
+        backface-visibility: hidden; /* GPT */
+        transform: rotateY(0deg); /* GPT */
+        transition: transform 0.5s; /* GPT */
+        width: 100%;
+        height: 100%;
+        border: $fourthColor solid 2px;
+        border-radius: 10%;
+
+        &[type="bronze"]{
+            background-color: rgb(233, 98, 98);
+        }
+
+        &[type="gold"]{
+            background-color: goldenrod;
+        }
+
+        div {
+            border: $fourthColor solid 1px;
+            width: 89%;
+            height: 90%;
+            border-radius: 10%;
+
+            font-size: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        position: absolute; /* GPT */
+        backface-visibility: hidden; /* GPT */
+
+        transform: rotateY(0deg); /* GPT */
+        transition: transform 0.5s; /* GPT */
     }
+
+    &:hover .frontface {
+        transform: rotateY(180deg); /* Rotação ao passar o mouse para mostrar a trás */
+    }
+
+    &:hover .backface {
+        transform: rotateY(0deg); /* Rotação ao passar o mouse para mostrar a frente */
+    }
+      
 }
 
 /* Media Query */

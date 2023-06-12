@@ -2,7 +2,7 @@ import { IcoDiamondCard } from "../Icons";
 
 export default function CardEmpty(props){
 
-    function takeEmoji(moviment){
+    function takeMovimentInfo(moviment){
         if(moviment === 'defense1' || moviment === "defense2" || moviment === "defense3"){
             return "🛡"
         }
@@ -22,22 +22,26 @@ export default function CardEmpty(props){
     return (
     <div className="card-game">
         <div className="backface">
-            <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
-            <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
-            <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
-            <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
-            <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
-            <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
-            <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
-            <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
-            <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
-            <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
-            <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
-            <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
+            <div>
+                <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
+                <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
+                <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
+                <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
+                <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
+                <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
+                <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
+                <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
+                <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
+                <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
+                <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
+                <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
+            </div>
         </div>
-        {/* <div className="frontface">
-            {takeEmoji('recharging3')}
-        </div> */}
+        <div className="frontface" /* type="gold" */>
+            <div>
+                {takeMovimentInfo('attack2')}
+            </div>
+        </div>
     </div>
     )
 }

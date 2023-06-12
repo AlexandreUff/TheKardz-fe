@@ -2,8 +2,8 @@ import CardEmpty from "../components/game/CardEmpty";
 
 export default function Game(){
     return (
-        <>
-        <CardEmpty />
-        </>
+        <div className="game-area">
+            <CardEmpty />
+        </div>
     )
 }
