@@ -7,7 +7,7 @@ export const Users = [
     loses: 27,
     hall: "778899",
     ping: true,
-    fighting: true,
+    fighting: false,
     moviments: [
       {
         name: "recharging",
@@ -31,7 +31,7 @@ export const Users = [
     loses: 51,
     hall: "778899",
     ping: true,
-    fighting: false,
+    fighting: true,
     moviments: [
       {
         name: "recharging",
@@ -67,7 +67,7 @@ export const Users = [
     loses: 15,
     hall: "778899",
     ping: true,
-    fighting: true,
+    fighting: false,
     moviments: [
       {
         name: "recharging",
@@ -139,7 +139,7 @@ export const Users = [
     loses: 90,
     hall: "778899",
     ping: true,
-    fighting: true,
+    fighting: false,
     moviments: [
       {
         name: "recharging",
@@ -181,7 +181,7 @@ export const Users = [
     loses: 23,
     hall: "778899",
     ping: true,
-    fighting: false,
+    fighting: true,
     moviments: [
       {
         name: "recharging",
@@ -223,7 +223,7 @@ export const Users = [
     loses: 80,
     hall: "778899",
     ping: true,
-    fighting: true,
+    fighting: false,
     moviments: [
       {
         name: "recharging",
@@ -307,7 +307,7 @@ export const Users = [
     loses: 58,
     hall: "778899",
     ping: true,
-    fighting: true,
+    fighting: false,
     moviments: [
       {
         name: "recharging",
@@ -391,7 +391,7 @@ export const Users = [
     loses: 25,
     hall: "778899",
     ping: true,
-    fighting: true,
+    fighting: false,
     moviments: [
       {
         name: "recharging",
@@ -475,7 +475,7 @@ export const Users = [
     loses: 10,
     hall: "778899",
     ping: true,
-    fighting: true,
+    fighting: false,
     moviments: [
       {
         name: "recharging",
@@ -559,7 +559,7 @@ export const Users = [
     loses: 50,
     hall: "778899",
     ping: true,
-    fighting: true,
+    fighting: false,
     moviments: [
       {
         name: "recharging",
@@ -637,7 +637,7 @@ export const Users = [
     loses: 90,
     hall: "778899",
     ping: true,
-    fighting: true,
+    fighting: false,
     moviments: [
       {
         name: "recharging",
@@ -709,7 +709,7 @@ export const Users = [
     loses: 30,
     hall: "778899",
     ping: true,
-    fighting: true,
+    fighting: false,
     moviments: [
       {
         name: "recharging",

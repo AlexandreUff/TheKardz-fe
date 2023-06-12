@@ -160,10 +160,19 @@
   overflow-y: scroll;
 }
 .App .game-area .aside-players .players-score-scope {
+  position: relative;
   width: 100%;
   font-size: 3rem;
   padding: 15px 0;
   border-bottom: #EEE2DE solid 2px;
+}
+.App .game-area .aside-players .players-score-scope .isFighting {
+  position: absolute;
+  top: 25%;
+  right: -5px;
+  background-color: #EA906C;
+  border-radius: 50%;
+  font-size: 1.5rem;
 }
 .App .game-area .aside-players .players-score-scope svg {
   width: 50%;
@@ -172,7 +181,7 @@
 }
 .App .game-area .aside-players .players-score-scope .score {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 }
 .App .game-area .aside-players .players-score-scope h4 {

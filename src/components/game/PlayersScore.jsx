@@ -15,6 +15,13 @@ export default function PlayersScore(props){
             <h4>
                 {props.name}
             </h4>
+            {props.isFighting && (
+                <div className="isFighting">
+                    ⚔️
+                </div>
+            )
+            }
+           
         </div>
     )
 }

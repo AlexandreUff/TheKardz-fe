@@ -199,10 +199,21 @@ $fourthColor: #2B2A4C;
         overflow-y: scroll;
 
         .players-score-scope{
+            position: relative;
             width: 100%;
             font-size: 3rem;
             padding: 15px 0;
             border-bottom: $firstColor solid 2px;
+
+            .isFighting{
+                position: absolute;
+                top: 25%;
+                right: -5px;
+                background-color: $secondColor;
+                border-radius: 50%;
+                font-size: 1.5rem;
+                
+            }
 
             svg {
                 width: 50%;
@@ -212,7 +223,7 @@ $fourthColor: #2B2A4C;
 
             .score{
                 display: flex;
-                justify-content: space-evenly;
+                justify-content:space-between;
                 align-items: center;
             }
 
