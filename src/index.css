@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Geologica:wght@100;200;600;800&display=swap");
 * {
   margin: 0px;
@@ -155,13 +154,7 @@
 }
 
 .card-game {
-  /*    display: flex;
-     justify-content: center;
-     align-items: center;
-     border: $fourthColor solid 2px;
-
-     border-radius: 10%; */
-  perspective: 1000px; /* gpt */
+  perspective: 1000px;
   width: 50px;
   height: 75px;
 }
@@ -169,10 +162,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute; /* GPT */
-  backface-visibility: hidden; /* GPT */
-  transform: rotateY(-180deg); /* GPT */
-  transition: transform 0.5s; /* GPT */
+  position: absolute;
+  backface-visibility: hidden;
+  transform: rotateY(0deg);
+  transition: transform 0.5s;
   width: 100%;
   height: 100%;
   border: #2B2A4C solid 2px;
@@ -195,10 +188,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute; /* GPT */
-  backface-visibility: hidden; /* GPT */
-  transform: rotateY(0deg); /* GPT */
-  transition: transform 0.5s; /* GPT */
+  position: absolute;
+  backface-visibility: hidden;
+  transform: rotateY(-180deg);
+  transition: transform 0.5s;
   width: 100%;
   height: 100%;
   border: #2B2A4C solid 2px;
@@ -221,10 +214,10 @@
   justify-content: center;
 }
 .card-game:hover .frontface {
-  transform: rotateY(180deg); /* Rotação ao passar o mouse para mostrar a trás */
+  transform: rotateY(0deg);
 }
 .card-game:hover .backface {
-  transform: rotateY(0deg); /* Rotação ao passar o mouse para mostrar a frente */
+  transform: rotateY(180deg);
 }
 
 /* Media Query */
