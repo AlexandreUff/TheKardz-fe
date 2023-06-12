@@ -1,7 +1,9 @@
+import CardEmpty from "../components/game/CardEmpty";
+
 export default function Game(){
     return (
         <>
-        <h2>Aqui será a área do game.</h2>
+        <CardEmpty />
         </>
     )
 }
