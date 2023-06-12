@@ -24,7 +24,7 @@ export default function Footer(){
                 </ul>
             </nav>
             <nav>
-                <Link to="/howtoplay" target="_blank">
+                <Link to="/howtoplay" /* target="_blank" */ onClick={() => window.open("/howtoplay")}>
                     <h3>COMO JOGAR!</h3>
                 </Link>
             </nav>
