@@ -152,6 +152,33 @@
   height: 100vh;
   background-color: #EEE2DE;
 }
+.App .game-area .aside-players {
+  width: 80px;
+  height: 100vh;
+  background-color: #2B2A4C;
+  padding: 0 10px;
+  overflow-y: scroll;
+}
+.App .game-area .aside-players .players-score-scope {
+  width: 100%;
+  font-size: 3rem;
+  padding: 15px 0;
+  border-bottom: #EEE2DE solid 2px;
+}
+.App .game-area .aside-players .players-score-scope svg {
+  width: 50%;
+  color: #EEE2DE;
+  margin: 0 15px;
+}
+.App .game-area .aside-players .players-score-scope .score {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.App .game-area .aside-players .players-score-scope h4 {
+  text-align: center;
+  font-size: 1rem;
+}
 
 .card-game {
   perspective: 1000px;
