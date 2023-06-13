@@ -1,5 +1,6 @@
 import PlayersScore from "./PlayersScore";
 import { Users } from "../../Utils/Mocks/Users";
+import { IcoPlayer } from "../Icons";
 
 export default function AsidePlayers(props){
 
@@ -21,6 +22,12 @@ export default function AsidePlayers(props){
                     )
                 })}
             </aside>
+            <div className="show-players">
+                <IcoPlayer />
+            </div>
+            <div className="number-of-players">
+                {ordenedUsers.length}
+            </div>
         </>
     )
 }

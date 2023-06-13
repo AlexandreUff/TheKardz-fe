@@ -193,6 +193,45 @@ $fourthColor: #2B2A4C;
     position: relative;
     background-color: $firstColor;
 
+    .show-players{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 10px;
+        left: -50px;
+        background-color: $fourthColor;
+        border-radius: 50%;
+        border-bottom-left-radius: 0px;
+        width: 50px;
+        height: 50px;
+        transition: .5s;
+        color: $firstColor;
+
+        svg {
+            width: 80%;
+        }
+    }
+
+    .number-of-players{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        position: absolute;
+        top: 40px;
+        left: -50px;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: $thirthColor;
+        color: $firstColor;
+        font-size: .9rem;
+        font-weight: 600;
+        text-align: center;
+        transition: .5s;
+    }
+
     .aside-players{
         position: fixed;
         width: 80px;
@@ -200,6 +239,7 @@ $fourthColor: #2B2A4C;
         background-color: $fourthColor;
         padding: 0 10px;
         overflow-y: scroll;
+        z-index: 2;
 
         .players-score-scope{
             position: relative;
@@ -347,6 +387,14 @@ $fourthColor: #2B2A4C;
 @media(max-width: 850px){
     .App{
         .game-area{
+            .show-players{
+                left: 10px;
+            }
+
+            .number-of-players{
+                left: 50px;
+            }
+
             .aside-players{
                 position: absolute;
                 left: -100px;

@@ -154,6 +154,41 @@
   position: relative;
   background-color: #EEE2DE;
 }
+.App .game-area .show-players {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10px;
+  left: -50px;
+  background-color: #2B2A4C;
+  border-radius: 50%;
+  border-bottom-left-radius: 0px;
+  width: 50px;
+  height: 50px;
+  transition: 0.5s;
+  color: #EEE2DE;
+}
+.App .game-area .show-players svg {
+  width: 80%;
+}
+.App .game-area .number-of-players {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 40px;
+  left: -50px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #B31312;
+  color: #EEE2DE;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  transition: 0.5s;
+}
 .App .game-area .aside-players {
   position: fixed;
   width: 80px;
@@ -161,6 +196,7 @@
   background-color: #2B2A4C;
   padding: 0 10px;
   overflow-y: scroll;
+  z-index: 2;
 }
 .App .game-area .aside-players .players-score-scope {
   position: relative;
@@ -280,6 +316,12 @@
 
 /* Media Query */
 @media (max-width: 850px) {
+  .App .game-area .show-players {
+    left: 10px;
+  }
+  .App .game-area .number-of-players {
+    left: 50px;
+  }
   .App .game-area .aside-players {
     position: absolute;
     left: -100px;
