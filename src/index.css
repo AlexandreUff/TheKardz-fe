@@ -242,6 +242,22 @@
   flex-grow: 1;
   margin: 0;
 }
+.App .game-area main.game-arena .table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+.App .game-area main.game-arena .card-list {
+  display: flex;
+}
+.App .game-area main.game-arena .player-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+  width: 100%;
+}
 .App .game-area .show-panel {
   display: none;
   align-items: center;
