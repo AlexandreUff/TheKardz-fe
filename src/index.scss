@@ -296,6 +296,31 @@ $fourthColor: #2B2A4C;
         margin: 0;
     }
 
+    .show-panel{
+        display: none;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 35%;
+        right: -50px;
+        background-color: $fourthColor;
+        border-radius: 50%;
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 0px;
+        width: 50px;
+        height: 150px;
+        transition: .5s;
+        color: $firstColor;
+
+        &:hover{
+            cursor: pointer;
+        }
+
+        svg {
+            width: 80%;
+        }
+    }
+
     .aside-panel{
         width: 200px;
         height: 100vh;
@@ -420,7 +445,34 @@ $fourthColor: #2B2A4C;
     }
 }
 
-@media (max-width: 500px){
+@media(max-width: 700px){
+    .App{
+        .game-area{
+            overflow: hidden;
+
+            .show-panel{
+                display: flex;
+                right: 0px;
+
+                &[show]{
+                    right: 210px;
+                }
+            }
+
+            .aside-panel{
+                position: absolute;
+                right: -220px;
+                transition: .5s;
+
+                &[show]{
+                    right: 0px;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 500px){
     .App{
         header {
             h1 {

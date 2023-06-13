@@ -242,6 +242,28 @@
   flex-grow: 1;
   margin: 0;
 }
+.App .game-area .show-panel {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 35%;
+  right: -50px;
+  background-color: #2B2A4C;
+  border-radius: 50%;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+  width: 50px;
+  height: 150px;
+  transition: 0.5s;
+  color: #EEE2DE;
+}
+.App .game-area .show-panel:hover {
+  cursor: pointer;
+}
+.App .game-area .show-panel svg {
+  width: 80%;
+}
 .App .game-area .aside-panel {
   width: 200px;
   height: 100vh;
@@ -338,6 +360,26 @@
   }
   .App .game-area .aside-players[show] {
     left: 0px;
+  }
+}
+@media (max-width: 700px) {
+  .App .game-area {
+    overflow: hidden;
+  }
+  .App .game-area .show-panel {
+    display: flex;
+    right: 0px;
+  }
+  .App .game-area .show-panel[show] {
+    right: 210px;
+  }
+  .App .game-area .aside-panel {
+    position: absolute;
+    right: -220px;
+    transition: 0.5s;
+  }
+  .App .game-area .aside-panel[show] {
+    right: 0px;
   }
 }
 @media (max-width: 500px) {
