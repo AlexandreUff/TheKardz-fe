@@ -169,6 +169,9 @@
   transition: 0.5s;
   color: #EEE2DE;
 }
+.App .game-area .show-players:hover {
+  cursor: pointer;
+}
 .App .game-area .show-players svg {
   width: 80%;
 }
@@ -319,15 +322,21 @@
   .App .game-area .show-players {
     left: 10px;
   }
+  .App .game-area .show-players[show] {
+    left: 100px;
+  }
   .App .game-area .number-of-players {
     left: 50px;
+  }
+  .App .game-area .number-of-players[show] {
+    left: 140px;
   }
   .App .game-area .aside-players {
     position: absolute;
     left: -100px;
     transition: 0.5s;
   }
-  .App .game-area .aside-players[show=yes] {
+  .App .game-area .aside-players[show] {
     left: 0px;
   }
 }

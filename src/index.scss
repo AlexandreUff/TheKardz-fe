@@ -208,6 +208,10 @@ $fourthColor: #2B2A4C;
         transition: .5s;
         color: $firstColor;
 
+        &:hover{
+            cursor: pointer;
+        }
+
         svg {
             width: 80%;
         }
@@ -389,10 +393,18 @@ $fourthColor: #2B2A4C;
         .game-area{
             .show-players{
                 left: 10px;
+
+                &[show]{
+                    left: 100px;
+                }
             }
 
             .number-of-players{
                 left: 50px;
+
+                &[show]{
+                    left: 140px;
+                }
             }
 
             .aside-players{
@@ -400,7 +412,7 @@ $fourthColor: #2B2A4C;
                 left: -100px;
                 transition: .5s;
 
-                &[show="yes"]{
+                &[show]{
                     left: 0px;
                 }
             }

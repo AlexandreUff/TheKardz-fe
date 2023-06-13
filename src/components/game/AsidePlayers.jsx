@@ -6,9 +6,18 @@ export default function AsidePlayers(props){
 
     const ordenedUsers = Users.sort((first, second) => second.wins - first.wins)
 
+    const showAsidePlayersBar = () => {
+        const asidePlayers = document.querySelector(".aside-players")
+        const numberOfPlayers = document.querySelector(".number-of-players")
+        const showPlayers = document.querySelector(".show-players")
+        asidePlayers.toggleAttribute("show")
+        showPlayers.toggleAttribute("show")
+        numberOfPlayers.toggleAttribute("show")
+    }
+
     return (
         <>
-            <aside className="aside-players" /* show="yes" */>
+            <aside className="aside-players">
                 {ordenedUsers.map((user, i) => {
                     return (
                         <PlayersScore
@@ -22,7 +31,7 @@ export default function AsidePlayers(props){
                     )
                 })}
             </aside>
-            <div className="show-players">
+            <div className="show-players" onClick={showAsidePlayersBar}>
                 <IcoPlayer />
             </div>
             <div className="number-of-players">
