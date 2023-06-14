@@ -5,13 +5,20 @@ export default function GameArena(){
         <main className="game-arena">
             {/* <CardToShow /> */}
             <div className="player-name">
-                ENEMY
+                <div className="unused-area">
+                </div>
+                <h5 className="top">
+                    ENEMY
+                </h5>
+                <h6>
+                    {`🏆 ${"2"}  ☠️ ${"1"}`}
+                </h6>
             </div>
-            <div className="card-list">
-                <CardToShow />
-                <CardToShow />
-                <CardToShow />
-            </div>
+                <div className="card-list">
+                    <CardToShow />
+                    <CardToShow />
+                    <CardToShow />
+                </div>
             <div className="table">
                 <CardToShow />
             </div>
@@ -21,7 +28,14 @@ export default function GameArena(){
                 <CardToShow />
             </div>
             <div className="player-name">
-                VOSSÊ
+                <div className="unused-area">
+                </div>
+                <h5 className="bottom">
+                    VOSSÊ
+                </h5>
+                <h6>
+                    {`🏆 ${"3"} ☠️ ${"2"}`}
+                </h6>
             </div>
         </main>
     )

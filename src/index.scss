@@ -308,11 +308,20 @@ $fourthColor: #2B2A4C;
 
         .player-name{
             display: flex;
-            justify-content: center;
+            /* justify-content: space-evenly; */
             align-items: center;
+            color: $thirthColor;
 
             height: 20%;
             width: 100%;
+
+            * {
+                width: 33.33%;
+            }
+
+            h6 {
+                background-image: linear-gradient(to right, $firstColor,$secondColor);
+            }
         }
     }
 
@@ -488,6 +497,20 @@ $fourthColor: #2B2A4C;
                     right: 0px;
                 }
             }
+
+            main.game-arena{
+
+                .player-name{
+
+                    h5.top{
+                        margin-bottom: 50px;
+                    }
+
+                    h5.bottom{
+                        margin-top: 50px;
+                    }
+                }
+            }
         }
     }
 }
@@ -539,6 +562,7 @@ $fourthColor: #2B2A4C;
 
 @media(max-width: 400px){
     .App{
+
         footer{
             flex-direction: column;
         }
