@@ -2,7 +2,7 @@ import { IcoPlayer } from "../Icons";
 
 export default function PlayersScore(props){
     return (
-        <div className="players-score-scope">
+        <div className="players-score-scope" title={props.name}>
             <IcoPlayer />
             <div className="score">
                 <div>

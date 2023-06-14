@@ -300,6 +300,20 @@ $fourthColor: #2B2A4C;
             justify-content: center;
             align-items: center;
             flex-grow: 1;
+
+            .timer{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                width: 80px;
+                height: 80px;
+                border: $thirthColor solid 5px;
+                color: $thirthColor;
+                font-size: 8rem;
+
+                border-radius: 50%;
+            }
         }
 
         .card-list {

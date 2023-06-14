@@ -248,6 +248,17 @@
   align-items: center;
   flex-grow: 1;
 }
+.App .game-area main.game-arena .table .timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  border: #B31312 solid 5px;
+  color: #B31312;
+  font-size: 8rem;
+  border-radius: 50%;
+}
 .App .game-area main.game-arena .card-list {
   display: flex;
 }

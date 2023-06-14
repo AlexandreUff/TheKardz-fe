@@ -1,4 +1,5 @@
 import CardToShow from "./CardToShow"
+import Timer from "./Timer"
 
 export default function GameArena(){
     return (
@@ -14,13 +15,13 @@ export default function GameArena(){
                     {`🏆 ${"2"}  ☠️ ${"1"}`}
                 </h6>
             </div>
-                <div className="card-list">
-                    <CardToShow />
-                    <CardToShow />
-                    <CardToShow />
-                </div>
-            <div className="table">
+            <div className="card-list">
                 <CardToShow />
+                <CardToShow />
+                <CardToShow />
+            </div>
+            <div className="table">
+                <Timer time={10} />
             </div>
             <div className="card-list my-cards"> {/* O jogador só entra nesse lado */}
                 <CardToShow />
