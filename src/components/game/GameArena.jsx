@@ -21,7 +21,7 @@ export default function GameArena(){
                 <CardToShow />
             </div>
             <div className="table">
-                <Timer time={10} />
+                <Timer time={10} type="match" />
             </div>
             <div className="card-list my-cards"> {/* O jogador só entra nesse lado */}
                 <CardToShow />

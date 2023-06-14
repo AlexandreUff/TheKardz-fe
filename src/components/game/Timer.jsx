@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react"
+import { IcoTimer } from "../Icons"
 
 export default function Timer(props){
 
     let [time,setTime] = useState(props.time)
 
     let regressiveTime
+
+    const colorTimer = props.type === "match" ? "green" : "red"
 
     useEffect(()=>{
         startTimer()
@@ -23,10 +26,13 @@ export default function Timer(props){
     }
 
     return (
-        <div className="timer">
+        <div className="timer" style={{border:`${colorTimer} solid 5px`, color: colorTimer}}>
             <h6>
                 {time}
             </h6>
+            <div className="timer-ico-container" style={{border:`${colorTimer} solid 2px`, backgroundColor: colorTimer}}>
+                <IcoTimer />
+            </div>
         </div>
     )
 }
