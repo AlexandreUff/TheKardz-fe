@@ -22,6 +22,7 @@ export default function GameArena(){
             </div>
             <div className="table">
                 <Timer time={10} type="match" />
+                {/* Fazer a área de logs */}
             </div>
             <div className="card-list my-cards"> {/* O jogador só entra nesse lado */}
                 <CardToShow />
