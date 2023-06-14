@@ -39,7 +39,8 @@ export default function CardEmpty(props){
         </div>
         <div className="frontface" /* type="gold" */>
             <div>
-                {takeMovimentInfo('attack2')}
+                {/* Condicional para caso receba alguma informação de movimento SE FOR PLAYER */}
+                {true && takeMovimentInfo('attack2')}
             </div>
         </div>
     </div>
