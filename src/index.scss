@@ -431,11 +431,11 @@ $fourthColor: #2B2A4C;
         }
     }
 
-    &:hover .frontface {
+    &.turn .frontface {
         transform: rotateY(0deg);
     }
 
-    &:hover .backface {
+    &.turn .backface {
         transform: rotateY(180deg);
     }
       
