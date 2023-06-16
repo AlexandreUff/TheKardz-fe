@@ -5,8 +5,6 @@ export default function Timer(props){
 
     let [time,setTime] = useState(props.time)
 
-    /* let regressiveTime */
-
     const colorTimer = props.type === "match" ? "green" : "red"
 
     useEffect(()=>{
@@ -20,18 +18,6 @@ export default function Timer(props){
             })
         },1000)
     },[])
-
-    /* function startTimer(){
-        regressiveTime = setInterval(()=>{
-            setTime(prevTime => {
-                if(prevTime <= 0){
-                    clearInterval(regressiveTime)
-                    return prevTime
-                }
-                return prevTime-1
-            })
-        },1000)
-    } */
 
     return (
         <div className="timer" style={{border:`${colorTimer} solid 5px`, color: colorTimer}}>
