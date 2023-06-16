@@ -8,7 +8,7 @@ export default function UserName() {
       <Header />
       <Main>
         <h2>A sala {"xxx"} aguarda sua entrada.</h2>
-        <h2>Sua sala já foi criada!</h2>
+        <h2>Sua sala já será criada!</h2>
         <form>
           <label htmlFor="name">Agora digite abaixo seu nome de usuário:</label>
           <input type="text" id="name" />
