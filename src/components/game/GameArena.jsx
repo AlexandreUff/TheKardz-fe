@@ -9,7 +9,7 @@ export default function GameArena(){
                 <div className="unused-area">
                 </div>
                 <h5 className="top">
-                    ENEMY
+                    ADVERSÁRIO
                 </h5>
                 <h6>
                     {`🏆 ${"2"}  ☠️ ${"1"}`}
@@ -21,7 +21,7 @@ export default function GameArena(){
                 <CardToShow />
             </div>
             <div className="table">
-                <Timer time={10} type="match" />
+                <Timer time={15} type="match" />
                 {/* Fazer a área de logs */}
             </div>
             <div className="card-list my-cards"> {/* O jogador só entra nesse lado */}
@@ -33,7 +33,7 @@ export default function GameArena(){
                 <div className="unused-area">
                 </div>
                 <h5 className="bottom">
-                    VOSSÊ
+                    VOCÊ
                 </h5>
                 <h6>
                     {`🏆 ${"3"} ☠️ ${"2"}`}
