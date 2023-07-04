@@ -16,6 +16,12 @@ export default function Game() {
       // Adicione aqui o código para lidar com os eventos de socket.io
     });
 
+    setTimeout(()=>socket.emit("attack","Atacando"),5000)
+    
+    socket.on("send",(msg)=>{
+      console.log(msg)
+    })
+
     socket.on("disconnect", () => {
       console.log("Desconectado do servidor socket.io.");
     });
