@@ -27,7 +27,7 @@ export default function AsidePanel(props){
         setTimeout(()=>{
             socket.send("attack", "Context funcionando com sucesso.")
         },15000)
-    },[])
+    },[socket])
 
     return (
         <>
