@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IcoLeftArrow, IcoRightArrow } from "../Icons";
+import SocketContext from "../../context/socketContext";
 
 export default function AsidePanel(props){
 
     const [arrowIcon, setArrowIcon] = useState(true);
+
+    const socket = useContext(SocketContext)
+    console.log("SOQUÉTE:", socket)
 
     const showAsidePanel = () => {
         const asidePanel = document.querySelector(".aside-panel")
@@ -13,6 +17,12 @@ export default function AsidePanel(props){
 
         setArrowIcon(!arrowIcon)
     }
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            socket.emit("attack", "Context funcionando com sucesso.")
+        },15000)
+    },[])
 
     return (
         <>
