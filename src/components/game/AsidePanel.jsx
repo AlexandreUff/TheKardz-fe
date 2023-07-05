@@ -8,7 +8,6 @@ export default function AsidePanel(props){
     const [test,setTest] = useState("");
 
     const socket = useContext(SocketContext)
-    console.log("SOQUÉTE:", socket)
 
     const showAsidePanel = () => {
         const asidePanel = document.querySelector(".aside-panel")
