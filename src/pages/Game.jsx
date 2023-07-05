@@ -3,19 +3,20 @@ import AsidePanel from "../components/game/AsidePanel";
 import AsidePlayers from "../components/game/AsidePlayers";
 import GameArena from "../components/game/GameArena";
 import SocketContext from "../context/socketContext";
-import startSocketService from "../services/SocketService";
+import SocketService from "../services/SocketService";
 
 export default function Game() {
   
-  const socket = startSocketService()
+  const socket = SocketService
+  socket.startSocketService()
 
   useEffect(() => {
-    
+
     setTimeout(() => {
-      socket.emit("attack","Atacando")
+      socket.send("attack","Atacando")
     }, 5000)
     
-    socket.on("send",(msg)=>{
+    socket.listen("send",(msg)=>{
       console.log(msg)
     })
 

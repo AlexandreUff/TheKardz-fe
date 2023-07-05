@@ -5,6 +5,7 @@ import SocketContext from "../../context/socketContext";
 export default function AsidePanel(props){
 
     const [arrowIcon, setArrowIcon] = useState(true);
+    const [test,setTest] = useState("");
 
     const socket = useContext(SocketContext)
     console.log("SOQUÉTE:", socket)
@@ -19,8 +20,13 @@ export default function AsidePanel(props){
     }
 
     useEffect(()=>{
+        socket.listen("send",(msg)=>{
+            console.log(msg,"ASIDE")
+            setTest(msg)
+        })
+
         setTimeout(()=>{
-            socket.emit("attack", "Context funcionando com sucesso.")
+            socket.send("attack", "Context funcionando com sucesso.")
         },15000)
     },[])
 
@@ -32,6 +38,7 @@ export default function AsidePanel(props){
                 </h4>
                 <h3>
                     2831456
+                    {test}
                 </h3>
             </aside>
             <div className="show-panel" onClick={showAsidePanel}>

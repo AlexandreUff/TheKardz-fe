@@ -1,18 +1,35 @@
 import { io } from "socket.io-client";
 
-export default function startSocketService(){
+export default class SocketService {
 
-    const socket = io("http://localhost:3002", { transports: ['websocket'] });
+    static socket/*  = io("http://localhost:3002", { transports: ['websocket'] }); */
 
-    socket.on("connect", () => {
-      console.log("Conexão estabelecida com o servidor socket.io.");
+    static startSocketService(){
+        this.socket = io("http://localhost:3002", { transports: ['websocket'] });
 
-      // Adicione aqui o código para lidar com os eventos de socket.io
-    });
+        this.socket.on("connect", () => {
+          console.log("Conexão estabelecida com o servidor socket.io.");
 
-    socket.on("disconnect", () => {
-      console.log("Desconectado do servidor socket.io.");
-    });
+          // Adicione aqui o código para lidar com os eventos de socket.io
+        });
 
-    return socket
+        this.socket.on("disconnect", () => {
+          console.log("Desconectado do servidor socket.io.");
+        });
+
+        return this.socket
+    }
+
+    static send(title, message){
+        this.socket.emit(title, message)
+    }
+
+    static listen(title, operation){
+        this.socket.on(title, operation)
+    }
+
+    static disconnect(){
+        this.socket.disconnect()
+    }
+    
 }
