@@ -24,7 +24,7 @@ export default function Game() {
       // Executa quando o componente é desmontado
       socket.disconnect();
     };
-  }, []);
+  }, [socket]);
 
   return (
     <div className="game-area">
