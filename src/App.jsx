@@ -17,7 +17,7 @@ function App() {
       <Router>
         <Routes>
           <Route index element={<Home/>}/>
-          <Route path="/username" element={<UserName/>}/>
+          <Route path="/username/:act" element={<UserName/>}/>
           <Route path="/howtoplay" element={<HowToPlay/>}/>
           <Route path="/game" element={<Game/>}/>
           <Route path ="*" element={<NotFound/>}/>

@@ -11,10 +11,10 @@ export default function Home() {
         <form>
           <label htmlFor="hall">Digite abaixo o número da sala:</label>
           <input type="text" id="hall" />
-          <input type="submit" value="ENTRAR" title="Criar sala" />
+          <input type="submit" value="ENTRAR" title="Entrar na sala" />
         </form>
         <div>
-          <Link to="/username">Ou crie uma sala</Link>
+          <Link to="/username/crt">Ou crie uma sala</Link>
         </div>
       </Main>
       <Footer />
