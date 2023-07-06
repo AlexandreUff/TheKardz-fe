@@ -3,16 +3,18 @@ class APIService {
 
     static async get(endPoint){
         try {
-            const response = await fetch(`${this.baseURL}${endPoint}`, {
+            let response
+            await fetch(`${this.baseURL}${endPoint}`, {
                 method: 'GET'
               })
-                /* .then(response => {
-                  // Manipule a resposta
+                .then(response => {
+                  return response.json()
                 })
-                .catch(error => {
-                  // Lide com erros
-                });*/
-              return response
+                .then(data => {
+                  response = data
+                })
+                
+            return response
 
         } catch (error) {
             console.log("Erro ao buscar dado(s) do servidor.", error)
@@ -22,20 +24,21 @@ class APIService {
 
     static async post(endPoint, data){
         try {
-            const response = await fetch(`${this.baseURL}${endPoint}`, {
+            let response
+            await fetch(`${this.baseURL}${endPoint}`, {
               method: 'POST',
-              body: JSON.stringify(data), // Opcional: envie dados no corpo da solicitação
+              body: JSON.stringify(data),
               headers: {
-                'Content-Type': 'application/json' // Opcional: especifique o tipo de conteúdo do corpo da solicitação
+                'Content-Type': 'application/json'
               }
             })
-              /* .then(response => {
-                // Manipule a resposta
+              .then(async response => {
+                return response.json()
+              }).then(data => {
+                response = data
               })
-              .catch(error => {
-                // Lide com erros
-              }); */
-              return response
+              
+            return response
 
         } catch (error) {
             console.log("Erro ao enviar dado(s) ao servidor.", error)

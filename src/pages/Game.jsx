@@ -15,7 +15,7 @@ export default function Game() {
 
     (async function(){
     const test = await APIService.post("/hall/create",{
-      userName: "Hardman"
+      userName: "Lennster"
     })
     console.log(test)
     })()
