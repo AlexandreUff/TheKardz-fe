@@ -13,7 +13,7 @@ export default function Game() {
   useEffect(() => {
 
     setTimeout(() => {
-      socket.send("attack","Atacando")
+      socket.send("attack",{data:"Atacando"})
     }, 5000)
     
     socket.listen("send",(msg)=>{

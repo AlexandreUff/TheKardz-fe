@@ -21,7 +21,7 @@ export default function AsidePanel(props){
     useEffect(()=>{
         socket.listen("send",(msg)=>{
             console.log(msg,"ASIDE")
-            setTest(msg)
+            setTest(msg.msg)
         })
 
         setTimeout(()=>{
