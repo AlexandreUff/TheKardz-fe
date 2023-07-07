@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Main from "../components/Main";
 import { useState } from "react";
 import APIService from "../services/APIService";
+import SessionService from "../services/SessionService";
 
 export default function UserName() {
 
@@ -11,6 +12,11 @@ export default function UserName() {
   const [warning, setWarning] = useState("")
 
   const { act } = useParams()
+
+  const saveUserGameData = (hall, userId) => {
+      SessionService.save("hallNumber", hall)
+      SessionService.save("userId", userId)
+  }
 
   const onChangeUserName = (e) => {
     setUserName(e.target.value)
@@ -36,6 +42,11 @@ export default function UserName() {
 
     if(response.status){
       console.log("Deu certo")
+      act === "crt" ? (
+          saveUserGameData(response.data.hall, response.data.userId)
+        ) : (
+          saveUserGameData(act, response.data.userId)
+        )
     } else {
       setWarning(response.message)
     }
