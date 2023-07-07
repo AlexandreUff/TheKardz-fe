@@ -128,11 +128,12 @@ $fourthColor: #2B2A4C;
         }
 
         input[type="text"]{
-            margin: 15px 0;
+            margin-top: 15px;
             text-align: center;
         }
 
         input[type="submit"]{
+            margin-top: 15px;
             background-color: $secondColor;
             font-weight: 600;
             color: $fourthColor;
@@ -143,6 +144,12 @@ $fourthColor: #2B2A4C;
             &:hover{
                 transform: scale(1.2);
             }
+        }
+
+        p.warning{
+            margin-top: 5px;
+            font-size: 1.5rem;
+            color: red;
         }
 
         .not-found-ico{

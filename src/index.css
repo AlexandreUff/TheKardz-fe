@@ -104,10 +104,11 @@
   padding: 0 5px;
 }
 .App main input[type=text] {
-  margin: 15px 0;
+  margin-top: 15px;
   text-align: center;
 }
 .App main input[type=submit] {
+  margin-top: 15px;
   background-color: #EA906C;
   font-weight: 600;
   color: #2B2A4C;
@@ -117,6 +118,11 @@
 }
 .App main input[type=submit]:hover {
   transform: scale(1.2);
+}
+.App main p.warning {
+  margin-top: 5px;
+  font-size: 1.5rem;
+  color: red;
 }
 .App main .not-found-ico {
   margin-top: 16px;
