@@ -12,6 +12,11 @@ export default function Home() {
 
   const navigate = useNavigate()
 
+  const onChangeUserName = (e) => {
+    setHallNumber(e.target.value)
+    setWarning("")
+  }
+
   const takeHallNumber = async (e) => {
     e.preventDefault()
     const response = await APIService.get(`/hall?number=${hallNumber}`)
@@ -29,7 +34,7 @@ export default function Home() {
       <Main>
         <form>
           <label htmlFor="hall">Digite abaixo o número da sala:</label>
-          <input type="text" id="hall" value={hallNumber} onChange={e => setHallNumber(e.target.value)} />
+          <input type="text" id="hall" value={hallNumber} onChange={e => onChangeUserName(e)} />
           {warning && <p className="warning">
             {warning}
           </p>}
