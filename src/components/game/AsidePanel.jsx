@@ -8,6 +8,18 @@ export default function AsidePanel(props){
 
     const [arrowIcon, setArrowIcon] = useState(true);
     const [test,setTest] = useState("");
+    const [reports, setReports] = useState([
+        <Report author={"Jonh"} type={"chat"} message={
+            "This is my first text and I just need to keep this text in a break line because this is a chat!"
+        } />,
+        <Report author={":game_server"} type={"log"} message={
+            "Erikson enter in this hall."
+        } />,
+        <Report author={"Jonh"} type={"chat"} message={
+            "This is my first text and I just need to keep this text in a break line because this is a chat!"
+        } />
+    ])
+    const [userMessage, setUserMessage] = useState("")
 
     const socket = useContext(SocketContext)
 
@@ -21,6 +33,24 @@ export default function AsidePanel(props){
         showPanel.toggleAttribute("show")
 
         setArrowIcon(!arrowIcon)
+    }
+
+    const sendMessage = () => {
+
+        const report = (
+            <Report
+                author={"YOU"}
+                type={"chat"}
+                message={userMessage}
+                key={reports.length+1}
+            />
+        )
+        
+        setReports(
+            [...reports, report]
+        )
+
+        setUserMessage("")
     }
 
     useEffect(()=>{
@@ -46,48 +76,19 @@ export default function AsidePanel(props){
                 </h3>
                 <div className="report-area">
                     <div className="hidder-top-messages"></div>
-                    <Report author={"Jonh"} type={"chat"} message={
-                        "This is my first text and I just need to keep this text in a break line because this is a chat!"
-                    } />
-                    <Report author={"Jonh"} type={"chat"} message={
-                        "This is my first text and I just need to keep this text in a break line because this is a chat!"
-                    } />
-                    <Report author={"Jonh"} type={"chat"} message={
-                        "This is my first text and I just need to keep this text in a break line because this is a chat!"
-                    } />
-                    <Report author={":game_server"} type={"log"} message={
-                        "Lord Richards is out."
-                    } />
-                    <Report author={"Jonh"} type={"chat"} message={
-                        "This is my first text and I just need to keep this text in a break line because this is a chat!"
-                    } />
-                    <Report author={":game_server"} type={"log"} message={
-                        "Erikson enter in this hall."
-                    } />
-                    <Report author={"Jonh"} type={"chat"} message={
-                        "This is my first text and I just need to keep this text in a break line because this is a chat!"
-                    } />
-                    <Report author={"Jonh"} type={"chat"} message={
-                        "This is my first text and I just need to keep this text in a break line because this is a chat!"
-                    } />
-                    <Report author={":game_server"} type={"log"} message={
-                        "John wins Sir Alice."
-                    } />
-                    <Report author={"Jonh"} type={"chat"} message={
-                        "This is my first text and I just need to keep this text in a break line because this is a chat!"
-                    } />
-                    <Report author={"Jonh"} type={"chat"} message={
-                        "This is my first text and I just need to keep this text in a break line because this is a chat!"
-                    } />
-                    <Report author={"Jonh"} type={"chat"} message={
-                        "This is my first text and I just need to keep this text in a break line because this is a chat!"
-                    } />
+                    {reports}
                 </div>
                 <section className="message-container">
-                    <textarea name="message-area" id="msg-area" cols="3" rows="5" placeholder="Digite aqui sua mensagem.">
+                    <textarea 
+                        name="message-area"
+                        id="msg-area" cols="3"
+                        rows="5" 
+                        placeholder="Digite aqui sua mensagem."
+                        onChange={e => setUserMessage(e.target.value)}
+                    >
 
                     </textarea>
-                    <button title="Enviar">
+                    <button title="Enviar" onClick={sendMessage}>
                         <IcoSendMsg />
                     </button>
                 </section>

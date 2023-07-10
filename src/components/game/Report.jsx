@@ -1,6 +1,15 @@
 export default function Default(props){
+
+    const titleText = () => {
+        if(props.type === "chat"){
+            return `${props.author} escreveu isso às ${props.hour}.`
+        } else {
+            return `${props.message} às ${props.hour}`
+        }
+    }
+
     return (
-        <div className="report-container">
+        <div className="report-container" title={titleText()}>
             {props.type === "chat" ? (
                 <>
                     <p className="author-name">{props.author}:</p> 
