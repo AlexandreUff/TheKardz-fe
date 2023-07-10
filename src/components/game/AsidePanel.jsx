@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { IcoLeftArrow, IcoRightArrow } from "../Icons";
+import { IcoLeftArrow, IcoRightArrow, IcoSendMsg } from "../Icons";
 import SocketContext from "../../context/socketContext";
 import SessionService from "../../services/SessionService";
 
@@ -43,6 +43,17 @@ export default function AsidePanel(props){
                     {hall}
                     {test}
                 </h3>
+                <div className="report-area">
+                    A
+                </div>
+                <div className="message-container">
+                    <textarea name="message-area" id="msg-area" cols="3" rows="5" placeholder="Digite aqui sua mensagem.">
+
+                    </textarea>
+                    <button title="Enviar">
+                        <IcoSendMsg />
+                    </button>
+                </div>
             </aside>
             <div className="show-panel" onClick={showAsidePanel}>
                 {arrowIcon ? <IcoLeftArrow /> : <IcoRightArrow />}

@@ -320,6 +320,8 @@
   width: 80%;
 }
 .App .game-area .aside-panel {
+  display: flex;
+  flex-direction: column;
   width: 200px;
   height: 100vh;
   background-color: #2B2A4C;
@@ -333,6 +335,44 @@
 .App .game-area .aside-panel h4 {
   margin-top: 10px;
   font-size: 1rem;
+}
+.App .game-area .aside-panel .report-area {
+  background-color: red;
+  flex-grow: 1;
+}
+.App .game-area .aside-panel .message-container {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+}
+.App .game-area .aside-panel .message-container textarea {
+  flex-grow: 1;
+  background-color: transparent;
+  font-size: 1rem;
+  color: #EEE2DE;
+  border: #EA906C 1px solid;
+  border-radius: 5px;
+  padding: 2px;
+}
+.App .game-area .aside-panel .message-container button {
+  width: 15%;
+  height: 50%;
+  border: solid 2px #EA906C;
+  border-radius: 5px;
+  background-color: #2B2A4C;
+  margin-left: 2px;
+  padding: 2px;
+  transition: 0.3s;
+}
+.App .game-area .aside-panel .message-container button svg {
+  color: #EA906C;
+}
+.App .game-area .aside-panel .message-container button:hover {
+  background-color: #EA906C;
+  cursor: pointer;
+}
+.App .game-area .aside-panel .message-container button:hover svg {
+  color: #2B2A4C;
 }
 
 .card-game {
