@@ -14,8 +14,9 @@ export default function UserName() {
   const { act } = useParams()
 
   const saveUserGameData = (hall, userId) => {
-      SessionService.save("hallNumber", hall)
-      SessionService.save("userId", userId)
+      /* SessionService.save("hallNumber", hall)
+      SessionService.save("userId", userId) */
+      SessionService.save("userDatas", {userId, hall})
   }
 
   const onChangeUserName = (e) => {
