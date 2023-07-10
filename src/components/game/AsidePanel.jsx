@@ -13,8 +13,8 @@ export default function AsidePanel(props){
 
     const socket = useContext(SocketContext)
 
-    const { userId, hall} = SessionService.get("userDatas")
-    console.log(userId, hall)
+    const { userName, userId, hall} = SessionService.get("userDatas")
+    console.log(userName,userId, hall)
 
     const showAsidePanel = () => {
         const asidePanel = document.querySelector(".aside-panel")
@@ -29,7 +29,7 @@ export default function AsidePanel(props){
 
         const report = (
             <Report
-                author={"YOU"}
+                author={userName}
                 type={"chat"}
                 message={userMessage}
                 isYou

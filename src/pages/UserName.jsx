@@ -15,8 +15,8 @@ export default function UserName() {
 
   const navigate = useNavigate()
 
-  const saveUserGameData = (hall, userId) => {
-      SessionService.save("userDatas", {userId, hall})
+  const saveUserGameData = (userName, hall, userId) => {
+      SessionService.save("userDatas", {userName, userId, hall})
   }
 
   const onChangeUserName = (e) => {
@@ -44,9 +44,9 @@ export default function UserName() {
     if(response.status){
       console.log("Deu certo")
       act === "crt" ? (
-          saveUserGameData(response.data.hall, response.data.userId)
+          saveUserGameData(userName, response.data.hall, response.data.userId)
         ) : (
-          saveUserGameData(act, response.data.userId)
+          saveUserGameData(userName, act, response.data.userId)
         )
       
       navigate("/game")
