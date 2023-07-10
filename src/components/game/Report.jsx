@@ -1,10 +1,12 @@
+import HourDefaultModel from "../../Utils/HourDefaultModel"
+
 export default function Default(props){
 
     const titleText = () => {
         if(props.type === "chat"){
-            return `${props.author} escreveu isso às ${props.hour}.`
+            return `${props.author} escreveu isso ${HourDefaultModel(props.hour)}.`
         } else {
-            return `${props.message} às ${props.hour}`
+            return `${props.message} ${HourDefaultModel(props.hour)}`
         }
     }
 

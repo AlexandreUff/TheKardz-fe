@@ -33,6 +33,7 @@ export default function AsidePanel(props){
                 type={"chat"}
                 message={userMessage}
                 isYou
+                hour={new Date()}
                 key={reports.length+1}
             />
         )
