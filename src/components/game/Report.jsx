@@ -1,13 +1,15 @@
 export default function Default(props){
     return (
-        <div className="report-area">
+        <div className="report-container">
             {props.type === "chat" ? (
-                <p className="chat-report">
-                    <b>{props.author}:</b> <br />
-                    {props.message}
-                </p>
+                <>
+                    <p className="author-name">{props.author}:</p> 
+                    <p className="chat-report">
+                        {props.message}
+                    </p>
+                </>
             ) : (
-                <p className="game-report">
+                <p className="log-report">
                     {props.message}
                 </p>
             )}

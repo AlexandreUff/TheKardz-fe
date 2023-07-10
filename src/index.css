@@ -337,8 +337,39 @@
   font-size: 1rem;
 }
 .App .game-area .aside-panel .report-area {
-  background-color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   flex-grow: 1;
+  overflow-y: scroll;
+  position: relative;
+}
+.App .game-area .aside-panel .report-area .hidder-top-messages {
+  background-image: linear-gradient(to bottom, #2B2A4C, transparent);
+  width: 100%;
+  height: 10%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.App .game-area .aside-panel .report-area .report-container {
+  display: block;
+  text-align: left;
+  font-size: 1.8rem;
+  overflow: visible;
+  width: 100%;
+  margin-top: 5px;
+}
+.App .game-area .aside-panel .report-area .report-container .author-name {
+  font-weight: 600;
+}
+.App .game-area .aside-panel .report-area .report-container .chat-report {
+  color: #EEE2DE;
+  word-break: break-word;
+}
+.App .game-area .aside-panel .report-area .report-container .log-report {
+  color: #EA906C;
+  word-break: break-word;
 }
 .App .game-area .aside-panel .message-container {
   display: flex;
