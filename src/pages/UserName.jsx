@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Main from "../components/Main";
@@ -12,6 +12,8 @@ export default function UserName() {
   const [warning, setWarning] = useState("")
 
   const { act } = useParams()
+
+  const navigate = useNavigate()
 
   const saveUserGameData = (hall, userId) => {
       SessionService.save("userDatas", {userId, hall})
@@ -46,6 +48,9 @@ export default function UserName() {
         ) : (
           saveUserGameData(act, response.data.userId)
         )
+      
+      navigate("/game")
+      
     } else {
       setWarning(response.message)
     }
