@@ -84,6 +84,7 @@ export default function AsidePanel(props){
                         id="msg-area" cols="3"
                         rows="5" 
                         placeholder="Digite aqui sua mensagem."
+                        value={userMessage}
                         onChange={e => setUserMessage(e.target.value)}
                     >
 
