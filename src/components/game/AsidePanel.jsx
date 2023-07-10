@@ -3,6 +3,7 @@ import { IcoLeftArrow, IcoRightArrow, IcoSendMsg } from "../Icons";
 import SocketContext from "../../context/socketContext";
 import SessionService from "../../services/SessionService";
 import Report from "../game/Report"
+import ReportModel from "../../Utils/ReportModel";
 
 export default function AsidePanel(props){
 
@@ -27,19 +28,19 @@ export default function AsidePanel(props){
 
     const sendMessage = () => {
 
-        const report = (
-            <Report
-                author={userName}
-                type={"chat"}
-                message={userMessage}
-                isYou
-                hour={new Date()}
-                key={reports.length+1}
-            />
-        )
+        const report = new ReportModel(
+                userName,
+                "chat",
+                userMessage,
+                true,
+                new Date(),
+            )
         
         setReports(
-            [...reports, report]
+            [...reports, <Report
+                data={report}
+                key={reports.length+1}
+            />]
         )
 
         setUserMessage("")

@@ -1,27 +1,27 @@
 import HourDefaultModel from "../../Utils/HourDefaultModel"
 
-export default function Default(props){
+export default function Default({data}){
 
     const titleText = () => {
-        if(props.type === "chat"){
-            return `${props.author} escreveu isso ${HourDefaultModel(props.hour)}.`
+        if(data.type === "chat"){
+            return `${data.author} escreveu isso ${HourDefaultModel(data.hour)}.`
         } else {
-            return `${props.message} ${HourDefaultModel(props.hour)}`
+            return `${data.message} ${HourDefaultModel(data.hour)}`
         }
     }
 
     return (
         <div className="report-container" title={titleText()}>
-            {props.type === "chat" ? (
+            {data.type === "chat" ? (
                 <>
-                    <p className={`author-name ${props.isYou && "you"}`}>{props.author}:</p> 
-                    <p className={`chat-report ${props.isYou && "you"}`}>
-                        {props.message}
+                    <p className={`author-name ${data.isYou && "you"}`}>{data.author}:</p> 
+                    <p className={`chat-report ${data.isYou && "you"}`}>
+                        {data.message}
                     </p>
                 </>
             ) : (
                 <p className="log-report">
-                    {props.message}
+                    {data.message}
                 </p>
             )}
         </div>
