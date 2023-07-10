@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { IcoLeftArrow, IcoRightArrow } from "../Icons";
 import SocketContext from "../../context/socketContext";
+import SessionService from "../../services/SessionService";
 
 export default function AsidePanel(props){
 
@@ -8,6 +9,9 @@ export default function AsidePanel(props){
     const [test,setTest] = useState("");
 
     const socket = useContext(SocketContext)
+
+    const { userId, hall} = SessionService.get("userDatas")
+    console.log(userId, hall)
 
     const showAsidePanel = () => {
         const asidePanel = document.querySelector(".aside-panel")
@@ -36,7 +40,7 @@ export default function AsidePanel(props){
                     Nº DA SALA:
                 </h4>
                 <h3>
-                    2831456
+                    {hall}
                     {test}
                 </h3>
             </aside>
