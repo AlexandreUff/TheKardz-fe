@@ -44,7 +44,7 @@ export default function AsidePanel(props){
                     {test}
                 </h3>
                 <div className="report-area">
-                    A
+                    
                 </div>
                 <div className="message-container">
                     <textarea name="message-area" id="msg-area" cols="3" rows="5" placeholder="Digite aqui sua mensagem.">
