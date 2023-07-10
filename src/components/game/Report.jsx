@@ -12,8 +12,8 @@ export default function Default(props){
         <div className="report-container" title={titleText()}>
             {props.type === "chat" ? (
                 <>
-                    <p className="author-name">{props.author}:</p> 
-                    <p className="chat-report">
+                    <p className={`author-name ${props.isYou && "you"}`}>{props.author}:</p> 
+                    <p className={`chat-report ${props.isYou && "you"}`}>
                         {props.message}
                     </p>
                 </>

@@ -8,17 +8,7 @@ export default function AsidePanel(props){
 
     const [arrowIcon, setArrowIcon] = useState(true);
     const [test,setTest] = useState("");
-    const [reports, setReports] = useState([
-        <Report author={"Jonh"} type={"chat"} message={
-            "This is my first text and I just need to keep this text in a break line because this is a chat!"
-        } />,
-        <Report author={":game_server"} type={"log"} message={
-            "Erikson enter in this hall."
-        } />,
-        <Report author={"Jonh"} type={"chat"} message={
-            "This is my first text and I just need to keep this text in a break line because this is a chat!"
-        } />
-    ])
+    const [reports, setReports] = useState([])
     const [userMessage, setUserMessage] = useState("")
 
     const socket = useContext(SocketContext)
@@ -42,6 +32,7 @@ export default function AsidePanel(props){
                 author={"YOU"}
                 type={"chat"}
                 message={userMessage}
+                isYou
                 key={reports.length+1}
             />
         )

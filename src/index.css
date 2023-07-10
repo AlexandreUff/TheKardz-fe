@@ -362,10 +362,17 @@
 }
 .App .game-area .aside-panel .report-area .report-container .author-name {
   font-weight: 600;
+  word-break: break-word;
+}
+.App .game-area .aside-panel .report-area .report-container .author-name.you {
+  color: #00c3ff;
 }
 .App .game-area .aside-panel .report-area .report-container .chat-report {
   color: #EEE2DE;
   word-break: break-word;
+}
+.App .game-area .aside-panel .report-area .report-container .chat-report.you {
+  color: #00c3ff;
 }
 .App .game-area .aside-panel .report-area .report-container .log-report {
   color: #EA906C;

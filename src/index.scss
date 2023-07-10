@@ -439,11 +439,20 @@ $fourthColor: #2B2A4C;
 
                 .author-name{
                     font-weight: 600;
+                    word-break: break-word;
+
+                    &.you{
+                        color: #00c3ff;
+                    }
                 }
 
                 .chat-report{
                     color: $firstColor;
                     word-break: break-word;
+
+                    &.you{
+                        color: #00c3ff;
+                    }
                 }
 
                 .log-report{
