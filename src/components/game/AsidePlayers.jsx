@@ -22,17 +22,16 @@ export default function AsidePlayers(props){
         numberOfPlayers.toggleAttribute("show")
     }
 
-    const { hall } = SessionService.get("userDatas")
+    const {userName, userId, hall} = SessionService.get("userDatas")
 
     useEffect(()=>{
-        socket.send("credential", hall)
+        socket.send("credential", {userName, userId, hall})
 
         socket.listen("getUsers",(response)=>{
             const ordenedUsers = response.data.sort((first, second) => second.victories - first.victories)
             setUsers(ordenedUsers)
-            console.log(ordenedUsers)
         })
-    },[socket, hall])
+    },[socket, userName, userId, hall])
 
     return (
         <>
