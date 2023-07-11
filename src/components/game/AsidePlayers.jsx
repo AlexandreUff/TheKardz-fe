@@ -1,10 +1,15 @@
 import PlayersScore from "./PlayersScore";
 import { Users } from "../../Utils/Mocks/Users";
 import { IcoPlayer } from "../Icons";
+import { useContext, useEffect } from "react";
+import SocketContext from "../../context/socketContext";
+import SessionService from "../../services/SessionService";
 
 export default function AsidePlayers(props){
 
     const ordenedUsers = Users.sort((first, second) => second.wins - first.wins)
+
+    const socket = useContext(SocketContext)
 
     const showAsidePlayersBar = () => {
         const asidePlayers = document.querySelector(".aside-players")
@@ -14,6 +19,16 @@ export default function AsidePlayers(props){
         showPlayers.toggleAttribute("show")
         numberOfPlayers.toggleAttribute("show")
     }
+
+    const { hall } = SessionService.get("userDatas")
+
+    useEffect(()=>{
+        socket.send("credential", hall)
+
+        socket.listen("getUsers",(data)=>{
+            console.log(data)
+        })
+    },[socket, hall])
 
     return (
         <>
