@@ -32,9 +32,13 @@ export default function AsidePanel(props){
                 userName,
                 "chat",
                 userMessage,
-                true,
+                false,
                 new Date(),
             )
+        
+        socket.send("report", report)
+
+        report.isYou = true
         
         setReports(
             [...reports, <Report
@@ -55,7 +59,25 @@ export default function AsidePanel(props){
         setTimeout(()=>{
             socket.send("attack", "Context funcionando com sucesso.")
         },15000)
-    },[socket])
+
+        socket.listen("report",(APIReport) => {
+            const report = new ReportModel(
+                APIReport.author,
+                APIReport.type,
+                APIReport.message,
+                APIReport.isYou,
+                APIReport.hour,
+            )
+        
+        setReports(
+            [...reports, <Report
+                data={report}
+                key={reports.length+1}
+            />]
+        )
+        })
+
+    },[reports, socket])
 
     return (
         <>
