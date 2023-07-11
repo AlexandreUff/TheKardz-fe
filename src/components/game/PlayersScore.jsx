@@ -6,7 +6,7 @@ export default function PlayersScore(props){
             <IcoPlayer />
             <div className="score">
                 <div>
-                    {`🏆 ${props.wins}`}
+                    {`🏆 ${props.victories}`}
                 </div>
                 <div>
                     {`☠️ ${props.loses}`}
