@@ -8,7 +8,6 @@ import ReportModel from "../../Utils/ReportModel";
 export default function AsidePanel(props){
 
     const [arrowIcon, setArrowIcon] = useState(true);
-    const [test,setTest] = useState("");
     const [reports, setReports] = useState([])
     const [userMessage, setUserMessage] = useState("")
 
@@ -51,15 +50,6 @@ export default function AsidePanel(props){
     }
 
     useEffect(()=>{
-        socket.listen("send",(msg)=>{
-            console.log(msg,"ASIDE")
-            setTest(msg.msg)
-        })
-
-        setTimeout(()=>{
-            socket.send("attack", "Context funcionando com sucesso.")
-        },15000)
-
         socket.listen("report",(APIReport) => {
             const report = new ReportModel(
                 APIReport.author,
@@ -87,7 +77,6 @@ export default function AsidePanel(props){
                 </h4>
                 <h3>
                     {hall}
-                    {test}
                 </h3>
                 <div className="report-area">
                     <div className="hidder-top-messages"></div>
