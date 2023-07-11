@@ -13,14 +13,6 @@ export default function Game() {
 
   useEffect(() => {
 
-    setTimeout(() => {
-      socket.send("attack",{data:"Atacando"})
-    }, 5000)
-    
-    socket.listen("send",(msg)=>{
-      console.log(msg)
-    })
-
     return () => {
       // Executa quando o componente é desmontado
       socket.disconnect();

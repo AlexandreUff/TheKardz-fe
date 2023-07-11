@@ -13,8 +13,7 @@ export default function AsidePanel(props){
 
     const socket = useContext(SocketContext)
 
-    const { userName, userId, hall} = SessionService.get("userDatas")
-    console.log(userName,userId, hall)
+    const { userName, hall} = SessionService.get("userDatas")
 
     const showAsidePanel = () => {
         const asidePanel = document.querySelector(".aside-panel")
