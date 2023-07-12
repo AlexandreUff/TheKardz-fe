@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { IcoLeftArrow, IcoRightArrow, IcoSendMsg } from "../Icons";
+import { IcoCopyEmpty, IcoLeftArrow, IcoLink, IcoRightArrow, IcoSendMsg } from "../Icons";
 import SocketContext from "../../context/socketContext";
 import SessionService from "../../services/SessionService";
 import Report from "../game/Report"
 import ReportModel from "../../Utils/ReportModel";
+import PainelButton from "../PainelButton";
 
 export default function AsidePanel(props){
 
@@ -25,9 +26,6 @@ export default function AsidePanel(props){
     }
 
     const sendMessage = () => {
-
-        navigator.clipboard.writeText("FOI AE!!!")
-
         const report = new ReportModel(
                 userName,
                 "chat",
@@ -73,12 +71,24 @@ export default function AsidePanel(props){
     return (
         <>
             <aside className="aside-panel">
-                <h4>
-                    Nº DA SALA:
-                </h4>
-                <h3>
-                    {hall}
-                </h3>
+                    <h4>
+                        Nº DA SALA:
+                    </h4>
+                <div className="hall-controller">
+                    <h3>
+                        {hall}
+                    </h3>
+                    <PainelButton
+                        ico={<IcoCopyEmpty/>}
+                        title="Copiar número da sala"
+                        dataToCopy={hall}
+                    />
+                    <PainelButton
+                        ico={<IcoLink />}
+                        title="Copiar link da sala"
+                        dataToCopy={`https://thekardz.netlify.app/username/${hall}`}
+                    />
+                </div>
                 <div className="report-area">
                     <div className="hidder-top-messages"></div>
                     {reports}

@@ -329,12 +329,35 @@
   text-align: center;
   color: #EEE2DE;
 }
-.App .game-area .aside-panel h3 {
+.App .game-area .aside-panel h4 {
+  margin-top: 5px;
+  font-size: 1rem;
+}
+.App .game-area .aside-panel .hall-controller {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 5px;
+}
+.App .game-area .aside-panel .hall-controller h3 {
   font-size: 2rem;
 }
-.App .game-area .aside-panel h4 {
-  margin-top: 10px;
-  font-size: 1rem;
+.App .game-area .aside-panel .hall-controller button {
+  width: 25px;
+  height: 25px;
+  background-color: #2B2A4C;
+  border: 2px solid #EEE2DE;
+  border-radius: 50%;
+  color: #EEE2DE;
+  padding: 3px;
+  transition: 0.3s;
+}
+.App .game-area .aside-panel .hall-controller button svg {
+  width: 100%;
+}
+.App .game-area .aside-panel .hall-controller button:hover {
+  background-color: #EEE2DE;
+  color: #2B2A4C;
+  cursor: pointer;
 }
 .App .game-area .aside-panel .report-area {
   display: flex;

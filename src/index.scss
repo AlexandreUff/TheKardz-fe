@@ -400,13 +400,43 @@ $fourthColor: #2B2A4C;
         text-align: center;
         color: $firstColor;
 
-        h3{
-            font-size: 2rem;
+        h4 {
+            margin-top: 5px;
+            font-size: 1rem;
         }
 
-        h4 {
-            margin-top: 10px;
-            font-size: 1rem;
+        .hall-controller{
+            display: flex;
+            justify-content: space-evenly;
+            margin-bottom: 5px;
+
+            h3{
+                font-size: 2rem;
+            }
+
+            button {
+                width: 25px;
+                height: 25px;
+
+                background-color: $fourthColor;
+                border: 2px solid $firstColor;
+                border-radius: 50%;
+                color: $firstColor;
+
+                padding: 3px;
+
+                transition: .3s;
+
+                svg {
+                    width: 100%;
+                }
+
+                &:hover{
+                    background-color: $firstColor;
+                    color: $fourthColor;
+                    cursor: pointer;
+                }
+            }
         }
 
         .report-area{
