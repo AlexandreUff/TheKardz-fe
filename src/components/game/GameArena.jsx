@@ -28,7 +28,7 @@ export default function GameArena(){
                 {moreThanOnePlayer ? (
                 <Timer time={15} type="match" />
                 ) : (
-                    <h3>Aguarde a entrada de mais jogadores.</h3>
+                    <h3>Aguarde a entrada <br /> de mais jogadores.</h3>
                 )}
                 
                 {/* Fazer a área de logs */}
