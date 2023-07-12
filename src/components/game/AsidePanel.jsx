@@ -26,6 +26,8 @@ export default function AsidePanel(props){
 
     const sendMessage = () => {
 
+        navigator.clipboard.writeText("FOI AE!!!")
+
         const report = new ReportModel(
                 userName,
                 "chat",
