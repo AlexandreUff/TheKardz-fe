@@ -1,7 +1,11 @@
+import { useState } from "react"
 import CardToShow from "./CardToShow"
 import Timer from "./Timer"
 
 export default function GameArena(){
+
+    const [moreThanOnePlayer, setMoreThanOnePlayer] = useState(false)
+
     return (
         <main className="game-arena">
             {/* <CardToShow /> */}
@@ -21,7 +25,12 @@ export default function GameArena(){
                 <CardToShow />
             </div>
             <div className="table">
+                {moreThanOnePlayer ? (
                 <Timer time={15} type="match" />
+                ) : (
+                    <h3>Aguarde a entrada de mais jogadores.</h3>
+                )}
+                
                 {/* Fazer a área de logs */}
             </div>
             <div className="card-list my-cards"> {/* O jogador só entra nesse lado */}
