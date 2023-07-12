@@ -500,6 +500,7 @@ $fourthColor: #2B2A4C;
             textarea{
                 flex-grow: 1;
                 background-color: transparent;
+                resize: none;
 
                 font-size: 1rem;
                 color: $firstColor;

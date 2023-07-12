@@ -409,6 +409,7 @@
 .App .game-area .aside-panel .message-container textarea {
   flex-grow: 1;
   background-color: transparent;
+  resize: none;
   font-size: 1rem;
   color: #EEE2DE;
   border: #EA906C 1px solid;
