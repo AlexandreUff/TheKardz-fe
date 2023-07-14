@@ -1,10 +1,20 @@
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import CardToShow from "./CardToShow"
 import Timer from "./Timer"
+import SocketContext from "../../context/socketContext"
 
 export default function GameArena(){
 
     const [moreThanOnePlayer, setMoreThanOnePlayer] = useState(false)
+
+    const socket = useContext(SocketContext)
+
+    useEffect(() => {
+        socket.listen("start-fight", (data) => {
+            setMoreThanOnePlayer(true)
+            console.log(data.playersId)
+        })
+    }, [socket])
 
     return (
         <main className="game-arena">
