@@ -12,7 +12,7 @@ export default function GameArena(){
     useEffect(() => {
         socket.listen("start-fight", (data) => {
             setMoreThanOnePlayer(true)
-            console.log(data.playersId)
+            console.log(data.players)
         })
     }, [socket])
 

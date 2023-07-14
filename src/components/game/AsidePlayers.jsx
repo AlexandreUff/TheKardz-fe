@@ -27,8 +27,8 @@ export default function AsidePlayers(props){
     useEffect(()=>{
         /* socket.send("credential", {userName, userId, hall}) */
 
-        socket.listen("getUsers",(response)=>{
-            const ordenedUsers = response.data.sort((first, second) => second.victories - first.victories)
+        socket.listen("getUsers",(users)=>{
+            const ordenedUsers = users.sort((first, second) => second.victories - first.victories)
             setUsers(ordenedUsers)
         })
     },[socket/* , userName, userId, hall */])
@@ -42,7 +42,7 @@ export default function AsidePlayers(props){
                             name={user.name}
                             victories={user.victories}
                             loses={user.loses}
-                            isFighting={user.fighting}
+                            isFighting={user.isFighting}
                             position={i+1}
                             key={i}
                         />
