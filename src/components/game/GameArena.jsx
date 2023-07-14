@@ -2,19 +2,33 @@ import { useContext, useEffect, useState } from "react"
 import CardToShow from "./CardToShow"
 import Timer from "./Timer"
 import SocketContext from "../../context/socketContext"
+import SessionService from "../../services/SessionService"
 
 export default function GameArena(){
 
     const [moreThanOnePlayer, setMoreThanOnePlayer] = useState(false)
+    const [playersToArena, setPlayersToArea] = useState([])
 
     const socket = useContext(SocketContext)
 
+    const { userName, userId, hall} = SessionService.get("userDatas")
+
     useEffect(() => {
         socket.listen("start-fight", (data) => {
-            setMoreThanOnePlayer(true)
             console.log(data.players)
+            
+            const indice = data.players.indexOf(userId);
+
+            if (indice !== -1 && indice !== 0) {
+              const temp = data.players[0];
+              data.players[0] = data.players[1];
+              data.players[1] = temp;
+            }
+            
+            setPlayersToArea([...data.players])
+            setMoreThanOnePlayer(true) /* Talvez esse state não precise mais */
         })
-    }, [socket])
+    }, [socket, userId])
 
     return (
         <main className="game-arena">
