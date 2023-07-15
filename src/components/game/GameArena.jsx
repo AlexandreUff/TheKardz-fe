@@ -15,16 +15,19 @@ export default function GameArena(){
 
     useEffect(() => {
         socket.listen("start-fight", (data) => {
-            console.log(data.players)
-            
-            const indice = data.players.indexOf(userId);
+            const onlyUsersId = [data.players[0]._id, data.players[1]._id]
+            const index = onlyUsersId.indexOf(userId);
+            console.log("IDs",data.players)
+            console.log("user:",userId)
+            console.log("Index", index)
 
-            if (indice !== -1 && indice !== 0) {
+            if (index !== -1 && index !== 0) {
               const temp = data.players[0];
               data.players[0] = data.players[1];
               data.players[1] = temp;
             }
             
+            console.log(data.players)
             setPlayersToArea([...data.players])
             setMoreThanOnePlayer(true) /* Talvez esse state não precise mais */
         })
@@ -37,7 +40,8 @@ export default function GameArena(){
                 <div className="unused-area">
                 </div>
                 <h5 className="top">
-                    ADVERSÁRIO
+                    {/* {"{playersToArena ? playersToArena[0].name : "Ningueḿ"}"} */}
+                    TESTE
                 </h5>
                 <h6>
                     {`🏆 ${"2"}  ☠️ ${"1"}`}
@@ -66,7 +70,8 @@ export default function GameArena(){
                 <div className="unused-area">
                 </div>
                 <h5 className="bottom">
-                    VOCÊ
+                    {playersToArena ? playersToArena[1]?.name : "Ningueḿ!"}
+                    {/* Teste */}
                 </h5>
                 <h6>
                     {`🏆 ${"3"} ☠️ ${"2"}`}
