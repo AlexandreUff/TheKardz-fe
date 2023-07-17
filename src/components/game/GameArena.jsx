@@ -6,8 +6,21 @@ import SessionService from "../../services/SessionService"
 
 export default function GameArena(){
 
-    const [moreThanOnePlayer, setMoreThanOnePlayer] = useState(false)
-    const [playersToArena, setPlayersToArea] = useState([])
+    const [stageMatch, setStageMatch] = useState("stand-by")
+    const [playersAreFighting, setPlayersAreFighting] = useState([
+        {
+            name: "-",
+            victories: 0,
+            loses: 0,
+            userId: "",
+        },
+        {
+            name: "-",
+            victories: 0,
+            loses: 0,
+            userId: "",
+        }
+    ])
 
     const socket = useContext(SocketContext)
 
@@ -15,7 +28,7 @@ export default function GameArena(){
 
     useEffect(() => {
         socket.listen("start-fight", (data) => {
-            const onlyUsersId = [data.players[0]._id, data.players[1]._id]
+            /* const onlyUsersId = [data.players[0]._id, data.players[1]._id]
             const index = onlyUsersId.indexOf(userId);
             console.log("IDs",data.players)
             console.log("user:",userId)
@@ -28,10 +41,22 @@ export default function GameArena(){
             }
             
             console.log(data.players)
-            setPlayersToArea([...data.players])
-            setMoreThanOnePlayer(true) /* Talvez esse state não precise mais */
+            setPlayersToArea([...data.players]) */
+            setStageMatch("start-fight")
         })
-    }, [socket, userId])
+
+        socket.listen("getUsers", (users) => {
+
+            const playersFighting = users.filter(user => {
+                return user.lineNumber === 0 || user.lineNumber === 1
+                })
+            
+            if(playersFighting){
+                setPlayersAreFighting([...playersFighting])
+            }
+            
+        })
+    }, [playersAreFighting, socket])
 
     return (
         <main className="game-arena">
@@ -40,11 +65,10 @@ export default function GameArena(){
                 <div className="unused-area">
                 </div>
                 <h5 className="top">
-                    {/* {"{playersToArena ? playersToArena[0].name : "Ningueḿ"}"} */}
-                    TESTE
+                    {/* {playersToArena[0].name} */}
                 </h5>
                 <h6>
-                    {`🏆 ${"2"}  ☠️ ${"1"}`}
+                    {/* {`🏆 ${playersToArena[0].victories}  ☠️ ${playersToArena[0].loses}`} */}
                 </h6>
             </div>
             <div className="card-list">
@@ -53,11 +77,16 @@ export default function GameArena(){
                 <CardToShow />
             </div>
             <div className="table">
-                {moreThanOnePlayer ? (
-                <Timer time={15} type="match" />
-                ) : (
-                    <h3>Aguarde a entrada <br /> de mais jogadores.</h3>
+                {stageMatch === "start-fight" && <Timer time={10} type="match" />}
+                {stageMatch === "start-battle" && <Timer time={5} />}
+                {stageMatch === "stand-by" && (
+                    playersAreFighting.length > 1 ?
+                    <h3>Obtendo dados da partida...</h3> : <h3>Aguarde a entrada <br /> de mais jogadores.</h3>
                 )}
+                {/* {(
+                    playersAreFighting.length > 1 ?
+                    <h3>Obtendo dados da partida...</h3> : <h3>Aguarde a entrada <br /> de mais jogadores.</h3>
+                )} */}
                 
                 {/* Fazer a área de logs */}
             </div>
@@ -70,11 +99,10 @@ export default function GameArena(){
                 <div className="unused-area">
                 </div>
                 <h5 className="bottom">
-                    {playersToArena ? playersToArena[1]?.name : "Ningueḿ!"}
-                    {/* Teste */}
+                    {/* {playersToArena[1].name} */}
                 </h5>
                 <h6>
-                    {`🏆 ${"3"} ☠️ ${"2"}`}
+                    {/* {`🏆 ${playersToArena[1].victories}  ☠️ ${playersToArena[1].loses}`} */}
                 </h6>
             </div>
         </main>
