@@ -42,7 +42,7 @@ export default function AsidePlayers(props){
                             name={user.name}
                             victories={user.victories}
                             loses={user.loses}
-                            isFighting={user.isFighting}
+                            isFighting={user.lineNumber === 0 || user.lineNumber === 1}
                             position={i+1}
                             key={i}
                         />
