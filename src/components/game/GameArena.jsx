@@ -77,7 +77,9 @@ export default function GameArena(){
                 <CardToShow />
             </div>
             <div className="table">
-                {stageMatch === "start-fight" && <Timer time={10} type="match" />}
+                {stageMatch === "start-fight" && <Timer time={10} type="match" action={()=>{
+                    socket.send("starting-round")
+                }} />}
                 {stageMatch === "start-round" && <Timer time={5} />}
                 {stageMatch === "stand-by" && (
                     playersAreFighting.length > 1 ?

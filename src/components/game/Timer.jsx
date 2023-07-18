@@ -11,6 +11,7 @@ export default function Timer(props){
         const regressiveTime = setInterval(()=>{
             setTime(prevTime => {
                 if(prevTime <= 0){
+                    props.action()
                     clearInterval(regressiveTime)
                     return prevTime
                 }
