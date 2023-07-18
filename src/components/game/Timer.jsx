@@ -17,7 +17,6 @@ export default function Timer(props){
                 }
                 return prevTime-1
             })
-            console.log("Rodando...")
         },1000)
 
         return () => {
