@@ -18,7 +18,7 @@ export default function Timer(props){
                 return prevTime-1
             })
         },1000)
-    },[])
+    },[props])
 
     return (
         <div className="timer" style={{border:`${colorTimer} solid 5px`, color: colorTimer}}>

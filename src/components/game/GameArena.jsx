@@ -45,6 +45,10 @@ export default function GameArena(){
             setStageMatch("start-fight")
         })
 
+        socket.listen("start-round", () => {
+            setStageMatch("start-round")
+        })
+
         socket.listen("getUsers", (users) => {
 
             const playersFighting = users.filter(user => {
@@ -80,7 +84,9 @@ export default function GameArena(){
                 {stageMatch === "start-fight" && <Timer time={10} type="match" action={()=>{
                     socket.send("starting-round")
                 }} />}
-                {stageMatch === "start-round" && <Timer time={5} />}
+                {stageMatch === "start-round" && <Timer time={5} action={() => {
+                    console.log("Fois")
+                }} />}
                 {stageMatch === "stand-by" && (
                     playersAreFighting.length > 1 ?
                     <h3>Obtendo dados da partida...</h3> : <h3>Aguarde a entrada <br /> de mais jogadores.</h3>
