@@ -78,7 +78,7 @@ export default function GameArena(){
             </div>
             <div className="table">
                 {stageMatch === "start-fight" && <Timer time={10} type="match" />}
-                {stageMatch === "start-battle" && <Timer time={5} />}
+                {stageMatch === "start-round" && <Timer time={5} />}
                 {stageMatch === "stand-by" && (
                     playersAreFighting.length > 1 ?
                     <h3>Obtendo dados da partida...</h3> : <h3>Aguarde a entrada <br /> de mais jogadores.</h3>
