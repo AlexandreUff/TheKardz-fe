@@ -27,8 +27,8 @@ export default function GameArena(){
     const { userName, userId, hall} = SessionService.get("userDatas")
 
     useEffect(() => {
-        socket.listen("start-fight", (data) => {
-            /* const onlyUsersId = [data.players[0]._id, data.players[1]._id]
+        /* socket.listen("start-fight", (data) => {
+            const onlyUsersId = [data.players[0]._id, data.players[1]._id]
             const index = onlyUsersId.indexOf(userId);
             console.log("IDs",data.players)
             console.log("user:",userId)
@@ -41,14 +41,14 @@ export default function GameArena(){
             }
             
             console.log(data.players)
-            setPlayersToArea([...data.players]) */
+            setPlayersToArea([...data.players])
             setStageMatch("start-fight")
             console.log("Chegou aqui")
-        })
+        }) */
 
-        socket.listen("start-round", () => {
+        /* socket.listen("start-round", () => {
             setStageMatch("start-round")
-        })
+        }) */
 
         socket.listen("fight-status", (status) => {
             /*
