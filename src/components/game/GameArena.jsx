@@ -43,10 +43,18 @@ export default function GameArena(){
             console.log(data.players)
             setPlayersToArea([...data.players]) */
             setStageMatch("start-fight")
+            console.log("Chegou aqui")
         })
 
         socket.listen("start-round", () => {
             setStageMatch("start-round")
+        })
+
+        socket.listen("fight-status", (status) => {
+            /*
+             if(status === "end-fight"){
+            } */
+            setStageMatch(status)
         })
 
         socket.listen("getUsers", (users) => {
