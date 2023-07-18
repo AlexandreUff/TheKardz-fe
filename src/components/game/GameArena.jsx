@@ -8,7 +8,7 @@ export default function GameArena(){
 
     const [stageMatch, setStageMatch] = useState("stand-by")
     const [playersAreFighting, setPlayersAreFighting] = useState([
-        {
+        /* {
             name: "-",
             victories: 0,
             loses: 0,
@@ -19,7 +19,7 @@ export default function GameArena(){
             victories: 0,
             loses: 0,
             userId: "",
-        }
+        } */
     ])
 
     const socket = useContext(SocketContext)
@@ -55,6 +55,7 @@ export default function GameArena(){
              if(status === "end-fight"){
             } */
             setStageMatch(status)
+            console.log("Último status:", status)
         })
 
         socket.listen("getUsers", (users) => {
@@ -63,8 +64,10 @@ export default function GameArena(){
                 return user.lineNumber === 0 || user.lineNumber === 1
                 })
             
-            if(playersFighting){
+            if(playersFighting.length > 1){
                 setPlayersAreFighting([...playersFighting])
+            } else {
+                setPlayersAreFighting([])
             }
             
         })
@@ -77,10 +80,10 @@ export default function GameArena(){
                 <div className="unused-area">
                 </div>
                 <h5 className="top">
-                    {/* {playersToArena[0].name} */}
+                    {playersAreFighting.length > 1 && playersAreFighting[0].name}
                 </h5>
                 <h6>
-                    {/* {`🏆 ${playersToArena[0].victories}  ☠️ ${playersToArena[0].loses}`} */}
+                    {playersAreFighting.length > 1 && `🏆 ${playersAreFighting[0].victories}  ☠️ ${playersAreFighting[0].loses}`}
                 </h6>
             </div>
             <div className="card-list">
@@ -115,10 +118,10 @@ export default function GameArena(){
                 <div className="unused-area">
                 </div>
                 <h5 className="bottom">
-                    {/* {playersToArena[1].name} */}
+                    {playersAreFighting.length > 1 && playersAreFighting[1].name}
                 </h5>
                 <h6>
-                    {/* {`🏆 ${playersToArena[1].victories}  ☠️ ${playersToArena[1].loses}`} */}
+                    {playersAreFighting.length > 1 && `🏆 ${playersAreFighting[1].victories}  ☠️ ${playersAreFighting[1].loses}`}
                 </h6>
             </div>
         </main>
