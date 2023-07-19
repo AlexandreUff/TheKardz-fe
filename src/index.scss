@@ -552,6 +552,8 @@ $fourthColor: #2B2A4C;
     height: 75px;
     margin: 5px;
 
+    transition: .3s;
+
     .show-amount{
         display: flex;
         align-items: center;
@@ -640,6 +642,11 @@ $fourthColor: #2B2A4C;
 
     &.turn .backface {
         transform: rotateY(180deg);
+    }
+
+    &.turn:hover{
+        transform: scale(1.1);
+        cursor: pointer;
     }
       
 }

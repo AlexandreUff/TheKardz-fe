@@ -141,6 +141,9 @@ export default function GameArena() {
                       type={card.type}
                       show={true}
                       amount={card.amount}
+                      titleMoviment={()=>{
+                        console.log("Bateu")
+                      }}
                       key={i}
                     />
           }) : (

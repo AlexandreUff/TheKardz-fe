@@ -20,7 +20,7 @@ export default function CardEmpty(props){
     }
 
     return (
-    <div className={`card-game ${props.show && "turn"}`}> {/* Faça um toggle para add essa classe turn */}
+    <div className={`card-game ${props.show && "turn"}`} title={props.title}>
         {props.amount > 1 && (
             <div className={`show-amount ${props.amount === Infinity && "is-infinity"}`}>
                 {props.amount === Infinity ? "∞" : props.amount}
