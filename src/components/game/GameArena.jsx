@@ -7,6 +7,23 @@ import SessionService from "../../services/SessionService";
 export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
+  const [cardsOfEnemy, setCardsOfEnemy] = useState([
+    {
+      cardName: "recharging1",
+      amount: 1,
+      type: "default",
+    },
+    {
+      cardName: "defense1",
+      amount: 1,
+      type: "default",
+    },
+    {
+      cardName: "attack1",
+      amount: 1,
+      type: "default",
+    },
+  ])
   const [cardsOfPlayer, setCardsOfPlayer] = useState([
     {
       cardName: "recharging1",
@@ -74,9 +91,11 @@ export default function GameArena() {
         </h6>
       </div>
       <div className="card-list">
-        <CardToShow />
-        <CardToShow />
-        <CardToShow />
+      {cardsOfEnemy.map((card, i) => {
+          return <CardToShow
+                    key={i}
+                  />
+        })}
       </div>
       <div className="table">
         {stageMatch === "start-fight" && (
@@ -117,14 +136,21 @@ export default function GameArena() {
         {/* <CardToShow />
         <CardToShow />
         <CardToShow /> */}
-        {cardsOfPlayer.map((card, i) => {
-          return <CardToShow
-                    moviment={card.cardName}
-                    type={card.type}
-                    show={playersAreFighting.length > 1 && (playersAreFighting[1].name === userName)}
-                    key={i}
-                  />
-        })}
+        {playersAreFighting.length > 1 && (playersAreFighting[1].name === userName) ?
+          cardsOfPlayer.map((card, i) => {
+            return <CardToShow
+                      moviment={card.cardName}
+                      type={card.type}
+                      show={true}
+                      key={i}
+                    />
+          }) : (
+            cardsOfPlayer.map((card, i) => {
+              return <CardToShow
+                        key={i}
+                      />
+            })
+          )}
       </div>
       <div className="player-name">
         <div className="unused-area"></div>
