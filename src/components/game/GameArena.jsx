@@ -7,15 +7,15 @@ import SessionService from "../../services/SessionService";
 export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
-  const [cardsOfEnemy, setCardsOfEnemy] = useState([
+  const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
     {
       cardName: "recharging1",
-      amount: 1,
+      amount: Infinity,
       type: "default",
     },
     {
       cardName: "defense1",
-      amount: 1,
+      amount: Infinity,
       type: "default",
     },
     {
@@ -24,7 +24,7 @@ export default function GameArena() {
       type: "default",
     },
   ])
-  const [cardsOfPlayer, setCardsOfPlayer] = useState([
+  const [cardsOfPlayerII, setCardsOfPlayerII] = useState([
     {
       cardName: "recharging1",
       amount: 1,
@@ -91,7 +91,7 @@ export default function GameArena() {
         </h6>
       </div>
       <div className="card-list">
-      {cardsOfEnemy.map((card, i) => {
+      {cardsOfPlayerI.map((card, i) => {
           return <CardToShow
                     key={i}
                   />
@@ -133,11 +133,9 @@ export default function GameArena() {
       <div className="card-list my-cards">
         {" "}
         {/* O jogador só entra nesse lado */}
-        {/* <CardToShow />
-        <CardToShow />
-        <CardToShow /> */}
+        {/* Verifica se é o você o jogador. Caso não, os dados não podem ser passados no card */}
         {playersAreFighting.length > 1 && (playersAreFighting[1].name === userName) ?
-          cardsOfPlayer.map((card, i) => {
+          cardsOfPlayerII.map((card, i) => {
             return <CardToShow
                       moviment={card.cardName}
                       type={card.type}
@@ -145,7 +143,7 @@ export default function GameArena() {
                       key={i}
                     />
           }) : (
-            cardsOfPlayer.map((card, i) => {
+            cardsOfPlayerII.map((card, i) => {
               return <CardToShow
                         key={i}
                       />
