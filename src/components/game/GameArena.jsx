@@ -142,7 +142,8 @@ export default function GameArena() {
       <div className="player-name">
         <div className="unused-area"></div>
         <h5 className="bottom">
-          {playersAreFighting.length > 1 && playersAreFighting[1].name}
+          {playersAreFighting.length > 1 && (playersAreFighting[1].name === userName ?
+           (playersAreFighting[1].name + "(Você)") : (playersAreFighting[1].name))}
         </h5>
         <h6>
           {playersAreFighting.length > 1 &&
