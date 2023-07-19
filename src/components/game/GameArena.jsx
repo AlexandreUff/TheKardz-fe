@@ -28,12 +28,12 @@ export default function GameArena() {
     {
       cardName: "recharging1",
       amount: 1,
-      type: "default",
+      type: "bronze",
     },
     {
       cardName: "defense1",
       amount: 1,
-      type: "default",
+      type: "gold",
     },
     {
       cardName: "attack1",

@@ -37,10 +37,10 @@ export default function CardEmpty(props){
                 <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
             </div>
         </div>
-        <div className="frontface" /* type="gold" */>
+        <div className="frontface" type={props.type}>
             <div>
                 {/* Condicional para caso receba alguma informação de movimento SE FOR PLAYER */}
-                {true && takeMovimentInfo('attack2')}
+                {true && takeMovimentInfo(props.moviment)}
             </div>
         </div>
     </div>
