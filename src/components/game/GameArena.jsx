@@ -7,6 +7,23 @@ import SessionService from "../../services/SessionService";
 export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
+  const [cardsOfPlayer, setCardsOfPlayer] = useState([
+    {
+      cardName: "recharging1",
+      amount: 1,
+      type: "default",
+    },
+    {
+      cardName: "defense1",
+      amount: 1,
+      type: "default",
+    },
+    {
+      cardName: "attack1",
+      amount: 1,
+      type: "default",
+    },
+  ])
 
   const socket = useContext(SocketContext);
 
