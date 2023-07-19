@@ -6,53 +6,15 @@ import SessionService from "../../services/SessionService";
 
 export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
-  const [playersAreFighting, setPlayersAreFighting] = useState([
-    /* {
-            name: "-",
-            victories: 0,
-            loses: 0,
-            userId: "",
-        },
-        {
-            name: "-",
-            victories: 0,
-            loses: 0,
-            userId: "",
-        } */
-  ]);
+  const [playersAreFighting, setPlayersAreFighting] = useState([]);
 
   const socket = useContext(SocketContext);
 
   const { userName, userId, hall } = SessionService.get("userDatas");
 
   useEffect(() => {
-    /* socket.listen("start-fight", (data) => {
-            const onlyUsersId = [data.players[0]._id, data.players[1]._id]
-            const index = onlyUsersId.indexOf(userId);
-            console.log("IDs",data.players)
-            console.log("user:",userId)
-            console.log("Index", index)
-
-            if (index !== -1 && index !== 0) {
-              const temp = data.players[0];
-              data.players[0] = data.players[1];
-              data.players[1] = temp;
-            }
-            
-            console.log(data.players)
-            setPlayersToArea([...data.players])
-            setStageMatch("start-fight")
-            console.log("Chegou aqui")
-        }) */
-
-    /* socket.listen("start-round", () => {
-            setStageMatch("start-round")
-        }) */
-
+    
     socket.listen("fight-status", (status) => {
-      /*
-             if(status === "end-fight"){
-            } */
       setStageMatch(status);
       console.log("Último status:", status);
     });
