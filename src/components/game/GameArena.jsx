@@ -27,12 +27,12 @@ export default function GameArena() {
   const [cardsOfPlayerII, setCardsOfPlayerII] = useState([
     {
       cardName: "attack1",
-      amount: 1,
+      amount: Infinity,
       type: "default",
     },
     {
       cardName: "recharging1",
-      amount: 1,
+      amount: Infinity,
       type: "default",
     },
     {
