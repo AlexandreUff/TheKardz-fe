@@ -26,7 +26,7 @@ export default function Game() {
   return (
     <div className="game-area">
       <SocketContext.Provider value={socket}>
-        <AsidePlayers />
+        <AsidePlayers isYourName={userName} />
         <GameArena />
         <AsidePanel />
       </SocketContext.Provider>

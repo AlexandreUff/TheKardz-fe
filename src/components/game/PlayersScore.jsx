@@ -2,7 +2,7 @@ import { IcoPlayer } from "../Icons";
 
 export default function PlayersScore(props){
     return (
-        <div className="players-score-scope" title={props.name}>
+        <div className={`players-score-scope ${props.isYourName === props.name ? "you" : ""}`} title={props.name}>
             <IcoPlayer />
             <div className="score">
                 <div>
