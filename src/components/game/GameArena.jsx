@@ -7,6 +7,7 @@ import SessionService from "../../services/SessionService";
 export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
+  const [choosedMoviment, setChoosedMoviment] = useState();
   const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
     {
       cardName: "attack1",
@@ -141,9 +142,7 @@ export default function GameArena() {
                       type={card.type}
                       show={true}
                       amount={card.amount}
-                      titleMoviment={()=>{
-                        console.log("Bateu")
-                      }}
+                      chooseMov={() => setChoosedMoviment({...card})}
                       key={i}
                     />
           }) : (
@@ -155,7 +154,9 @@ export default function GameArena() {
           )}
       </div>
       <div className="player-name">
-        <div className="unused-area"></div>
+        <div className="unused-area">
+          {!!choosedMoviment && "Fois"}
+        </div>
         <h5 className="bottom">
           {playersAreFighting.length > 1 && (playersAreFighting[1].name === userName ?
            (playersAreFighting[1].name + "(Você)") : (playersAreFighting[1].name))}
