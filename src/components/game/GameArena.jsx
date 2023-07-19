@@ -9,6 +9,11 @@ export default function GameArena() {
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
   const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
     {
+      cardName: "attack1",
+      amount: 1,
+      type: "default",
+    },
+    {
       cardName: "recharging1",
       amount: Infinity,
       type: "default",
@@ -16,27 +21,22 @@ export default function GameArena() {
     {
       cardName: "defense1",
       amount: Infinity,
-      type: "default",
-    },
-    {
-      cardName: "attack1",
-      amount: 1,
       type: "default",
     },
   ])
   const [cardsOfPlayerII, setCardsOfPlayerII] = useState([
     {
+      cardName: "attack1",
+      amount: 1,
+      type: "default",
+    },
+    {
       cardName: "recharging1",
       amount: 1,
-      type: "bronze",
+      type: "default",
     },
     {
       cardName: "defense1",
-      amount: 1,
-      type: "gold",
-    },
-    {
-      cardName: "attack1",
       amount: 1,
       type: "default",
     },
