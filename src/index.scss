@@ -572,6 +572,10 @@ $fourthColor: #2B2A4C;
         color: $firstColor;
 
         z-index: 1;
+
+        &.is-infinity {
+            font-size: 1.5rem;
+        }
     }
 
     .backface,.frontface{

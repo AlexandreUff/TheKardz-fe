@@ -463,6 +463,9 @@
   color: #EEE2DE;
   z-index: 1;
 }
+.card-game .show-amount.is-infinity {
+  font-size: 1.5rem;
+}
 .card-game .backface, .card-game .frontface {
   display: flex;
   align-items: center;

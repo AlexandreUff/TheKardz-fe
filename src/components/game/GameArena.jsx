@@ -14,12 +14,12 @@ export default function GameArena() {
       type: "default",
     },
     {
-      cardName: "recharging1",
+      cardName: "defense1",
       amount: Infinity,
       type: "default",
     },
     {
-      cardName: "defense1",
+      cardName: "recharging1",
       amount: Infinity,
       type: "default",
     },
@@ -27,17 +27,17 @@ export default function GameArena() {
   const [cardsOfPlayerII, setCardsOfPlayerII] = useState([
     {
       cardName: "attack1",
+      amount: 1,
+      type: "default",
+    },
+    {
+      cardName: "defense1",
       amount: Infinity,
       type: "default",
     },
     {
       cardName: "recharging1",
       amount: Infinity,
-      type: "default",
-    },
-    {
-      cardName: "defense1",
-      amount: 1,
       type: "default",
     },
   ])
