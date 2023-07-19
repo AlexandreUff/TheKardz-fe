@@ -546,10 +546,33 @@ $fourthColor: #2B2A4C;
 }
 
 .card-game{
+    position: relative;
     perspective: 1000px;
     width: 50px;
     height: 75px;
     margin: 5px;
+
+    .show-amount{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        position: absolute;
+        top: -5px;
+        right: -10px;
+
+        width: 15px;
+        height: 15px;
+
+        font-size: 0.9rem;
+        font-weight: 600;
+
+        border-radius: 50%;
+        background-color: $thirthColor;
+        color: $firstColor;
+
+        z-index: 1;
+    }
 
     .backface,.frontface{
         display: flex;

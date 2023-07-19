@@ -140,6 +140,7 @@ export default function GameArena() {
                       moviment={card.cardName}
                       type={card.type}
                       show={true}
+                      amount={card.amount}
                       key={i}
                     />
           }) : (
