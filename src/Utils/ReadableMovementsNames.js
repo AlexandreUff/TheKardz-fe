@@ -1,30 +1,32 @@
-function titleMovimentInfo(data){
-    let moviment
-    let type
+function titleMovimentInfo(movement, type){
+    let movementLegible
+    let typeLegible
 
     //Verifica o nome do movimento
-    if(data.moviment === 'defense1' || data.moviment === "defense2" || data.moviment === "defense3"){
-        moviment = "Defesa"
-    } else if(data.moviment === 'attack1'){
-        moviment = "Ataque"
-    } else if(data.moviment === 'attack2' || data.moviment === 'attack3'){
-        moviment = "Ataque"
-    } else if(data.moviment === 'recharging1' || data.moviment === 'recharging2' || data.moviment === 'recharging3'){
-        moviment = "Recarga"
+    if(movement === 'defense1' || movement === "defense2" || movement === "defense3"){
+        movementLegible = "Defesa"
+    } else if(movement === 'attack1'){
+        movementLegible = "Ataque"
+    } else if(movement === 'attack2' || movement === 'attack3'){
+        movementLegible = "Ataque"
+    } else if(movement === 'recharging1' || movement === 'recharging2' || movement === 'recharging3'){
+        movementLegible = "Recarga"
     }
 
     //Verifica o tipo do movimento
-    if(data.type === "bronze"){
-        type = "Bronze";
-    } else if (data.type === "gold"){
-        type = "Gold";
+    if(type === "bronze"){
+        typeLegible = "Bronze";
+    } else if (type === "gold"){
+        typeLegible = "Gold";
     } else {
-        type = "";
+        typeLegible = "";
     }
 
     //Retorna um objeto com os dois dados agora legíveis
     return {
-        name: moviment,
-        type
+        name: movementLegible,
+        type: typeLegible
     }
 }
+
+export default titleMovimentInfo

@@ -1,4 +1,5 @@
 import { IcoDiamondCard } from "../Icons";
+import ReadableMovementsNames from "../../Utils/ReadableMovementsNames"
 
 export default function CardEmpty(props){
 
@@ -40,10 +41,10 @@ export default function CardEmpty(props){
         return `${moviment} ${props.type !== "default" ? props.type : ""}`
     }
 
-    const titleCompleted = titleMovimentInfo()
+    const titleCompleted = ReadableMovementsNames(props.moviment, props.type)
 
     return (
-    <div className={`card-game ${props.show && "turn"}`} title={titleCompleted} onClick={props.chooseMov}>
+    <div className={`card-game ${props.show && "turn"}`} title={props.show &&`${titleCompleted.name} ${titleCompleted.type}`} onClick={props.chooseMov}>
         {props.amount > 1 && (
             <div className={`show-amount ${props.amount === Infinity && "is-infinity"}`}>
                 {props.amount === Infinity ? "∞" : props.amount}
