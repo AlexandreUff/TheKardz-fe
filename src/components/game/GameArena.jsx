@@ -114,9 +114,17 @@ export default function GameArena() {
       <div className="card-list my-cards">
         {" "}
         {/* O jogador só entra nesse lado */}
+        {/* <CardToShow />
         <CardToShow />
-        <CardToShow />
-        <CardToShow />
+        <CardToShow /> */}
+        {cardsOfPlayer.map((card, i) => {
+          return <CardToShow
+                    moviment={card.cardName}
+                    type={card.type}
+                    show={playersAreFighting.length > 1 && (playersAreFighting[1].name === userName)}
+                    key={i}
+                  />
+        })}
       </div>
       <div className="player-name">
         <div className="unused-area"></div>
