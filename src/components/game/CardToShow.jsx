@@ -20,7 +20,7 @@ export default function CardEmpty(props){
     }
 
     return (
-    <div className={`card-game ${props.show ? "turn" : ""}`}> {/* Faça um toggle para add essa classe turn */}
+    <div className={`card-game ${props.show && "turn"}`}> {/* Faça um toggle para add essa classe turn */}
         <div className="backface">
             <div>
                 <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
