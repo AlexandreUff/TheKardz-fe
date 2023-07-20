@@ -80,6 +80,23 @@ export default function GameArena() {
     });
   }, [playersAreFighting, socket]);
 
+
+  const sendChosenMoviment = () => {
+    console.log("Fois");
+    let movementWillBeSent
+    
+    if(!chosenMoviment){
+      movementWillBeSent = {
+        cardName: "recharging1",
+        amount: Infinity,
+        type: "default",
+      }
+    } else {
+      movementWillBeSent = {...chosenMoviment}
+    }
+    socket.send("chosen-movement", movementWillBeSent)
+  }
+
   return (
     <main className="game-arena">
       {/* <CardToShow /> */}
@@ -106,6 +123,7 @@ export default function GameArena() {
             time={10}
             type="match"
             action={() => {
+              /* Ajustar este disparo para apenas quando for o player vencedor (id === 0) */
               socket.send("starting-round");
             }}
           />
@@ -113,9 +131,7 @@ export default function GameArena() {
         {stageMatch === "start-round" && (
           <Timer
             time={5}
-            action={() => {
-              console.log("Fois");
-            }}
+            action={sendChosenMoviment}
           />
         )}
         {stageMatch === "stand-by" &&
