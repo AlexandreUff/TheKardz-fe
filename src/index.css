@@ -297,6 +297,18 @@
 .App .game-area main.game-arena .player-name * {
   width: 33.33%;
 }
+.App .game-area main.game-arena .player-name .unused-area {
+  display: flex;
+  justify-content: center;
+}
+.App .game-area main.game-arena .player-name .unused-area .selected-mov-content {
+  border: 2px solid #2B2A4C;
+  border-radius: 5px;
+  width: 70px;
+  padding: 5px 0;
+  font-size: 1.5rem;
+  text-align: center;
+}
 .App .game-area main.game-arena .player-name h6 {
   background-image: linear-gradient(to right, #EEE2DE, #EA906C);
 }
@@ -570,7 +582,7 @@
   .App .game-area main.game-arena .player-name h5.top {
     margin-bottom: 50px;
   }
-  .App .game-area main.game-arena .player-name h5.bottom {
+  .App .game-area main.game-arena .player-name h5.bottom, .App .game-area main.game-arena .player-name .unused-area {
     margin-top: 50px;
   }
 }

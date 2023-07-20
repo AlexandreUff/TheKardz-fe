@@ -157,11 +157,15 @@ export default function GameArena() {
       </div>
       <div className="player-name">
         <div className="unused-area">
-          {!!chosenMoviment && ReadableMovementsNames(chosenMoviment.cardName, chosenMoviment.type)}
+          {!!chosenMoviment && (
+            <div className="selected-mov-content">
+              {ReadableMovementsNames(chosenMoviment.cardName, chosenMoviment.type)}
+            </div>)
+          }
         </div>
         <h5 className="bottom">
           {playersAreFighting.length > 1 && (playersAreFighting[1].name === userName ?
-           (playersAreFighting[1].name + "(Você)") : (playersAreFighting[1].name))}
+           <>{playersAreFighting[1].name} <br /><small>(Você)</small></> : (playersAreFighting[1].name))}
         </h5>
         <h6>
           {playersAreFighting.length > 1 &&

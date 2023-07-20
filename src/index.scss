@@ -362,6 +362,22 @@ $fourthColor: #2B2A4C;
                 width: 33.33%;
             }
 
+            .unused-area {
+                display: flex;
+                justify-content: center;
+
+                .selected-mov-content{
+                    border: 2px solid $fourthColor;
+                    border-radius: 5px;
+
+                    width: 70px;
+                    padding: 5px 0;
+
+                    font-size: 1.5rem;
+                    text-align: center;
+                }
+            }
+
             h6 {
                 background-image: linear-gradient(to right, $firstColor,$secondColor);
             }
@@ -716,9 +732,10 @@ $fourthColor: #2B2A4C;
                         margin-bottom: 50px;
                     }
 
-                    h5.bottom{
+                    h5.bottom, .unused-area{
                         margin-top: 50px;
                     }
+                    
                 }
             }
         }
