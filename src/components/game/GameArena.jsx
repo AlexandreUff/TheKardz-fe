@@ -82,19 +82,23 @@ export default function GameArena() {
 
 
   const sendChosenMoviment = () => {
-    console.log("Fois");
-    let movementWillBeSent
-    
-    if(!chosenMoviment){
-      movementWillBeSent = {
-        cardName: "recharging1",
-        amount: Infinity,
-        type: "default",
+    console.log("Disparo de movimento");
+
+    if(playersAreFighting[0].userId === userId || playersAreFighting[1].userId === userId){
+      let movementWillBeSent
+  
+      if(!chosenMoviment){
+        movementWillBeSent = {
+          cardName: "recharging1",
+          amount: Infinity,
+          type: "default",
+        }
+      } else {
+        movementWillBeSent = {...chosenMoviment}
       }
-    } else {
-      movementWillBeSent = {...chosenMoviment}
+  
+      socket.send("chosen-movement", movementWillBeSent)
     }
-    socket.send("chosen-movement", movementWillBeSent)
   }
 
   return (
