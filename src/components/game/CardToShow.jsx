@@ -20,27 +20,6 @@ export default function CardEmpty(props){
         }
     }
 
-    function titleMovimentInfo(){
-        let moviment
-
-        if(props.moviment === 'defense1' || props.moviment === "defense2" || props.moviment === "defense3"){
-            moviment = "Defesa"
-        }
-
-        if(props.moviment === 'attack1'){
-            moviment = "Ataque"
-        }
-
-        if(props.moviment === 'attack2' || props.moviment === 'attack3'){
-            moviment = "Ataque"
-        }
-        if(props.moviment === 'recharging1' || props.moviment === 'recharging2' || props.moviment === 'recharging3'){
-            moviment = "Recarga"
-        }
-
-        return `${moviment} ${props.type !== "default" ? props.type : ""}`
-    }
-
     const titleCompleted = props.show ? ReadableMovementsNames(props.moviment, props.type) : ""
 
     return (
