@@ -23,10 +23,7 @@ function titleMovimentInfo(movement, type){
     }
 
     //Retorna um objeto com os dois dados agora legíveis
-    return {
-        name: movementLegible,
-        type: typeLegible
-    }
+    return `${movementLegible} ${typeLegible}`
 }
 
 export default titleMovimentInfo

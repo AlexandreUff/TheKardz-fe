@@ -50,6 +50,7 @@ export default function GameArena() {
   useEffect(() => {
     
     socket.listen("fight-status", (status) => {
+      console.log("Bateu aqui:", status)
       setStageMatch(status);
       console.log("Último status:", status);
     });
@@ -140,7 +141,7 @@ export default function GameArena() {
             return <CardToShow
                       moviment={card.cardName}
                       type={card.type}
-                      show={true}
+                      show={stageMatch === "start-round"}
                       amount={card.amount}
                       chooseMov={() => setChosenMoviment({...card})}
                       key={i}
