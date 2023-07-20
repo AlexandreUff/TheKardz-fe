@@ -3,6 +3,7 @@ import CardToShow from "./CardToShow";
 import Timer from "./Timer";
 import SocketContext from "../../context/socketContext";
 import SessionService from "../../services/SessionService";
+import ReadableMovementsNames from "../../Utils/ReadableMovementsNames";
 
 export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
@@ -156,7 +157,7 @@ export default function GameArena() {
       </div>
       <div className="player-name">
         <div className="unused-area">
-          {!!chosenMoviment && "Fois"}
+          {!!chosenMoviment && ReadableMovementsNames(chosenMoviment.cardName, chosenMoviment.type)}
         </div>
         <h5 className="bottom">
           {playersAreFighting.length > 1 && (playersAreFighting[1].name === userName ?

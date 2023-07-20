@@ -44,7 +44,7 @@ export default function CardEmpty(props){
     const titleCompleted = props.show ? ReadableMovementsNames(props.moviment, props.type) : ""
 
     return (
-    <div className={`card-game ${props.show && "turn"}`} title={titleCompleted} onClick={props.chooseMov}>
+    <div className={`card-game ${props.show && "turn"}`} title={titleCompleted} onClick={() => props.show && props.chooseMov()}>
         {props.amount > 1 && (
             <div className={`show-amount ${props.amount === Infinity && "is-infinity"}`}>
                 {props.amount === Infinity ? "∞" : props.amount}
