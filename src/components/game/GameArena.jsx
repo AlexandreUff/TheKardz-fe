@@ -82,10 +82,11 @@ export default function GameArena() {
 
 
   const sendChosenMoviment = () => {
-    console.log("Disparo de movimento");
-
-    if(playersAreFighting[0].userId === userId || playersAreFighting[1].userId === userId){
+    if(playersAreFighting[0]._id === userId || playersAreFighting[1]._id === userId){
+      console.log("Disparei um movimento");
       let movementWillBeSent
+
+      console.log("Mov escolhido", chosenMoviment)
   
       if(!chosenMoviment){
         movementWillBeSent = {
