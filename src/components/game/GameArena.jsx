@@ -97,8 +97,24 @@ export default function GameArena() {
       } else {
         movementWillBeSent = {...chosenMoviment}
       }
+
+      console.log("O que será enviado", movementWillBeSent);
+
+      //Envio provisório aleatório de dado
+      const randomNumber = Math.floor(Math.random() * (cardsOfPlayerII.length-1 - 0 + 1)) + 0
+
+      const movementDataWillSend = {
+        player: {
+          userName: userName,
+          userId: userId,
+          lineNumber: playersAreFighting[1].lineNumber
+        },
+        movement: {
+          ...cardsOfPlayerII[randomNumber]
+        }
+      }
   
-      socket.send("chosen-movement", movementWillBeSent)
+      socket.send("chosen-movement", movementDataWillSend)
     }
   }
 
