@@ -113,6 +113,18 @@ export default function GameArena() {
           ...cardsOfPlayerII[randomNumber]
         }
       }
+
+      if(cardsOfPlayerII[randomNumber].amount === 1){
+        const newMovements = [...cardsOfPlayerII];
+        newMovements.splice(randomNumber, 1);
+        console.log("MENOS:", newMovements)
+        setCardsOfPlayerII([...newMovements])
+      } else {
+        const newMovements = [...cardsOfPlayerII]
+        newMovements[randomNumber].amount--
+        console.log("--Amount:", newMovements)
+        setCardsOfPlayerII([...newMovements])
+      }
   
       socket.send("chosen-movement", movementDataWillSend)
     }
