@@ -31,16 +31,19 @@ export default function GameArena() {
       cardName: "attack1",
       amount: 1,
       type: "default",
+      selected: false,
     },
     {
       cardName: "defense1",
       amount: Infinity,
       type: "default",
+      selected: false,
     },
     {
       cardName: "recharging1",
       amount: Infinity,
       type: "default",
+      selected: false,
     },
   ])
 
@@ -95,18 +98,22 @@ export default function GameArena() {
   const sendChosenMoviment = () => {
     if(playersAreFighting[0]._id === userId || playersAreFighting[1]._id === userId){
       console.log("Disparei um movimento");
-      let movementWillBeSent
 
-      console.log("Mov escolhido", chosenMoviment)
+      const movementIndexWillBeSent = cardsOfPlayerII.findIndex(card => card.selected === true)
+      console.log("movementIndexWillBeSent", movementIndexWillBeSent)
+      let movementWillBeSent;
+
+      /* console.log("Mov escolhido", movementWillBeSent) */
   
-      if(!chosenMoviment){
+      if(movementIndexWillBeSent === -1){
+        console.log("O USUÁRIO NÃO ESCOLHEU NENHUM MOVIMENTO.")
         movementWillBeSent = {
           cardName: "recharging1",
           amount: Infinity,
           type: "default",
         }
       } else {
-        movementWillBeSent = {...chosenMoviment}
+        movementWillBeSent = cardsOfPlayerII[movementIndexWillBeSent]
       }
 
       console.log("O que será enviado", movementWillBeSent);
@@ -121,7 +128,7 @@ export default function GameArena() {
           lineNumber: playersAreFighting[1].lineNumber
         },
         movement: {
-          ...cardsOfPlayerII[randomNumber]
+          ...movementWillBeSent
         }
       }
 
@@ -201,7 +208,13 @@ export default function GameArena() {
                       type={card.type}
                       show={stageMatch === "start-round"}
                       amount={card.amount}
-                      chooseMov={() => setChosenMoviment({...card})}
+                      chooseMov={() => {
+                        setChosenMoviment({...card})
+                        const newCards = [...cardsOfPlayerII]
+                        newCards[i].selected = true
+                        console.log(newCards)
+                        setCardsOfPlayerII([...newCards])
+                      }}
                       key={i}
                     />
           }) : (
