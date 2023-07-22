@@ -80,6 +80,17 @@ export default function GameArena() {
     });
   }, [playersAreFighting, socket]);
 
+  useEffect(()=>{
+    console.log("Atualizou")
+  },[playersAreFighting])
+
+
+  const sendStartRoundStatus = () => {
+    if(playersAreFighting[1]._id === userId && playersAreFighting[1].lineNumber === 0){
+      console.log(`${playersAreFighting[1].name} de ${playersAreFighting[1].lineNumber} iniciou a partida.`);
+      socket.send("starting-round");
+    }
+  }
 
   const sendChosenMoviment = () => {
     if(playersAreFighting[0]._id === userId || playersAreFighting[1]._id === userId){
@@ -114,7 +125,7 @@ export default function GameArena() {
         }
       }
 
-      if(cardsOfPlayerII[randomNumber].amount === 1){
+      /* if(cardsOfPlayerII[randomNumber].amount === 1){
         const newMovements = [...cardsOfPlayerII];
         newMovements.splice(randomNumber, 1);
         console.log("MENOS:", newMovements)
@@ -124,7 +135,7 @@ export default function GameArena() {
         newMovements[randomNumber].amount--
         console.log("--Amount:", newMovements)
         setCardsOfPlayerII([...newMovements])
-      }
+      } */
   
       socket.send("chosen-movement", movementDataWillSend)
     }
@@ -155,10 +166,7 @@ export default function GameArena() {
           <Timer
             time={10}
             type="match"
-            action={() => {
-              /* Ajustar este disparo para apenas quando for o player vencedor (id === 0) */
-              socket.send("starting-round");
-            }}
+            action={sendStartRoundStatus}
           />
         )}
         {stageMatch === "start-round" && (
