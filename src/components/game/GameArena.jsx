@@ -54,17 +54,13 @@ export default function GameArena() {
   useEffect(() => {
     
     socket.listen("fight-status", (status) => {
-      console.log("Bateu aqui:", status)
       setStageMatch(status);
-      console.log("Último status:", status);
     });
 
     socket.listen("getUsers", (users) => {
       let playersWillFight = users.filter((user) => {
         return user.lineNumber === 0 || user.lineNumber === 1;
       });
-
-      console.log(playersWillFight);
 
       if (playersWillFight.length > 1) {
         const onlyUsersId = [playersWillFight[0]._id, playersWillFight[1]._id];
@@ -97,16 +93,10 @@ export default function GameArena() {
 
   const sendChosenMoviment = () => {
     if(playersAreFighting[0]._id === userId || playersAreFighting[1]._id === userId){
-      console.log("Disparei um movimento");
-
       const movementIndexWillBeSent = cardsOfPlayerII.findIndex(card => card.selected === true)
-      console.log("movementIndexWillBeSent", movementIndexWillBeSent)
       let movementWillBeSent;
-
-      /* console.log("Mov escolhido", movementWillBeSent) */
   
       if(movementIndexWillBeSent === -1){
-        console.log("O USUÁRIO NÃO ESCOLHEU NENHUM MOVIMENTO.")
         movementWillBeSent = {
           cardName: "recharging1",
           amount: Infinity,
@@ -115,8 +105,6 @@ export default function GameArena() {
       } else {
         movementWillBeSent = cardsOfPlayerII[movementIndexWillBeSent]
       }
-
-      console.log("O que será enviado", movementWillBeSent);
 
       //Envio provisório aleatório de dado
       const randomNumber = Math.floor(Math.random() * (cardsOfPlayerII.length-1 - 0 + 1)) + 0
@@ -212,7 +200,6 @@ export default function GameArena() {
                         setChosenMoviment({...card})
                         const newCards = [...cardsOfPlayerII]
                         newCards[i].selected = true
-                        console.log(newCards)
                         setCardsOfPlayerII([...newCards])
                       }}
                       key={i}
