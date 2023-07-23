@@ -77,7 +77,7 @@ export default function GameArena() {
         setPlayersAreFighting([]);
       }
     });
-  }, [playersAreFighting, socket]);
+  }, [/* playersAreFighting,  */socket]);
 
   useEffect(()=>{
     console.log("Atualizou")
