@@ -125,22 +125,6 @@ export default function GameArena() {
 
   const sendChosenMoviment = () => {
     if(playersAreFighting[0]._id === userId || playersAreFighting[1]._id === userId){
-      const movementIndexWillBeSent = cardsOfPlayerI.findIndex(card => card.selected === true)
-      let movementWillBeSent;
-  
-      if(movementIndexWillBeSent === -1){
-        movementWillBeSent = {
-          cardName: "recharging1",
-          amount: Infinity,
-          type: "default",
-        }
-      } else {
-        movementWillBeSent = cardsOfPlayerI[movementIndexWillBeSent]
-      }
-
-      //Envio provisório aleatório de dado
-      const randomNumber = Math.floor(Math.random() * (cardsOfPlayerI.length-1 - 0 + 1)) + 0
-
       const movementDataWillSend = {
         player: {
           userName: userName,
@@ -148,22 +132,9 @@ export default function GameArena() {
           lineNumber: playersAreFighting[0].lineNumber
         },
         movement: {
-          ...movementWillBeSent
+          ...cardsOfPlayerI
         }
       }
-
-      /* if(cardsOfPlayerII[randomNumber].amount === 1){
-        const newMovements = [...cardsOfPlayerII];
-        newMovements.splice(randomNumber, 1);
-        console.log("MENOS:", newMovements)
-        setCardsOfPlayerII([...newMovements])
-      } else {
-        const newMovements = [...cardsOfPlayerII]
-        newMovements[randomNumber].amount--
-        console.log("--Amount:", newMovements)
-        setCardsOfPlayerII([...newMovements])
-      } */
-  
       socket.send("chosen-movement", movementDataWillSend)
     }
   }
