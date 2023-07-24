@@ -168,6 +168,16 @@ export default function GameArena() {
     }
   }
 
+  const userSelectMovement = (index,card) => {
+    setChosenMoviment({...card})
+    const newCards = cardsOfPlayerI.map(card => {
+      card.selected = false
+      return card
+    })
+    newCards[index].selected = true
+    setCardsOfPlayerI([...newCards])
+  }
+
   return (
     <main className="game-arena">
       {/* <CardToShow /> */}
@@ -228,12 +238,12 @@ export default function GameArena() {
                       type={card.type}
                       show={stageMatch === "start-round"}
                       amount={card.amount}
-                      chooseMov={() => {
+                      chooseMov={() => userSelectMovement(i, card)/* {
                         setChosenMoviment({...card})
                         const newCards = [...cardsOfPlayerI]
                         newCards[i].selected = true
                         setCardsOfPlayerI([...newCards])
-                      }}
+                      } */}
                       key={i}
                     />
           }) : (
