@@ -9,7 +9,7 @@ export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
   const [chosenMoviment, setChosenMoviment] = useState();
-  const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
+  const [cardsOfPlayerII, setCardsOfPlayerII] = useState([
     {
       cardName: "attack1",
       amount: 1,
@@ -26,7 +26,7 @@ export default function GameArena() {
       type: "default",
     },
   ])
-  const [cardsOfPlayerII, setCardsOfPlayerII] = useState([
+  const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
     {
       cardName: "attack1",
       amount: 1,
@@ -94,7 +94,7 @@ export default function GameArena() {
 
   const sendChosenMoviment = () => {
     if(playersAreFighting[0]._id === userId || playersAreFighting[1]._id === userId){
-      const movementIndexWillBeSent = cardsOfPlayerII.findIndex(card => card.selected === true)
+      const movementIndexWillBeSent = cardsOfPlayerI.findIndex(card => card.selected === true)
       let movementWillBeSent;
   
       if(movementIndexWillBeSent === -1){
@@ -104,11 +104,11 @@ export default function GameArena() {
           type: "default",
         }
       } else {
-        movementWillBeSent = cardsOfPlayerII[movementIndexWillBeSent]
+        movementWillBeSent = cardsOfPlayerI[movementIndexWillBeSent]
       }
 
       //Envio provisório aleatório de dado
-      const randomNumber = Math.floor(Math.random() * (cardsOfPlayerII.length-1 - 0 + 1)) + 0
+      const randomNumber = Math.floor(Math.random() * (cardsOfPlayerI.length-1 - 0 + 1)) + 0
 
       const movementDataWillSend = {
         player: {
@@ -151,7 +151,7 @@ export default function GameArena() {
         </h6>
       </div>
       <div className="card-list">
-      {cardsOfPlayerI.map((card, i) => {
+      {cardsOfPlayerII.map((card, i) => {
           return <CardToShow
                     key={i}
                   />
@@ -191,7 +191,7 @@ export default function GameArena() {
         {/* O jogador só entra nesse lado */}
         {/* Verifica se é o você o jogador. Caso não, os dados não podem ser passados no card */}
         {playersAreFighting.length > 1 && (playersAreFighting[0].name === userName) ?
-          cardsOfPlayerII.map((card, i) => {
+          cardsOfPlayerI.map((card, i) => {
             return <CardToShow
                       moviment={card.cardName}
                       type={card.type}
@@ -199,14 +199,14 @@ export default function GameArena() {
                       amount={card.amount}
                       chooseMov={() => {
                         setChosenMoviment({...card})
-                        const newCards = [...cardsOfPlayerII]
+                        const newCards = [...cardsOfPlayerI]
                         newCards[i].selected = true
-                        setCardsOfPlayerII([...newCards])
+                        setCardsOfPlayerI([...newCards])
                       }}
                       key={i}
                     />
           }) : (
-            cardsOfPlayerII.map((card, i) => {
+            cardsOfPlayerI.map((card, i) => {
               return <CardToShow
                         key={i}
                       />
