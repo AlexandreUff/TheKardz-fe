@@ -7,8 +7,8 @@ import ReadableMovementsNames from "../../Utils/ReadableMovementsNames";
 
 export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
-  const playersAreFighting = useRef([])
-  /* const [playersAreFighting, setPlayersAreFighting] = useState([]); */
+  /* const playersAreFighting = useRef([]) */
+  const [playersAreFighting, setPlayersAreFighting] = useState([]);
   const [chosenMoviment, setChosenMoviment] = useState();
   const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
     {
@@ -73,30 +73,35 @@ export default function GameArena() {
           playersWillFight[0] = temp;
         }
 
-        playersAreFighting.current = [...playersWillFight]
-        /* setPlayersAreFighting([...playersWillFight]); */
+        /* playersAreFighting.current = [...playersWillFight] */
+        setPlayersAreFighting([...playersWillFight]);
       } else {
-        playersAreFighting.current = [...users]
-        /* setPlayersAreFighting([...users]); */
+        /* playersAreFighting.current = [...users] */
+        setPlayersAreFighting([...users]);
       }
     });
+
+    socket.listen("chosen-movement", (chosenMovement) => {
+      console.log("MOVES DA API", chosenMovement)
+    })
+
   }, [/* playersAreFighting,  */socket]);
 
   useEffect(()=>{
     console.log("Atualizou")
-  },[playersAreFighting.current])
+  },[playersAreFighting])
 
 
   const sendStartRoundStatus = () => {
-    console.log("SENDSTARTFUNC",playersAreFighting.current[0])
-    if(playersAreFighting.current[0]._id === userId && playersAreFighting.current[0].lineNumber === 0){
-      console.log(`${playersAreFighting.current[0].name} de ${playersAreFighting.current[0].lineNumber} iniciou a partida.`);
+    /* console.log("SENDSTARTFUNC",playersAreFighting[0]) */
+    /* if(playersAreFighting[0]._id === userId && playersAreFighting[0].lineNumber === 0){ */
+      /* console.log(`${playersAreFighting[0].name} de ${playersAreFighting[0].lineNumber} iniciou a partida.`); */
       socket.send("starting-round");
-    }
+    /* } */
   }
 
   const sendChosenMoviment = () => {
-    if(playersAreFighting.current[0]._id === userId || playersAreFighting.current[1]._id === userId){
+    if(playersAreFighting[0]._id === userId || playersAreFighting[1]._id === userId){
       const movementIndexWillBeSent = cardsOfPlayerI.findIndex(card => card.selected === true)
       let movementWillBeSent;
   
@@ -117,7 +122,7 @@ export default function GameArena() {
         player: {
           userName: userName,
           userId: userId,
-          lineNumber: playersAreFighting.current[0].lineNumber
+          lineNumber: playersAreFighting[0].lineNumber
         },
         movement: {
           ...movementWillBeSent
@@ -146,11 +151,11 @@ export default function GameArena() {
       <div className="player-name">
         <div className="unused-area"></div>
         <h5 className="top">
-          {playersAreFighting.current.length > 1 && playersAreFighting.current[1].name}
+          {playersAreFighting.length > 1 && playersAreFighting[1].name}
         </h5>
         <h6>
-          {playersAreFighting.current.length > 1 &&
-            `🏆 ${playersAreFighting.current[1].victories}  ☠️ ${playersAreFighting.current[1].loses}`}
+          {playersAreFighting.length > 1 &&
+            `🏆 ${playersAreFighting[1].victories}  ☠️ ${playersAreFighting[1].loses}`}
         </h6>
       </div>
       <div className="card-list">
@@ -175,7 +180,7 @@ export default function GameArena() {
           />
         )}
         {stageMatch === "stand-by" &&
-          (playersAreFighting.current.length > 1 ? (
+          (playersAreFighting.length > 1 ? (
             <h3>Obtendo dados da partida...</h3>
           ) : (
             <h3>
@@ -193,7 +198,7 @@ export default function GameArena() {
         {" "}
         {/* O jogador só entra nesse lado */}
         {/* Verifica se é o você o jogador. Caso não, os dados não podem ser passados no card */}
-        {playersAreFighting.current.length > 1 && (playersAreFighting.current[0].name === userName) ?
+        {playersAreFighting.length > 1 && (playersAreFighting[0].name === userName) ?
           cardsOfPlayerI.map((card, i) => {
             return <CardToShow
                       moviment={card.cardName}
@@ -225,12 +230,12 @@ export default function GameArena() {
           }
         </div>
         <h5 className="bottom">
-          {playersAreFighting.current.length > 1 && (playersAreFighting.current[0].name === userName ?
-           <>{playersAreFighting.current[0].name} <br /><small>(Você)</small></> : (playersAreFighting.current[0].name))}
+          {playersAreFighting.length > 1 && (playersAreFighting[0].name === userName ?
+           <>{playersAreFighting[0].name} <br /><small>(Você)</small></> : (playersAreFighting[0].name))}
         </h5>
         <h6>
-          {playersAreFighting.current.length > 1 &&
-            `🏆 ${playersAreFighting.current[0].victories}  ☠️ ${playersAreFighting.current[0].loses}`}
+          {playersAreFighting.length > 1 &&
+            `🏆 ${playersAreFighting[0].victories}  ☠️ ${playersAreFighting[0].loses}`}
         </h6>
       </div>
     </main>
