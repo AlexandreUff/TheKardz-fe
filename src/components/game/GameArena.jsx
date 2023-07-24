@@ -87,20 +87,28 @@ export default function GameArena() {
     socket.listen("chosen-movement", (chosenMovement) => {
       if(chosenMovement.player.lineNumber === 0){
         console.log("Movimento player 1", chosenMovement)
-        setCardsOfPlayerI([...chosenMovement.movement])
-
-        /* setTimeout(() => {
-          console.log("State p1", cardsOfPlayerI)
-        }, 1000); */
+        //Reajusta a quantidade (amount) do movimento que vem null para Infinity
+        const movementsWithAmountCorrectly = chosenMovement.movement.map(movement => {
+          if(movement.amount === null){
+            console.log("Movimento nulo 1")
+            movement.amount = Infinity
+          }
+          return movement
+        })
+        setCardsOfPlayerI([...movementsWithAmountCorrectly])
       }
 
       if(chosenMovement.player.lineNumber === 1){
         console.log("Movimento player 2", chosenMovement)
-        setCardsOfPlayerII([...chosenMovement.movement])
-
-        /* setTimeout(() => {
-          console.log("State p2", cardsOfPlayerII)
-        }, 1000); */
+        //Reajusta a quantidade (amount) do movimento que vem null para Infinity
+        const movementsWithAmountCorrectly = chosenMovement.movement.map(movement => {
+          if(movement.amount === null){
+            console.log("Movimento nulo 2")
+            movement.amount = Infinity
+          }
+          return movement
+        })
+        setCardsOfPlayerII([...movementsWithAmountCorrectly])
       }
     })
 
