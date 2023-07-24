@@ -95,9 +95,6 @@ export default function GameArena() {
         console.log("CP1-a",newCardsOfPlayerI)
         setCardsOfPlayerI([...newCardsOfPlayerI])
 
-        /* setTimeout(()=>{
-          console.log("CP1", cardsOfPlayerI)
-        },1000) */
       }
 
       if(chosenMovement.player.lineNumber === 1){
@@ -109,9 +106,6 @@ export default function GameArena() {
         console.log("CP2-a",newCardsOfPlayerII)
         setCardsOfPlayerII([...newCardsOfPlayerII])
 
-        /* setTimeout(()=>{
-          console.log("CP2", cardsOfPlayerII)
-        },1000) */
       }
     })
 
@@ -120,15 +114,6 @@ export default function GameArena() {
   useEffect(()=>{
     console.log("Atualizou")
   },[playersAreFighting])
-
-  /* useEffect(()=>{
-    console.log("cardsOfPlayerI", cardsOfPlayerI)
-  },[cardsOfPlayerI])
-
-  useEffect(()=>{
-    console.log("cardsOfPlayerII", cardsOfPlayerII)
-  },[cardsOfPlayerII]) */
-
 
   const sendStartRoundStatus = () => {
     /* console.log("SENDSTARTFUNC",playersAreFighting[0]) */
