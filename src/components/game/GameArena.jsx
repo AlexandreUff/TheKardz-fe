@@ -85,13 +85,22 @@ export default function GameArena() {
     });
 
     socket.listen("chosen-movement", (chosenMovement) => {
-      console.log("MOVES DA API", chosenMovement)
       if(chosenMovement.player.lineNumber === 0){
         console.log("Movimento player 1", chosenMovement)
+        setCardsOfPlayerI([...chosenMovement.movement])
+
+        /* setTimeout(() => {
+          console.log("State p1", cardsOfPlayerI)
+        }, 1000); */
       }
 
       if(chosenMovement.player.lineNumber === 1){
         console.log("Movimento player 2", chosenMovement)
+        setCardsOfPlayerII([...chosenMovement.movement])
+
+        /* setTimeout(() => {
+          console.log("State p2", cardsOfPlayerII)
+        }, 1000); */
       }
     })
 
@@ -100,6 +109,14 @@ export default function GameArena() {
   useEffect(()=>{
     console.log("Atualizou")
   },[playersAreFighting])
+
+  useEffect(()=>{
+    console.log("SCP1", cardsOfPlayerI)
+  },[cardsOfPlayerI])
+
+  useEffect(()=>{
+    console.log("SCP2", cardsOfPlayerII)
+  },[cardsOfPlayerII])
 
   const sendStartRoundStatus = () => {
     /* console.log("SENDSTARTFUNC",playersAreFighting[0]) */
@@ -117,9 +134,9 @@ export default function GameArena() {
           userId: userId,
           lineNumber: playersAreFighting[0].lineNumber
         },
-        movement: {
+        movement: [
           ...cardsOfPlayerI
-        }
+        ]
       }
       socket.send("chosen-movement", movementDataWillSend)
     }
