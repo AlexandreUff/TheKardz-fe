@@ -87,25 +87,11 @@ export default function GameArena() {
     socket.listen("chosen-movement", (chosenMovement) => {
       console.log("MOVES DA API", chosenMovement)
       if(chosenMovement.player.lineNumber === 0){
-        const newCardsOfPlayerI = [...cardsOfPlayerI]
-        console.log("CDP1", newCardsOfPlayerI)
-        const cardIndex = newCardsOfPlayerI.indexOf(chosenMovement.movement.cardName)
-        console.log("INDEX 1", cardIndex)
-        newCardsOfPlayerI[cardIndex] = chosenMovement.movement
-        console.log("CP1-a",newCardsOfPlayerI)
-        setCardsOfPlayerI([...newCardsOfPlayerI])
-
+        console.log("Movimento player 1", chosenMovement)
       }
 
       if(chosenMovement.player.lineNumber === 1){
-        const newCardsOfPlayerII = [...cardsOfPlayerII]
-        console.log("CDP1", newCardsOfPlayerII)
-        const cardIndex = newCardsOfPlayerII.indexOf(chosenMovement.movement.cardName)
-        console.log("INDEX 2", cardIndex)
-        newCardsOfPlayerII[cardIndex] = chosenMovement.movement
-        console.log("CP2-a",newCardsOfPlayerII)
-        setCardsOfPlayerII([...newCardsOfPlayerII])
-
+        console.log("Movimento player 2", chosenMovement)
       }
     })
 
