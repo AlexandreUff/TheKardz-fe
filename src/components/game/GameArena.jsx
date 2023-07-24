@@ -35,16 +35,19 @@ export default function GameArena() {
       cardName: "attack1",
       amount: 1,
       type: "default",
+      selected: false,
     },
     {
       cardName: "defense1",
       amount: Infinity,
       type: "default",
+      selected: false,
     },
     {
       cardName: "recharging1",
       amount: Infinity,
       type: "default",
+      selected: false,
     },
   ])
 
@@ -83,6 +86,33 @@ export default function GameArena() {
 
     socket.listen("chosen-movement", (chosenMovement) => {
       console.log("MOVES DA API", chosenMovement)
+      if(chosenMovement.player.lineNumber === 0){
+        const newCardsOfPlayerI = [...cardsOfPlayerI]
+        console.log("CDP1", newCardsOfPlayerI)
+        const cardIndex = newCardsOfPlayerI.indexOf(chosenMovement.movement.cardName)
+        console.log("INDEX 1", cardIndex)
+        newCardsOfPlayerI[cardIndex] = chosenMovement.movement
+        console.log("CP1-a",newCardsOfPlayerI)
+        setCardsOfPlayerI([...newCardsOfPlayerI])
+
+        /* setTimeout(()=>{
+          console.log("CP1", cardsOfPlayerI)
+        },1000) */
+      }
+
+      if(chosenMovement.player.lineNumber === 1){
+        const newCardsOfPlayerII = [...cardsOfPlayerII]
+        console.log("CDP1", newCardsOfPlayerII)
+        const cardIndex = newCardsOfPlayerII.indexOf(chosenMovement.movement.cardName)
+        console.log("INDEX 2", cardIndex)
+        newCardsOfPlayerII[cardIndex] = chosenMovement.movement
+        console.log("CP2-a",newCardsOfPlayerII)
+        setCardsOfPlayerII([...newCardsOfPlayerII])
+
+        /* setTimeout(()=>{
+          console.log("CP2", cardsOfPlayerII)
+        },1000) */
+      }
     })
 
   }, [/* playersAreFighting,  */socket]);
@@ -90,6 +120,14 @@ export default function GameArena() {
   useEffect(()=>{
     console.log("Atualizou")
   },[playersAreFighting])
+
+  /* useEffect(()=>{
+    console.log("cardsOfPlayerI", cardsOfPlayerI)
+  },[cardsOfPlayerI])
+
+  useEffect(()=>{
+    console.log("cardsOfPlayerII", cardsOfPlayerII)
+  },[cardsOfPlayerII]) */
 
 
   const sendStartRoundStatus = () => {
