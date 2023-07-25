@@ -1,12 +1,17 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useReducer, useRef, useState } from "react";
 import CardToShow from "./CardToShow";
 import Timer from "./Timer";
 import SocketContext from "../../context/socketContext";
 import SessionService from "../../services/SessionService";
 import ReadableMovementsNames from "../../Utils/ReadableMovementsNames";
 
+const stageMatchReducer = (state, action) => {
+  return action.payload ;
+};
+
 export default function GameArena() {
-  const [stageMatch, setStageMatch] = useState("stand-by");
+  const [stageMatch, setStageMatch] = useReducer(stageMatchReducer, "stand-by");
+  /* const [stageMatch, setStageMatch] = useState("stand-by"); */
   /* const playersAreFighting = useRef([]) */
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
   const [chosenMoviment, setChosenMoviment] = useState();
@@ -58,7 +63,7 @@ export default function GameArena() {
   useEffect(() => {
     
     socket.listen("fight-status", (status) => {
-      setStageMatch(status);
+      setStageMatch({payload: status});
     });
 
     socket.listen("getUsers", (users) => {
@@ -85,7 +90,9 @@ export default function GameArena() {
     });
 
     socket.listen("chosen-movement", (chosenMovement) => {
+      
       if(chosenMovement.player.lineNumber === 0){
+        
         console.log("Movimento player 1", chosenMovement)
         //Reajusta a quantidade (amount) do movimento que vem null para Infinity
         const movementsWithAmountCorrectly = chosenMovement.movement.map(movement => {
@@ -99,6 +106,7 @@ export default function GameArena() {
       }
 
       if(chosenMovement.player.lineNumber === 1){
+        
         console.log("Movimento player 2", chosenMovement)
         //Reajusta a quantidade (amount) do movimento que vem null para Infinity
         const movementsWithAmountCorrectly = chosenMovement.movement.map(movement => {
@@ -110,9 +118,14 @@ export default function GameArena() {
         })
         setCardsOfPlayerII([...movementsWithAmountCorrectly])
       }
+      
     })
 
   }, [/* playersAreFighting,  */socket]);
+
+  useEffect(()=>{
+    console.log("Estágio:", stageMatch)
+  },[stageMatch])
 
   useEffect(()=>{
     console.log("Atualizou")
@@ -193,6 +206,9 @@ export default function GameArena() {
             time={5}
             action={sendChosenMoviment}
           />
+        )}
+        {stageMatch === "comparing-movements" && (
+          <h1>Comparando Movimentos...</h1>
         )}
         {stageMatch === "stand-by" &&
           (playersAreFighting.length > 1 ? (
