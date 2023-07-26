@@ -90,34 +90,40 @@ export default function GameArena() {
     });
 
     socket.listen("chosen-movement", (chosenMovement) => {
+      console.log("PLAYER LUTANDO", playersAreFighting)
       
-      if(chosenMovement.player.lineNumber === 0){
-        
-        console.log("Movimento player 1", chosenMovement)
-        //Reajusta a quantidade (amount) do movimento que vem null para Infinity
-        const movementsWithAmountCorrectly = chosenMovement.movement.map(movement => {
-          if(movement.amount === null){
-            console.log("Movimento nulo 1")
-            movement.amount = Infinity
-          }
-          return movement
-        })
+      //Reajusta a quantidade (amount) do movimento que vem null para Infinity
+      const movementsWithAmountCorrectly = chosenMovement.movement.map(movement => {
+        if(movement.amount === null){
+          console.log("Movimento nulo")
+          movement.amount = Infinity
+        }
+        return movement
+      })
+
+      if(chosenMovement.player.lineNumber === 0 && chosenMovement.player.userId !== userId){
+        console.log("Movimento player",chosenMovement.player.userName, movementsWithAmountCorrectly)
+        setCardsOfPlayerI([...movementsWithAmountCorrectly])
+      } else if(chosenMovement.player.lineNumber === 1){
+        setCardsOfPlayerII([...movementsWithAmountCorrectly])
+      } else {
+        setCardsOfPlayerII([...movementsWithAmountCorrectly])
+      }
+
+      /* if(chosenMovement.player.lineNumber === 1){
+        console.log("Movimento player",chosenMovement.player.userName, movementsWithAmountCorrectly)
+        setCardsOfPlayerII([...movementsWithAmountCorrectly])
+      } */
+
+      /* if(playersAreFighting[0]._id === chosenMovement.player.userId){
+        console.log("Movimento player",chosenMovement.player.userName, movementsWithAmountCorrectly)
         setCardsOfPlayerI([...movementsWithAmountCorrectly])
       }
 
-      if(chosenMovement.player.lineNumber === 1){
-        
-        console.log("Movimento player 2", chosenMovement)
-        //Reajusta a quantidade (amount) do movimento que vem null para Infinity
-        const movementsWithAmountCorrectly = chosenMovement.movement.map(movement => {
-          if(movement.amount === null){
-            console.log("Movimento nulo 2")
-            movement.amount = Infinity
-          }
-          return movement
-        })
+      if(playersAreFighting[1]._id === chosenMovement.player.userId){
+        console.log("Movimento player",chosenMovement.player.userName, movementsWithAmountCorrectly)
         setCardsOfPlayerII([...movementsWithAmountCorrectly])
-      }
+      } */
       
     })
 
