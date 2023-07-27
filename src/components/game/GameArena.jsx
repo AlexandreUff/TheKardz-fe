@@ -16,7 +16,7 @@ export default function GameArena() {
   const playersFightingRef = useRef([])
   const movementsToCompare = useRef([])
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
-  const [chosenMoviment, setChosenMoviment] = useState([]);
+  const [chosenMoviment, setChosenMoviment] = useState();
   const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
     {
       cardName: "attack1",
