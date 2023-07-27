@@ -96,16 +96,16 @@ export default function GameArena() {
 
     socket.listen("chosen-movement", (dataMovements) => {     
 
-      console.log("QUEM ENVIOU:", dataMovements)
-
       if(dataMovements.player.name === playersFightingRef.current[0].name){
-        movementsToCompare.current.push(dataMovements)
+        console.log("Jogou pro 1:", dataMovements)
+        movementsToCompare.current[0] = dataMovements
       } else if (dataMovements.player.name === playersFightingRef.current[1].name){
-        movementsToCompare.current.push(dataMovements)
+        console.log("Jogou pro 2:", dataMovements)
+        movementsToCompare.current[1] = dataMovements
       }
 
       console.log("Chegou aqui!!!!!",movementsToCompare.current)
-      if(movementsToCompare.current.length > 1) console.log("É maior que 1.")  
+      if(movementsToCompare.current[0] && movementsToCompare.current[1]) console.log("É maior que 1.")  
     })
 
   }, [/* playersAreFighting,  */socket]);
