@@ -94,19 +94,48 @@ export default function GameArena() {
       }
     });
 
-    socket.listen("chosen-movement", (dataMovements) => {     
+    socket.listen("chosen-movement", (dataMovements) => {
 
       if(dataMovements.player.name === playersFightingRef.current[0].name){
         console.log("Jogou pro 1:", dataMovements)
         movementsToCompare.current[0] = dataMovements
+        
       } else if (dataMovements.player.name === playersFightingRef.current[1].name){
         console.log("Jogou pro 2:", dataMovements)
         movementsToCompare.current[1] = dataMovements
+        
       }
 
       console.log("Chegou aqui!!!!!",movementsToCompare.current)
       if(movementsToCompare.current[0] && movementsToCompare.current[1]){
         console.log("É maior que 1.")
+
+        const updateCards = (data) => {
+          const movementsWithCorretlyAmountI = data.map(movement => {
+            if(movement.amount === null) {
+              movement.amount = Infinity
+            }
+  
+            if(movement.selected === true){
+              movement.amount--
+            }
+            return movement
+          })
+  
+          const movementsWithouAmount = movementsWithCorretlyAmountI.filter(movement => {
+            if(movement.selected === true){
+              if(movement.amount > 0) return true
+            } else {
+              return true
+            }
+          })
+
+          return movementsWithouAmount
+        }
+
+
+        setCardsOfPlayerI([...updateCards(movementsToCompare.current[0].movement)]) //Remover se necessário
+        setCardsOfPlayerII([...updateCards(movementsToCompare.current[1].movement)]) //Remover se necessário
         movementsVerification()
       }
     })
