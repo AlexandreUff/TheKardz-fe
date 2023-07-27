@@ -149,19 +149,31 @@ export default function GameArena() {
         ]
       }
 
-      movementsToCompare.current[0] = movementDataWillSend
+      /* movementsToCompare.current[0] = movementDataWillSend */
 
       socket.send("chosen-movement", movementDataWillSend)
     }
   }
 
   const userSelectMovement = (index,card) => {
-    setChosenMoviment([{...card}])
+    setChosenMoviment({...card})
     const newCards = cardsOfPlayerI.map(card => {
       card.selected = false
       return card
     })
     newCards[index].selected = true
+
+    movementsToCompare.current[0] = {
+      player: {
+        ...playersAreFighting[0]
+      },
+      movement: [
+        ...newCards
+      ]
+    }
+
+    console.log("Crica:",movementsToCompare.current)
+
     setCardsOfPlayerI([...newCards])
   }
 
@@ -246,14 +258,9 @@ export default function GameArena() {
       </div>
       <div className="player-name">
         <div className="unused-area">
-          {!!chosenMoviment.length === 1 && (
+          {!!chosenMoviment && (
             <div className="selected-mov-content">
-              {ReadableMovementsNames(chosenMoviment[0].cardName, chosenMoviment[0].type)}
-            </div>)
-          }
-          {!!chosenMoviment.length === 2 && (
-            <div className="selected-mov-content">
-              <p>Tenho 2 chosens</p>
+              {ReadableMovementsNames(chosenMoviment.cardName, chosenMoviment.type)}
             </div>)
           }
         </div>
