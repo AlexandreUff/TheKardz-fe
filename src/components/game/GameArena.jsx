@@ -10,8 +10,8 @@ const stageMatchReducer = (state, action) => {
 };
 
 export default function GameArena() {
-  const [stageMatch, setStageMatch] = useReducer(stageMatchReducer, "stand-by");
-  /* const [stageMatch, setStageMatch] = useState("stand-by"); */
+  /* const [stageMatch, setStageMatch] = useReducer(stageMatchReducer, "stand-by"); */
+  const [stageMatch, setStageMatch] = useState("stand-by");
   /* const playersAreFighting = useRef([]) */
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
   const [chosenMoviment, setChosenMoviment] = useState();
@@ -63,7 +63,8 @@ export default function GameArena() {
   useEffect(() => {
     
     socket.listen("fight-status", (status) => {
-      setStageMatch({payload: status});
+      setStageMatch(status);
+      /* setStageMatch({payload: status}); */
     });
 
     socket.listen("getUsers", (users) => {
@@ -90,7 +91,7 @@ export default function GameArena() {
     });
 
     socket.listen("chosen-movement", (chosenMovement) => {
-      console.log("PLAYER LUTANDO", playersAreFighting)
+      console.log("Movimento que chegou", chosenMovement)
       
       //Reajusta a quantidade (amount) do movimento que vem null para Infinity
       const movementsWithAmountCorrectly = chosenMovement.movement.map(movement => {
@@ -101,14 +102,9 @@ export default function GameArena() {
         return movement
       })
 
-      if(chosenMovement.player.lineNumber === 0 && chosenMovement.player.userId !== userId){
-        console.log("Movimento player",chosenMovement.player.userName, movementsWithAmountCorrectly)
-        setCardsOfPlayerI([...movementsWithAmountCorrectly])
-      } else if(chosenMovement.player.lineNumber === 1){
-        setCardsOfPlayerII([...movementsWithAmountCorrectly])
-      } else {
-        setCardsOfPlayerII([...movementsWithAmountCorrectly])
-      }
+      setTimeout(()=>{
+        setStageMatch("comparing-movements");
+      },1000)
 
       /* if(chosenMovement.player.lineNumber === 1){
         console.log("Movimento player",chosenMovement.player.userName, movementsWithAmountCorrectly)
@@ -157,14 +153,16 @@ export default function GameArena() {
     if(playersAreFighting[0]._id === userId || playersAreFighting[1]._id === userId){
       const movementDataWillSend = {
         player: {
-          userName: userName,
-          userId: userId,
-          lineNumber: playersAreFighting[0].lineNumber
+          ...playersAreFighting[0]
+        },
+        enemy: {
+          ...playersAreFighting[1]
         },
         movement: [
           ...cardsOfPlayerI
         ]
       }
+
       socket.send("chosen-movement", movementDataWillSend)
     }
   }
