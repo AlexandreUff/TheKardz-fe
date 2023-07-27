@@ -13,8 +13,9 @@ export default function GameArena() {
   /* const [stageMatch, setStageMatch] = useReducer(stageMatchReducer, "stand-by"); */
   const [stageMatch, setStageMatch] = useState("stand-by");
   /* const playersAreFighting = useRef([]) */
+  const playersFightingRef = useRef([])
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
-  const [chosenMoviment, setChosenMoviment] = useState();
+  const [chosenMoviment, setChosenMoviment] = useState([{},{}]);
   const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
     {
       cardName: "attack1",
@@ -83,18 +84,21 @@ export default function GameArena() {
         }
 
         /* playersAreFighting.current = [...playersWillFight] */
+        playersFightingRef.current = [...playersWillFight]
         setPlayersAreFighting([...playersWillFight]);
       } else {
         /* playersAreFighting.current = [...users] */
+        playersFightingRef.current = [...users]
         setPlayersAreFighting([...users]);
       }
     });
 
-    socket.listen("chosen-movement", (chosenMovement) => {
-      console.log("Movimento que chegou", chosenMovement)
+    socket.listen("chosen-movement", (enemyDataMovements) => {
+      console.log("Movimento que chegou", enemyDataMovements)
+      console.log("PLAYERS CURRENT", playersFightingRef.current)
       
       //Reajusta a quantidade (amount) do movimento que vem null para Infinity
-      const movementsWithAmountCorrectly = chosenMovement.movement.map(movement => {
+      const movementsWithAmountCorrectly = enemyDataMovements.movement.map(movement => {
         if(movement.amount === null){
           console.log("Movimento nulo")
           movement.amount = Infinity
@@ -102,9 +106,22 @@ export default function GameArena() {
         return movement
       })
 
-      setTimeout(()=>{
+      const movementHasBeenChosen = movementsWithAmountCorrectly.find(movement => {
+        return movement.selected === true
+      })
+      console.log("O QUE VAI ENTRAR",movementHasBeenChosen)
+
+      if(enemyDataMovements.player.name === playersFightingRef.current[0].name){
+        console.log(`Taquei ${playersFightingRef.current[0].name} como player 1.`)
+        setChosenMoviment([{...movementHasBeenChosen},{...chosenMoviment[1]}])
+      } else if (enemyDataMovements.player.name === playersFightingRef.current[1].name){
+        console.log(`Taquei ${playersFightingRef.current[1].name} como player 2.`)
+        setChosenMoviment([{...chosenMoviment[0]},{...movementHasBeenChosen}])
+      }
+
+      /* setTimeout(()=>{
         setStageMatch("comparing-movements");
-      },1000)
+      },1000) */
 
       /* if(chosenMovement.player.lineNumber === 1){
         console.log("Movimento player",chosenMovement.player.userName, movementsWithAmountCorrectly)
@@ -141,6 +158,10 @@ export default function GameArena() {
     console.log("SCP2", cardsOfPlayerII)
   },[cardsOfPlayerII])
 
+  useEffect(()=>{
+    console.log("Movimentos Escolhidos", chosenMoviment)
+  },[chosenMoviment])
+
   const sendStartRoundStatus = () => {
     /* console.log("SENDSTARTFUNC",playersAreFighting[0]) */
     /* if(playersAreFighting[0]._id === userId && playersAreFighting[0].lineNumber === 0){ */
@@ -168,7 +189,7 @@ export default function GameArena() {
   }
 
   const userSelectMovement = (index,card) => {
-    setChosenMoviment({...card})
+    setChosenMoviment([{...card},])
     const newCards = cardsOfPlayerI.map(card => {
       card.selected = false
       return card
@@ -258,9 +279,14 @@ export default function GameArena() {
       </div>
       <div className="player-name">
         <div className="unused-area">
-          {!!chosenMoviment && (
+          {!!chosenMoviment.length === 1 && (
             <div className="selected-mov-content">
-              {ReadableMovementsNames(chosenMoviment.cardName, chosenMoviment.type)}
+              {ReadableMovementsNames(chosenMoviment[0].cardName, chosenMoviment[0].type)}
+            </div>)
+          }
+          {!!chosenMoviment.length === 2 && (
+            <div className="selected-mov-content">
+              <p>Tenho 2 chosens</p>
             </div>)
           }
         </div>
