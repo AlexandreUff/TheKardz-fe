@@ -14,8 +14,9 @@ export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
   /* const playersAreFighting = useRef([]) */
   const playersFightingRef = useRef([])
+  const movementsToCompare = useRef([])
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
-  const [chosenMoviment, setChosenMoviment] = useState([{},{}]);
+  const [chosenMoviment, setChosenMoviment] = useState([]);
   const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
     {
       cardName: "attack1",
@@ -93,51 +94,18 @@ export default function GameArena() {
       }
     });
 
-    socket.listen("chosen-movement", (enemyDataMovements) => {
-      console.log("Movimento que chegou", enemyDataMovements)
-      console.log("PLAYERS CURRENT", playersFightingRef.current)
-      
-      //Reajusta a quantidade (amount) do movimento que vem null para Infinity
-      const movementsWithAmountCorrectly = enemyDataMovements.movement.map(movement => {
-        if(movement.amount === null){
-          console.log("Movimento nulo")
-          movement.amount = Infinity
-        }
-        return movement
-      })
+    socket.listen("chosen-movement", (dataMovements) => {     
 
-      const movementHasBeenChosen = movementsWithAmountCorrectly.find(movement => {
-        return movement.selected === true
-      })
-      console.log("O QUE VAI ENTRAR",movementHasBeenChosen)
+      console.log("QUEM ENVIOU:", dataMovements)
 
-      if(enemyDataMovements.player.name === playersFightingRef.current[0].name){
-        console.log(`Taquei ${playersFightingRef.current[0].name} como player 1.`)
-        setChosenMoviment([{...movementHasBeenChosen},{...chosenMoviment[1]}])
-      } else if (enemyDataMovements.player.name === playersFightingRef.current[1].name){
-        console.log(`Taquei ${playersFightingRef.current[1].name} como player 2.`)
-        setChosenMoviment([{...chosenMoviment[0]},{...movementHasBeenChosen}])
+      if(dataMovements.player.name === playersFightingRef.current[0].name){
+        movementsToCompare.current.push(dataMovements)
+      } else if (dataMovements.player.name === playersFightingRef.current[1].name){
+        movementsToCompare.current.push(dataMovements)
       }
 
-      /* setTimeout(()=>{
-        setStageMatch("comparing-movements");
-      },1000) */
-
-      /* if(chosenMovement.player.lineNumber === 1){
-        console.log("Movimento player",chosenMovement.player.userName, movementsWithAmountCorrectly)
-        setCardsOfPlayerII([...movementsWithAmountCorrectly])
-      } */
-
-      /* if(playersAreFighting[0]._id === chosenMovement.player.userId){
-        console.log("Movimento player",chosenMovement.player.userName, movementsWithAmountCorrectly)
-        setCardsOfPlayerI([...movementsWithAmountCorrectly])
-      }
-
-      if(playersAreFighting[1]._id === chosenMovement.player.userId){
-        console.log("Movimento player",chosenMovement.player.userName, movementsWithAmountCorrectly)
-        setCardsOfPlayerII([...movementsWithAmountCorrectly])
-      } */
-      
+      console.log("Chegou aqui!!!!!",movementsToCompare.current)
+      if(movementsToCompare.current.length > 1) console.log("É maior que 1.")  
     })
 
   }, [/* playersAreFighting,  */socket]);
@@ -159,8 +127,8 @@ export default function GameArena() {
   },[cardsOfPlayerII])
 
   useEffect(()=>{
-    console.log("Movimentos Escolhidos", chosenMoviment)
-  },[chosenMoviment])
+    console.log("movementsToCompare", movementsToCompare)
+  },[movementsToCompare.current])
 
   const sendStartRoundStatus = () => {
     /* console.log("SENDSTARTFUNC",playersAreFighting[0]) */
@@ -176,20 +144,19 @@ export default function GameArena() {
         player: {
           ...playersAreFighting[0]
         },
-        enemy: {
-          ...playersAreFighting[1]
-        },
         movement: [
           ...cardsOfPlayerI
         ]
       }
+
+      movementsToCompare.current[0] = movementDataWillSend
 
       socket.send("chosen-movement", movementDataWillSend)
     }
   }
 
   const userSelectMovement = (index,card) => {
-    setChosenMoviment([{...card},])
+    setChosenMoviment([{...card}])
     const newCards = cardsOfPlayerI.map(card => {
       card.selected = false
       return card
