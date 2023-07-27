@@ -105,7 +105,10 @@ export default function GameArena() {
       }
 
       console.log("Chegou aqui!!!!!",movementsToCompare.current)
-      if(movementsToCompare.current[0] && movementsToCompare.current[1]) console.log("É maior que 1.")  
+      if(movementsToCompare.current[0] && movementsToCompare.current[1]){
+        console.log("É maior que 1.")
+        movementsVerification()
+      }
     })
 
   }, [/* playersAreFighting,  */socket]);
@@ -175,6 +178,11 @@ export default function GameArena() {
     console.log("Crica:",movementsToCompare.current)
 
     setCardsOfPlayerI([...newCards])
+  }
+
+  const movementsVerification = () => {
+    console.log("INICOU A APURAÇÃO")
+    setStageMatch("comparing-movements")
   }
 
   return (
