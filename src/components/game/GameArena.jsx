@@ -182,7 +182,7 @@ export default function GameArena() {
 
   const movementsVerification = () => {
     console.log("INICOU A APURAÇÃO")
-    setStageMatch("comparing-movements")
+    /* setStageMatch("comparing-movements") */
   }
 
   return (
