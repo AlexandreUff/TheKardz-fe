@@ -67,6 +67,13 @@ export default function GameArena() {
     socket.listen("fight-status", (status) => {
       setStageMatch(status);
       /* setStageMatch({payload: status}); */
+
+      if(status === "start-round"){
+        setTimeout(()=>{
+          console.log("DISPAROU!")
+          sendChosenMoviment()
+        },5000)
+      }
     });
 
     socket.listen("getUsers", (users) => {
@@ -95,6 +102,8 @@ export default function GameArena() {
     });
 
     socket.listen("chosen-movement", (dataMovements) => {
+
+      console.log("RECEBIDO", dataMovements)
 
       if(dataMovements.player.name === playersFightingRef.current[0].name){
         console.log("Jogou pro 1:", dataMovements)
@@ -146,10 +155,6 @@ export default function GameArena() {
   },[stageMatch])
 
   useEffect(()=>{
-    console.log("Atualizou")
-  },[playersAreFighting])
-
-  useEffect(()=>{
     console.log("SCP1", cardsOfPlayerI)
   },[cardsOfPlayerI])
 
@@ -158,31 +163,13 @@ export default function GameArena() {
   },[cardsOfPlayerII])
 
   useEffect(()=>{
-    console.log("movementsToCompare", movementsToCompare)
+    /* console.log("movementsToCompare", movementsToCompare) */
+    if(cardsOfPlayerI.find(card => card.selected === true) && cardsOfPlayerII.find(card => card.selected === true)){
+      console.log("OS DOIS SÃO TRUE")
+      /* movementsVerification() */
+    }
 
-    if(movementsToCompare.current[0] && movementsToCompare.current[1]){
-      console.log("OS DOIS SÂO TRUE")
-
-      if(playersFightingRef.current[0].name === userName){
-        console.log("movementsToCompare.current[0]",movementsToCompare.current[0])
-        const cardsOfPlayerIWithNewAmount = movementsToCompare.current[0].movement.map(card => {
-          if(card.selected){
-            card.amount--
-          }
-          return card
-        })
-
-        const newCardsOfPlayerI = cardsOfPlayerIWithNewAmount.filter(movement => {
-          return movement.selected === false || movement.amount > 0;
-        })
-
-        setCardsOfPlayerI([...newCardsOfPlayerI])
-      }
-
-      movementsVerification()
-      }
-
-  },[movementsToCompare.current[0], movementsToCompare.current[1]])
+  },[cardsOfPlayerI], [cardsOfPlayerII])
 
   const sendStartRoundStatus = () => {
     /* console.log("SENDSTARTFUNC",playersAreFighting[0]) */
@@ -193,21 +180,21 @@ export default function GameArena() {
   }
 
   const sendChosenMoviment = () => {
-    if(playersAreFighting[0]._id === userId || playersAreFighting[1]._id === userId){
+    if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
       const movementDataWillSend = {
         player: {
-          ...playersAreFighting[0]
+          ...playersFightingRef.current[0]
         },
         movement: [
-          ...cardsOfPlayerI
+          ...movementsToCompare.current[0]
         ]
       }
 
-      movementsToCompare.current[0] = movementDataWillSend
+      /* movementsToCompare.current[0] = movementDataWillSend */
 
       socket.send("chosen-movement", movementDataWillSend)
 
-      /* const cardsOfPlayerIWithNewAmount = cardsOfPlayerI.map(card => {
+      const cardsOfPlayerIWithNewAmount = movementsToCompare.current[0].map(card => {
         if(card.selected){
           card.amount--
         }
@@ -218,7 +205,9 @@ export default function GameArena() {
         return movement.selected === false || movement.amount > 0;
       })
 
-      setCardsOfPlayerI([...newCardsOfPlayerI]) */
+      setStageMatch("waiting-enemy-answer")
+
+      setCardsOfPlayerI([...newCardsOfPlayerI])
     }
   }
 
@@ -230,7 +219,10 @@ export default function GameArena() {
     })
     newCards[index].selected = true
 
-    /* movementsToCompare.current[0] = {
+    movementsToCompare.current[0] = [
+        ...newCards
+      ]
+    /* {
       player: {
         ...playersAreFighting[0]
       },
@@ -239,9 +231,9 @@ export default function GameArena() {
       ]
     } */
 
-    console.log("Crica:",movementsToCompare.current)
+    /* console.log("Crica:",movementsToCompare.current) */
 
-    setCardsOfPlayerI([...newCards])
+    /* setCardsOfPlayerI([...newCards]) */
   }
 
   const movementsVerification = () => {
@@ -280,7 +272,8 @@ export default function GameArena() {
         {stageMatch === "start-round" && (
           <Timer
             time={5}
-            action={sendChosenMoviment}
+            /* action={sendChosenMoviment} */
+            action={()=>{}}
           />
         )}
         {stageMatch === "comparing-movements" && (
