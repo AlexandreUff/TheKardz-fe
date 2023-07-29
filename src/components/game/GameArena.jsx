@@ -20,7 +20,7 @@ export default function GameArena() {
   const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
     {
       cardName: "attack1",
-      amount: 1,
+      amount: 2,
       type: "default",
       selected: false,
     },
@@ -40,7 +40,7 @@ export default function GameArena() {
   const [cardsOfPlayerII, setCardsOfPlayerII] = useState([
     {
       cardName: "attack1",
-      amount: 1,
+      amount: 2,
       type: "default",
       selected: false,
     },
@@ -164,15 +164,13 @@ export default function GameArena() {
 
   useEffect(()=>{
     /* console.log("movementsToCompare", movementsToCompare) */
-    if(movementsToCompare.current[0] && movementsToCompare.current[1]){
-      console.log("movementsToCompare IS HERE!")
-    }
-
-    if(cardsOfPlayerI.find(card => card.selected === true) && cardsOfPlayerII.find(card => card.selected === true)){
-      console.log("OS DOIS SÃO TRUE")
-      /* movementsVerification() */
-    }
-
+    setTimeout(()=>{
+      console.log("Entrou no setTimeout")
+      if(movementsToCompare.current[0] && movementsToCompare.current[1]){
+        console.log("movementsToCompare IS HERE!")
+        movementsVerification()
+      }
+    },300)
   },[cardsOfPlayerI], [cardsOfPlayerII])
 
   const sendStartRoundStatus = () => {
@@ -242,7 +240,7 @@ export default function GameArena() {
 
   const movementsVerification = () => {
     console.log("INICOU A APURAÇÃO")
-    /* setStageMatch("comparing-movements") */
+    setStageMatch("comparing-movements")
   }
 
   return (
