@@ -141,11 +141,10 @@ export default function GameArena() {
       }
 
       /* console.log("Chegou aqui!!!!!",movementsToCompare.current) */
-      /* if(movementsToCompare.current[0] && movementsToCompare.current[1]){
-
+      if(movementsToCompare.current[0] && movementsToCompare.current[1]){
+        console.log("CHEGOU NO LISTENER")
       movementsVerification()
-
-      } */
+      }
     })
 
   }, [/* playersAreFighting,  */socket]);
@@ -162,16 +161,16 @@ export default function GameArena() {
     console.log("SCP2", cardsOfPlayerII)
   },[cardsOfPlayerII])
 
-  useEffect(()=>{
-    /* console.log("movementsToCompare", movementsToCompare) */
+  /* useEffect(()=>{
+    console.log("movementsToCompare", movementsToCompare)
     setTimeout(()=>{
       console.log("Entrou no setTimeout")
       if(movementsToCompare.current[0] && movementsToCompare.current[1]){
         console.log("movementsToCompare IS HERE!")
         movementsVerification()
       }
-    },300)
-  },[cardsOfPlayerI], [cardsOfPlayerII])
+    },500)
+  },[cardsOfPlayerI], [cardsOfPlayerII]) */
 
   const sendStartRoundStatus = () => {
     /* console.log("SENDSTARTFUNC",playersAreFighting[0]) */
@@ -208,6 +207,11 @@ export default function GameArena() {
       })
 
       setStageMatch("waiting-enemy-answer")
+
+      if(movementsToCompare.current[0] && movementsToCompare.current[1]){
+        console.log("CHEGOU NO DISPARO!")
+      movementsVerification()
+      }
 
       setCardsOfPlayerI([...newCardsOfPlayerI])
     }
