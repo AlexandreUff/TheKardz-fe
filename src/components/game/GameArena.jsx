@@ -20,7 +20,7 @@ export default function GameArena() {
   const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
     {
       cardName: "attack1",
-      amount: 1,
+      amount: 2,
       type: "default",
       selected: false,
     },
@@ -40,7 +40,7 @@ export default function GameArena() {
   const [cardsOfPlayerII, setCardsOfPlayerII] = useState([
     {
       cardName: "attack1",
-      amount: 1,
+      amount: 2,
       type: "default",
       selected: false,
     },
@@ -98,46 +98,45 @@ export default function GameArena() {
 
       if(dataMovements.player.name === playersFightingRef.current[0].name){
         console.log("Jogou pro 1:", dataMovements)
-        movementsToCompare.current[0] = dataMovements
-        
+        movementsToCompare.current[0] = {...dataMovements}
+
+        const cardsOfPlayerIWithNewAmount = dataMovements.movement.map(card => {
+          if(card.selected){
+            card.amount--
+          }
+          return card
+        })
+
+        const newCardsOfPlayerI = cardsOfPlayerIWithNewAmount.filter(movement => {
+          return movement.selected === false || movement.amount > 0;
+        })
+
+        setCardsOfPlayerI([...newCardsOfPlayerI])
+
       } else if (dataMovements.player.name === playersFightingRef.current[1].name){
         console.log("Jogou pro 2:", dataMovements)
-        movementsToCompare.current[1] = dataMovements
-        
+        movementsToCompare.current[1] = {...dataMovements}
+
+        const cardsOfPlayerIIWithNewAmount = dataMovements.movement.map(card => {
+          if(card.selected){
+            card.amount--
+          }
+          return card
+        })
+
+        const newCardsOfPlayerII = cardsOfPlayerIIWithNewAmount.filter(movement => {
+          return movement.selected === false || movement.amount > 0;
+        })
+
+        setCardsOfPlayerII([...newCardsOfPlayerII])
       }
 
-      console.log("Chegou aqui!!!!!",movementsToCompare.current)
-      if(movementsToCompare.current[0] && movementsToCompare.current[1]){
-        console.log("É maior que 1.")
+      /* console.log("Chegou aqui!!!!!",movementsToCompare.current) */
+      /* if(movementsToCompare.current[0] && movementsToCompare.current[1]){
 
-        const updateCards = (data) => {
-          const movementsWithCorretlyAmountI = data.map(movement => {
-            if(movement.amount === null) {
-              movement.amount = Infinity
-            }
-  
-            if(movement.selected === true){
-              movement.amount--
-            }
-            return movement
-          })
-  
-          const movementsWithouAmount = movementsWithCorretlyAmountI.filter(movement => {
-            if(movement.selected === true){
-              if(movement.amount > 0) return true
-            } else {
-              return true
-            }
-          })
+      movementsVerification()
 
-          return movementsWithouAmount
-        }
-
-
-        setCardsOfPlayerI([...updateCards(movementsToCompare.current[0].movement)]) //Remover se necessário
-        setCardsOfPlayerII([...updateCards(movementsToCompare.current[1].movement)]) //Remover se necessário
-        movementsVerification()
-      }
+      } */
     })
 
   }, [/* playersAreFighting,  */socket]);
@@ -160,7 +159,30 @@ export default function GameArena() {
 
   useEffect(()=>{
     console.log("movementsToCompare", movementsToCompare)
-  },[movementsToCompare.current])
+
+    if(movementsToCompare.current[0] && movementsToCompare.current[1]){
+      console.log("OS DOIS SÂO TRUE")
+
+      if(playersFightingRef.current[0].name === userName){
+        console.log("movementsToCompare.current[0]",movementsToCompare.current[0])
+        const cardsOfPlayerIWithNewAmount = movementsToCompare.current[0].movement.map(card => {
+          if(card.selected){
+            card.amount--
+          }
+          return card
+        })
+
+        const newCardsOfPlayerI = cardsOfPlayerIWithNewAmount.filter(movement => {
+          return movement.selected === false || movement.amount > 0;
+        })
+
+        setCardsOfPlayerI([...newCardsOfPlayerI])
+      }
+
+      movementsVerification()
+      }
+
+  },[movementsToCompare.current[0], movementsToCompare.current[1]])
 
   const sendStartRoundStatus = () => {
     /* console.log("SENDSTARTFUNC",playersAreFighting[0]) */
@@ -181,9 +203,22 @@ export default function GameArena() {
         ]
       }
 
-      /* movementsToCompare.current[0] = movementDataWillSend */
+      movementsToCompare.current[0] = movementDataWillSend
 
       socket.send("chosen-movement", movementDataWillSend)
+
+      /* const cardsOfPlayerIWithNewAmount = cardsOfPlayerI.map(card => {
+        if(card.selected){
+          card.amount--
+        }
+        return card
+      })
+
+      const newCardsOfPlayerI = cardsOfPlayerIWithNewAmount.filter(movement => {
+        return movement.selected === false || movement.amount > 0;
+      })
+
+      setCardsOfPlayerI([...newCardsOfPlayerI]) */
     }
   }
 
@@ -195,14 +230,14 @@ export default function GameArena() {
     })
     newCards[index].selected = true
 
-    movementsToCompare.current[0] = {
+    /* movementsToCompare.current[0] = {
       player: {
         ...playersAreFighting[0]
       },
       movement: [
         ...newCards
       ]
-    }
+    } */
 
     console.log("Crica:",movementsToCompare.current)
 
