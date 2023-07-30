@@ -19,41 +19,41 @@ export default function GameArena() {
   const [chosenMoviment, setChosenMoviment] = useState();
   const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
     {
-      cardName: "attack1",
+      cardName: "attack",
       amount: 1,
-      type: "default",
+      type: 1,
       selected: false,
     },
     {
-      cardName: "defense1",
+      cardName: "defense",
       amount: Infinity,
-      type: "default",
+      type: 1,
       selected: false,
     },
     {
-      cardName: "recharging1",
+      cardName: "recharging",
       amount: Infinity,
-      type: "default",
+      type: 1,
       selected: false,
     },
   ])
   const [cardsOfPlayerII, setCardsOfPlayerII] = useState([
     {
-      cardName: "attack1",
+      cardName: "attack",
       amount: 1,
-      type: "default",
+      type: 1,
       selected: false,
     },
     {
-      cardName: "defense1",
+      cardName: "defense",
       amount: Infinity,
-      type: "default",
+      type: 1,
       selected: false,
     },
     {
-      cardName: "recharging1",
+      cardName: "recharging",
       amount: Infinity,
-      type: "default",
+      type: 1,
       selected: false,
     },
   ])

@@ -3,20 +3,20 @@ function titleMovimentInfo(movement, type){
     let typeLegible
 
     //Verifica o nome do movimento
-    if(movement === 'defense1' || movement === "defense2" || movement === "defense3"){
+    if(movement === 'defense'){
         movementLegible = "🛡 Defesa"
-    } else if(movement === 'attack1'){
+    } else if(movement === 'attack' && type === 1){
         movementLegible = "🗡 Ataque"
-    } else if(movement === 'attack2' || movement === 'attack3'){
+    } else if(movement === 'attack' && type >= 2){
         movementLegible = "⚔️ Ataque"
-    } else if(movement === 'recharging1' || movement === 'recharging2' || movement === 'recharging3'){
+    } else if(movement === 'recharging'){
         movementLegible = "➕ Recarga"
     }
 
     //Verifica o tipo do movimento
-    if(type === "bronze"){
+    if(type === 2){
         typeLegible = "Bronze";
-    } else if (type === "gold"){
+    } else if (type === 3){
         typeLegible = "Gold";
     } else {
         typeLegible = "";

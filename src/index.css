@@ -510,10 +510,10 @@
 .card-game .frontface {
   transform: rotateY(-180deg);
 }
-.card-game .frontface[type=bronze] {
+.card-game .frontface[type="2"] {
   background-color: rgb(233, 98, 98);
 }
-.card-game .frontface[type=gold] {
+.card-game .frontface[type="3"] {
   background-color: goldenrod;
 }
 .card-game .frontface div {

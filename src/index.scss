@@ -631,11 +631,11 @@ $fourthColor: #2B2A4C;
     .frontface{
         transform: rotateY(-180deg);
 
-        &[type="bronze"]{
+        &[type="2"]{
             background-color: rgb(233, 98, 98);
         }
 
-        &[type="gold"]{
+        &[type="3"]{
             background-color: goldenrod;
         }
 

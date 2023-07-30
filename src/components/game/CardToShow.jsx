@@ -3,19 +3,22 @@ import ReadableMovementsNames from "../../Utils/ReadableMovementsNames"
 
 export default function CardEmpty(props){
 
-    function takeMovimentInfo(moviment){
-        if(moviment === 'defense1' || moviment === "defense2" || moviment === "defense3"){
+    function takeMovimentInfo(moviment, type){
+        if(moviment === 'defense' || moviment === "defense" || moviment === "defense"){
             return "🛡"
         }
 
-        if(moviment === 'attack1'){
+        if(moviment === 'attack' && type === 1){
             return "🗡"
-        }
-
-        if(moviment === 'attack2' || moviment === 'attack3'){
+        } else if (moviment === 'attack' && type >= 2){
             return "⚔️"
         }
-        if(moviment === 'recharging1' || moviment === 'recharging2' || moviment === 'recharging3'){
+
+        /* if(moviment === 'attack' || moviment === 'attack'){
+            return "⚔️"
+        } */
+        
+        if(moviment === 'recharging' || moviment === 'recharging' || moviment === 'recharging'){
             return "➕"
         }
     }
@@ -45,10 +48,10 @@ export default function CardEmpty(props){
                 <IcoDiamondCard/><IcoDiamondCard/><IcoDiamondCard/>
             </div>
         </div>
-        <div className="frontface" type={props.type}>
+        <div className="frontface" type={`${props.type}`}>
             <div>
                 {/* Condicional para caso receba alguma informação de movimento SE FOR PLAYER */}
-                {true && takeMovimentInfo(props.moviment)}
+                {true && takeMovimentInfo(props.moviment, props.type)}
             </div>
         </div>
     </div>
