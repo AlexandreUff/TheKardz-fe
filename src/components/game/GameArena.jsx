@@ -14,6 +14,7 @@ export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
   /* const playersAreFighting = useRef([]) */
   const playersFightingRef = useRef([])
+  const sendMovementTimeControll = useRef()
   const movementsToCompare = useRef([])
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
   const [chosenMoviment, setChosenMoviment] = useState();
@@ -68,9 +69,14 @@ export default function GameArena() {
       setStageMatch(status);
       /* setStageMatch({payload: status}); */
 
+      //Cancelamento do Timeout de disparo de movimento caso um dos lutadores (lineNumber 0 ou 1) saiam da sala
+      if(status === "start-fight"){
+        clearTimeout(sendMovementTimeControll.current)
+      }
+
+      //Ignição de disparo de movimento caso o "round" se inicie
       if(status === "start-round"){
-        setTimeout(()=>{
-          console.log("DISPAROU!")
+        sendMovementTimeControll.current = setTimeout(()=>{
           sendChosenMoviment()
         },5000)
       }
@@ -182,6 +188,7 @@ export default function GameArena() {
   }
 
   const sendChosenMoviment = () => {
+    console.log("DISPARADO!")
     if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
       const movementDataWillSend = {
         player: {
