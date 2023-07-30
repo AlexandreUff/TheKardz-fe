@@ -296,8 +296,9 @@ export default function GameArena() {
     /* setStageMatch("comparing-movements") */
     return (
       <>
-        <h1>Comparando Movimentos...</h1>
-        <p>{movementSelectedPlayerI.cardName} | {movementSelectedPlayerII.cardName}</p>
+        <h1>{matchResult}</h1>
+        <p>({movementSelectedPlayerI.cardName} | {movementSelectedPlayerI.type})</p>
+        <p>({movementSelectedPlayerII.cardName} | {movementSelectedPlayerII.type})</p>
       </>
     )
   }
