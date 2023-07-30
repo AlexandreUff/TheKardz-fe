@@ -20,7 +20,7 @@ export default function GameArena() {
   const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
     {
       cardName: "attack1",
-      amount: 2,
+      amount: 1,
       type: "default",
       selected: false,
     },
@@ -40,7 +40,7 @@ export default function GameArena() {
   const [cardsOfPlayerII, setCardsOfPlayerII] = useState([
     {
       cardName: "attack1",
-      amount: 2,
+      amount: 1,
       type: "default",
       selected: false,
     },
