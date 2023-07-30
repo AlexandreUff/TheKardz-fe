@@ -110,9 +110,9 @@ export default function GameArena() {
         movementsToCompare.current[0] = {...dataMovements}
 
         const cardsOfPlayerIWithNewAmount = dataMovements.movement.map(card => {
-          if(card.selected){
-            card.amount--
-          }
+          if(card.amount === null) card.amount = Infinity
+          if(card.selected) card.amount--
+
           return card
         })
 
@@ -127,9 +127,9 @@ export default function GameArena() {
         movementsToCompare.current[1] = {...dataMovements}
 
         const cardsOfPlayerIIWithNewAmount = dataMovements.movement.map(card => {
-          if(card.selected){
-            card.amount--
-          }
+          if(card.amount === null) card.amount = Infinity
+          if(card.selected) card.amount--
+          
           return card
         })
 
