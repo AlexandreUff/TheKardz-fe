@@ -107,7 +107,7 @@ export default function GameArena() {
 
       if(dataMovements.player.name === playersFightingRef.current[0].name){
         console.log("Jogou pro 1:", dataMovements)
-        movementsToCompare.current[0] = {...dataMovements}
+        movementsToCompare.current[0] = [...dataMovements.movement]
 
         const cardsOfPlayerIWithNewAmount = dataMovements.movement.map(card => {
           if(card.amount === null) card.amount = Infinity
@@ -124,12 +124,12 @@ export default function GameArena() {
 
       } else if (dataMovements.player.name === playersFightingRef.current[1].name){
         console.log("Jogou pro 2:", dataMovements)
-        movementsToCompare.current[1] = {...dataMovements}
+        movementsToCompare.current[1] = [...dataMovements.movement]
 
         const cardsOfPlayerIIWithNewAmount = dataMovements.movement.map(card => {
           if(card.amount === null) card.amount = Infinity
           if(card.selected) card.amount--
-          
+
           return card
         })
 
@@ -243,6 +243,23 @@ export default function GameArena() {
   }
 
   const movementsVerification = () => {
+    const movementSelectedPlayerI = movementsToCompare.current[0].find(movement => movement.selected === true).cardName
+    const movementSelectedPlayerII = movementsToCompare.current[1].find(movement => movement.selected === true).cardName
+
+    //Aqui entram apenas as estruturas de vitória do player I
+    /* const attack1VsRecharging1 = movementSelectedPlayerI === "attack1" && movementSelectedPlayerII === "recharging1"
+    const attack2VsRecharging1 = movementSelectedPlayerI === "attack2" && movementSelectedPlayerII === "recharging1"
+    const attack3VsRecharging1 = movementSelectedPlayerI === "attack3" && movementSelectedPlayerII === "recharging1" */
+
+    //
+    /* if(movementSelectedPlayerI === "attack1" && movementSelectedPlayerI === "recharging1"){
+      console.log("Player 1 venceu!")
+    } else if(movementSelectedPlayerI === "recharging1" && movementSelectedPlayerI === "attack1"){
+      console.log("Player 2 venceu!")
+    } */
+
+    console.log("Movimentos escolhidos:", movementSelectedPlayerI, movementSelectedPlayerII)
+
     console.log("INICOU A APURAÇÃO")
     setStageMatch("comparing-movements")
   }
