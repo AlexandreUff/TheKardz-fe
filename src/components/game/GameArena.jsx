@@ -143,7 +143,8 @@ export default function GameArena() {
       /* console.log("Chegou aqui!!!!!",movementsToCompare.current) */
       if(movementsToCompare.current[0] && movementsToCompare.current[1]){
         console.log("CHEGOU NO LISTENER")
-      movementsVerification()
+        setStageMatch("comparing-movements")
+        /* movementsVerification() */
       }
     })
 
@@ -210,7 +211,8 @@ export default function GameArena() {
 
       if(movementsToCompare.current[0] && movementsToCompare.current[1]){
         console.log("CHEGOU NO DISPARO!")
-      movementsVerification()
+        setStageMatch("comparing-movements")
+        /* movementsVerification() */
       }
 
       setCardsOfPlayerI([...newCardsOfPlayerI])
@@ -243,25 +245,61 @@ export default function GameArena() {
   }
 
   const movementsVerification = () => {
-    const movementSelectedPlayerI = movementsToCompare.current[0].find(movement => movement.selected === true).cardName
-    const movementSelectedPlayerII = movementsToCompare.current[1].find(movement => movement.selected === true).cardName
+    const movementSelectedPlayerI = movementsToCompare.current[0].find(movement => movement.selected === true)
+    const movementSelectedPlayerII = movementsToCompare.current[1].find(movement => movement.selected === true)
 
     //Aqui entram apenas as estruturas de vitória do player I
     /* const attack1VsRecharging1 = movementSelectedPlayerI === "attack1" && movementSelectedPlayerII === "recharging1"
     const attack2VsRecharging1 = movementSelectedPlayerI === "attack2" && movementSelectedPlayerII === "recharging1"
     const attack3VsRecharging1 = movementSelectedPlayerI === "attack3" && movementSelectedPlayerII === "recharging1" */
 
-    //
-    /* if(movementSelectedPlayerI === "attack1" && movementSelectedPlayerI === "recharging1"){
-      console.log("Player 1 venceu!")
-    } else if(movementSelectedPlayerI === "recharging1" && movementSelectedPlayerI === "attack1"){
-      console.log("Player 2 venceu!")
-    } */
+    const p1_attack_p2_attack = movementSelectedPlayerI.cardName === "attack" && movementSelectedPlayerII.cardName === "attack"
+    const p1_attack_p2_defense = movementSelectedPlayerI.cardName === "attack" && movementSelectedPlayerII.cardName === "defense"
+    const p1_attack_p2_recharging = movementSelectedPlayerI.cardName === "attack" && movementSelectedPlayerII.cardName === "recharging"
+
+    const p2_attack_p1_attack = movementSelectedPlayerII.cardName === "attack" && movementSelectedPlayerI.cardName === "attack"
+    const p2_attack_p1_defense = movementSelectedPlayerII.cardName === "attack" && movementSelectedPlayerI.cardName === "defense"
+    const p2_attack_p1_recharging = movementSelectedPlayerII.cardName === "attack" && movementSelectedPlayerI.cardName === "recharging"
+
+    let matchResult = "Empate"
+
+    //Aqui entram apenas as estruturas de ataque com vitória do player I
+    if(p1_attack_p2_attack && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
+      matchResult = "P1 Venceu"
+    }
+
+    if(p1_attack_p2_defense && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
+      matchResult = "P1 Venceu"
+    }
+
+    if(p1_attack_p2_recharging){
+      matchResult = "P1 Venceu"
+    }
+
+    //Aqui entram apenas as estruturas de ataque com vitória do player II
+    if(p2_attack_p1_attack && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
+      matchResult = "P2 Venceu"
+    }
+
+    if(p2_attack_p1_defense && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
+      matchResult = "P2 Venceu"
+    }
+
+    if(p2_attack_p1_recharging){
+      matchResult = "P2 Venceu"
+    }
+
 
     console.log("Movimentos escolhidos:", movementSelectedPlayerI, movementSelectedPlayerII)
 
-    console.log("INICOU A APURAÇÃO")
-    setStageMatch("comparing-movements")
+    console.log("Resultado da apuração:", matchResult)
+    /* setStageMatch("comparing-movements") */
+    return (
+      <>
+        <h1>Comparando Movimentos...</h1>
+        <p>{movementSelectedPlayerI.cardName} | {movementSelectedPlayerII.cardName}</p>
+      </>
+    )
   }
 
   return (
@@ -300,7 +338,7 @@ export default function GameArena() {
           />
         )}
         {stageMatch === "comparing-movements" && (
-          <h1>Comparando Movimentos...</h1>
+          movementsVerification()
         )}
         {stageMatch === "stand-by" &&
           (playersAreFighting.length > 1 ? (
