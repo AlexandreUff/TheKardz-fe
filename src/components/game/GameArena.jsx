@@ -252,7 +252,7 @@ export default function GameArena() {
     /* setCardsOfPlayerI([...newCards]) */
   }
 
-  const movementsVerification = () => {
+  /* const movementsVerification = () => {
     return (
       <>
         <ShowResultsOfRound
@@ -261,7 +261,7 @@ export default function GameArena() {
         />
       </>
     )
-  }
+  } */
 
   return (
     <main className="game-arena">
@@ -299,7 +299,11 @@ export default function GameArena() {
           />
         )}
         {stageMatch === "comparing-movements" && (
-          movementsVerification()
+          /* movementsVerification() */
+          <ShowResultsOfRound
+            player1={movementsToCompare.current[0].find(movement => movement.selected === true)}
+            player2={movementsToCompare.current[1].find(movement => movement.selected === true)}
+          />
         )}
         {stageMatch === "stand-by" &&
           (playersAreFighting.length > 1 ? (
