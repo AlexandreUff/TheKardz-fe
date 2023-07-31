@@ -301,6 +301,7 @@ export default function GameArena() {
         {stageMatch === "comparing-movements" && (
           /* movementsVerification() */
           <ShowResultsOfRound
+            myId={userId}
             player1={
                 {
                   playerData: playersFightingRef.current[0],

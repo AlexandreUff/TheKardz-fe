@@ -1,11 +1,26 @@
 import { useEffect, useState } from "react"
 import CardToShow from "./CardToShow";
+import APIService from "../../services/APIService"
 
 export default function ShowResultsOfRound(props){
 
     const [show, setShow] = useState(false)
 
-    console.log("ESTOU RENDERIZANDO!!!!!!!!")
+    const saveWinnerResultsInAPI = async (winner) => {
+        const winnerWithNewDatas = {...winner}
+        if(props.myId === winnerWithNewDatas._id){
+            console.log(`${winnerWithNewDatas.name} gravou os dados.`)
+    
+            winnerWithNewDatas.victories++
+    
+            await APIService.post("/user/update",{...winnerWithNewDatas})
+        }
+    }
+
+    console.log("ESTOU RENDERIZANDO!!!!!!!!",props.player1.playerData)
+
+    const player1Data = props.player1.playerData
+    const player2Data = props.player2.playerData
 
     const movementSelectedPlayerI = props.player1.movement
     const movementSelectedPlayerII = props.player2.movement
@@ -24,28 +39,34 @@ export default function ShowResultsOfRound(props){
 
     //Aqui entram apenas as estruturas de ataque com vitória do player I
     if(p1_attack_p2_attack && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-      matchResult = "P1 Venceu"
+        saveWinnerResultsInAPI(player1Data)
+        matchResult = "P1 Venceu"
     }
 
     if(p1_attack_p2_defense && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-      matchResult = "P1 Venceu"
+        saveWinnerResultsInAPI(player1Data)
+        matchResult = "P1 Venceu"
     }
 
     if(p1_attack_p2_recharging){
-      matchResult = "P1 Venceu"
+        saveWinnerResultsInAPI(player1Data)
+        matchResult = "P1 Venceu"
     }
 
     //Aqui entram apenas as estruturas de ataque com vitória do player II
     if(p2_attack_p1_attack && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-      matchResult = "P2 Venceu"
+        saveWinnerResultsInAPI(player2Data)
+        matchResult = "P2 Venceu"
     }
 
     if(p2_attack_p1_defense && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-      matchResult = "P2 Venceu"
+        saveWinnerResultsInAPI(player2Data)
+        matchResult = "P2 Venceu"
     }
 
     if(p2_attack_p1_recharging){
-      matchResult = "P2 Venceu"
+        saveWinnerResultsInAPI(player2Data)
+        matchResult = "P2 Venceu"
     }
 
     useEffect(()=>{
