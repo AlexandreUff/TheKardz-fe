@@ -51,7 +51,7 @@ export default function ShowResultsOfRound(props){
     useEffect(()=>{
         const resultTimeout = setTimeout(()=>{
             setShow(true)
-        },1000)
+        },500)
 
         return ()=>{
             clearTimeout(resultTimeout)

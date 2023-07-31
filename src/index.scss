@@ -348,15 +348,19 @@ $fourthColor: #2B2A4C;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                align-items: safe;
 
                 .player-1-card-bringer{
-                    /* margin-top: 2px; */
-                    
+                    position: relative;
+                    animation: show-cards-result .3s forwards;
+                    opacity: 0;
+                    top: 100px;
                 }
 
                 .player-2-card-bringer{
-                    /* margin-bottom: 2px; */
+                    position: relative;
+                    animation: show-cards-result .3s forwards;
+                    opacity: 0;
+                    top: -100px;
                 }
             }
         }
@@ -842,5 +846,12 @@ $fourthColor: #2B2A4C;
         left: 45px;
         top: 22px;
         transform: rotate(0deg);
+    }
+}
+
+@keyframes show-cards-result {
+    100%{
+        top: 0px;
+        opacity: 1;
     }
 }

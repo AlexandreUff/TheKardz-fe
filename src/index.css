@@ -287,13 +287,18 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: safe;
 }
 .App .game-area main.game-arena .table .show-result .player-1-card-bringer {
-  /* margin-top: 2px; */
+  position: relative;
+  animation: show-cards-result 0.3s forwards;
+  opacity: 0;
+  top: 100px;
 }
 .App .game-area main.game-arena .table .show-result .player-2-card-bringer {
-  /* margin-bottom: 2px; */
+  position: relative;
+  animation: show-cards-result 0.3s forwards;
+  opacity: 0;
+  top: -100px;
 }
 .App .game-area main.game-arena .card-list {
   display: flex;
@@ -657,6 +662,12 @@
     left: 45px;
     top: 22px;
     transform: rotate(0deg);
+  }
+}
+@keyframes show-cards-result {
+  100% {
+    top: 0px;
+    opacity: 1;
   }
 }
 
