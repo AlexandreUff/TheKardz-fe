@@ -343,6 +343,22 @@ $fourthColor: #2B2A4C;
                     }
                 }
             }
+
+            .show-result {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: safe;
+
+                .player-1-card-bringer{
+                    /* margin-top: 2px; */
+                    
+                }
+
+                .player-2-card-bringer{
+                    /* margin-bottom: 2px; */
+                }
+            }
         }
 
         .card-list {

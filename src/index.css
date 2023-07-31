@@ -283,6 +283,18 @@
   width: 80%;
   height: 80%;
 }
+.App .game-area main.game-arena .table .show-result {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: safe;
+}
+.App .game-area main.game-arena .table .show-result .player-1-card-bringer {
+  /* margin-top: 2px; */
+}
+.App .game-area main.game-arena .table .show-result .player-2-card-bringer {
+  /* margin-bottom: 2px; */
+}
 .App .game-area main.game-arena .card-list {
   display: flex;
 }

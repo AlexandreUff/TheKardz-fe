@@ -1,4 +1,10 @@
+import { useEffect, useState } from "react"
+import CardToShow from "./CardToShow";
+
 export default function ShowResultsOfRound(props){
+
+    const [show, setShow] = useState(false)
+
     console.log("ESTOU RENDERIZANDO!!!!!!!!")
 
     const movementSelectedPlayerI = props.player1
@@ -42,11 +48,41 @@ export default function ShowResultsOfRound(props){
       matchResult = "P2 Venceu"
     }
 
+    useEffect(()=>{
+        const resultTimeout = setTimeout(()=>{
+            setShow(true)
+        },1000)
+
+        return ()=>{
+            clearTimeout(resultTimeout)
+        }
+    },[])
+
     return (
       <>
-        <h1>{matchResult}</h1>
+        {/* <h1>{matchResult}</h1>
         <p>({movementSelectedPlayerI.cardName} | {movementSelectedPlayerI.type})</p>
-        <p>({movementSelectedPlayerII.cardName} | {movementSelectedPlayerII.type})</p>
+        <p>({movementSelectedPlayerII.cardName} | {movementSelectedPlayerII.type})</p> */}
+        <div className="show-result">
+            <div className="player-2-card-bringer">
+                <CardToShow
+                    moviment={movementSelectedPlayerII.cardName}
+                    type={movementSelectedPlayerII.type}
+                    show={show}
+                    /* amount={card.amount} */
+                    chooseMov={() => {}}
+                />
+            </div>
+            <div className="player-1-card-bringer">
+                <CardToShow
+                    moviment={movementSelectedPlayerI.cardName}
+                    type={movementSelectedPlayerI.type}
+                    show={show}
+                    /* amount={card.amount} */
+                    chooseMov={() => {}}
+                />
+            </div>
+        </div>
       </>
     )
 }
