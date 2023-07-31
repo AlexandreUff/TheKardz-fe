@@ -7,8 +7,8 @@ export default function ShowResultsOfRound(props){
 
     console.log("ESTOU RENDERIZANDO!!!!!!!!")
 
-    const movementSelectedPlayerI = props.player1
-    const movementSelectedPlayerII = props.player2
+    const movementSelectedPlayerI = props.player1.movement
+    const movementSelectedPlayerII = props.player2.movement
 
     //Ataques do player I
     const p1_attack_p2_attack = movementSelectedPlayerI.cardName === "attack" && movementSelectedPlayerII.cardName === "attack"

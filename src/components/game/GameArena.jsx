@@ -149,7 +149,7 @@ export default function GameArena() {
 
       /* console.log("Chegou aqui!!!!!",movementsToCompare.current) */
       if(movementsToCompare.current[0] && movementsToCompare.current[1]){
-        console.log("CHEGOU NO LISTENER")
+        console.log("CHEGOU NO LISTENER",movementsToCompare.current[0])
         setStageMatch("comparing-movements")
         /* movementsVerification() */
       }
@@ -301,8 +301,18 @@ export default function GameArena() {
         {stageMatch === "comparing-movements" && (
           /* movementsVerification() */
           <ShowResultsOfRound
-            player1={movementsToCompare.current[0].find(movement => movement.selected === true)}
-            player2={movementsToCompare.current[1].find(movement => movement.selected === true)}
+            player1={
+                {
+                  playerData: playersFightingRef.current[0],
+                  movement: movementsToCompare.current[0].find(movement => movement.selected === true),
+                }
+              }
+            player2={
+                {
+                  playerData: playersFightingRef.current[1],
+                  movement: movementsToCompare.current[1].find(movement => movement.selected === true),
+                }
+              }
           />
         )}
         {stageMatch === "stand-by" &&
