@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import CardToShow from "./CardToShow";
-import APIService from "../../services/APIService"
+import SocketContext from "../../context/socketContext";
 
 export default function ShowResultsOfRound(props){
 
     const [show, setShow] = useState(false)
+
+    const socket = useContext(SocketContext);
 
     const saveWinnerResultsInAPI = async (winner) => {
         const winnerWithNewDatas = {...winner}
@@ -12,8 +14,8 @@ export default function ShowResultsOfRound(props){
             console.log(`${winnerWithNewDatas.name} gravou os dados.`)
     
             winnerWithNewDatas.victories++
-    
-            await APIService.post("/user/update",{...winnerWithNewDatas})
+
+            socket.send("user-save-data", winnerWithNewDatas)
         }
     }
 
