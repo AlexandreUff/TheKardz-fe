@@ -215,6 +215,8 @@ $fourthColor: #2B2A4C;
         transition: .5s;
         color: $firstColor;
 
+        z-index: 3;
+
         &:hover{
             cursor: pointer;
         }
@@ -241,6 +243,8 @@ $fourthColor: #2B2A4C;
         font-weight: 600;
         text-align: center;
         transition: .5s;
+
+        z-index: 3;
     }
 
     .aside-players{
@@ -250,7 +254,7 @@ $fourthColor: #2B2A4C;
         background-color: $fourthColor;
         padding: 0 10px;
         overflow-y: scroll;
-        z-index: 2;
+        z-index: 4;
 
         .players-score-scope{
             position: relative;
@@ -305,6 +309,35 @@ $fourthColor: #2B2A4C;
     main.game-arena{
         flex-grow: 1;
         margin: 0;
+
+        .scoreboard{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            position: absolute;
+            top: 0px;
+            left: 0px;
+
+            width: 100%;
+            height: 100%;
+
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+
+            z-index: 2;
+
+            h1 {
+                font-size: 9rem;
+                margin-right: 20%;
+            }
+
+            h2 {
+                font-size: 6rem;
+                margin-right: 20%;
+            }
+        }
 
         .table {
             display: flex;
@@ -420,6 +453,8 @@ $fourthColor: #2B2A4C;
         transition: .5s;
         color: $firstColor;
 
+        z-index: 3;
+
         &:hover{
             cursor: pointer;
         }
@@ -439,6 +474,8 @@ $fourthColor: #2B2A4C;
         padding: 0 10px;
         text-align: center;
         color: $firstColor;
+
+        z-index: 3;
 
         h4 {
             margin-top: 5px;
@@ -691,6 +728,7 @@ $fourthColor: #2B2A4C;
 @media(max-width: 850px){
     .App{
         .game-area{
+
             .show-players{
                 left: 10px;
 

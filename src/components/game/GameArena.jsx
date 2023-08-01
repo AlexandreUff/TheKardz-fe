@@ -5,6 +5,7 @@ import SocketContext from "../../context/socketContext";
 import SessionService from "../../services/SessionService";
 import ReadableMovementsNames from "../../Utils/ReadableMovementsNames";
 import HandlerResultsOfRound from "./HandlerResultsOfRound";
+import ShowScoreboard from "./ShowScoreboard";
 
 const stageMatchReducer = (state, action) => {
   return action.payload ;
@@ -265,7 +266,7 @@ export default function GameArena() {
 
   return (
     <main className="game-arena">
-      {/* <CardToShow /> */}
+      <ShowScoreboard username="John" status="Loser" />
       <div className="player-name">
         <div className="unused-area"></div>
         <h5 className="top">
