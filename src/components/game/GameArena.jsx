@@ -15,6 +15,7 @@ export default function GameArena() {
   /* const [stageMatch, setStageMatch] = useReducer(stageMatchReducer, "stand-by"); */
   const [stageMatch, setStageMatch] = useState("stand-by");
   /* const playersAreFighting = useRef([]) */
+  const [resultMatch, setResultMatch] = useState({})
   const playersFightingRef = useRef([])
   const sendMovementTimeControll = useRef()
   const movementsToCompare = useRef([])
@@ -264,9 +265,37 @@ export default function GameArena() {
     )
   } */
 
+  const renderScoreboard = () => {
+
+    console.log("USER", resultMatch.winner.name)
+
+    let userTitle
+    let status
+
+    if(resultMatch.winner.name === userName){
+      userTitle = "você"
+      status = "venceu"
+    } else if (resultMatch.loser.name === userName){
+      userTitle = "você"
+      status = "perdeu"
+    } else {
+      userTitle = resultMatch.winner.name
+      status = "venceu"
+    }
+
+    return (
+      <ShowScoreboard
+          username={userTitle}
+          status={status}
+      />
+    )
+  }
+
   return (
     <main className="game-arena">
-      <ShowScoreboard username="John" status="Loser" />
+      {resultMatch.isThereAWinner && (
+        renderScoreboard()
+      )}
       <div className="player-name">
         <div className="unused-area"></div>
         <h5 className="top">
@@ -316,7 +345,7 @@ export default function GameArena() {
                 }
               }
             takeResult={
-              (data)=>{console.log("Resultado:",data)}
+              (data)=>{setResultMatch({...data})}
             }
           />
         )}
