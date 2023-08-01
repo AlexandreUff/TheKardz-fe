@@ -6,8 +6,10 @@ export default function ShowScoreboard(props){
     return (
         <>
             <div className="scoreboard">
-                <h1>{userName.toUpperCase()}</h1>
-                <h2>{status.toUpperCase()}</h2>
+                {/* <div className="title-container"> */}
+                    <h1>{userName.toUpperCase()}</h1>
+                    <h2>{status.toUpperCase()}</h2>
+                {/* </div> */}
             </div>
         </>
     )

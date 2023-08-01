@@ -328,15 +328,28 @@ $fourthColor: #2B2A4C;
 
             z-index: 2;
 
-            h1 {
-                font-size: 9rem;
-                margin-right: 20%;
-            }
+            overflow: hidden;
 
-            h2 {
-                font-size: 6rem;
+            /* .title-container{
+                position: relative; */
+
+                h1 {
+                    position: absolute;
+                    top: 30%;
+                    left: 20%;
+                    font-size: 9rem;
+                    /* animation: winner-title 4s linear infinite; */
+                }
+    
+                h2 {
+                    position: absolute;
+                    top: 60%;
+                    left: 20%;
+                    font-size: 6rem;
+                    /* animation: winner-title 4s linear infinite; */
+                }
                 margin-right: 20%;
-            }
+            /* } */
         }
 
         .table {
@@ -893,3 +906,18 @@ $fourthColor: #2B2A4C;
         opacity: 1;
     }
 }
+
+/* @keyframes winner-title {
+    0% {
+      left: -50%;
+    }
+    10% {
+      left: -10%;
+    }
+    50% {
+      left: 100%;
+    }
+    100% {
+      left: 100%;
+    }
+} */

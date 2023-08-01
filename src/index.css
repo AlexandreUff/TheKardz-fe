@@ -266,14 +266,25 @@
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
   z-index: 2;
+  overflow: hidden;
+  /* .title-container{
+      position: relative; */
+  margin-right: 20%;
+  /* } */
 }
 .App .game-area main.game-arena .scoreboard h1 {
+  position: absolute;
+  top: 30%;
+  left: 20%;
   font-size: 9rem;
-  margin-right: 20%;
+  /* animation: winner-title 4s linear infinite; */
 }
 .App .game-area main.game-arena .scoreboard h2 {
+  position: absolute;
+  top: 60%;
+  left: 20%;
   font-size: 6rem;
-  margin-right: 20%;
+  /* animation: winner-title 4s linear infinite; */
 }
 .App .game-area main.game-arena .table {
   display: flex;
@@ -696,5 +707,19 @@
     opacity: 1;
   }
 }
+/* @keyframes winner-title {
+    0% {
+      left: -50%;
+    }
+    10% {
+      left: -10%;
+    }
+    50% {
+      left: 100%;
+    }
+    100% {
+      left: 100%;
+    }
+} */
 
 /*# sourceMappingURL=index.css.map */
