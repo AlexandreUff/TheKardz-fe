@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import CardToShow from "./CardToShow";
 import SocketContext from "../../context/socketContext";
 
-export default function ShowResultsOfRound(props){
+export default function HandlerResultsOfRound(props){
 
     const [show, setShow] = useState(false)
 
@@ -37,47 +37,81 @@ export default function ShowResultsOfRound(props){
     const p2_attack_p1_defense = movementSelectedPlayerII.cardName === "attack" && movementSelectedPlayerI.cardName === "defense"
     const p2_attack_p1_recharging = movementSelectedPlayerII.cardName === "attack" && movementSelectedPlayerI.cardName === "recharging"
 
-    let matchResult = "Empate"
+    let matchResult = {
+        isThereAWinner: false,
+        winner: {},
+        loser: {},
+    }
 
     //Aqui entram apenas as estruturas de ataque com vitória do player I
     if(p1_attack_p2_attack && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
         saveWinnerResultsInAPI(player1Data)
-        matchResult = "P1 Venceu"
+        matchResult = {
+            isThereAWinner: true,
+            winner: player1Data,
+            loser: player2Data,
+        }
     }
 
     if(p1_attack_p2_defense && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
         saveWinnerResultsInAPI(player1Data)
-        matchResult = "P1 Venceu"
+        matchResult = {
+            isThereAWinner: true,
+            winner: player1Data,
+            loser: player2Data,
+        }
     }
 
     if(p1_attack_p2_recharging){
         saveWinnerResultsInAPI(player1Data)
-        matchResult = "P1 Venceu"
+        matchResult = {
+            isThereAWinner: true,
+            winner: player1Data,
+            loser: player2Data,
+        }
     }
 
     //Aqui entram apenas as estruturas de ataque com vitória do player II
     if(p2_attack_p1_attack && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
         saveWinnerResultsInAPI(player2Data)
-        matchResult = "P2 Venceu"
+        matchResult = {
+            isThereAWinner: true,
+            winner: player2Data,
+            loser: player1Data,
+        }
     }
 
     if(p2_attack_p1_defense && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
         saveWinnerResultsInAPI(player2Data)
-        matchResult = "P2 Venceu"
+        matchResult = {
+            isThereAWinner: true,
+            winner: player2Data,
+            loser: player1Data,
+        }
     }
 
     if(p2_attack_p1_recharging){
         saveWinnerResultsInAPI(player2Data)
-        matchResult = "P2 Venceu"
+        matchResult = {
+            isThereAWinner: true,
+            winner: player2Data,
+            loser: player1Data,
+        }
     }
 
     useEffect(()=>{
-        const resultTimeout = setTimeout(()=>{
+        const showCardsTimeout = setTimeout(()=>{
             setShow(true)
         },500)
 
+        const giveResultTimeout = setTimeout(()=>{
+            props.takeResult(matchResult)
+        },1000)
+
         return ()=>{
-            clearTimeout(resultTimeout)
+            //Caso algum player saia antes da apresentação resultado, o setTimeout deve ser abortado
+            clearTimeout(showCardsTimeout)
+            clearTimeout(giveResultTimeout)
         }
     },[])
 

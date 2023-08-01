@@ -4,7 +4,7 @@ import Timer from "./Timer";
 import SocketContext from "../../context/socketContext";
 import SessionService from "../../services/SessionService";
 import ReadableMovementsNames from "../../Utils/ReadableMovementsNames";
-import ShowResultsOfRound from "./ShowResultsOfRound";
+import HandlerResultsOfRound from "./HandlerResultsOfRound";
 
 const stageMatchReducer = (state, action) => {
   return action.payload ;
@@ -300,7 +300,7 @@ export default function GameArena() {
         )}
         {stageMatch === "comparing-movements" && (
           /* movementsVerification() */
-          <ShowResultsOfRound
+          <HandlerResultsOfRound
             myId={userId}
             player1={
                 {
@@ -314,6 +314,9 @@ export default function GameArena() {
                   movement: movementsToCompare.current[1].find(movement => movement.selected === true),
                 }
               }
+            takeResult={
+              (data)=>{console.log("Resultado:",data)}
+            }
           />
         )}
         {stageMatch === "stand-by" &&
