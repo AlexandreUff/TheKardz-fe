@@ -16,7 +16,7 @@ export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
   /* const playersAreFighting = useRef([]) */
   const [resultMatch, setResultMatch] = useState({})
-  const numberOfPlayersInThisHall = useRef(0)
+  const numberOfPlayersInThisHall = useRef(0) /* Excluír esse */
   const playersFightingRef = useRef([])
   const sendMovementTimeControll = useRef()
   const movementsToCompare = useRef([])
@@ -76,10 +76,13 @@ export default function GameArena() {
       //Cancelamento do Timeout de disparo de movimento caso um dos lutadores (lineNumber 0 ou 1) saiam da sala
       if(status === "start-fight"){
         clearTimeout(sendMovementTimeControll.current)
+
       }
 
       //Ignição de disparo de movimento caso o "round" se inicie
       if(status === "start-round"){
+        movementsToCompare.current = []
+        setChosenMoviment(false)
         sendMovementTimeControll.current = setTimeout(()=>{
           sendChosenMoviment()
         },5000)
@@ -161,6 +164,15 @@ export default function GameArena() {
     })
 
   }, [/* playersAreFighting,  */socket]);
+
+  /* useEffect(()=>{
+    console.log("O ROUND VAI REINICIAR")
+    if(!resultMatch.isThereAWinner){
+      setTimeout(()=>{
+        socket.send("starting-round");
+      },1000)
+    }
+  },[resultMatch]) */
 
   useEffect(()=>{
     console.log("Estágio:", stageMatch)

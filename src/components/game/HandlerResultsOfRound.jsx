@@ -10,27 +10,17 @@ export default function HandlerResultsOfRound(props){
 
     console.log("NUMBRE OF PLAYERS", props.playersInHall)
 
-    const saveWinnerResultsInAPI = async (winner, loser) => {
-        const winnerWithNewDatas = {...winner}
-        const loserWithNewDatas = {...loser}
-        if(props.myId === winnerWithNewDatas._id){
-            console.log(`${winnerWithNewDatas.name} gravou os dados.`)
-    
-            /* winnerWithNewDatas.victories++
-            winnerWithNewDatas.lineNumber = 0
-
-            loserWithNewDatas.loses++
-            loserWithNewDatas.lineNumber = props.playersInHall */
-
-            /* socket.send("user-save-data", winnerWithNewDatas)
-            socket.send("user-save-data", loserWithNewDatas) */
+    const saveResultsInAPI = async (winner, loser) => {
+        if(props.myId === winner._id){
+            console.log(`${winner.name} gravou os dados.`)
 
             const fightersData = {
                 winner: {...winner},
                 loser: {...loser}
             }
 
-            props.startOtherFight(fightersData)
+            /* props.startOtherFight(fightersData) */
+            socket.send("start-new-fight", fightersData)
         }
     }
 
@@ -124,8 +114,14 @@ export default function HandlerResultsOfRound(props){
         },1000)
 
         const startOtherFightTimeout = setTimeout(()=>{
-            saveWinnerResultsInAPI(matchResult.winner, matchResult.loser)
+            if(matchResult.isThereAWinner){
+                saveResultsInAPI(matchResult.winner, matchResult.loser)
+            } else {
+                socket.send("starting-round");
+            }
         },3000)
+
+        //Ponha um timeout pra iniciar um round caso não haja vencedor/perdedor
 
         return ()=>{
             //Caso algum player saia antes da apresentação resultado, o setTimeout deve ser abortado
