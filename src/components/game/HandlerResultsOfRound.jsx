@@ -8,18 +8,33 @@ export default function HandlerResultsOfRound(props){
 
     const socket = useContext(SocketContext);
 
-    const saveWinnerResultsInAPI = async (winner) => {
+    console.log("NUMBRE OF PLAYERS", props.playersInHall)
+
+    const saveWinnerResultsInAPI = async (winner, loser) => {
         const winnerWithNewDatas = {...winner}
+        const loserWithNewDatas = {...loser}
         if(props.myId === winnerWithNewDatas._id){
             console.log(`${winnerWithNewDatas.name} gravou os dados.`)
     
-            winnerWithNewDatas.victories++
+            /* winnerWithNewDatas.victories++
+            winnerWithNewDatas.lineNumber = 0
 
-            socket.send("user-save-data", winnerWithNewDatas)
+            loserWithNewDatas.loses++
+            loserWithNewDatas.lineNumber = props.playersInHall */
+
+            /* socket.send("user-save-data", winnerWithNewDatas)
+            socket.send("user-save-data", loserWithNewDatas) */
+
+            const fightersData = {
+                winner: {...winner},
+                loser: {...loser}
+            }
+
+            props.startOtherFight(fightersData)
         }
     }
 
-    console.log("ESTOU RENDERIZANDO!!!!!!!!",props.player1.playerData)
+    
 
     const player1Data = props.player1.playerData
     const player2Data = props.player2.playerData
@@ -45,7 +60,7 @@ export default function HandlerResultsOfRound(props){
 
     //Aqui entram apenas as estruturas de ataque com vitória do player I
     if(p1_attack_p2_attack && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-        saveWinnerResultsInAPI(player1Data)
+        /* saveWinnerResultsInAPI(player1Data) */
         matchResult = {
             isThereAWinner: true,
             winner: player1Data,
@@ -54,7 +69,7 @@ export default function HandlerResultsOfRound(props){
     }
 
     if(p1_attack_p2_defense && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-        saveWinnerResultsInAPI(player1Data)
+        /* saveWinnerResultsInAPI(player1Data) */
         matchResult = {
             isThereAWinner: true,
             winner: player1Data,
@@ -63,7 +78,7 @@ export default function HandlerResultsOfRound(props){
     }
 
     if(p1_attack_p2_recharging){
-        saveWinnerResultsInAPI(player1Data)
+        /* saveWinnerResultsInAPI(player1Data) */
         matchResult = {
             isThereAWinner: true,
             winner: player1Data,
@@ -73,7 +88,7 @@ export default function HandlerResultsOfRound(props){
 
     //Aqui entram apenas as estruturas de ataque com vitória do player II
     if(p2_attack_p1_attack && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-        saveWinnerResultsInAPI(player2Data)
+        /* saveWinnerResultsInAPI(player2Data) */
         matchResult = {
             isThereAWinner: true,
             winner: player2Data,
@@ -82,7 +97,7 @@ export default function HandlerResultsOfRound(props){
     }
 
     if(p2_attack_p1_defense && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-        saveWinnerResultsInAPI(player2Data)
+        /* saveWinnerResultsInAPI(player2Data) */
         matchResult = {
             isThereAWinner: true,
             winner: player2Data,
@@ -91,7 +106,7 @@ export default function HandlerResultsOfRound(props){
     }
 
     if(p2_attack_p1_recharging){
-        saveWinnerResultsInAPI(player2Data)
+        /* saveWinnerResultsInAPI(player2Data) */
         matchResult = {
             isThereAWinner: true,
             winner: player2Data,
@@ -108,10 +123,16 @@ export default function HandlerResultsOfRound(props){
             props.takeResult(matchResult)
         },1000)
 
+        const startOtherFightTimeout = setTimeout(()=>{
+            saveWinnerResultsInAPI(matchResult.winner, matchResult.loser)
+        },3000)
+
         return ()=>{
             //Caso algum player saia antes da apresentação resultado, o setTimeout deve ser abortado
+            
             clearTimeout(showCardsTimeout)
             clearTimeout(giveResultTimeout)
+            clearTimeout(startOtherFightTimeout)
         }
     },[])
 

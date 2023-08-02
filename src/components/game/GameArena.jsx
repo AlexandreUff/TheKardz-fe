@@ -16,6 +16,7 @@ export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
   /* const playersAreFighting = useRef([]) */
   const [resultMatch, setResultMatch] = useState({})
+  const numberOfPlayersInThisHall = useRef(0)
   const playersFightingRef = useRef([])
   const sendMovementTimeControll = useRef()
   const movementsToCompare = useRef([])
@@ -86,6 +87,8 @@ export default function GameArena() {
     });
 
     socket.listen("getUsers", (users) => {
+      numberOfPlayersInThisHall.current = users.length
+
       let playersWillFight = users.filter((user) => {
         return user.lineNumber === 0 || user.lineNumber === 1;
       });
@@ -332,6 +335,7 @@ export default function GameArena() {
           /* movementsVerification() */
           <HandlerResultsOfRound
             myId={userId}
+            playersInHall={numberOfPlayersInThisHall.current}
             player1={
                 {
                   playerData: playersFightingRef.current[0],
@@ -346,6 +350,10 @@ export default function GameArena() {
               }
             takeResult={
               (data)=>{setResultMatch({...data})}
+            }
+            startOtherFight={(data)=>{
+              socket.send("start-new-fight", data)
+              }
             }
           />
         )}
