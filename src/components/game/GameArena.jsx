@@ -135,6 +135,15 @@ export default function GameArena() {
           return movement.selected === false || movement.amount > 0;
         })
 
+        /* Esse tratamento abaixo é provisório e deve ser alterado */
+        /* const cardsWithouSelectedI = newCardsOfPlayerI.map(card => {
+          if(card.selected){
+            card.selected = false
+          }
+
+          return card
+        }) */
+
         setCardsOfPlayerI([...newCardsOfPlayerI])
 
       } else if (dataMovements.player.name === playersFightingRef.current[1].name){
@@ -151,6 +160,15 @@ export default function GameArena() {
         const newCardsOfPlayerII = cardsOfPlayerIIWithNewAmount.filter(movement => {
           return movement.selected === false || movement.amount > 0;
         })
+
+        /* Esse tratamento abaixo é provisório e deve ser alterado */
+        /* const cardsWithouSelectedII = newCardsOfPlayerII.map(card => {
+          if(card.selected){
+            card.selected = false
+          }
+
+          return card
+        }) */
 
         setCardsOfPlayerII([...newCardsOfPlayerII])
       }
@@ -208,6 +226,20 @@ export default function GameArena() {
   const sendChosenMoviment = () => {
     console.log("DISPARADO!")
     if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
+
+      //Caso o player nao tenha escolhido nenhuma carta, o jogo força escolha de uma "Recharging"
+      console.log("COMO ESTAVA:",movementsToCompare.current[0])
+      if(!movementsToCompare.current[0]){
+        const cardsWithRechargingTrue = [
+          ...cardsOfPlayerI
+        ]
+
+        cardsWithRechargingTrue[cardsWithRechargingTrue.length-1].selected = true
+
+        movementsToCompare.current[0] = [...cardsWithRechargingTrue]
+      }
+
+
       const movementDataWillSend = {
         player: {
           ...playersFightingRef.current[0]
