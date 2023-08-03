@@ -324,9 +324,13 @@ export default function GameArena() {
               (data)=>{setResultMatch({...data})}
             }
             cardsToIncrement={
-              (cardForPlayer1, cardForPlayer2) => {
-                if(cardForPlayer1) setCardsOfPlayerI([...cardsOfPlayerI, cardForPlayer1])
-                if(cardForPlayer2) setCardsOfPlayerII([...cardsOfPlayerII, cardForPlayer2])
+              (cardForPlayer1, cardForPlayer2, lastMovementPlayerI, lastMovementPlayerII) => {
+                /* if(cardForPlayer1) setCardsOfPlayerI([...cardsOfPlayerI, cardForPlayer1])
+                if(cardForPlayer2) setCardsOfPlayerII([...cardsOfPlayerII, cardForPlayer2]) */
+                movemetsInLastRound.current = [
+                  {...lastMovementPlayerI},
+                  {...lastMovementPlayerII}
+                ]
               }
             }
             movemetsInLastRound={movemetsInLastRound.current}

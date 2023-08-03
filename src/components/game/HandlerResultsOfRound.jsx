@@ -116,12 +116,12 @@ export default function HandlerResultsOfRound(props){
         let cardForPlayer2
 
         //Verifica se o Player 1 usou o mesmo movimento que na jogada anterior
-        if(lastMovementPlayerI.name === movementSelectedPlayerI){
+        if(lastMovementPlayerI.name === movementSelectedPlayerI.cardName){
             const movementIndex = allMovementsOfPlayer1.findIndex(movement => movement.cardName === movementSelectedPlayerI)
 
             if(lastMovementPlayerI.used === 1){
                 if(movementIndex === -1){
-                    allMovementsOfPlayer1.unshift(new CardModel(movementSelectedPlayerI, 1, 2))
+                    allMovementsOfPlayer1.unshift(new CardModel(movementSelectedPlayerI.cardName, 1, 2))
                 } else {
                     allMovementsOfPlayer1[movementIndex].amount++
                 }
@@ -129,7 +129,7 @@ export default function HandlerResultsOfRound(props){
 
             if(lastMovementPlayerI.used >= 2){
                 if(movementIndex === -1){
-                    allMovementsOfPlayer1.unshift(new CardModel(movementSelectedPlayerI, 1, 3))
+                    allMovementsOfPlayer1.unshift(new CardModel(movementSelectedPlayerI.cardName, 1, 3))
                 } else {
                     allMovementsOfPlayer1[movementIndex].amount++
                 }
@@ -137,35 +137,44 @@ export default function HandlerResultsOfRound(props){
 
             lastMovementPlayerI.used++
         } else {
-            lastMovementPlayerI.name = movementSelectedPlayerI
+            lastMovementPlayerI.name = movementSelectedPlayerI.cardName
             lastMovementPlayerI.used = 1
         }
 
         //Verifica se o Player 2 usou o mesmo movimento que na jogada anterior
-        if(lastMovementPlayerII.name === movementSelectedPlayerII){
+        if(lastMovementPlayerII.name === movementSelectedPlayerII.cardName){
             const movementIndex = allMovementsOfPlayer2.findIndex(movement => movement.cardName === movementSelectedPlayerII)
 
             if(lastMovementPlayerII.used === 1){
                 if(movementIndex === -1){
-                    allMovementsOfPlayer2.unshift(new CardModel(movementSelectedPlayerII, 1, 2))
+                    allMovementsOfPlayer2.unshift(new CardModel(movementSelectedPlayerII.cardName, 1, 2))
                 } else {
                     allMovementsOfPlayer2[movementIndex].amount++
                 }
             }
             if(lastMovementPlayerII.used >= 2){
                 if(movementIndex === -1){
-                    allMovementsOfPlayer2.unshift(new CardModel(movementSelectedPlayerI, 1, 3))
+                    allMovementsOfPlayer2.unshift(new CardModel(movementSelectedPlayerII.cardName, 1, 3))
                 } else {
                     allMovementsOfPlayer2[movementIndex].amount++
                 }
             }
-        }else {
-            lastMovementPlayerII.name = movementSelectedPlayerII
+
+            lastMovementPlayerII.used++
+        } else {
+            lastMovementPlayerII.name = movementSelectedPlayerII.cardName
             lastMovementPlayerII.used = 1
         }
 
         console.log("Movimentos do player 1",allMovementsOfPlayer1)
         console.log("Movimentos do player 2",allMovementsOfPlayer2)
+
+        return props.cardsToIncrement(
+            allMovementsOfPlayer1,
+            allMovementsOfPlayer2,
+            lastMovementPlayerI,
+            lastMovementPlayerII
+            )
     }
 
     useEffect(()=>{
