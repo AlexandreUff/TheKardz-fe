@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import CardToShow from "./CardToShow";
 import SocketContext from "../../context/socketContext";
+import CardModel from "../../Utils/MovementModel";
 
 export default function HandlerResultsOfRound(props){
 
@@ -114,9 +115,25 @@ export default function HandlerResultsOfRound(props){
         let cardForPlayer1
         let cardForPlayer2
 
+        //Verifica se o Player 1 usou o mesmo movimento que na jogada anterior
         if(lastMovementPlayerI.name === movementSelectedPlayerI){
-            if(lastMovementPlayerI.used === 1) console.log("Player 1 recebe card Bronze")
-            if(lastMovementPlayerI.used >= 2) console.log("Player 1 recebe card Gold")
+            const movementIndex = allMovementsOfPlayer1.findIndex(movement => movement.cardName === movementSelectedPlayerI)
+
+            if(lastMovementPlayerI.used === 1){
+                if(movementIndex === -1){
+                    allMovementsOfPlayer1.unshift(new CardModel(movementSelectedPlayerI, 1, 2))
+                } else {
+                    allMovementsOfPlayer1[movementIndex].amount++
+                }
+            }
+
+            if(lastMovementPlayerI.used >= 2){
+                if(movementIndex === -1){
+                    allMovementsOfPlayer1.unshift(new CardModel(movementSelectedPlayerI, 1, 3))
+                } else {
+                    allMovementsOfPlayer1[movementIndex].amount++
+                }
+            }
 
             lastMovementPlayerI.used++
         } else {
@@ -124,13 +141,31 @@ export default function HandlerResultsOfRound(props){
             lastMovementPlayerI.used = 1
         }
 
+        //Verifica se o Player 2 usou o mesmo movimento que na jogada anterior
         if(lastMovementPlayerII.name === movementSelectedPlayerII){
-            if(lastMovementPlayerII.used === 1) console.log("Player 2 recebe card Bronze")
-            if(lastMovementPlayerII.used >= 2) console.log("Player 2 recebe card Gold")   
+            const movementIndex = allMovementsOfPlayer2.findIndex(movement => movement.cardName === movementSelectedPlayerII)
+
+            if(lastMovementPlayerII.used === 1){
+                if(movementIndex === -1){
+                    allMovementsOfPlayer2.unshift(new CardModel(movementSelectedPlayerII, 1, 2))
+                } else {
+                    allMovementsOfPlayer2[movementIndex].amount++
+                }
+            }
+            if(lastMovementPlayerII.used >= 2){
+                if(movementIndex === -1){
+                    allMovementsOfPlayer2.unshift(new CardModel(movementSelectedPlayerI, 1, 3))
+                } else {
+                    allMovementsOfPlayer2[movementIndex].amount++
+                }
+            }
         }else {
             lastMovementPlayerII.name = movementSelectedPlayerII
             lastMovementPlayerII.used = 1
         }
+
+        console.log("Movimentos do player 1",allMovementsOfPlayer1)
+        console.log("Movimentos do player 2",allMovementsOfPlayer2)
     }
 
     useEffect(()=>{
@@ -146,6 +181,7 @@ export default function HandlerResultsOfRound(props){
             if(matchResult.isThereAWinner){
                 saveResultsInAPI(matchResult.winner, matchResult.loser)
             } else {
+                detectLastMovementUsed()
                 socket.send("starting-round");
             }
         },3000)
