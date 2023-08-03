@@ -392,10 +392,12 @@ export default function GameArena() {
             takeResult={
               (data)=>{setResultMatch({...data})}
             }
-            /* startOtherFight={(data)=>{
-              socket.send("start-new-fight", data)
+            cardsToIncrement={
+              (cardForPlayer1, cardForPlayer2) => {
+                if(cardForPlayer1) setCardsOfPlayerI([...cardsOfPlayerI, cardForPlayer1])
+                if(cardForPlayer2) setCardsOfPlayerII([...cardsOfPlayerII, cardForPlayer2])
               }
-            } */
+            }
           />
         )}
         {stageMatch === "stand-by" &&
