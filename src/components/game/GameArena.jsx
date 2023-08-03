@@ -12,9 +12,7 @@ const stageMatchReducer = (state, action) => {
 };
 
 export default function GameArena() {
-  /* const [stageMatch, setStageMatch] = useReducer(stageMatchReducer, "stand-by"); */
   const [stageMatch, setStageMatch] = useState("stand-by");
-  /* const playersAreFighting = useRef([]) */
   const [resultMatch, setResultMatch] = useState({})
   const playersFightingRef = useRef([])
   const sendMovementTimeControll = useRef()
@@ -70,7 +68,6 @@ export default function GameArena() {
     
     socket.listen("fight-status", (status) => {
       setStageMatch(status);
-      /* setStageMatch({payload: status}); */
 
       //Cancelamento do Timeout de disparo de movimento caso um dos lutadores (lineNumber 0 ou 1) saiam da sala
       if(status === "start-fight"){
@@ -104,11 +101,9 @@ export default function GameArena() {
           playersWillFight[0] = temp;
         }
 
-        /* playersAreFighting.current = [...playersWillFight] */
         playersFightingRef.current = [...playersWillFight]
         setPlayersAreFighting([...playersWillFight]);
       } else {
-        /* playersAreFighting.current = [...users] */
         playersFightingRef.current = [...users]
         setPlayersAreFighting([...users]);
       }
@@ -133,15 +128,6 @@ export default function GameArena() {
           return movement.selected === false || movement.amount > 0;
         })
 
-        /* Esse tratamento abaixo é provisório e deve ser alterado */
-        /* const cardsWithouSelectedI = newCardsOfPlayerI.map(card => {
-          if(card.selected){
-            card.selected = false
-          }
-
-          return card
-        }) */
-
         setCardsOfPlayerI([...newCardsOfPlayerI])
 
       } else if (dataMovements.player.name === playersFightingRef.current[1].name){
@@ -159,36 +145,16 @@ export default function GameArena() {
           return movement.selected === false || movement.amount > 0;
         })
 
-        /* Esse tratamento abaixo é provisório e deve ser alterado */
-        /* const cardsWithouSelectedII = newCardsOfPlayerII.map(card => {
-          if(card.selected){
-            card.selected = false
-          }
-
-          return card
-        }) */
-
         setCardsOfPlayerII([...newCardsOfPlayerII])
       }
 
-      /* console.log("Chegou aqui!!!!!",movementsToCompare.current) */
       if(movementsToCompare.current[0] && movementsToCompare.current[1]){
         console.log("CHEGOU NO LISTENER",movementsToCompare.current[0])
         setStageMatch("comparing-movements")
-        /* movementsVerification() */
       }
     })
 
-  }, [/* playersAreFighting,  */socket]);
-
-  /* useEffect(()=>{
-    console.log("O ROUND VAI REINICIAR")
-    if(!resultMatch.isThereAWinner){
-      setTimeout(()=>{
-        socket.send("starting-round");
-      },1000)
-    }
-  },[resultMatch]) */
+  }, [socket]);
 
   useEffect(()=>{
     console.log("Estágio:", stageMatch)
@@ -202,23 +168,8 @@ export default function GameArena() {
     console.log("SCP2", cardsOfPlayerII)
   },[cardsOfPlayerII])
 
-  /* useEffect(()=>{
-    console.log("movementsToCompare", movementsToCompare)
-    setTimeout(()=>{
-      console.log("Entrou no setTimeout")
-      if(movementsToCompare.current[0] && movementsToCompare.current[1]){
-        console.log("movementsToCompare IS HERE!")
-        movementsVerification()
-      }
-    },500)
-  },[cardsOfPlayerI], [cardsOfPlayerII]) */
-
   const sendStartRoundStatus = () => {
-    /* console.log("SENDSTARTFUNC",playersAreFighting[0]) */
-    /* if(playersAreFighting[0]._id === userId && playersAreFighting[0].lineNumber === 0){ */
-      /* console.log(`${playersAreFighting[0].name} de ${playersAreFighting[0].lineNumber} iniciou a partida.`); */
-      socket.send("starting-round");
-    /* } */
+    socket.send("starting-round");
   }
 
   const sendChosenMoviment = () => {
@@ -247,8 +198,6 @@ export default function GameArena() {
         ]
       }
 
-      /* movementsToCompare.current[0] = movementDataWillSend */
-
       socket.send("chosen-movement", movementDataWillSend)
 
       const cardsOfPlayerIWithNewAmount = movementsToCompare.current[0].map(card => {
@@ -267,7 +216,6 @@ export default function GameArena() {
       if(movementsToCompare.current[0] && movementsToCompare.current[1]){
         console.log("CHEGOU NO DISPARO!")
         setStageMatch("comparing-movements")
-        /* movementsVerification() */
       }
 
       setCardsOfPlayerI([...newCardsOfPlayerI])
@@ -285,30 +233,7 @@ export default function GameArena() {
     movementsToCompare.current[0] = [
         ...newCards
       ]
-    /* {
-      player: {
-        ...playersAreFighting[0]
-      },
-      movement: [
-        ...newCards
-      ]
-    } */
-
-    /* console.log("Crica:",movementsToCompare.current) */
-
-    /* setCardsOfPlayerI([...newCards]) */
   }
-
-  /* const movementsVerification = () => {
-    return (
-      <>
-        <ShowResultsOfRound
-          player1={movementsToCompare.current[0].find(movement => movement.selected === true)}
-          player2={movementsToCompare.current[1].find(movement => movement.selected === true)}
-        />
-      </>
-    )
-  } */
 
   const renderScoreboard = () => {
 
@@ -369,12 +294,10 @@ export default function GameArena() {
         {stageMatch === "start-round" && (
           <Timer
             time={5}
-            /* action={sendChosenMoviment} */
             action={()=>{}}
           />
         )}
         {stageMatch === "comparing-movements" && (
-          /* movementsVerification() */
           <HandlerResultsOfRound
             myId={userId}
             player1={
@@ -408,12 +331,6 @@ export default function GameArena() {
               Aguarde a entrada <br /> de mais jogadores.
             </h3>
           ))}
-        {/* {(
-                    playersAreFighting.length > 1 ?
-                    <h3>Obtendo dados da partida...</h3> : <h3>Aguarde a entrada <br /> de mais jogadores.</h3>
-                )} */}
-
-        {/* Fazer a área de logs */}
       </div>
       <div className="card-list my-cards">
         {" "}
@@ -426,12 +343,7 @@ export default function GameArena() {
                       type={card.type}
                       show={stageMatch === "start-round"}
                       amount={card.amount}
-                      chooseMov={() => userSelectMovement(i, card)/* {
-                        setChosenMoviment({...card})
-                        const newCards = [...cardsOfPlayerI]
-                        newCards[i].selected = true
-                        setCardsOfPlayerI([...newCards])
-                      } */}
+                      chooseMov={() => userSelectMovement(i, card)}
                       key={i}
                     />
           }) : (
