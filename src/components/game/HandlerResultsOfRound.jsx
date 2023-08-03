@@ -30,6 +30,9 @@ export default function HandlerResultsOfRound(props){
     const movementSelectedPlayerI = props.player1.movement
     const movementSelectedPlayerII = props.player2.movement
 
+    const lastMovementPlayerI = props.movemetsInLastRound[0]
+    const lastMovementPlayerII = props.movemetsInLastRound[1]
+
     //Ataques do player I
     const p1_attack_p2_attack = movementSelectedPlayerI.cardName === "attack" && movementSelectedPlayerII.cardName === "attack"
     const p1_attack_p2_defense = movementSelectedPlayerI.cardName === "attack" && movementSelectedPlayerII.cardName === "defense"
@@ -100,6 +103,21 @@ export default function HandlerResultsOfRound(props){
             winner: player2Data,
             loser: player1Data,
         }
+    }
+
+    //Caso não haja nenhum vencedor, o card que tem selected igual a true passará a ser false
+    //Caso haja movimento repetido, o jogador ganhará a carta bonus
+    if(!matchResult.isThereAWinner){
+        if(lastMovementPlayerI.name === movementSelectedPlayerI){
+            if(lastMovementPlayerI.used === 1) console.log("Player 1 recebe card Bronze")
+            if(lastMovementPlayerI.used >= 2) console.log("Player 1 recebe card Gold")   
+        }
+
+        if(lastMovementPlayerII.name === movementSelectedPlayerII){
+            if(lastMovementPlayerII.used === 1) console.log("Player 2 recebe card Bronze")
+            if(lastMovementPlayerII.used >= 2) console.log("Player 2 recebe card Gold")   
+        }
+
     }
 
     useEffect(()=>{
