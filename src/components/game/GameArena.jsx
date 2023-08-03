@@ -111,10 +111,7 @@ export default function GameArena() {
 
     socket.listen("chosen-movement", (dataMovements) => {
 
-      console.log("RECEBIDO", dataMovements)
-
       if(dataMovements.player.name === playersFightingRef.current[0].name){
-        console.log("Jogou pro 1:", dataMovements)
         movementsToCompare.current[0] = [...dataMovements.movement]
 
         const cardsOfPlayerIWithNewAmount = dataMovements.movement.map(card => {
@@ -131,7 +128,6 @@ export default function GameArena() {
         setCardsOfPlayerI([...newCardsOfPlayerI])
 
       } else if (dataMovements.player.name === playersFightingRef.current[1].name){
-        console.log("Jogou pro 2:", dataMovements)
         movementsToCompare.current[1] = [...dataMovements.movement]
 
         const cardsOfPlayerIIWithNewAmount = dataMovements.movement.map(card => {
@@ -149,7 +145,6 @@ export default function GameArena() {
       }
 
       if(movementsToCompare.current[0] && movementsToCompare.current[1]){
-        console.log("CHEGOU NO LISTENER",movementsToCompare.current[0])
         setStageMatch("comparing-movements")
       }
     })
@@ -173,11 +168,9 @@ export default function GameArena() {
   }
 
   const sendChosenMoviment = () => {
-    console.log("DISPARADO!")
     if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
 
       //Caso o player nao tenha escolhido nenhuma carta, o jogo força escolha de uma "Recharging"
-      console.log("COMO ESTAVA:",movementsToCompare.current[0])
       if(!movementsToCompare.current[0]){
         const cardsWithRechargingTrue = [
           ...cardsOfPlayerI
@@ -214,7 +207,6 @@ export default function GameArena() {
       setStageMatch("waiting-enemy-answer")
 
       if(movementsToCompare.current[0] && movementsToCompare.current[1]){
-        console.log("CHEGOU NO DISPARO!")
         setStageMatch("comparing-movements")
       }
 
@@ -236,9 +228,6 @@ export default function GameArena() {
   }
 
   const renderScoreboard = () => {
-
-    console.log("USER", resultMatch.winner.name)
-
     let userTitle
     let status
 
