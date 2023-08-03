@@ -304,13 +304,13 @@ export default function GameArena() {
             player1={
                 {
                   playerData: playersFightingRef.current[0],
-                  movement: movementsToCompare.current[0].find(movement => movement.selected === true),
+                  movements: movementsToCompare.current[0],
                 }
               }
             player2={
                 {
                   playerData: playersFightingRef.current[1],
-                  movement: movementsToCompare.current[1].find(movement => movement.selected === true),
+                  movements: movementsToCompare.current[1],
                 }
               }
             takeResult={

@@ -27,8 +27,11 @@ export default function HandlerResultsOfRound(props){
     const player1Data = props.player1.playerData
     const player2Data = props.player2.playerData
 
-    const movementSelectedPlayerI = props.player1.movement
-    const movementSelectedPlayerII = props.player2.movement
+    const allMovementsOfPlayer1 = props.player1.movements
+    const allMovementsOfPlayer2 = props.player2.movements
+
+    const movementSelectedPlayerI = props.player1.movements.find(movement => movement.selected === true)
+    const movementSelectedPlayerII = props.player2.movements.find(movement => movement.selected === true)
 
     const lastMovementPlayerI = props.movemetsInLastRound[0]
     const lastMovementPlayerII = props.movemetsInLastRound[1]
@@ -107,17 +110,27 @@ export default function HandlerResultsOfRound(props){
 
     //Caso não haja nenhum vencedor, o card que tem selected igual a true passará a ser false
     //Caso haja movimento repetido, o jogador ganhará a carta bonus
-    if(!matchResult.isThereAWinner){
+    function detectLastMovementUsed(){
+        let cardForPlayer1
+        let cardForPlayer2
+
         if(lastMovementPlayerI.name === movementSelectedPlayerI){
             if(lastMovementPlayerI.used === 1) console.log("Player 1 recebe card Bronze")
-            if(lastMovementPlayerI.used >= 2) console.log("Player 1 recebe card Gold")   
+            if(lastMovementPlayerI.used >= 2) console.log("Player 1 recebe card Gold")
+
+            lastMovementPlayerI.used++
+        } else {
+            lastMovementPlayerI.name = movementSelectedPlayerI
+            lastMovementPlayerI.used = 1
         }
 
         if(lastMovementPlayerII.name === movementSelectedPlayerII){
             if(lastMovementPlayerII.used === 1) console.log("Player 2 recebe card Bronze")
             if(lastMovementPlayerII.used >= 2) console.log("Player 2 recebe card Gold")   
+        }else {
+            lastMovementPlayerII.name = movementSelectedPlayerII
+            lastMovementPlayerII.used = 1
         }
-
     }
 
     useEffect(()=>{
