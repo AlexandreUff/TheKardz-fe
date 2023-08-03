@@ -8,8 +8,6 @@ export default function HandlerResultsOfRound(props){
 
     const socket = useContext(SocketContext);
 
-    console.log("NUMBRE OF PLAYERS", props.playersInHall)
-
     const saveResultsInAPI = async (winner, loser) => {
         if(props.myId === winner._id){
             console.log(`${winner.name} gravou os dados.`)
