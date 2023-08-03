@@ -6,6 +6,7 @@ import SessionService from "../../services/SessionService";
 import ReadableMovementsNames from "../../Utils/ReadableMovementsNames";
 import HandlerResultsOfRound from "./HandlerResultsOfRound";
 import ShowScoreboard from "./ShowScoreboard";
+import CardModel from "../../Utils/MovementModel";
 
 const stageMatchReducer = (state, action) => {
   return action.payload ;
@@ -32,7 +33,10 @@ export default function GameArena() {
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
   const [chosenMoviment, setChosenMoviment] = useState();
   const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
-    {
+    new CardModel("attack",1,1),
+    new CardModel("defense",Infinity,1),
+    new CardModel("recharging",Infinity,1),
+    /* {
       cardName: "attack",
       amount: 1,
       type: 1,
@@ -49,10 +53,13 @@ export default function GameArena() {
       amount: Infinity,
       type: 1,
       selected: false,
-    },
+    }, */
   ])
   const [cardsOfPlayerII, setCardsOfPlayerII] = useState([
-    {
+    new CardModel("attack",1,1),
+    new CardModel("defense",Infinity,1),
+    new CardModel("recharging",Infinity,1),
+    /* {
       cardName: "attack",
       amount: 1,
       type: 1,
@@ -69,7 +76,7 @@ export default function GameArena() {
       amount: Infinity,
       type: 1,
       selected: false,
-    },
+    }, */
   ])
 
   const socket = useContext(SocketContext);
