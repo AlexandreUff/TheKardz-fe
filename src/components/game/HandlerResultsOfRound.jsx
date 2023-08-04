@@ -31,8 +31,8 @@ export default function HandlerResultsOfRound(props){
     const allMovementsOfPlayer1 = props.player1.movements
     const allMovementsOfPlayer2 = props.player2.movements
 
-    const movementSelectedPlayerI = props.player1.movements.find(movement => movement.selected === true)
-    const movementSelectedPlayerII = props.player2.movements.find(movement => movement.selected === true)
+    const movementSelectedPlayerI = props.player1.movements.find(movement => movement.selected === true) || new CardModel("recharging", Infinity, 1)
+    const movementSelectedPlayerII = props.player2.movements.find(movement => movement.selected === true) || new CardModel("recharging", Infinity, 1)
 
     const lastMovementPlayerI = props.movemetsInLastRound[0]
     const lastMovementPlayerII = props.movemetsInLastRound[1]
@@ -169,9 +169,25 @@ export default function HandlerResultsOfRound(props){
         console.log("Movimentos do player 1",allMovementsOfPlayer1)
         console.log("Movimentos do player 2",allMovementsOfPlayer2)
 
+        const allMovementsOfPlayer1Unselected = allMovementsOfPlayer1.map(movement => {
+            if(movement.selected){
+                movement.selected = false
+            }
+
+            return movement
+        })
+
+        const allMovementsOfPlayer2Unselected = allMovementsOfPlayer2.map(movement => {
+            if(movement.selected){
+                movement.selected = false
+            }
+
+            return movement
+        })
+
         return props.cardsToIncrement(
-            allMovementsOfPlayer1,
-            allMovementsOfPlayer2,
+            allMovementsOfPlayer1Unselected,
+            allMovementsOfPlayer2Unselected,
             lastMovementPlayerI,
             lastMovementPlayerII
             )

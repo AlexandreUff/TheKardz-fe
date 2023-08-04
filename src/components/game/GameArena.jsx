@@ -325,8 +325,11 @@ export default function GameArena() {
             }
             cardsToIncrement={
               (cardForPlayer1, cardForPlayer2, lastMovementPlayerI, lastMovementPlayerII) => {
-                /* if(cardForPlayer1) setCardsOfPlayerI([...cardsOfPlayerI, cardForPlayer1])
-                if(cardForPlayer2) setCardsOfPlayerII([...cardsOfPlayerII, cardForPlayer2]) */
+
+                /* Tac geral como true */
+
+                if(cardForPlayer1) setCardsOfPlayerI([.../* cardsOfPlayerI,  */cardForPlayer1])
+                if(cardForPlayer2) setCardsOfPlayerII([.../* cardsOfPlayerII,  */cardForPlayer2])
                 movemetsInLastRound.current = [
                   {...lastMovementPlayerI},
                   {...lastMovementPlayerII}
