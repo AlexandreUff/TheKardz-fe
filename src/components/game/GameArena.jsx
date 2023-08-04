@@ -36,47 +36,11 @@ export default function GameArena() {
     new CardModel("attack",1,1),
     new CardModel("defense",Infinity,1),
     new CardModel("recharging",Infinity,1),
-    /* {
-      cardName: "attack",
-      amount: 1,
-      type: 1,
-      selected: false,
-    },
-    {
-      cardName: "defense",
-      amount: Infinity,
-      type: 1,
-      selected: false,
-    },
-    {
-      cardName: "recharging",
-      amount: Infinity,
-      type: 1,
-      selected: false,
-    }, */
   ])
   const [cardsOfPlayerII, setCardsOfPlayerII] = useState([
     new CardModel("attack",1,1),
     new CardModel("defense",Infinity,1),
     new CardModel("recharging",Infinity,1),
-    /* {
-      cardName: "attack",
-      amount: 1,
-      type: 1,
-      selected: false,
-    },
-    {
-      cardName: "defense",
-      amount: Infinity,
-      type: 1,
-      selected: false,
-    },
-    {
-      cardName: "recharging",
-      amount: Infinity,
-      type: 1,
-      selected: false,
-    }, */
   ])
 
   const socket = useContext(SocketContext);
@@ -84,7 +48,7 @@ export default function GameArena() {
   const { userName, userId, hall } = SessionService.get("userDatas");
 
   useEffect(() => {
-    
+    //Recebe os status via websocket (nem sempre será assim)
     socket.listen("fight-status", (status) => {
       setStageMatch(status);
 
@@ -104,12 +68,16 @@ export default function GameArena() {
       }
     });
 
+    //Este serviço recebe os usuário da sala, mas pega apenas os que estão jogando/lutando (lineNumber 0 e 1)
     socket.listen("getUsers", (users) => {
 
       let playersWillFight = users.filter((user) => {
         return user.lineNumber === 0 || user.lineNumber === 1;
       });
 
+      //É feita uma verificação para saber se você é um dos jogadores
+      //Caso seja, seus cards e seu nome serão renderizados na parte inferior da tela
+      //Caso não, jogador de lineNumber 0 ficará na parte superior e lineNumber 1 na inferior
       if (playersWillFight.length > 1) {
         const onlyUsersId = [playersWillFight[0]._id, playersWillFight[1]._id];
         const index = onlyUsersId.indexOf(userId);
@@ -128,11 +96,15 @@ export default function GameArena() {
       }
     });
 
+    //Captura de movimento dos jogadores via websocket
     socket.listen("chosen-movement", (dataMovements) => {
 
+      //Caso o player que enviou o movimento seja igual ao do índice 0, ele joga...
+      //...no useRef movementsToCompare.current[0]
       if(dataMovements.player.name === playersFightingRef.current[0].name){
         movementsToCompare.current[0] = [...dataMovements.movement]
 
+        //Refaz os attr que têm amount igual a null para Infinity novamente
         const cardsOfPlayerIWithNewAmount = dataMovements.movement.map(card => {
           if(card.amount === null) card.amount = Infinity
           if(card.selected) card.amount--
@@ -140,15 +112,19 @@ export default function GameArena() {
           return card
         })
 
+        //Remove os cards que zeraram o amout
         const newCardsOfPlayerI = cardsOfPlayerIWithNewAmount.filter(movement => {
           return movement.selected === false || movement.amount > 0;
         })
 
         setCardsOfPlayerI([...newCardsOfPlayerI])
 
+        //Caso o player que enviou o movimento seja igual ao do índice 1, ele joga...
+        //...no useRef movementsToCompare.current[1]
       } else if (dataMovements.player.name === playersFightingRef.current[1].name){
         movementsToCompare.current[1] = [...dataMovements.movement]
 
+        //Refaz os attr que têm amount igual a null para Infinity novamente
         const cardsOfPlayerIIWithNewAmount = dataMovements.movement.map(card => {
           if(card.amount === null) card.amount = Infinity
           if(card.selected) card.amount--
@@ -156,6 +132,7 @@ export default function GameArena() {
           return card
         })
 
+        //Remove os cards que zeraram o amout
         const newCardsOfPlayerII = cardsOfPlayerIIWithNewAmount.filter(movement => {
           return movement.selected === false || movement.amount > 0;
         })
@@ -163,6 +140,7 @@ export default function GameArena() {
         setCardsOfPlayerII([...newCardsOfPlayerII])
       }
 
+      //Caso o player já tenha escolhido um movimento e o outro player acaba de enviar o seu
       if(movementsToCompare.current[0] && movementsToCompare.current[1]){
         setStageMatch("comparing-movements")
       }
@@ -187,6 +165,7 @@ export default function GameArena() {
   }
 
   const sendChosenMoviment = () => {
+    //Apenas os fighters podem disparar o movimento
     if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
 
       //Caso o player nao tenha escolhido nenhuma carta, o jogo força escolha de uma "Recharging"
@@ -200,7 +179,9 @@ export default function GameArena() {
         movementsToCompare.current[0] = [...cardsWithRechargingTrue]
       }
 
-
+      //É enviado uma estrutura com o nome do fighter e todos os seus movimentos + o selecionado
+      //Isso serve para que o jogador que acabou de entrar possa receber informações das cartas...
+      //...para fazer o processamento de seu lado.
       const movementDataWillSend = {
         player: {
           ...playersFightingRef.current[0]
@@ -212,6 +193,7 @@ export default function GameArena() {
 
       socket.send("chosen-movement", movementDataWillSend)
 
+      //Assim que os dados são enviados, os cardsOfPlayerI são refeitos + o movimento selecionado
       const cardsOfPlayerIWithNewAmount = movementsToCompare.current[0].map(card => {
         if(card.selected){
           card.amount--
@@ -223,8 +205,10 @@ export default function GameArena() {
         return movement.selected === false || movement.amount > 0;
       })
 
+      //Entra em standy-by caso o adversário não tenha enviado ainda seu movimento
       setStageMatch("waiting-enemy-answer")
 
+      //Caso o adversário já tenha enviado o movimento, inicia-se a comparação
       if(movementsToCompare.current[0] && movementsToCompare.current[1]){
         setStageMatch("comparing-movements")
       }
@@ -233,6 +217,8 @@ export default function GameArena() {
     }
   }
 
+  //Seleciona o movimento escolhido pelo player e o põe, junto com os outros cards, ...
+  //no movementsToCompare.current[0]
   const userSelectMovement = (index,card) => {
     setChosenMoviment({...card})
     const newCards = cardsOfPlayerI.map(card => {
@@ -250,6 +236,7 @@ export default function GameArena() {
     let userTitle
     let status
 
+    //O texto do Scoreboard varia conforme a tela de cada participante
     if(resultMatch.winner.name === userName){
       userTitle = "você"
       status = "venceu"
@@ -274,6 +261,7 @@ export default function GameArena() {
       {resultMatch.isThereAWinner && (
         renderScoreboard()
       )}
+      {/* Se você está jogando, seu nome nunca aparece nesta parte superior */}
       <div className="player-name">
         <div className="unused-area"></div>
         <h5 className="top">
@@ -285,6 +273,7 @@ export default function GameArena() {
         </h6>
       </div>
       <div className="card-list">
+      {/* Informações do card inimigo jamais serão renderizados no card tela, apenas quantidade */}
       {cardsOfPlayerII.map((card, i) => {
           return <CardToShow
                     key={i}
@@ -328,8 +317,8 @@ export default function GameArena() {
 
                 /* Tac geral como true */
 
-                if(cardForPlayer1) setCardsOfPlayerI([.../* cardsOfPlayerI,  */cardForPlayer1])
-                if(cardForPlayer2) setCardsOfPlayerII([.../* cardsOfPlayerII,  */cardForPlayer2])
+                if(cardForPlayer1) setCardsOfPlayerI([...cardForPlayer1])
+                if(cardForPlayer2) setCardsOfPlayerII([...cardForPlayer2])
                 setMovemetsInLastRound([
                   {...lastMovementPlayerI},
                   {...lastMovementPlayerII}
