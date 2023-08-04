@@ -55,12 +55,23 @@ export default function GameArena() {
       //Cancelamento do Timeout de disparo de movimento caso um dos lutadores (lineNumber 0 ou 1) saiam da sala
       if(status === "start-fight"){
         clearTimeout(sendMovementTimeControll.current)
-
+        movementsToCompare.current = [
+          [
+            new CardModel("attack",1,1),
+            new CardModel("defense",Infinity,1),
+            new CardModel("recharging",Infinity,1),
+          ],
+          [
+            new CardModel("attack",1,1),
+            new CardModel("defense",Infinity,1),
+            new CardModel("recharging",Infinity,1),
+          ]
+        ]
       }
 
       //Ignição de disparo de movimento caso o "round" se inicie
       if(status === "start-round"){
-        movementsToCompare.current = []
+        /* movementsToCompare.current = [] */
         setChosenMoviment(false)
         sendMovementTimeControll.current = setTimeout(()=>{
           sendChosenMoviment()
@@ -168,15 +179,15 @@ export default function GameArena() {
     //Apenas os fighters podem disparar o movimento
     if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
 
+      console.log("ANTES DE ENVIAR",movementsToCompare.current[0])
+
+      const isThereASelectedCardPlayer1 = movementsToCompare.current[0].find(movement => movement.selected === true)
+      const isThereASelectedCardPlayer2 = movementsToCompare.current[1].find(movement => movement.selected === true)
+
       //Caso o player nao tenha escolhido nenhuma carta, o jogo força escolha de uma "Recharging"
-      if(!movementsToCompare.current[0]){
-        const cardsWithRechargingTrue = [
-          ...cardsOfPlayerI
-        ]
-
-        cardsWithRechargingTrue[cardsWithRechargingTrue.length-1].selected = true
-
-        movementsToCompare.current[0] = [...cardsWithRechargingTrue]
+      if(!isThereASelectedCardPlayer1){
+        console.log("Ñ SELECT", movementsToCompare.current[0][movementsToCompare.current[0].length-1])
+        movementsToCompare.current[0][movementsToCompare.current[0].length-1].selected = true
       }
 
       //É enviado uma estrutura com o nome do fighter e todos os seus movimentos + o selecionado
@@ -209,7 +220,7 @@ export default function GameArena() {
       setStageMatch("waiting-enemy-answer")
 
       //Caso o adversário já tenha enviado o movimento, inicia-se a comparação
-      if(movementsToCompare.current[0] && movementsToCompare.current[1]){
+      if(isThereASelectedCardPlayer1 && isThereASelectedCardPlayer2){
         setStageMatch("comparing-movements")
       }
 
@@ -317,8 +328,14 @@ export default function GameArena() {
 
                 /* Tac geral como true */
 
-                if(cardForPlayer1) setCardsOfPlayerI([...cardForPlayer1])
-                if(cardForPlayer2) setCardsOfPlayerII([...cardForPlayer2])
+                if(cardForPlayer1){
+                  setCardsOfPlayerI([...cardForPlayer1])
+                  movementsToCompare.current[0] = [...cardForPlayer1]
+                }
+                if(cardForPlayer2){
+                  setCardsOfPlayerII([...cardForPlayer2])
+                  movementsToCompare.current[1] = [...cardForPlayer2]
+                }
                 setMovemetsInLastRound([
                   {...lastMovementPlayerI},
                   {...lastMovementPlayerII}

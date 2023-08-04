@@ -231,7 +231,7 @@ export default function HandlerResultsOfRound(props){
             if(matchResult.isThereAWinner){
                 saveResultsInAPI(matchResult.winner, matchResult.loser)
             } else {
-                detectLastMovementUsed()
+                /* detectLastMovementUsed() */
                 socket.send("starting-round");
             }
         },3000)
