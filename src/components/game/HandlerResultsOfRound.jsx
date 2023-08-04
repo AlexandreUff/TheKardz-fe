@@ -114,7 +114,7 @@ export default function HandlerResultsOfRound(props){
     function detectLastMovementUsed(){
 
         //Verificando recargas do player 1
-        if(movementSelectedPlayerI.cardName === "recharging"){
+        /* if(movementSelectedPlayerI.cardName === "recharging"){
             const movementIndex = allMovementsOfPlayer1.findIndex(movement => movement.cardName === "attack")
 
             if(movementIndex === -1){
@@ -138,7 +138,7 @@ export default function HandlerResultsOfRound(props){
                 }
 
             }
-        }
+        } */
 
         //Verifica se o Player 1 usou o mesmo movimento que na jogada anterior
         if(lastMovementPlayerI.name === movementSelectedPlayerI.cardName){
