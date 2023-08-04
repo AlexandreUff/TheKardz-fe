@@ -112,8 +112,33 @@ export default function HandlerResultsOfRound(props){
     //Caso não haja nenhum vencedor, o card que tem selected igual a true passará a ser false
     //Caso haja movimento repetido, o jogador ganhará a carta bonus
     function detectLastMovementUsed(){
-        let cardForPlayer1
-        let cardForPlayer2
+
+        //Verificando recargas do player 1
+        if(movementSelectedPlayerI.cardName === "recharging"){
+            const movementIndex = allMovementsOfPlayer1.findIndex(movement => movement.cardName === "attack")
+
+            if(movementIndex === -1){
+
+                if(movementSelectedPlayerI.type === 1){
+                    allMovementsOfPlayer1.unshift(new CardModel("attack", 1, 1))
+                } else if(movementSelectedPlayerI.type === 2){
+                    allMovementsOfPlayer1.unshift(new CardModel("attack", 2, 1))
+                } else if(movementSelectedPlayerI.type >= 3){
+                    allMovementsOfPlayer1.unshift(new CardModel("attack", 3, 1))
+                }
+
+            } else {
+
+                if(movementSelectedPlayerI.type === 1){
+                    allMovementsOfPlayer1[movementIndex].amount++
+                } else if(movementSelectedPlayerI.type === 2){
+                    allMovementsOfPlayer1[movementIndex].amount = allMovementsOfPlayer1[movementIndex].amount + 2
+                } else if(movementSelectedPlayerI.type >= 3){
+                    allMovementsOfPlayer1[movementIndex].amount = allMovementsOfPlayer1[movementIndex].amount + 3
+                }
+
+            }
+        }
 
         //Verifica se o Player 1 usou o mesmo movimento que na jogada anterior
         if(lastMovementPlayerI.name === movementSelectedPlayerI.cardName){
