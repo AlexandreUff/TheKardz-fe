@@ -375,8 +375,18 @@ export default function GameArena() {
 
                 console.log("EXECUTEI")
 
-                setCardsOfPlayerI([...cardsOfPlayerI/* , new CardModel("attack",1,2) */])
-                setCardsOfPlayerII([...cardsOfPlayerII])
+                const newCardsOfPlayerI = cardsOfPlayerI.map(card => {
+                  card.selected = false
+                  return card
+                })
+
+                const newCardsOfPlayerII = cardsOfPlayerII.map(card => {
+                  card.selected = false
+                  return card
+                })
+
+                setCardsOfPlayerI([...newCardsOfPlayerI/* , new CardModel("attack",1,2) */])
+                setCardsOfPlayerII([...newCardsOfPlayerII])
                 
                 /* if(cardForPlayer1){
                   setCardsOfPlayerI([...cardsOfPlayerI,{...cardForPlayer1}])

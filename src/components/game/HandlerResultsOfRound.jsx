@@ -232,7 +232,7 @@ export default function HandlerResultsOfRound(props){
                 saveResultsInAPI(matchResult.winner, matchResult.loser)
             } else {
                 /* detectLastMovementUsed() */
-                props.cardsToIncrement()
+                
                 socket.send("starting-round");
             }
         },3000)
@@ -245,6 +245,7 @@ export default function HandlerResultsOfRound(props){
             clearTimeout(showCardsTimeout)
             clearTimeout(giveResultTimeout)
             clearTimeout(startOtherFightTimeout)
+            props.cardsToIncrement()
         }
     },[])
 
