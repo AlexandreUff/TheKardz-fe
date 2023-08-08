@@ -30,6 +30,8 @@ export default function GameArena() {
   const playersFightingRef = useRef([])
   const sendMovementTimeControll = useRef()
   const movementsToCompare = useRef([])
+  const [doP1,setDoP1] = useState()
+  const [doP2,setDoP2] = useState()
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
   const [chosenMoviment, setChosenMoviment] = useState();
   /* const [triggeredMovement, setTriggeredMovement] = useState(false) */
@@ -129,6 +131,7 @@ export default function GameArena() {
         })
 
         movementsToCompare.current[0] = [...cardsOfPlayerIWithNewAmount]
+        setDoP1([...cardsOfPlayerIWithNewAmount])
 
         //Remove os cards que zeraram o amout
         /* const newCardsOfPlayerI = cardsOfPlayerIWithNewAmount.filter(movement => {
@@ -158,14 +161,15 @@ export default function GameArena() {
         }) */
 
         movementsToCompare.current[1] = [...cardsOfPlayerIIWithNewAmount]
+        setDoP2([...cardsOfPlayerIIWithNewAmount])
 
         /* setCardsOfPlayerII([...cardsOfPlayerIIWithNewAmount]) */
       }
 
       //Caso o player já tenha escolhido um movimento e o outro player acaba de enviar o seu
-      if(movementsToCompare.current[0] && movementsToCompare.current[1]){
+      /* if(movementsToCompare.current[0] && movementsToCompare.current[1]){
         setStageMatch("comparing-movements")
-      }
+      } */
     })
 
   }, [socket]);
@@ -181,6 +185,18 @@ export default function GameArena() {
   useEffect(()=>{
     console.log("SCP2", cardsOfPlayerII)
   },[cardsOfPlayerII])
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      console.log("doP1",doP1)
+      console.log("doP2",doP2)
+    },1000)
+
+    if(doP1 && doP2){
+      console.log("JÁ TEM OS 2 PORRA!")
+      setStageMatch("comparing-movements")
+    }
+  },[doP1,doP2])
 
   /* useEffect(()=>{
     const isThereASelectedCardPlayer1 = cardsOfPlayerI.find(movement => movement.selected === true)
@@ -244,10 +260,11 @@ export default function GameArena() {
       socket.send("chosen-movement", movementDataWillSend)
 
       movementsToCompare.current[0] = isThereASelectedCardPlayer1
+      setDoP1([...isThereASelectedCardPlayer1])
 
-      if(movementsToCompare.current[0] && movementsToCompare.current[1]){
+      /* if(movementsToCompare.current[0] && movementsToCompare.current[1]){
         setStageMatch("comparing-movements")
-      }
+      } */
 
       //Assim que os dados são enviados, os cardsOfPlayerI são refeitos + o movimento selecionado
       /* const cardsOfPlayerIWithNewAmount = isThereASelectedCardPlayer1.map(card => {
@@ -266,7 +283,7 @@ export default function GameArena() {
       }) */
 
       //Entra em standy-by caso o adversário não tenha enviado ainda seu movimento
-      setStageMatch("waiting-enemy-answer")
+      /* setStageMatch("waiting-enemy-answer") */
 
       //Caso o adversário já tenha enviado o movimento, inicia-se a comparação
       /* if(isThereASelectedCardPlayer1 && isThereASelectedCardPlayer2){
@@ -364,13 +381,13 @@ export default function GameArena() {
             player1={
                 {
                   playerData: playersFightingRef.current[0],
-                  movements: movementsToCompare.current[0],
+                  movements: doP1,
                 }
               }
             player2={
                 {
                   playerData: playersFightingRef.current[1],
-                  movements: movementsToCompare.current[1],
+                  movements: doP2,
                 }
               }
             takeResult={
@@ -413,6 +430,8 @@ export default function GameArena() {
                 setCardsOfPlayerII([...newCardsOfPlayerII])
 
                 movementsToCompare.current = []
+                setDoP1(undefined)
+                setDoP2(undefined)
                 
                 /* if(cardForPlayer1){
                   setCardsOfPlayerI([...cardsOfPlayerI,{...cardForPlayer1}])
