@@ -31,8 +31,8 @@ export default function HandlerResultsOfRound(props){
     const allMovementsOfPlayer1 = props.player1.movements
     const allMovementsOfPlayer2 = props.player2.movements
 
-    const movementSelectedPlayerI = props.player1.movements.find(movement => movement.selected === true) || new CardModel("recharging", Infinity, 1)
-    const movementSelectedPlayerII = props.player2.movements.find(movement => movement.selected === true) || new CardModel("recharging", Infinity, 1)
+    const movementSelectedPlayerI = props.player1.movements.find(movement => movement.selected === true)
+    const movementSelectedPlayerII = props.player2.movements.find(movement => movement.selected === true)
 
     const lastMovementPlayerI = props.movemetsInLastRound[0]
     const lastMovementPlayerII = props.movemetsInLastRound[1]
@@ -232,6 +232,7 @@ export default function HandlerResultsOfRound(props){
                 saveResultsInAPI(matchResult.winner, matchResult.loser)
             } else {
                 /* detectLastMovementUsed() */
+                props.cardsToIncrement()
                 socket.send("starting-round");
             }
         },3000)
