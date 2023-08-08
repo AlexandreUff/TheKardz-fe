@@ -398,9 +398,9 @@ export default function GameArena() {
 
                 /* Tac geral como true */
 
-                console.log("EXECUTEI",movementsToCompare.current[0],movementsToCompare.current[1])
+                /* console.log("EXECUTEI",movementsToCompare.current[0],movementsToCompare.current[1]) */
 
-                const newCardsOfPlayerIWithNewAmount = movementsToCompare.current[0].map(card => {
+                const newCardsOfPlayerIWithNewAmount = doP1.map(card => {
                   if(card.selected){
                     card.amount--
                   }
@@ -413,7 +413,7 @@ export default function GameArena() {
                   return movement.amount > 0;
                 })
 
-                const newCardsOfPlayerIIWithNewAmount = movementsToCompare.current[1].map(card => {
+                const newCardsOfPlayerIIWithNewAmount = doP2.map(card => {
                   if(card.selected){
                     card.amount--
                   }
