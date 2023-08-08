@@ -123,7 +123,7 @@ export default function GameArena() {
         //Refaz os attr que têm amount igual a null para Infinity novamente
         const cardsOfPlayerIWithNewAmount = dataMovements.movement.map(card => {
           if(card.amount === null) card.amount = Infinity
-          if(card.selected) card.amount--
+          /* if(card.selected) card.amount-- */
 
           return card
         })
@@ -145,7 +145,7 @@ export default function GameArena() {
         //Refaz os attr que têm amount igual a null para Infinity novamente
         const cardsOfPlayerIIWithNewAmount = dataMovements.movement.map(card => {
           if(card.amount === null) card.amount = Infinity
-          if(card.selected) card.amount--
+          /* if(card.selected) card.amount-- */
 
           return card
         })
@@ -206,14 +206,12 @@ export default function GameArena() {
     if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
 
       /* console.log("ANTES DE ENVIAR",movementsToCompare.current[0]) */
-      console.log("OS CARTÕES", cardsOfPlayerI)
 
       let isThereASelectedCardPlayer1/*  = [...cardsOfPlayerI] */
       /* let isThereASelectedCardPlayer2 = cardsOfPlayerII.find(movement => movement.selected === true) */
 
       //Caso o player nao tenha escolhido nenhuma carta, o jogo força escolha de uma "Recharging"
       if(!cardsOfPlayerI.find(movement => movement.selected === true)){
-        console.log("Ñ SELECT", cardsOfPlayerI[cardsOfPlayerI.length-1])
         const newCardsOfPlayerI =  [...cardsOfPlayerI]
         newCardsOfPlayerI[cardsOfPlayerI.length-1].selected = true
         isThereASelectedCardPlayer1 = [...newCardsOfPlayerI]
@@ -222,10 +220,7 @@ export default function GameArena() {
         isThereASelectedCardPlayer1 = [...cardsOfPlayerI]
       }
 
-      console.log("CURRENT", movementsToCompare.current[0])
       movementsToCompare.current[0] = isThereASelectedCardPlayer1.find(movement => movement.selected === true)
-
-      console.log("MOV SELECIONADO", cardsOfPlayerI.find(movement => movement.selected === true))
 
       //É enviado uma estrutura com o nome do fighter e todos os seus movimentos + o selecionado
       //Isso serve para que o jogador que acabou de entrar possa receber informações das cartas...
@@ -242,12 +237,12 @@ export default function GameArena() {
       socket.send("chosen-movement", movementDataWillSend)
 
       //Assim que os dados são enviados, os cardsOfPlayerI são refeitos + o movimento selecionado
-      const cardsOfPlayerIWithNewAmount = isThereASelectedCardPlayer1.map(card => {
+      /* const cardsOfPlayerIWithNewAmount = isThereASelectedCardPlayer1.map(card => {
         if(card.selected){
           card.amount--
         }
         return card
-      })
+      }) */
 
       /* const newCardsOfPlayerI = [...cardsOfPlayerIWithNewAmount].filter(movement => {
         return movement.selected === false || movement.amount > 0;
@@ -265,7 +260,7 @@ export default function GameArena() {
         setStageMatch("comparing-movements")
       } */
 
-      setCardsOfPlayerI([...cardsOfPlayerIWithNewAmount])
+      /* setCardsOfPlayerI([...cardsOfPlayerIWithNewAmount]) */
 
       /* setTriggeredMovement(true) */
     }
@@ -375,14 +370,30 @@ export default function GameArena() {
 
                 console.log("EXECUTEI")
 
-                const newCardsOfPlayerI = cardsOfPlayerI.map(card => {
+                const newCardsOfPlayerIWithNewAmount = cardsOfPlayerI.map(card => {
+                  if(card.selected){
+                    card.amount--
+                  }
+
                   card.selected = false
                   return card
                 })
 
-                const newCardsOfPlayerII = cardsOfPlayerII.map(card => {
+                const newCardsOfPlayerI = [...newCardsOfPlayerIWithNewAmount].filter(movement => {
+                  return movement.amount > 0;
+                })
+
+                const newCardsOfPlayerIIWithNewAmount = cardsOfPlayerII.map(card => {
+                  if(card.selected){
+                    card.amount--
+                  }
+
                   card.selected = false
                   return card
+                })
+
+                const newCardsOfPlayerII = [...newCardsOfPlayerIIWithNewAmount].filter(movement => {
+                  return movement.amount > 0;
                 })
 
                 setCardsOfPlayerI([...newCardsOfPlayerI/* , new CardModel("attack",1,2) */])
