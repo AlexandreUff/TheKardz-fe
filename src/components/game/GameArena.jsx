@@ -394,44 +394,64 @@ export default function GameArena() {
               (data)=>{setResultMatch({...data})}
             }
             cardsToIncrement={
-              (/* cardForPlayer1, cardForPlayer2, lastMovementPlayerI, lastMovementPlayerII */) => {
+              (/* cardForPlayer1, cardForPlayer2, lastMovementPlayerI, lastMovementPlayerII */result) => {
 
                 /* Tac geral como true */
 
                 /* console.log("EXECUTEI",movementsToCompare.current[0],movementsToCompare.current[1]) */
 
-                const newCardsOfPlayerIWithNewAmount = doP1.map(card => {
-                  if(card.selected){
-                    card.amount--
-                  }
+                console.log("resulto",result)
 
-                  card.selected = false
-                  return card
-                })
+                if(result){
+                  setCardsOfPlayerI([
+                    new CardModel("attack",1,1),
+                    new CardModel("defense",Infinity,1),
+                    new CardModel("recharging",Infinity,1),
+                  ])
 
-                const newCardsOfPlayerI = [...newCardsOfPlayerIWithNewAmount].filter(movement => {
-                  return movement.amount > 0;
-                })
+                  setCardsOfPlayerII([
+                    new CardModel("attack",1,1),
+                    new CardModel("defense",Infinity,1),
+                    new CardModel("recharging",Infinity,1),
+                  ])
 
-                const newCardsOfPlayerIIWithNewAmount = doP2.map(card => {
-                  if(card.selected){
-                    card.amount--
-                  }
+                  setResultMatch({})
+                  
+                } else {
+                  const newCardsOfPlayerIWithNewAmount = doP1.map(card => {
+                    if(card.selected){
+                      card.amount--
+                    }
+  
+                    card.selected = false
+                    return card
+                  })
+  
+                  const newCardsOfPlayerI = [...newCardsOfPlayerIWithNewAmount].filter(movement => {
+                    return movement.amount > 0;
+                  })
+  
+                  const newCardsOfPlayerIIWithNewAmount = doP2.map(card => {
+                    if(card.selected){
+                      card.amount--
+                    }
+  
+                    card.selected = false
+                    return card
+                  })
+  
+                  const newCardsOfPlayerII = [...newCardsOfPlayerIIWithNewAmount].filter(movement => {
+                    return movement.amount > 0;
+                  })
+  
+                  setCardsOfPlayerI([...newCardsOfPlayerI/* , new CardModel("attack",1,2) */])
+                  setCardsOfPlayerII([...newCardsOfPlayerII])
+  
+                  movementsToCompare.current = []
+                  setDoP1(undefined)
+                  setDoP2(undefined)
+                }
 
-                  card.selected = false
-                  return card
-                })
-
-                const newCardsOfPlayerII = [...newCardsOfPlayerIIWithNewAmount].filter(movement => {
-                  return movement.amount > 0;
-                })
-
-                setCardsOfPlayerI([...newCardsOfPlayerI/* , new CardModel("attack",1,2) */])
-                setCardsOfPlayerII([...newCardsOfPlayerII])
-
-                movementsToCompare.current = []
-                setDoP1(undefined)
-                setDoP2(undefined)
                 
                 /* if(cardForPlayer1){
                   setCardsOfPlayerI([...cardsOfPlayerI,{...cardForPlayer1}])
