@@ -176,6 +176,10 @@ export default function GameArena() {
 
   useEffect(()=>{
     console.log("Estágio:", stageMatch)
+    if(stageMatch === "start-fight"){
+      setDoP1(undefined)
+      setDoP2(undefined)
+    }
   },[stageMatch])
 
   useEffect(()=>{
@@ -415,6 +419,8 @@ export default function GameArena() {
                     new CardModel("recharging",Infinity,1),
                   ])
 
+                  setDoP1(undefined)
+                  setDoP2(undefined)
                   setResultMatch({})
                   
                 } else {
@@ -451,7 +457,7 @@ export default function GameArena() {
                   setDoP1(undefined)
                   setDoP2(undefined)
                 }
-
+                
                 
                 /* if(cardForPlayer1){
                   setCardsOfPlayerI([...cardsOfPlayerI,{...cardForPlayer1}])
