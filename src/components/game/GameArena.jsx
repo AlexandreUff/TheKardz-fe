@@ -35,16 +35,8 @@ export default function GameArena() {
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
   const [chosenMoviment, setChosenMoviment] = useState();
   /* const [triggeredMovement, setTriggeredMovement] = useState(false) */
-  const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
-    new CardModel("attack",1,1),
-    new CardModel("defense",Infinity,1),
-    new CardModel("recharging",Infinity,1),
-  ])
-  const [cardsOfPlayerII, setCardsOfPlayerII] = useState([
-    new CardModel("attack",1,1),
-    new CardModel("defense",Infinity,1),
-    new CardModel("recharging",Infinity,1),
-  ])
+  const [cardsOfPlayerI, setCardsOfPlayerI] = useState([])
+  const [cardsOfPlayerII, setCardsOfPlayerII] = useState([])
 
   const socket = useContext(SocketContext);
 
@@ -105,11 +97,26 @@ export default function GameArena() {
 
         playersFightingRef.current = [...playersWillFight]
         setPlayersAreFighting([...playersWillFight]);
+
+        /* socket.send("get-fighter-cards") */
       } else {
         playersFightingRef.current = [...users]
         setPlayersAreFighting([...users]);
       }
     });
+
+    socket.listen("get-fighter-cards", (data) => {
+      console.log("MOVS API", data)
+
+      if(data.userCredentials.userId === playersFightingRef.current[0]._id){
+        setCardsOfPlayerI([...data.userCards])
+        console.log(`Player ${playersFightingRef.current[0].name} de id ${playersFightingRef.current[0]._id} recebeu no CARD I`)
+      } else if(data.userCredentials.userId === playersFightingRef.current[1]._id){
+        setCardsOfPlayerII([...data.userCards])
+        console.log(`Player ${playersFightingRef.current[1].name} de id ${playersFightingRef.current[1]._id} recebeu no CARD II`)
+      }
+
+    })
 
     //Captura de movimento dos jogadores via websocket
     socket.listen("chosen-movement", (dataMovements) => {
@@ -179,6 +186,12 @@ export default function GameArena() {
     if(stageMatch === "start-fight"){
       setDoP1(undefined)
       setDoP2(undefined)
+    }
+
+    if(stageMatch === "start-round"){
+      if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
+        socket.send("get-fighter-cards")
+      }
     }
   },[stageMatch])
 
