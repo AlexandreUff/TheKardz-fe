@@ -29,7 +29,7 @@ export default function GameArena() {
   ])
   const playersFightingRef = useRef([])
   const sendMovementTimeControll = useRef()
-  const movementsToCompare = useRef([])
+  const cardsChosenToCompare = useRef([])
   const [doP1,setDoP1] = useState()
   const [doP2,setDoP2] = useState()
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
@@ -113,7 +113,7 @@ export default function GameArena() {
           return card
         })
 
-        movementsToCompare.current[0] = [...cardsOfPlayerIWithNewAmount]
+        cardsChosenToCompare.current[0] = [...cardsOfPlayerIWithNewAmount]
         setDoP1([...cardsOfPlayerIWithNewAmount])
 
         //Caso o player que enviou o movimento seja igual ao do índice 1, ele joga...
@@ -128,7 +128,7 @@ export default function GameArena() {
         })
 
         //Remove os cards que zeraram o amout
-        movementsToCompare.current[1] = [...cardsOfPlayerIIWithNewAmount]
+        cardsChosenToCompare.current[1] = [...cardsOfPlayerIIWithNewAmount]
         setDoP2([...cardsOfPlayerIIWithNewAmount])
       }
 
@@ -182,31 +182,24 @@ export default function GameArena() {
       let isThereASelectedCardPlayer1
 
       //Caso o player nao tenha escolhido nenhuma carta, o jogo força escolha de uma "Recharging"
-      console.log("CARD DO P1:", cardsOfPlayerI)
-      if(!cardsOfPlayerI.find(movement => movement.selected === true)){
-        const newCardsOfPlayerI =  [...cardsOfPlayerI]
-        newCardsOfPlayerI[cardsOfPlayerI.length-1].selected = true
-        isThereASelectedCardPlayer1 = [...newCardsOfPlayerI]
-      } else {
-        isThereASelectedCardPlayer1 = [...cardsOfPlayerI]
+      console.log("CARD DO P1:", cardsChosenToCompare.current[0])
+      if(!cardsChosenToCompare.current[0]){
+        cardsChosenToCompare.current[0] = new CardModel("Recharging", Infinity, 1)
       }
 
       //É enviado uma estrutura com o nome do fighter e todos os seus movimentos + o selecionado
       //Isso serve para que o jogador que acabou de entrar possa receber informações das cartas...
       //...para fazer o processamento de seu lado.
-      const movementDataWillSend = {
+      const cardDataWillSend = {
         player: {
           ...playersFightingRef.current[0]
         },
-        movement: [
-          ...isThereASelectedCardPlayer1
-        ]
+        movement: {
+          ...cardsChosenToCompare.current[0]
+        }
       }
 
-      socket.send("chosen-movement", movementDataWillSend)
-
-      movementsToCompare.current[0] = isThereASelectedCardPlayer1
-      setDoP1([...isThereASelectedCardPlayer1])
+      socket.send("chosen-movement", cardDataWillSend)
     }
   }
 
@@ -219,6 +212,8 @@ export default function GameArena() {
       return card
     })
     newCards[index].selected = true
+
+    cardsChosenToCompare.current[0] = newCards[index]
 
     setCardsOfPlayerI([
         ...newCards
@@ -358,7 +353,7 @@ export default function GameArena() {
                   setCardsOfPlayerI([...newCardsOfPlayerI/* , new CardModel("attack",1,2) */])
                   setCardsOfPlayerII([...newCardsOfPlayerII])
   
-                  movementsToCompare.current = []
+                  cardsChosenToCompare.current = []
                   setDoP1(undefined)
                   setDoP2(undefined)
                 }
