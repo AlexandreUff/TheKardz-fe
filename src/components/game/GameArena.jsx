@@ -48,12 +48,15 @@ export default function GameArena() {
 
       //Cancelamento do Timeout de disparo de movimento caso um dos lutadores (lineNumber 0 ou 1) saiam da sala
       if(status === "start-fight"){
+        setChosenMoviment(false)
+        cardsChosenToCompare.current = []
         clearTimeout(sendMovementTimeControll.current)
       }
 
       //Ignição de disparo de movimento caso o "round" se inicie
       if(status === "start-round"){
         setChosenMoviment(false)
+        cardsChosenToCompare.current = []
         sendMovementTimeControll.current = setTimeout(()=>{
           sendChosenMoviment()
         },5000)
@@ -322,55 +325,7 @@ export default function GameArena() {
                 console.log("resulto",result)
 
                 if(result){
-                  setCardsOfPlayerI([
-                    new CardModel("attack",1,1),
-                    new CardModel("defense",Infinity,1),
-                    new CardModel("recharging",Infinity,1),
-                  ])
 
-                  setCardsOfPlayerII([
-                    new CardModel("attack",1,1),
-                    new CardModel("defense",Infinity,1),
-                    new CardModel("recharging",Infinity,1),
-                  ])
-
-                  setDoP1(undefined)
-                  setDoP2(undefined)
-                  setResultMatch({})
-                  
-                } else {
-                  const newCardsOfPlayerIWithNewAmount = doP1.map(card => {
-                    if(card.selected){
-                      card.amount--
-                    }
-  
-                    card.selected = false
-                    return card
-                  })
-  
-                  const newCardsOfPlayerI = [...newCardsOfPlayerIWithNewAmount].filter(movement => {
-                    return movement.amount > 0;
-                  })
-  
-                  const newCardsOfPlayerIIWithNewAmount = doP2.map(card => {
-                    if(card.selected){
-                      card.amount--
-                    }
-  
-                    card.selected = false
-                    return card
-                  })
-  
-                  const newCardsOfPlayerII = [...newCardsOfPlayerIIWithNewAmount].filter(movement => {
-                    return movement.amount > 0;
-                  })
-  
-                  setCardsOfPlayerI([...newCardsOfPlayerI/* , new CardModel("attack",1,2) */])
-                  setCardsOfPlayerII([...newCardsOfPlayerII])
-  
-                  cardsChosenToCompare.current = []
-                  setDoP1(undefined)
-                  setDoP2(undefined)
                 }
               }
             }
