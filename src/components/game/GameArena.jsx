@@ -86,6 +86,9 @@ export default function GameArena() {
         setPlayersAreFighting([...playersWillFight]);
 
       } else {
+        //Esse reset é feito pois pode o player fica só na sala e não reiniciar suas cartas
+        socket.send("reset-my-cards")
+        
         playersFightingRef.current = [...users]
         setPlayersAreFighting([...users]);
       }
