@@ -10,15 +10,24 @@ export default function HandlerResultsOfRound(props){
     const socket = useContext(SocketContext);
 
     const saveResultsInAPI = async (winner, loser) => {
+        //Caso seja o player perdedor, suas cartas voltam ao estado inicial
+        if(props.myId === loser._id){
+            socket.send("reset-my-cards")
+        }
+
+        //Caso seja o player vencedor, ele faz o update dos players
         if(props.myId === winner._id){
             console.log(`${winner.name} gravou os dados.`)
-
+            
             const fightersData = {
                 winner: {...winner},
                 loser: {...loser}
             }
+            
+            //Ele também reinicia suas próprias cartas para o estado inicial
+            socket.send("reset-my-cards")
 
-            /* props.startOtherFight(fightersData) */
+            //Ele também começa uma nova partida
             socket.send("start-new-fight", fightersData)
         }
     }
