@@ -30,8 +30,6 @@ export default function GameArena() {
   const playersFightingRef = useRef([])
   const sendMovementTimeControll = useRef()
   const cardsChosenToCompare = useRef([])
-  const [doP1,setDoP1] = useState()
-  const [doP2,setDoP2] = useState()
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
   const [chosenMoviment, setChosenMoviment] = useState();
   const [cardsOfPlayerI, setCardsOfPlayerI] = useState([])
@@ -154,10 +152,6 @@ export default function GameArena() {
 
   useEffect(()=>{
     console.log("Estágio:", stageMatch)
-    if(stageMatch === "start-fight"){
-      setDoP1(undefined)
-      setDoP2(undefined)
-    }
 
     if(stageMatch === "start-round"){
       if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
@@ -180,18 +174,6 @@ export default function GameArena() {
   useEffect(()=>{
     console.log("SCP2", cardsOfPlayerII)
   },[cardsOfPlayerII])
-
-  useEffect(()=>{
-    setTimeout(()=>{
-      console.log("doP1",doP1)
-      console.log("doP2",doP2)
-    },1000)
-
-    if(doP1 && doP2){
-      console.log("JÁ TEM OS 2 PORRA!")
-      setStageMatch("comparing-movements")
-    }
-  },[doP1,doP2])
 
   const sendStartRoundStatus = () => {
     socket.send("starting-round");
