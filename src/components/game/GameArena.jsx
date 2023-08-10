@@ -100,39 +100,40 @@ export default function GameArena() {
     })
 
     //Captura de movimento dos jogadores via websocket
-    socket.listen("chosen-movement", (dataMovements) => {
+    socket.listen("chosen-movement", (dataMovement) => {
 
       //Caso o player que enviou o movimento seja igual ao do índice 0, ele joga...
       //...no useRef movementsToCompare.current[0]
-      if(dataMovements.player.name === playersFightingRef.current[0].name){
+      if(dataMovement.player.name === playersFightingRef.current[0].name){
 
         //Refaz os attr que têm amount igual a null para Infinity novamente
-        const cardsOfPlayerIWithNewAmount = dataMovements.movement.map(card => {
-          if(card.amount === null) card.amount = Infinity
+        const cardOfPlayerIWithNewAmount = {...dataMovement.movement}
+        if(cardOfPlayerIWithNewAmount.amount === null) cardOfPlayerIWithNewAmount.amount = Infinity
 
-          return card
-        })
-
-        cardsChosenToCompare.current[0] = [...cardsOfPlayerIWithNewAmount]
-        setDoP1([...cardsOfPlayerIWithNewAmount])
+        cardsChosenToCompare.current[0] = cardOfPlayerIWithNewAmount
+        console.log("Card do P1",cardsChosenToCompare.current[0])
+        /* setDoP1([...cardsOfPlayerIWithNewAmount]) */
 
         //Caso o player que enviou o movimento seja igual ao do índice 1, ele joga...
         //...no useRef movementsToCompare.current[1]
-      } else if (dataMovements.player.name === playersFightingRef.current[1].name){
+      } else if (dataMovement.player.name === playersFightingRef.current[1].name){
 
         //Refaz os attr que têm amount igual a null para Infinity novamente
-        const cardsOfPlayerIIWithNewAmount = dataMovements.movement.map(card => {
-          if(card.amount === null) card.amount = Infinity
+        const cardOfPlayerIIWithNewAmount = {...dataMovement.movement}
+        if(cardOfPlayerIIWithNewAmount.amount === null) cardOfPlayerIIWithNewAmount.amount = Infinity
 
-          return card
-        })
-
-        //Remove os cards que zeraram o amout
-        cardsChosenToCompare.current[1] = [...cardsOfPlayerIIWithNewAmount]
-        setDoP2([...cardsOfPlayerIIWithNewAmount])
+        cardsChosenToCompare.current[1] = cardOfPlayerIIWithNewAmount
+        console.log("Card do P2",cardsChosenToCompare.current[1])
+        /* setDoP2([...cardsOfPlayerIIWithNewAmount]) */
       }
 
       //Caso o player já tenha escolhido um movimento e o outro player acaba de enviar o seu
+      if(cardsChosenToCompare.current[0] && cardsChosenToCompare.current[1]){
+        console.log("Tenho os dois cardsChosenToCompare!",
+        cardsChosenToCompare.current[0],
+        cardsChosenToCompare.current[1])
+        setStageMatch("comparing-movements")
+      }
     })
 
   }, [socket]);
@@ -150,6 +151,13 @@ export default function GameArena() {
       }
     }
   },[stageMatch])
+
+  /* useEffect(()=>{
+    if(cardsChosenToCompare.current[0] && cardsChosenToCompare.current[1]){
+      console.log("Tenho os dois cardsChosenToCompare!")
+    }
+  },[cardsChosenToCompare.current[0],cardsChosenToCompare.current[1]]) */
+
 
   useEffect(()=>{
     console.log("SCP1", cardsOfPlayerI)
@@ -182,10 +190,10 @@ export default function GameArena() {
       let isThereASelectedCardPlayer1
 
       //Caso o player nao tenha escolhido nenhuma carta, o jogo força escolha de uma "Recharging"
-      console.log("CARD DO P1:", cardsChosenToCompare.current[0])
       if(!cardsChosenToCompare.current[0]){
-        cardsChosenToCompare.current[0] = new CardModel("Recharging", Infinity, 1)
+        cardsChosenToCompare.current[0] = new CardModel("recharging", Infinity, 1)
       }
+      console.log("CARD DO P1:", cardsChosenToCompare.current[0])
 
       //É enviado uma estrutura com o nome do fighter e todos os seus movimentos + o selecionado
       //Isso serve para que o jogador que acabou de entrar possa receber informações das cartas...
@@ -200,6 +208,13 @@ export default function GameArena() {
       }
 
       socket.send("chosen-movement", cardDataWillSend)
+
+      if(cardsChosenToCompare.current[0] && cardsChosenToCompare.current[1]){
+        console.log("Tenho os dois cardsChosenToCompare!",
+        cardsChosenToCompare.current[0],
+        cardsChosenToCompare.current[1])
+        setStageMatch("comparing-movements")
+      }
     }
   }
 
@@ -290,13 +305,13 @@ export default function GameArena() {
             player1={
                 {
                   playerData: playersFightingRef.current[0],
-                  movements: doP1,
+                  movements: cardsChosenToCompare.current[0],
                 }
               }
             player2={
                 {
                   playerData: playersFightingRef.current[1],
-                  movements: doP2,
+                  movements: cardsChosenToCompare.current[1],
                 }
               }
             takeResult={

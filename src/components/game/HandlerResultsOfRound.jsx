@@ -28,11 +28,13 @@ export default function HandlerResultsOfRound(props){
     const player1Data = props.player1.playerData
     const player2Data = props.player2.playerData
 
-    const allMovementsOfPlayer1 = props.player1.movements
-    const allMovementsOfPlayer2 = props.player2.movements
+    /* const allMovementsOfPlayer1 = props.player1.movements */
+    /* const allMovementsOfPlayer2 = props.player2.movements */
 
-    const movementSelectedPlayerI = props.player1.movements.find(movement => movement.selected === true)
-    const movementSelectedPlayerII = props.player2.movements.find(movement => movement.selected === true)
+    const movementSelectedPlayerI = props.player1.movements/* .find(movement => movement.selected === true) */
+    const movementSelectedPlayerII = props.player2.movements/* .find(movement => movement.selected === true) */
+
+    console.log("Aqui dentro", movementSelectedPlayerI, movementSelectedPlayerII)
 
     const lastMovementPlayerI = props.movemetsInLastRound[0]
     const lastMovementPlayerII = props.movemetsInLastRound[1]
