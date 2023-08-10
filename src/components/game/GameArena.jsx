@@ -49,6 +49,7 @@ export default function GameArena() {
       //Cancelamento do Timeout de disparo de movimento caso um dos lutadores (lineNumber 0 ou 1) saiam da sala
       if(status === "start-fight"){
         setChosenMoviment(false)
+        setResultMatch({})
         cardsChosenToCompare.current = []
         clearTimeout(sendMovementTimeControll.current)
       }
