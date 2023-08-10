@@ -95,9 +95,19 @@ export default function GameArena() {
     socket.listen("get-fighter-cards", (data) => {
 
       if(data.userCredentials.userId === playersFightingRef.current[0]._id){
-        setCardsOfPlayerI([...data.userCards])
+        const cardsWithCorretlyAmount = data.userCards.map(card => {
+          if(card.amount === null) card.amount = Infinity
+          return card
+        })
+        setCardsOfPlayerI([...cardsWithCorretlyAmount])
+
       } else if(data.userCredentials.userId === playersFightingRef.current[1]._id){
-        setCardsOfPlayerII([...data.userCards])
+        const cardsWithCorretlyAmount = data.userCards.map(card => {
+          if(card.amount === null) card.amount = Infinity
+          return card
+        })
+
+        setCardsOfPlayerII([...cardsWithCorretlyAmount])
       }
 
     })
