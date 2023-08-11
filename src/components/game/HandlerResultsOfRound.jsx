@@ -66,7 +66,7 @@ export default function HandlerResultsOfRound(props){
 
     //Aqui entram apenas as estruturas de ataque com vitória do player I
     if(p1_attack_p2_attack && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-        /* saveWinnerResultsInAPI(player1Data) */
+        console.log("Player 1 venceu com at-at", movementSelectedPlayerI.type, movementSelectedPlayerII.type)
         matchResult = {
             isThereAWinner: true,
             winner: player1Data,
@@ -75,7 +75,7 @@ export default function HandlerResultsOfRound(props){
     }
 
     if(p1_attack_p2_defense && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-        /* saveWinnerResultsInAPI(player1Data) */
+        console.log("Player 1 venceu com at-de", movementSelectedPlayerI.type, movementSelectedPlayerII.type)
         matchResult = {
             isThereAWinner: true,
             winner: player1Data,
@@ -84,7 +84,7 @@ export default function HandlerResultsOfRound(props){
     }
 
     if(p1_attack_p2_recharging){
-        /* saveWinnerResultsInAPI(player1Data) */
+        console.log("Player 1 venceu com at-re", movementSelectedPlayerI.type, movementSelectedPlayerII.type)
         matchResult = {
             isThereAWinner: true,
             winner: player1Data,
@@ -93,8 +93,8 @@ export default function HandlerResultsOfRound(props){
     }
 
     //Aqui entram apenas as estruturas de ataque com vitória do player II
-    if(p2_attack_p1_attack && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-        /* saveWinnerResultsInAPI(player2Data) */
+    if(p2_attack_p1_attack && movementSelectedPlayerII.type > movementSelectedPlayerI.type){
+        console.log("Player 2 venceu com at-at", movementSelectedPlayerII.type, movementSelectedPlayerI.type)
         matchResult = {
             isThereAWinner: true,
             winner: player2Data,
@@ -102,8 +102,8 @@ export default function HandlerResultsOfRound(props){
         }
     }
 
-    if(p2_attack_p1_defense && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-        /* saveWinnerResultsInAPI(player2Data) */
+    if(p2_attack_p1_defense && movementSelectedPlayerII.type > movementSelectedPlayerI.type){
+        console.log("Player 2 venceu com at-de", movementSelectedPlayerII.type, movementSelectedPlayerI.type)
         matchResult = {
             isThereAWinner: true,
             winner: player2Data,
@@ -112,7 +112,7 @@ export default function HandlerResultsOfRound(props){
     }
 
     if(p2_attack_p1_recharging){
-        /* saveWinnerResultsInAPI(player2Data) */
+        console.log("Player 2 venceu com at-re", movementSelectedPlayerII.type, movementSelectedPlayerI.type)
         matchResult = {
             isThereAWinner: true,
             winner: player2Data,
