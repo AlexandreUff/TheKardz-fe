@@ -60,6 +60,13 @@ export default function GameArena() {
           sendChosenMoviment()
         },5000)
       }
+
+      if(status === "end-fight"){
+        if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
+          //Esse reset é feito pois pode o player fica só na sala e não reiniciar suas cartas
+          socket.send("reset-my-cards")
+        }
+      }
     });
 
     //Este serviço recebe os usuário da sala, mas pega apenas os que estão jogando/lutando (lineNumber 0 e 1)
@@ -87,8 +94,8 @@ export default function GameArena() {
 
       } else {
         //Esse reset é feito pois pode o player fica só na sala e não reiniciar suas cartas
-        socket.send("reset-my-cards")
-        
+        /* socket.send("reset-my-cards") */
+
         playersFightingRef.current = [...users]
         setPlayersAreFighting([...users]);
       }
@@ -126,7 +133,6 @@ export default function GameArena() {
         if(cardOfPlayerIWithNewAmount.amount === null) cardOfPlayerIWithNewAmount.amount = Infinity
 
         cardsChosenToCompare.current[0] = cardOfPlayerIWithNewAmount
-        console.log("Card do P1",cardsChosenToCompare.current[0])
         /* setDoP1([...cardsOfPlayerIWithNewAmount]) */
 
         //Caso o player que enviou o movimento seja igual ao do índice 1, ele joga...
@@ -138,15 +144,11 @@ export default function GameArena() {
         if(cardOfPlayerIIWithNewAmount.amount === null) cardOfPlayerIIWithNewAmount.amount = Infinity
 
         cardsChosenToCompare.current[1] = cardOfPlayerIIWithNewAmount
-        console.log("Card do P2",cardsChosenToCompare.current[1])
         /* setDoP2([...cardsOfPlayerIIWithNewAmount]) */
       }
 
       //Caso o player já tenha escolhido um movimento e o outro player acaba de enviar o seu
       if(cardsChosenToCompare.current[0] && cardsChosenToCompare.current[1]){
-        console.log("Tenho os dois cardsChosenToCompare!",
-        cardsChosenToCompare.current[0],
-        cardsChosenToCompare.current[1])
         setStageMatch("comparing-movements")
       }
     })
@@ -162,13 +164,6 @@ export default function GameArena() {
       }
     }
   },[stageMatch])
-
-  /* useEffect(()=>{
-    if(cardsChosenToCompare.current[0] && cardsChosenToCompare.current[1]){
-      console.log("Tenho os dois cardsChosenToCompare!")
-    }
-  },[cardsChosenToCompare.current[0],cardsChosenToCompare.current[1]]) */
-
 
   useEffect(()=>{
     console.log("SCP1", cardsOfPlayerI)
@@ -192,7 +187,6 @@ export default function GameArena() {
       if(!cardsChosenToCompare.current[0]){
         cardsChosenToCompare.current[0] = new CardModel("recharging", Infinity, 1)
       }
-      console.log("CARD DO P1:", cardsChosenToCompare.current[0])
 
       //É enviado uma estrutura com o nome do fighter e todos os seus movimentos + o selecionado
       //Isso serve para que o jogador que acabou de entrar possa receber informações das cartas...
@@ -209,9 +203,6 @@ export default function GameArena() {
       socket.send("chosen-movement", cardDataWillSend)
 
       if(cardsChosenToCompare.current[0] && cardsChosenToCompare.current[1]){
-        console.log("Tenho os dois cardsChosenToCompare!",
-        cardsChosenToCompare.current[0],
-        cardsChosenToCompare.current[1])
         setStageMatch("comparing-movements")
       }
     }
@@ -297,8 +288,6 @@ export default function GameArena() {
           />
         )}
         {stageMatch === "comparing-movements" && (
-          <>
-          {console.log("CHOSWEN", chosenMoviment)}
           <HandlerResultsOfRound
             myId={userId}
             player1={
@@ -318,8 +307,6 @@ export default function GameArena() {
             }
             cardsToIncrement={
               (result) => {
-                console.log("resulto",result)
-
                 if(result){
 
                 }
@@ -327,7 +314,6 @@ export default function GameArena() {
             }
             movemetsInLastRound={[...movemetsInLastRound]}
           />
-          </>
         )}
         {stageMatch === "stand-by" &&
           (playersAreFighting.length > 1 ? (

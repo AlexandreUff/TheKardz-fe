@@ -9,9 +9,11 @@ export default function HandlerResultsOfRound(props){
 
     const socket = useContext(SocketContext);
 
-    const saveResultsInAPI = async (winner, loser) => {
+    const setResultsInAPI = async (winner, loser) => {
         //Caso seja o player perdedor, suas cartas voltam ao estado inicial
+        console.log("Winner e loser", winner, loser)
         if(props.myId === loser._id){
+            console.log("Disparei", loser.name)
             socket.send("reset-my-cards")
         }
 
@@ -42,8 +44,6 @@ export default function HandlerResultsOfRound(props){
 
     const movementSelectedPlayerI = props.player1.movements/* .find(movement => movement.selected === true) */
     const movementSelectedPlayerII = props.player2.movements/* .find(movement => movement.selected === true) */
-
-    console.log("Aqui dentro", movementSelectedPlayerI, movementSelectedPlayerII)
 
     const lastMovementPlayerI = props.movemetsInLastRound[0]
     const lastMovementPlayerII = props.movemetsInLastRound[1]
@@ -240,7 +240,7 @@ export default function HandlerResultsOfRound(props){
 
         const startOtherFightTimeout = setTimeout(()=>{
             if(matchResult.isThereAWinner){
-                saveResultsInAPI(matchResult.winner, matchResult.loser)
+                setResultsInAPI(matchResult.winner, matchResult.loser)
             } else {
                 /* detectLastMovementUsed() */
                 
