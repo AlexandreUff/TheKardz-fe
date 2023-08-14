@@ -48,6 +48,8 @@ export default function GameArena() {
       if(status === "start-fight"){
         setChosenMoviment(false)
         setResultMatch({})
+        //Esse "reset-my-cards", provavelmente, não ficará aqui
+        socket.send("reset-my-cards")
         cardsChosenToCompare.current = []
         clearTimeout(sendMovementTimeControll.current)
       }
