@@ -315,10 +315,11 @@ export default function GameArena() {
             takeResult={
               (data)=>{setResultMatch({...data})}
             }
-            cardsToIncrement={
+            resetCards={
               (result) => {
                 if(result){
-
+                  setCardsOfPlayerI([])
+                  setCardsOfPlayerII([])
                 }
               }
             }

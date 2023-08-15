@@ -256,7 +256,7 @@ export default function HandlerResultsOfRound(props){
             clearTimeout(showCardsTimeout)
             clearTimeout(giveResultTimeout)
             clearTimeout(startOtherFightTimeout)
-            props.cardsToIncrement(matchResult.isThereAWinner)
+            props.resetCards(matchResult.isThereAWinner)
         }
     },[])
 
