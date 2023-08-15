@@ -30,6 +30,7 @@ export default function GameArena() {
   const playersFightingRef = useRef([])
   const sendMovementTimeControll = useRef()
   const cardsChosenToCompare = useRef([])
+  const blockSendCard = useRef(false)
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
   const [chosenMoviment, setChosenMoviment] = useState();
   const [cardsOfPlayerI, setCardsOfPlayerI] = useState([])
@@ -58,6 +59,7 @@ export default function GameArena() {
       if(status === "start-round"){
         setChosenMoviment(false)
         cardsChosenToCompare.current = []
+        blockSendCard.current = false
         sendMovementTimeControll.current = setTimeout(()=>{
           sendChosenMoviment()
         },5000)
@@ -187,6 +189,9 @@ export default function GameArena() {
 
       //Caso o player nao tenha escolhido nenhuma carta, o jogo força escolha de uma "Recharging"
       if(!cardsChosenToCompare.current[0]){
+        //blockSendCard serve para impedir que haja uma escolha posterior ao envio e,...
+        //com isso, evitado que hajam cartas escolhidas distintas para ambos players.
+        blockSendCard.current = true
         cardsChosenToCompare.current[0] = new CardModel("recharging", Infinity, 1)
       }
 
@@ -213,18 +218,21 @@ export default function GameArena() {
   //Seleciona o movimento escolhido pelo player e o põe, junto com os outros cards, ...
   //no movementsToCompare.current[0]
   const userSelectMovement = (index,card) => {
-    setChosenMoviment({...card})
-    const newCards = cardsOfPlayerI.map(card => {
-      card.selected = false
-      return card
-    })
-    newCards[index].selected = true
+    //Caso não haja bloqueio de envio, os trâmites de escolhe ocorrem normalmente
+    if(!blockSendCard.current){
+      setChosenMoviment({...card})
+      const newCards = cardsOfPlayerI.map(card => {
+        card.selected = false
+        return card
+      })
+      newCards[index].selected = true
 
-    cardsChosenToCompare.current[0] = newCards[index]
-
-    setCardsOfPlayerI([
+      cardsChosenToCompare.current[0] = newCards[index]
+  
+      setCardsOfPlayerI([
         ...newCards
       ])
+    }
   }
 
   const renderScoreboard = () => {
