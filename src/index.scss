@@ -333,6 +333,15 @@ $fourthColor: #2B2A4C;
 
             animation: scoreboard-appearing .3s forwards;
 
+            &.venceu{
+                color: green
+            }
+
+            .emoji-status{
+                font-size: 4rem;
+                animation: emoji-appearing 10s forwards;
+            }
+
             /* .title-container{
                 position: relative; */
 
@@ -340,18 +349,31 @@ $fourthColor: #2B2A4C;
                     position: absolute;
                     top: 30%;
                     left: 0%;
+
+                    -webkit-text-stroke-width: 3px;
+                    -webkit-text-stroke-color: $firstColor;
+                    text-shadow: 0px 5px 5px black;
+
                     font-size: 9rem;
                     animation: winner-title 4s linear;
+                    z-index: 5;
                 }
     
                 h2 {
                     position: absolute;
                     top: 60%;
                     right: 20%;
+
+                    -webkit-text-stroke-width: 3px;
+                    -webkit-text-stroke-color: $firstColor;
+                    text-shadow: 0px 5px 5px black;
+
                     font-size: 6rem;
                     animation: winner-subtitle 4s linear;
+                    z-index: 5;
                 }
-                margin-right: 20%;
+
+            margin-right: 20%;
             /* } */
         }
 
@@ -926,5 +948,11 @@ $fourthColor: #2B2A4C;
     to {
         backdrop-filter: blur(2px);
         opacity: 1;
+    }
+}
+
+@keyframes emoji-appearing {
+    to {
+        top: -50%
     }
 }
