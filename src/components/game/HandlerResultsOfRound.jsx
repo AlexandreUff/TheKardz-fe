@@ -45,9 +45,6 @@ export default function HandlerResultsOfRound(props){
     const movementSelectedPlayerI = props.player1.movements/* .find(movement => movement.selected === true) */
     const movementSelectedPlayerII = props.player2.movements/* .find(movement => movement.selected === true) */
 
-    const lastMovementPlayerI = props.movemetsInLastRound[0]
-    const lastMovementPlayerII = props.movemetsInLastRound[1]
-
     //Ataques do player I
     const p1_attack_p2_attack = movementSelectedPlayerI.cardName === "attack" && movementSelectedPlayerII.cardName === "attack"
     const p1_attack_p2_defense = movementSelectedPlayerI.cardName === "attack" && movementSelectedPlayerII.cardName === "defense"

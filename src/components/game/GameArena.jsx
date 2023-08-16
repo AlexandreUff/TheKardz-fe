@@ -15,18 +15,6 @@ const stageMatchReducer = (state, action) => {
 export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
   const [resultMatch, setResultMatch] = useState({})
-  const [movemetsInLastRound, setMovemetsInLastRound] = useState([
-    {
-      player: "player1",
-      name: "",
-      used: 0
-    },
-    {
-      player: "player2",
-      name: "",
-      used: 0
-    },
-  ])
   const playersFightingRef = useRef([])
   const sendMovementTimeControll = useRef()
   const cardsChosenToCompare = useRef([])
@@ -323,7 +311,6 @@ export default function GameArena() {
                 }
               }
             }
-            movemetsInLastRound={[...movemetsInLastRound]}
           />
         )}
         {stageMatch === "stand-by" &&
