@@ -30,7 +30,6 @@ export default function UserName() {
     let response
 
     if(act === "crt"){
-      console.log("nome",userName)
       response = await APIService.post('/hall/create',{
         userName: userName,
       })
@@ -42,7 +41,6 @@ export default function UserName() {
     }
 
     if(response.status){
-      console.log("Deu certo")
       act === "crt" ? (
           saveUserGameData(userName, response.data.hall, response.data.userId)
         ) : (
@@ -54,8 +52,6 @@ export default function UserName() {
     } else {
       setWarning(response.message)
     }
-
-    console.log(response)
   }
 
   return (
