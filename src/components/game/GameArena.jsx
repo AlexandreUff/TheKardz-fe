@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import CardToShow from "./CardToShow";
 import Timer from "./Timer";
 import SocketContext from "../../context/socketContext";
@@ -7,10 +7,6 @@ import ReadableMovementsNames from "../../Utils/ReadableMovementsNames";
 import HandlerResultsOfRound from "./HandlerResultsOfRound";
 import ShowScoreboard from "./ShowScoreboard";
 import CardModel from "../../Utils/MovementModel";
-
-const stageMatchReducer = (state, action) => {
-  return action.payload ;
-};
 
 export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
@@ -148,22 +144,12 @@ export default function GameArena() {
   }, [socket]);
 
   useEffect(()=>{
-    console.log("Estágio:", stageMatch)
-
     if(stageMatch === "start-round"){
       if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
         socket.send("get-fighter-cards")
       }
     }
   },[stageMatch])
-
-  useEffect(()=>{
-    console.log("SCP1", cardsOfPlayerI)
-  },[cardsOfPlayerI])
-
-  useEffect(()=>{
-    console.log("SCP2", cardsOfPlayerII)
-  },[cardsOfPlayerII])
 
   const sendStartRoundStatus = () => {
     socket.send("starting-round");
