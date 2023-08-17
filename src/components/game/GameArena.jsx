@@ -262,6 +262,7 @@ export default function GameArena() {
           <Timer
             time={10}
             type="match"
+            isMyMatch={playersFightingRef.current[0]._id === userId}
             action={sendStartRoundStatus}
           />
         )}

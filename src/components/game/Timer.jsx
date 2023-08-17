@@ -7,7 +7,7 @@ export default function Timer(props){
     let [time,setTime] = useState(props.time)
 
     const colorTimer = props.type === "match" ? "green" : "red"
-    const soundBeepTimer = props.type === "match" ? SoundPlayer.TimerRead : SoundPlayer.TimerRound
+    const soundBeepTimer = props.type === "match" && props.isMyMatch ? SoundPlayer.TimerRead : SoundPlayer.TimerRound
 
     useEffect(()=>{
         const regressiveTime = setInterval(()=>{
