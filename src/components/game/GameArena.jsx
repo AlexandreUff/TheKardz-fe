@@ -7,6 +7,7 @@ import ReadableMovementsNames from "../../Utils/ReadableMovementsNames";
 import HandlerResultsOfRound from "./HandlerResultsOfRound";
 import ShowScoreboard from "./ShowScoreboard";
 import CardModel from "../../Utils/MovementModel";
+import MyNotification from "../../Utils/MyNotification";
 
 export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
@@ -145,6 +146,7 @@ export default function GameArena() {
 
   useEffect(()=>{
     if(stageMatch === "start-round"){
+      MyNotification()
       if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
         socket.send("get-fighter-cards")
       }
