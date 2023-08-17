@@ -1,5 +1,7 @@
 import { IcoDiamondCard } from "../Icons";
 import ReadableMovementsNames from "../../Utils/ReadableMovementsNames"
+import { useEffect } from "react";
+import SoundPlayer from "../../Utils/SoundPlayer";
 
 export default function CardEmpty(props){
 
@@ -24,6 +26,10 @@ export default function CardEmpty(props){
     }
 
     const titleCompleted = props.show ? ReadableMovementsNames(props.moviment, props.type) : ""
+
+    useEffect(()=>{
+        if(props.show) SoundPlayer.TurnCards.play()
+    },[props.show])
 
     return (
     <div className={`card-game ${props.show && "turn"}`} title={titleCompleted} onClick={() => props.show && props.chooseMov()}>

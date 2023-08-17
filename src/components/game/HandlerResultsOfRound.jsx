@@ -106,7 +106,6 @@ export default function HandlerResultsOfRound(props){
 
     useEffect(()=>{
         const showCardsTimeout = setTimeout(()=>{
-            SoundPlayer.TurnCards.play()
             setShow(true)
         },500)
 
