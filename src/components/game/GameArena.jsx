@@ -262,7 +262,12 @@ export default function GameArena() {
           <Timer
             time={10}
             type="match"
-            isMyMatch={playersFightingRef.current[0]._id === userId}
+            isMyMatch={
+              //Caso você seja o jogador e seja de lineNumber 1, o beep servirá como alerta...
+              //...de que a partida irá começar.
+              playersFightingRef.current[0]._id === userId && 
+              playersFightingRef.current[0].lineNumber === 1
+            }
             action={sendStartRoundStatus}
           />
         )}
