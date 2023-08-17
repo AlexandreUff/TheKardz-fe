@@ -15,10 +15,6 @@ export default function CardEmpty(props){
         } else if (moviment === 'attack' && type >= 2){
             return "⚔️"
         }
-
-        /* if(moviment === 'attack' || moviment === 'attack'){
-            return "⚔️"
-        } */
         
         if(moviment === 'recharging' || moviment === 'recharging' || moviment === 'recharging'){
             return "➕"

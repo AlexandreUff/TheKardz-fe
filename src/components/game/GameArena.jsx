@@ -159,8 +159,6 @@ export default function GameArena() {
     //Apenas os fighters podem disparar o movimento
     if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
 
-      let isThereASelectedCardPlayer1
-
       //Caso o player nao tenha escolhido nenhuma carta, o jogo força escolha de uma "Recharging"
       if(!cardsChosenToCompare.current[0]){
         //blockSendCard serve para impedir que haja uma escolha posterior ao envio e,...
