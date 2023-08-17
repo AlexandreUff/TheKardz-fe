@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import CardToShow from "./CardToShow";
 import SocketContext from "../../context/socketContext";
+import SoundPlayer from "../../Utils/SoundPlayer";
 
 export default function HandlerResultsOfRound(props){
 
@@ -105,6 +106,7 @@ export default function HandlerResultsOfRound(props){
 
     useEffect(()=>{
         const showCardsTimeout = setTimeout(()=>{
+            SoundPlayer.TurnCards.play()
             setShow(true)
         },500)
 
@@ -119,6 +121,8 @@ export default function HandlerResultsOfRound(props){
                 socket.send("starting-round");
             }
         },3000)
+
+        SoundPlayer.DropCards.play()
 
         return ()=>{
             //Caso algum player saia antes da apresentação resultado, o setTimeout deve ser abortado

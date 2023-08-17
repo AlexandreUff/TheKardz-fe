@@ -1,7 +1,15 @@
+import SoundPlayer from "../../Utils/SoundPlayer"
+
 export default function ShowScoreboard(props){
 
     const userName = props.username
     const status = props.status
+
+    if(status === "venceu"){
+        SoundPlayer.Winner.play()
+    } else {
+        SoundPlayer.Loser.play()
+    }
 
     const emojiStatusShow = () => {
 
