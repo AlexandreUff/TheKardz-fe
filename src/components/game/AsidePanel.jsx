@@ -5,6 +5,7 @@ import SessionService from "../../services/SessionService";
 import Report from "../game/Report"
 import ReportModel from "../../Utils/ReportModel";
 import PainelButton from "../PainelButton";
+import SoundPlayer from "../../Utils/SoundPlayer";
 
 export default function AsidePanel(props){
 
@@ -35,6 +36,8 @@ export default function AsidePanel(props){
             )
         
         socket.send("report", report)
+
+        SoundPlayer.SendMessage.play()
 
         report.isYou = true
         
