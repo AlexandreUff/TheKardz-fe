@@ -17,36 +17,36 @@ export default function Game() {
   
   const {userName, userId, hall} = SessionService.get("userDatas")
   
-  const isCredentialRead = SessionService.get("credential-read")
+  /* const isCredentialRead = SessionService.get("credential-read") */
   
-  if(!isCredentialRead){
-    socket.startSocketService()
-  } /* else {
+  socket.startSocketService()
+  /* if(!isCredentialRead){
+  } */ /* else {
     console.log("usuário inexistente")
     navigate("/nonuser")
   }
  */
-  SessionService.save("credential-read", true)
+  /* SessionService.save("credential-read", true) */
   
-  /* socket.listen("redirect-nonexistent-user", ()=>{
+  socket.listen("redirect-nonexistent-user", ()=>{
     navigate("/nonuser")
-  }) */
+  })
 
   useEffect(() => {
-    if(!isCredentialRead){
-      socket.send("credential", {userName, userId, hall})
+    socket.send("credential", {userName, userId, hall})
+    /* if(!isCredentialRead){
       console.log("credencial agora",isCredentialRead)
     } else {
       console.log("usuário inexistente")
       SessionService.remove("credential-read")
       navigate("/nonuser")
-    }
+    } */
 
     return () => {
       // Executa quando o componente é desmontado
-      if(!isCredentialRead){
-        socket.disconnect();
-      }
+      socket.disconnect();
+      /* if(!isCredentialRead){
+      } */
     };
   }, []);
 
