@@ -1,3 +1,5 @@
+import MainIcon from "../assets/images/main-icon.png"
+
 async function MyNotification(){
     /* if('Notification' in window){
         Notification.requestPermission().then(function (permission){
@@ -15,7 +17,8 @@ async function MyNotification(){
         /* window.Notification.requestPermission().then(function (permission){ */
             if(permission === 'granted'){
                 new Notification('Notif Exem', {
-                    body: "Texto texto texto"
+                    body: "Texto texto texto",
+                    icon: MainIcon
                 })
             }
         /* }) */
