@@ -90,6 +90,14 @@ export default function GameArena() {
       }
     });
 
+    socket.listen("notify-next-fight",(player) => {
+      if(player._id === userId) MyNotification(`Atenção`, `${userName}, é a sua vez de jogar!`)
+    })
+
+    socket.listen("notify-player-is-waiting", (playerIsWaiting) => {
+      if(playerIsWaiting._id === userId) MyNotification("Prepare-se!", `${userName}, você jogará na próxima partida!`)
+    })
+
     socket.listen("get-fighter-cards", (data) => {
 
       if(data.userCredentials.userId === playersFightingRef.current[0]._id){
@@ -146,7 +154,6 @@ export default function GameArena() {
 
   useEffect(()=>{
     if(stageMatch === "start-round"){
-      MyNotification()
       if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
         socket.send("get-fighter-cards")
       }
