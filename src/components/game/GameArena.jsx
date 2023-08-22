@@ -299,8 +299,10 @@ export default function GameArena() {
             resetCards={
               (result) => {
                 if(result){
-                  setCardsOfPlayerI([])
-                  setCardsOfPlayerII([])
+                  //Arrays com objetos vazios são adicionados para que, ao começar um...
+                  //novo combate, produza o efeito das cartas virando ao iniciar o round
+                  setCardsOfPlayerI([{}, {}, {}])
+                  setCardsOfPlayerII([{}, {}, {}])
                 }
               }
             }
