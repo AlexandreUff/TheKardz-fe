@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import CardToShow from "./CardToShow";
 import SocketContext from "../../context/socketContext";
-import CardModel from "../../Utils/MovementModel";
+import SoundPlayer from "../../Utils/SoundPlayer";
 
 export default function HandlerResultsOfRound(props){
 
@@ -9,16 +9,23 @@ export default function HandlerResultsOfRound(props){
 
     const socket = useContext(SocketContext);
 
-    const saveResultsInAPI = async (winner, loser) => {
-        if(props.myId === winner._id){
-            console.log(`${winner.name} gravou os dados.`)
+    const setResultsInAPI = async (winner, loser) => {
+        //Caso seja o player perdedor, suas cartas voltam ao estado inicial
+        if(props.myId === loser._id){
+            socket.send("reset-my-cards")
+        }
 
+        //Caso seja o player vencedor, ele faz o update dos players
+        if(props.myId === winner._id){
             const fightersData = {
                 winner: {...winner},
                 loser: {...loser}
             }
+            
+            //Ele também reinicia suas próprias cartas para o estado inicial
+            socket.send("reset-my-cards")
 
-            /* props.startOtherFight(fightersData) */
+            //Ele também começa uma nova partida
             socket.send("start-new-fight", fightersData)
         }
     }
@@ -28,14 +35,8 @@ export default function HandlerResultsOfRound(props){
     const player1Data = props.player1.playerData
     const player2Data = props.player2.playerData
 
-    const allMovementsOfPlayer1 = props.player1.movements
-    const allMovementsOfPlayer2 = props.player2.movements
-
-    const movementSelectedPlayerI = props.player1.movements.find(movement => movement.selected === true)
-    const movementSelectedPlayerII = props.player2.movements.find(movement => movement.selected === true)
-
-    const lastMovementPlayerI = props.movemetsInLastRound[0]
-    const lastMovementPlayerII = props.movemetsInLastRound[1]
+    const movementSelectedPlayerI = props.player1.movements
+    const movementSelectedPlayerII = props.player2.movements
 
     //Ataques do player I
     const p1_attack_p2_attack = movementSelectedPlayerI.cardName === "attack" && movementSelectedPlayerII.cardName === "attack"
@@ -55,7 +56,6 @@ export default function HandlerResultsOfRound(props){
 
     //Aqui entram apenas as estruturas de ataque com vitória do player I
     if(p1_attack_p2_attack && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-        /* saveWinnerResultsInAPI(player1Data) */
         matchResult = {
             isThereAWinner: true,
             winner: player1Data,
@@ -64,7 +64,6 @@ export default function HandlerResultsOfRound(props){
     }
 
     if(p1_attack_p2_defense && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-        /* saveWinnerResultsInAPI(player1Data) */
         matchResult = {
             isThereAWinner: true,
             winner: player1Data,
@@ -73,7 +72,6 @@ export default function HandlerResultsOfRound(props){
     }
 
     if(p1_attack_p2_recharging){
-        /* saveWinnerResultsInAPI(player1Data) */
         matchResult = {
             isThereAWinner: true,
             winner: player1Data,
@@ -82,8 +80,7 @@ export default function HandlerResultsOfRound(props){
     }
 
     //Aqui entram apenas as estruturas de ataque com vitória do player II
-    if(p2_attack_p1_attack && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-        /* saveWinnerResultsInAPI(player2Data) */
+    if(p2_attack_p1_attack && movementSelectedPlayerII.type > movementSelectedPlayerI.type){
         matchResult = {
             isThereAWinner: true,
             winner: player2Data,
@@ -91,8 +88,7 @@ export default function HandlerResultsOfRound(props){
         }
     }
 
-    if(p2_attack_p1_defense && movementSelectedPlayerI.type > movementSelectedPlayerII.type){
-        /* saveWinnerResultsInAPI(player2Data) */
+    if(p2_attack_p1_defense && movementSelectedPlayerII.type > movementSelectedPlayerI.type){
         matchResult = {
             isThereAWinner: true,
             winner: player2Data,
@@ -101,121 +97,11 @@ export default function HandlerResultsOfRound(props){
     }
 
     if(p2_attack_p1_recharging){
-        /* saveWinnerResultsInAPI(player2Data) */
         matchResult = {
             isThereAWinner: true,
             winner: player2Data,
             loser: player1Data,
         }
-    }
-
-    //Caso não haja nenhum vencedor, o card que tem selected igual a true passará a ser false
-    //Caso haja movimento repetido, o jogador ganhará a carta bonus
-    function detectLastMovementUsed(){
-
-        //Verificando recargas do player 1
-        /* if(movementSelectedPlayerI.cardName === "recharging"){
-            const movementIndex = allMovementsOfPlayer1.findIndex(movement => movement.cardName === "attack")
-
-            if(movementIndex === -1){
-
-                if(movementSelectedPlayerI.type === 1){
-                    allMovementsOfPlayer1.unshift(new CardModel("attack", 1, 1))
-                } else if(movementSelectedPlayerI.type === 2){
-                    allMovementsOfPlayer1.unshift(new CardModel("attack", 2, 1))
-                } else if(movementSelectedPlayerI.type >= 3){
-                    allMovementsOfPlayer1.unshift(new CardModel("attack", 3, 1))
-                }
-
-            } else {
-
-                if(movementSelectedPlayerI.type === 1){
-                    allMovementsOfPlayer1[movementIndex].amount++
-                } else if(movementSelectedPlayerI.type === 2){
-                    allMovementsOfPlayer1[movementIndex].amount = allMovementsOfPlayer1[movementIndex].amount + 2
-                } else if(movementSelectedPlayerI.type >= 3){
-                    allMovementsOfPlayer1[movementIndex].amount = allMovementsOfPlayer1[movementIndex].amount + 3
-                }
-
-            }
-        } */
-
-        //Verifica se o Player 1 usou o mesmo movimento que na jogada anterior
-        if(lastMovementPlayerI.name === movementSelectedPlayerI.cardName){
-            const movementIndex = allMovementsOfPlayer1.findIndex(movement => movement.cardName === movementSelectedPlayerI)
-
-            if(lastMovementPlayerI.used === 1){
-                if(movementIndex === -1){
-                    allMovementsOfPlayer1.unshift(new CardModel(movementSelectedPlayerI.cardName, 1, 2))
-                } else {
-                    allMovementsOfPlayer1[movementIndex].amount++
-                }
-            }
-
-            if(lastMovementPlayerI.used >= 2){
-                if(movementIndex === -1){
-                    allMovementsOfPlayer1.unshift(new CardModel(movementSelectedPlayerI.cardName, 1, 3))
-                } else {
-                    allMovementsOfPlayer1[movementIndex].amount++
-                }
-            }
-
-            lastMovementPlayerI.used++
-        } else {
-            lastMovementPlayerI.name = movementSelectedPlayerI.cardName
-            lastMovementPlayerI.used = 1
-        }
-
-        //Verifica se o Player 2 usou o mesmo movimento que na jogada anterior
-        if(lastMovementPlayerII.name === movementSelectedPlayerII.cardName){
-            const movementIndex = allMovementsOfPlayer2.findIndex(movement => movement.cardName === movementSelectedPlayerII)
-
-            if(lastMovementPlayerII.used === 1){
-                if(movementIndex === -1){
-                    allMovementsOfPlayer2.unshift(new CardModel(movementSelectedPlayerII.cardName, 1, 2))
-                } else {
-                    allMovementsOfPlayer2[movementIndex].amount++
-                }
-            }
-            if(lastMovementPlayerII.used >= 2){
-                if(movementIndex === -1){
-                    allMovementsOfPlayer2.unshift(new CardModel(movementSelectedPlayerII.cardName, 1, 3))
-                } else {
-                    allMovementsOfPlayer2[movementIndex].amount++
-                }
-            }
-
-            lastMovementPlayerII.used++
-        } else {
-            lastMovementPlayerII.name = movementSelectedPlayerII.cardName
-            lastMovementPlayerII.used = 1
-        }
-
-        console.log("Movimentos do player 1",allMovementsOfPlayer1)
-        console.log("Movimentos do player 2",allMovementsOfPlayer2)
-
-        const allMovementsOfPlayer1Unselected = allMovementsOfPlayer1.map(movement => {
-            if(movement.selected){
-                movement.selected = false
-            }
-
-            return movement
-        })
-
-        const allMovementsOfPlayer2Unselected = allMovementsOfPlayer2.map(movement => {
-            if(movement.selected){
-                movement.selected = false
-            }
-
-            return movement
-        })
-
-        return props.cardsToIncrement(
-            allMovementsOfPlayer1Unselected,
-            allMovementsOfPlayer2Unselected,
-            lastMovementPlayerI,
-            lastMovementPlayerII
-            )
     }
 
     useEffect(()=>{
@@ -229,38 +115,31 @@ export default function HandlerResultsOfRound(props){
 
         const startOtherFightTimeout = setTimeout(()=>{
             if(matchResult.isThereAWinner){
-                saveResultsInAPI(matchResult.winner, matchResult.loser)
+                setResultsInAPI(matchResult.winner, matchResult.loser)
             } else {
-                /* detectLastMovementUsed() */
-                
                 socket.send("starting-round");
             }
         },3000)
 
-        //Ponha um timeout pra iniciar um round caso não haja vencedor/perdedor
+        SoundPlayer.DropCards.play()
 
         return ()=>{
             //Caso algum player saia antes da apresentação resultado, o setTimeout deve ser abortado
-            
             clearTimeout(showCardsTimeout)
             clearTimeout(giveResultTimeout)
             clearTimeout(startOtherFightTimeout)
-            props.cardsToIncrement(matchResult.isThereAWinner)
+            props.resetCards(matchResult.isThereAWinner)
         }
     },[])
 
     return (
       <>
-        {/* <h1>{matchResult}</h1>
-        <p>({movementSelectedPlayerI.cardName} | {movementSelectedPlayerI.type})</p>
-        <p>({movementSelectedPlayerII.cardName} | {movementSelectedPlayerII.type})</p> */}
         <div className="show-result">
             <div className="player-2-card-bringer">
                 <CardToShow
                     moviment={movementSelectedPlayerII.cardName}
                     type={movementSelectedPlayerII.type}
                     show={show}
-                    /* amount={card.amount} */
                     chooseMov={() => {}}
                 />
             </div>
@@ -269,7 +148,6 @@ export default function HandlerResultsOfRound(props){
                     moviment={movementSelectedPlayerI.cardName}
                     type={movementSelectedPlayerI.type}
                     show={show}
-                    /* amount={card.amount} */
                     chooseMov={() => {}}
                 />
             </div>

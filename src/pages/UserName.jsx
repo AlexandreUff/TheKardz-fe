@@ -20,8 +20,12 @@ export default function UserName() {
   }
 
   const onChangeUserName = (e) => {
-    setUserName(e.target.value)
-    setWarning("")
+    if(e.target.value.length <= 12) {
+      setUserName(e.target.value)
+      setWarning("")
+    } else {
+      setWarning("O nome não pode exceder mais que 12 caracteres")
+    }
   }
 
   const sendDatas = async (e) => {
@@ -30,7 +34,6 @@ export default function UserName() {
     let response
 
     if(act === "crt"){
-      console.log("nome",userName)
       response = await APIService.post('/hall/create',{
         userName: userName,
       })
@@ -42,7 +45,6 @@ export default function UserName() {
     }
 
     if(response.status){
-      console.log("Deu certo")
       act === "crt" ? (
           saveUserGameData(userName, response.data.hall, response.data.userId)
         ) : (
@@ -54,8 +56,6 @@ export default function UserName() {
     } else {
       setWarning(response.message)
     }
-
-    console.log(response)
   }
 
   return (

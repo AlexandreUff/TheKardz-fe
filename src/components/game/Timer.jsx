@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import { IcoTimer } from "../Icons"
+import SoundPlayer from "../../Utils/SoundPlayer"
 
 export default function Timer(props){
 
     let [time,setTime] = useState(props.time)
 
     const colorTimer = props.type === "match" ? "green" : "red"
+    const soundBeepTimer = props.type === "match" ? SoundPlayer.TimerRead : SoundPlayer.TimerRound
 
     useEffect(()=>{
         const regressiveTime = setInterval(()=>{
@@ -23,6 +25,10 @@ export default function Timer(props){
             clearInterval(regressiveTime)
         }
     },[])
+
+    useEffect(()=>{
+        soundBeepTimer.play()
+    },[time])
 
     return (
         <div className="timer" style={{border:`${colorTimer} solid 5px`, color: colorTimer}}>

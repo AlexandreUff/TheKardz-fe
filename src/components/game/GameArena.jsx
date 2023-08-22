@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import CardToShow from "./CardToShow";
 import Timer from "./Timer";
 import SocketContext from "../../context/socketContext";
@@ -7,44 +7,19 @@ import ReadableMovementsNames from "../../Utils/ReadableMovementsNames";
 import HandlerResultsOfRound from "./HandlerResultsOfRound";
 import ShowScoreboard from "./ShowScoreboard";
 import CardModel from "../../Utils/MovementModel";
-
-const stageMatchReducer = (state, action) => {
-  return action.payload ;
-};
+import MyNotification from "../../Utils/MyNotification";
 
 export default function GameArena() {
   const [stageMatch, setStageMatch] = useState("stand-by");
   const [resultMatch, setResultMatch] = useState({})
-  const [movemetsInLastRound, setMovemetsInLastRound] = useState([
-    {
-      player: "player1",
-      name: "",
-      used: 0
-    },
-    {
-      player: "player2",
-      name: "",
-      used: 0
-    },
-  ])
   const playersFightingRef = useRef([])
   const sendMovementTimeControll = useRef()
-  const movementsToCompare = useRef([])
-  const [doP1,setDoP1] = useState()
-  const [doP2,setDoP2] = useState()
+  const cardsChosenToCompare = useRef([])
+  const blockSendCard = useRef(false)
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
   const [chosenMoviment, setChosenMoviment] = useState();
-  /* const [triggeredMovement, setTriggeredMovement] = useState(false) */
-  const [cardsOfPlayerI, setCardsOfPlayerI] = useState([
-    new CardModel("attack",1,1),
-    new CardModel("defense",Infinity,1),
-    new CardModel("recharging",Infinity,1),
-  ])
-  const [cardsOfPlayerII, setCardsOfPlayerII] = useState([
-    new CardModel("attack",1,1),
-    new CardModel("defense",Infinity,1),
-    new CardModel("recharging",Infinity,1),
-  ])
+  const [cardsOfPlayerI, setCardsOfPlayerI] = useState([])
+  const [cardsOfPlayerII, setCardsOfPlayerII] = useState([])
 
   const socket = useContext(SocketContext);
 
@@ -57,29 +32,29 @@ export default function GameArena() {
 
       //Cancelamento do Timeout de disparo de movimento caso um dos lutadores (lineNumber 0 ou 1) saiam da sala
       if(status === "start-fight"){
+        setChosenMoviment(false)
+        setResultMatch({})
+        //Esse "reset-my-cards", provavelmente, não ficará aqui
+        socket.send("reset-my-cards")
+        cardsChosenToCompare.current = []
         clearTimeout(sendMovementTimeControll.current)
-        /* movementsToCompare.current = [] */
-        /* movementsToCompare.current = [
-          [
-            new CardModel("attack",1,1),
-            new CardModel("defense",Infinity,1),
-            new CardModel("recharging",Infinity,1),
-          ],
-          [
-            new CardModel("attack",1,1),
-            new CardModel("defense",Infinity,1),
-            new CardModel("recharging",Infinity,1),
-          ]
-        ] */
       }
 
       //Ignição de disparo de movimento caso o "round" se inicie
       if(status === "start-round"){
-        /* movementsToCompare.current = [] */
         setChosenMoviment(false)
+        cardsChosenToCompare.current = []
+        blockSendCard.current = false
         sendMovementTimeControll.current = setTimeout(()=>{
           sendChosenMoviment()
         },5000)
+      }
+
+      if(status === "end-fight"){
+        if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
+          //Esse reset é feito pois pode o player fica só na sala e não reiniciar suas cartas
+          socket.send("reset-my-cards")
+        }
       }
     });
 
@@ -105,124 +80,85 @@ export default function GameArena() {
 
         playersFightingRef.current = [...playersWillFight]
         setPlayersAreFighting([...playersWillFight]);
+
       } else {
+        //Esse reset é feito pois pode o player fica só na sala e não reiniciar suas cartas
+        /* socket.send("reset-my-cards") */
+
         playersFightingRef.current = [...users]
         setPlayersAreFighting([...users]);
       }
     });
 
+    socket.listen("notify-next-fight",(player) => {
+      if(player._id === userId) MyNotification(`Atenção`, `${userName}, é a sua vez de jogar!`)
+    })
+
+    socket.listen("notify-player-is-waiting", (playerIsWaiting) => {
+      if(playerIsWaiting._id === userId) MyNotification("Prepare-se!", `${userName}, você jogará na próxima partida!`)
+    })
+
+    socket.listen("get-fighter-cards", (data) => {
+
+      if(data.userCredentials.userId === playersFightingRef.current[0]._id){
+        const cardsWithCorretlyAmount = data.userCards.map(card => {
+          if(card.amount === null) card.amount = Infinity
+          return card
+        })
+        setCardsOfPlayerI([...cardsWithCorretlyAmount])
+
+      } else if(data.userCredentials.userId === playersFightingRef.current[1]._id){
+        const cardsWithCorretlyAmount = data.userCards.map(card => {
+          if(card.amount === null) card.amount = Infinity
+          return card
+        })
+
+        setCardsOfPlayerII([...cardsWithCorretlyAmount])
+      }
+
+    })
+
     //Captura de movimento dos jogadores via websocket
-    socket.listen("chosen-movement", (dataMovements) => {
+    socket.listen("chosen-movement", (dataMovement) => {
 
       //Caso o player que enviou o movimento seja igual ao do índice 0, ele joga...
       //...no useRef movementsToCompare.current[0]
-      if(dataMovements.player.name === playersFightingRef.current[0].name){
-        /* movementsToCompare.current[0] = [...dataMovements.movement].find(movement => {
-          return movement.selected === true
-        })
-        console.log("O que chegou aqui", movementsToCompare.current[0]) */
+      if(dataMovement.player.name === playersFightingRef.current[0].name){
 
         //Refaz os attr que têm amount igual a null para Infinity novamente
-        const cardsOfPlayerIWithNewAmount = dataMovements.movement.map(card => {
-          if(card.amount === null) card.amount = Infinity
-          /* if(card.selected) card.amount-- */
+        const cardOfPlayerIWithNewAmount = {...dataMovement.movement}
+        if(cardOfPlayerIWithNewAmount.amount === null) cardOfPlayerIWithNewAmount.amount = Infinity
 
-          return card
-        })
-
-        movementsToCompare.current[0] = [...cardsOfPlayerIWithNewAmount]
-        setDoP1([...cardsOfPlayerIWithNewAmount])
-
-        //Remove os cards que zeraram o amout
-        /* const newCardsOfPlayerI = cardsOfPlayerIWithNewAmount.filter(movement => {
-          return movement.selected === false || movement.amount > 0;
-        }) */
-
-        /* setCardsOfPlayerI([...cardsOfPlayerIWithNewAmount]) */
+        cardsChosenToCompare.current[0] = cardOfPlayerIWithNewAmount
+        /* setDoP1([...cardsOfPlayerIWithNewAmount]) */
 
         //Caso o player que enviou o movimento seja igual ao do índice 1, ele joga...
         //...no useRef movementsToCompare.current[1]
-      } else if (dataMovements.player.name === playersFightingRef.current[1].name){
-        /* movementsToCompare.current[1] = [...dataMovements.movement].find(movement => {
-          return movement.selected === true
-        }) */
+      } else if (dataMovement.player.name === playersFightingRef.current[1].name){
 
         //Refaz os attr que têm amount igual a null para Infinity novamente
-        const cardsOfPlayerIIWithNewAmount = dataMovements.movement.map(card => {
-          if(card.amount === null) card.amount = Infinity
-          /* if(card.selected) card.amount-- */
+        const cardOfPlayerIIWithNewAmount = {...dataMovement.movement}
+        if(cardOfPlayerIIWithNewAmount.amount === null) cardOfPlayerIIWithNewAmount.amount = Infinity
 
-          return card
-        })
-
-        //Remove os cards que zeraram o amout
-        /* const newCardsOfPlayerII = cardsOfPlayerIIWithNewAmount.filter(movement => {
-          return movement.selected === false || movement.amount > 0;
-        }) */
-
-        movementsToCompare.current[1] = [...cardsOfPlayerIIWithNewAmount]
-        setDoP2([...cardsOfPlayerIIWithNewAmount])
-
-        /* setCardsOfPlayerII([...cardsOfPlayerIIWithNewAmount]) */
+        cardsChosenToCompare.current[1] = cardOfPlayerIIWithNewAmount
+        /* setDoP2([...cardsOfPlayerIIWithNewAmount]) */
       }
 
       //Caso o player já tenha escolhido um movimento e o outro player acaba de enviar o seu
-      /* if(movementsToCompare.current[0] && movementsToCompare.current[1]){
+      if(cardsChosenToCompare.current[0] && cardsChosenToCompare.current[1]){
         setStageMatch("comparing-movements")
-      } */
+      }
     })
 
   }, [socket]);
 
   useEffect(()=>{
-    console.log("Estágio:", stageMatch)
-    if(stageMatch === "start-fight"){
-      setDoP1(undefined)
-      setDoP2(undefined)
+    if(stageMatch === "start-round"){
+      if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
+        socket.send("get-fighter-cards")
+      }
     }
   },[stageMatch])
-
-  useEffect(()=>{
-    console.log("SCP1", cardsOfPlayerI)
-  },[cardsOfPlayerI])
-
-  useEffect(()=>{
-    console.log("SCP2", cardsOfPlayerII)
-  },[cardsOfPlayerII])
-
-  useEffect(()=>{
-    setTimeout(()=>{
-      console.log("doP1",doP1)
-      console.log("doP2",doP2)
-    },1000)
-
-    if(doP1 && doP2){
-      console.log("JÁ TEM OS 2 PORRA!")
-      setStageMatch("comparing-movements")
-    }
-  },[doP1,doP2])
-
-  /* useEffect(()=>{
-    const isThereASelectedCardPlayer1 = cardsOfPlayerI.find(movement => movement.selected === true)
-    const isThereASelectedCardPlayer2 = cardsOfPlayerII.find(movement => movement.selected === true)
-    const iAmNotOneOfThePlayers = playersFightingRef.current[0]._id === userId
-
-    if(isThereASelectedCardPlayer1 && isThereASelectedCardPlayer2 && triggeredMovement){
-      console.log("JÁ TENHO OS 2!")
-      setStageMatch("comparing-movements")
-    }
-
-  },[cardsOfPlayerI, cardsOfPlayerII, triggeredMovement]) */
-
-  /* useEffect(()=>{
-    console.log("P1",movementsToCompare.current[0])
-    console.log("P2",movementsToCompare.current[1])
-
-    if(movementsToCompare.current[0] && movementsToCompare.current[1]){
-      console.log("----FINALMENTE!----")
-      setStageMatch("comparing-movements")
-    }
-  },[movementsToCompare.current[0],movementsToCompare.current[1]]) */
 
   const sendStartRoundStatus = () => {
     socket.send("starting-round");
@@ -232,87 +168,52 @@ export default function GameArena() {
     //Apenas os fighters podem disparar o movimento
     if(playersFightingRef.current[0]._id === userId || playersFightingRef.current[1]._id === userId){
 
-      /* console.log("ANTES DE ENVIAR",movementsToCompare.current[0]) */
-
-      let isThereASelectedCardPlayer1/*  = [...cardsOfPlayerI] */
-      /* let isThereASelectedCardPlayer2 = cardsOfPlayerII.find(movement => movement.selected === true) */
-
       //Caso o player nao tenha escolhido nenhuma carta, o jogo força escolha de uma "Recharging"
-      if(!cardsOfPlayerI.find(movement => movement.selected === true)){
-        const newCardsOfPlayerI =  [...cardsOfPlayerI]
-        newCardsOfPlayerI[cardsOfPlayerI.length-1].selected = true
-        isThereASelectedCardPlayer1 = [...newCardsOfPlayerI]
-        /* setChosenMoviment({...newCardsOfPlayerI[cardsOfPlayerI.length-1]}) */
-      } else {
-        isThereASelectedCardPlayer1 = [...cardsOfPlayerI]
+      if(!cardsChosenToCompare.current[0]){
+        //blockSendCard serve para impedir que haja uma escolha posterior ao envio e,...
+        //com isso, evitado que hajam cartas escolhidas distintas para ambos players.
+        blockSendCard.current = true
+        cardsChosenToCompare.current[0] = new CardModel("recharging", Infinity, 1)
       }
-
-      /* movementsToCompare.current[0] = isThereASelectedCardPlayer1.find(movement => movement.selected === true) */
 
       //É enviado uma estrutura com o nome do fighter e todos os seus movimentos + o selecionado
       //Isso serve para que o jogador que acabou de entrar possa receber informações das cartas...
       //...para fazer o processamento de seu lado.
-      const movementDataWillSend = {
+      const cardDataWillSend = {
         player: {
           ...playersFightingRef.current[0]
         },
-        movement: [
-          ...isThereASelectedCardPlayer1
-        ]
+        movement: {
+          ...cardsChosenToCompare.current[0]
+        }
       }
 
-      socket.send("chosen-movement", movementDataWillSend)
+      socket.send("chosen-movement", cardDataWillSend)
 
-      movementsToCompare.current[0] = isThereASelectedCardPlayer1
-      setDoP1([...isThereASelectedCardPlayer1])
-
-      /* if(movementsToCompare.current[0] && movementsToCompare.current[1]){
+      if(cardsChosenToCompare.current[0] && cardsChosenToCompare.current[1]){
         setStageMatch("comparing-movements")
-      } */
-
-      //Assim que os dados são enviados, os cardsOfPlayerI são refeitos + o movimento selecionado
-      /* const cardsOfPlayerIWithNewAmount = isThereASelectedCardPlayer1.map(card => {
-        if(card.selected){
-          card.amount--
-        }
-        return card
-      }) */
-
-      /* const newCardsOfPlayerI = [...cardsOfPlayerIWithNewAmount].filter(movement => {
-        return movement.selected === false || movement.amount > 0;
-      }) */
-
-      /* const newCardsOfPlayerI = [...cardsOfPlayerIWithNewAmount].filter(movement => {
-        return movement.selected === false || movement.amount > 0;
-      }) */
-
-      //Entra em standy-by caso o adversário não tenha enviado ainda seu movimento
-      /* setStageMatch("waiting-enemy-answer") */
-
-      //Caso o adversário já tenha enviado o movimento, inicia-se a comparação
-      /* if(isThereASelectedCardPlayer1 && isThereASelectedCardPlayer2){
-        setStageMatch("comparing-movements")
-      } */
-
-      /* setCardsOfPlayerI([...cardsOfPlayerIWithNewAmount]) */
-
-      /* setTriggeredMovement(true) */
+      }
     }
   }
 
   //Seleciona o movimento escolhido pelo player e o põe, junto com os outros cards, ...
   //no movementsToCompare.current[0]
   const userSelectMovement = (index,card) => {
-    setChosenMoviment({...card})
-    const newCards = cardsOfPlayerI.map(card => {
-      card.selected = false
-      return card
-    })
-    newCards[index].selected = true
+    //Caso não haja bloqueio de envio, os trâmites de escolhe ocorrem normalmente
+    if(!blockSendCard.current){
+      setChosenMoviment({...card})
+      const newCards = cardsOfPlayerI.map(card => {
+        card.selected = false
+        return card
+      })
+      newCards[index].selected = true
 
-    setCardsOfPlayerI([
+      cardsChosenToCompare.current[0] = newCards[index]
+  
+      setCardsOfPlayerI([
         ...newCards
       ])
+    }
   }
 
   const renderScoreboard = () => {
@@ -378,104 +279,34 @@ export default function GameArena() {
           />
         )}
         {stageMatch === "comparing-movements" && (
-          <>
-          {console.log("CHOSWEN", chosenMoviment)}
           <HandlerResultsOfRound
             myId={userId}
             player1={
                 {
                   playerData: playersFightingRef.current[0],
-                  movements: doP1,
+                  movements: cardsChosenToCompare.current[0],
                 }
               }
             player2={
                 {
                   playerData: playersFightingRef.current[1],
-                  movements: doP2,
+                  movements: cardsChosenToCompare.current[1],
                 }
               }
             takeResult={
               (data)=>{setResultMatch({...data})}
             }
-            cardsToIncrement={
-              (/* cardForPlayer1, cardForPlayer2, lastMovementPlayerI, lastMovementPlayerII */result) => {
-
-                /* Tac geral como true */
-
-                /* console.log("EXECUTEI",movementsToCompare.current[0],movementsToCompare.current[1]) */
-
-                console.log("resulto",result)
-
+            resetCards={
+              (result) => {
                 if(result){
-                  setCardsOfPlayerI([
-                    new CardModel("attack",1,1),
-                    new CardModel("defense",Infinity,1),
-                    new CardModel("recharging",Infinity,1),
-                  ])
-
-                  setCardsOfPlayerII([
-                    new CardModel("attack",1,1),
-                    new CardModel("defense",Infinity,1),
-                    new CardModel("recharging",Infinity,1),
-                  ])
-
-                  setDoP1(undefined)
-                  setDoP2(undefined)
-                  setResultMatch({})
-                  
-                } else {
-                  const newCardsOfPlayerIWithNewAmount = doP1.map(card => {
-                    if(card.selected){
-                      card.amount--
-                    }
-  
-                    card.selected = false
-                    return card
-                  })
-  
-                  const newCardsOfPlayerI = [...newCardsOfPlayerIWithNewAmount].filter(movement => {
-                    return movement.amount > 0;
-                  })
-  
-                  const newCardsOfPlayerIIWithNewAmount = doP2.map(card => {
-                    if(card.selected){
-                      card.amount--
-                    }
-  
-                    card.selected = false
-                    return card
-                  })
-  
-                  const newCardsOfPlayerII = [...newCardsOfPlayerIIWithNewAmount].filter(movement => {
-                    return movement.amount > 0;
-                  })
-  
-                  setCardsOfPlayerI([...newCardsOfPlayerI/* , new CardModel("attack",1,2) */])
-                  setCardsOfPlayerII([...newCardsOfPlayerII])
-  
-                  movementsToCompare.current = []
-                  setDoP1(undefined)
-                  setDoP2(undefined)
+                  //Arrays com objetos vazios são adicionados para que, ao começar um...
+                  //novo combate, produza o efeito das cartas virando ao iniciar o round
+                  setCardsOfPlayerI([{}, {}, {}])
+                  setCardsOfPlayerII([{}, {}, {}])
                 }
-                
-                
-                /* if(cardForPlayer1){
-                  setCardsOfPlayerI([...cardsOfPlayerI,{...cardForPlayer1}])
-                  movementsToCompare.current[0] = undefined
-                }
-                if(cardForPlayer2){
-                  setCardsOfPlayerII([...cardsOfPlayerII,{...cardForPlayer2}])
-                  movementsToCompare.current[1] = undefined
-                } */
-                /* setMovemetsInLastRound([
-                  {...lastMovementPlayerI},
-                  {...lastMovementPlayerII}
-                ]) */
               }
             }
-            movemetsInLastRound={[...movemetsInLastRound]}
           />
-          </>
         )}
         {stageMatch === "stand-by" &&
           (playersAreFighting.length > 1 ? (

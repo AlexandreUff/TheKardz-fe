@@ -324,11 +324,23 @@ $fourthColor: #2B2A4C;
             height: 100%;
 
             background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(0px);
+            opacity: 0;
 
             z-index: 2;
 
             overflow: hidden;
+
+            animation: scoreboard-appearing .3s forwards;
+
+            &.venceu{
+                color: green
+            }
+
+            .emoji-status{
+                font-size: 4rem;
+                animation: emoji-appearing 10s forwards;
+            }
 
             /* .title-container{
                 position: relative; */
@@ -336,19 +348,32 @@ $fourthColor: #2B2A4C;
                 h1 {
                     position: absolute;
                     top: 30%;
-                    left: 20%;
+                    left: 0%;
+
+                    -webkit-text-stroke-width: 3px;
+                    -webkit-text-stroke-color: $firstColor;
+                    text-shadow: 0px 5px 5px black;
+
                     font-size: 9rem;
-                    /* animation: winner-title 4s linear infinite; */
+                    animation: winner-title 4s linear;
+                    z-index: 5;
                 }
     
                 h2 {
                     position: absolute;
                     top: 60%;
-                    left: 20%;
+                    right: 20%;
+
+                    -webkit-text-stroke-width: 3px;
+                    -webkit-text-stroke-color: $firstColor;
+                    text-shadow: 0px 5px 5px black;
+
                     font-size: 6rem;
-                    /* animation: winner-title 4s linear infinite; */
+                    animation: winner-subtitle 4s linear;
+                    z-index: 5;
                 }
-                margin-right: 20%;
+
+            margin-right: 20%;
             /* } */
         }
 
@@ -907,17 +932,27 @@ $fourthColor: #2B2A4C;
     }
 }
 
-/* @keyframes winner-title {
-    0% {
-      left: -50%;
+@keyframes winner-title {
+    to {
+        left: 100%;
     }
-    10% {
-      left: -10%;
+}
+
+@keyframes winner-subtitle {
+    to {
+        right: 100%;
     }
-    50% {
-      left: 100%;
+}
+
+@keyframes scoreboard-appearing {
+    to {
+        backdrop-filter: blur(2px);
+        opacity: 1;
     }
-    100% {
-      left: 100%;
+}
+
+@keyframes emoji-appearing {
+    to {
+        top: -50%
     }
-} */
+}
