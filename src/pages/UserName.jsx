@@ -20,8 +20,12 @@ export default function UserName() {
   }
 
   const onChangeUserName = (e) => {
-    setUserName(e.target.value)
-    setWarning("")
+    if(e.target.value.length <= 12) {
+      setUserName(e.target.value)
+      setWarning("")
+    } else {
+      setWarning("O nome não pode exceder mais que 12 caracteres")
+    }
   }
 
   const sendDatas = async (e) => {
