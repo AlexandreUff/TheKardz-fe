@@ -1,5 +1,5 @@
 class APIService {
-    static baseURL = "https://the-kardz-be.vercel.app:3001"
+    static baseURL = /* "http://localhost:3001" */ "https://the-kardz-be.vercel.app"
 
     static async get(endPoint){
         try {
