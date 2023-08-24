@@ -5,7 +5,7 @@ export default class SocketService {
     static socket
 
     static startSocketService(){
-        this.socket = io(/* "http://localhost:3002" */ "wss://the-kardz-be.vercel.app:3002", { transports: ['websocket'] });
+        this.socket = io(/* "http://localhost:3002" */ "http://the-kardz-be.vercel.app:3002", { transports: ['websocket'] });
 
         this.socket.on("connect", () => {
           console.log("Conexão estabelecida com o servidor socket.io.");
