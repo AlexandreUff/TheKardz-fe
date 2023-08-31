@@ -9,9 +9,11 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 /* import APIService from "../services/APIService"; */
 
+const socket = SocketService
+socket.startSocketService()
+
 export default function Game() {
   
-  const socket = SocketService
   const navigate = useNavigate()
 
   
@@ -19,7 +21,6 @@ export default function Game() {
   
   /* const isCredentialRead = SessionService.get("credential-read") */
   
-  socket.startSocketService()
   /* if(!isCredentialRead){
   } */ /* else {
     console.log("usuário inexistente")
