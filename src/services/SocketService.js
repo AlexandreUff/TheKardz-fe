@@ -5,7 +5,7 @@ export default class SocketService {
     static socket
 
     static startSocketService(){
-        this.socket = io(/* "http://localhost:3002" */ "https://the-kardz-be-render.onrender.com:3002", {/* host: "http://localhost:3002", */ port: 3002,path:"/tkc/", transports: ['websocket'] });
+        this.socket = io(/* "http://localhost:3002" */ "54.207.135.42:3002", {/* host: "http://localhost:3002", */ port: 3002,path:"/tkc/", transports: ['websocket'] });
 
         this.socket.on("connect", () => {
           console.log("Conexão estabelecida com o servidor socket.io.");
