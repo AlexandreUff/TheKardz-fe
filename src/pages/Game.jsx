@@ -9,10 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 /* import APIService from "../services/APIService"; */
 
-const socket = SocketService
-socket.startSocketService()
 
 export default function Game() {
+  const socket = SocketService
+  socket.startSocketService()
   
   const navigate = useNavigate()
 
