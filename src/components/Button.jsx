@@ -1,3 +1,9 @@
-/* Aqui ficará o botão de envio */
-
-/* Lembre-se de fazer o ícone do game usando CSS mesmo */
+export default function Button(props){
+    return (
+        <>
+            <button title={props.title} onClick={props.eventClick}>
+                {props.loading ? "XXXX" : props.value}
+            </button>
+        </>
+    )
+}

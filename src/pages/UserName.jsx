@@ -5,11 +5,13 @@ import Main from "../components/Main";
 import { useState } from "react";
 import APIService from "../services/APIService";
 import SessionService from "../services/SessionService";
+import Button from "../components/Button";
 
 export default function UserName() {
 
   const [userName, setUserName] = useState("")
   const [warning, setWarning] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const { act } = useParams()
 
@@ -33,6 +35,8 @@ export default function UserName() {
 
     let response
 
+    setLoading(true)
+
     if(act === "crt"){
       response = await APIService.post('/hall/create',{
         userName: userName,
@@ -54,6 +58,7 @@ export default function UserName() {
       navigate("/game")
       
     } else {
+      setLoading(false)
       setWarning(response.message)
     }
   }
@@ -69,7 +74,8 @@ export default function UserName() {
           {warning && <p className="warning">
             {warning}
           </p>}
-          <input type="submit" value="CRIAR" title="Criar nome de usuário" onClick={sendDatas} />
+          {/* <input type="submit" value="CRIAR" title="Criar nome de usuário" onClick={sendDatas} /> */}
+          <Button value="CRIAR" loading={loading} title="Criar nome de usuário" eventClick={sendDatas} />
         </form>
       </Main>
       <Footer />

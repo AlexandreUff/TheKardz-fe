@@ -132,12 +132,15 @@ $fourthColor: #2B2A4C;
             text-align: center;
         }
 
-        input[type="submit"]{
+        button {
             margin-top: 15px;
             background-color: $secondColor;
             font-weight: 600;
             color: $fourthColor;
-            width: 150px;
+            width: 180px;
+            border: none;
+            border-radius: 10px;
+            padding: 5px 0;
             cursor: pointer;
             transition: .2s;
 

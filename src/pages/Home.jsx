@@ -4,11 +4,13 @@ import Header from "../components/Header";
 import Main from "../components/Main";
 import APIService from "../services/APIService";
 import { useState } from "react";
+import Button from "../components/Button";
 
 export default function Home() {
 
   const [hallNumber,setHallNumber] = useState("")
   const [warning,setWarning] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -19,11 +21,13 @@ export default function Home() {
 
   const takeHallNumber = async (e) => {
     e.preventDefault()
+    setLoading(true)
     const response = await APIService.get(`/hall?number=${hallNumber}`)
     
     if(response.status){
       navigate(`/username/${response.data}`)
     } else {
+      setLoading(false)
       setWarning(response.message)
     }
   }
@@ -38,7 +42,8 @@ export default function Home() {
           {warning && <p className="warning">
             {warning}
           </p>}
-          <input type="submit" value="ENTRAR" title="Entrar na sala" onClick={takeHallNumber} />
+          {/* <input type="submit" value="ENTRAR" title="Entrar na sala" onClick={takeHallNumber} /> */}
+          <Button value="ENTRAR" loading={loading} title="Entrar na sala" eventClick={takeHallNumber} />
         </form>
         <div>
           <Link to="/username/crt">Ou crie uma sala</Link>

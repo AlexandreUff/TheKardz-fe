@@ -107,16 +107,19 @@
   margin-top: 15px;
   text-align: center;
 }
-.App main input[type=submit] {
+.App main button {
   margin-top: 15px;
   background-color: #EA906C;
   font-weight: 600;
   color: #2B2A4C;
-  width: 150px;
+  width: 180px;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 0;
   cursor: pointer;
   transition: 0.2s;
 }
-.App main input[type=submit]:hover {
+.App main button:hover {
   transform: scale(1.2);
 }
 .App main p.warning {
