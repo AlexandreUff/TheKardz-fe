@@ -607,6 +607,9 @@
   transform: scale(1.1);
   cursor: pointer;
 }
+.card-game.selected {
+  transform: scale(1.1);
+}
 
 /* Media Query */
 @media (max-width: 850px) {

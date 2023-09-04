@@ -28,7 +28,7 @@ export default function CardEmpty(props){
     },[props.show])
 
     return (
-    <div className={`card-game ${props.show && "turn"}`} title={titleCompleted} onClick={() => props.show && props.chooseMov()}>
+    <div className={`card-game ${props.show && "turn"} ${props.selected && "selected"}`} title={titleCompleted} onClick={() => props.show && props.chooseMov()}>
         {props.amount > 1 && (
             <div className={`show-amount ${props.amount === Infinity && "is-infinity"}`}>
                 {props.amount === Infinity ? "∞" : props.amount}

@@ -759,6 +759,10 @@ $fourthColor: #2B2A4C;
         transform: scale(1.1);
         cursor: pointer;
     }
+
+    &.selected{
+        transform: scale(1.1);
+    }
       
 }
 

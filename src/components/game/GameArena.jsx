@@ -329,6 +329,7 @@ export default function GameArena() {
                       show={stageMatch === "start-round"}
                       amount={card.amount}
                       chooseMov={() => userSelectMovement(i, card)}
+                      selected={card.selected}
                       key={i}
                     />
           }) : (
