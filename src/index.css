@@ -108,6 +108,9 @@
   text-align: center;
 }
 .App main button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 15px;
   background-color: #EA906C;
   font-weight: 600;
@@ -121,6 +124,14 @@
 }
 .App main button:hover {
   transform: scale(1.2);
+}
+.App main button .loading {
+  width: 20px;
+  height: 20px;
+  animation: spinning 0.5s linear infinite;
+}
+.App main button .loading svg {
+  width: 100%;
 }
 .App main p.warning {
   margin-top: 5px;
@@ -749,6 +760,14 @@
 @keyframes emoji-appearing {
   to {
     top: -50%;
+  }
+}
+@keyframes spinning {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 

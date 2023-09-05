@@ -133,6 +133,10 @@ $fourthColor: #2B2A4C;
         }
 
         button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
             margin-top: 15px;
             background-color: $secondColor;
             font-weight: 600;
@@ -146,6 +150,17 @@ $fourthColor: #2B2A4C;
 
             &:hover{
                 transform: scale(1.2);
+            }
+
+            .loading{
+                width: 20px;
+                height: 20px;
+
+                animation: spinning .5s linear infinite;
+
+                svg{
+                    width: 100%;
+                }
             }
         }
 
@@ -962,4 +977,13 @@ $fourthColor: #2B2A4C;
     to {
         top: -50%
     }
+}
+
+@keyframes spinning{
+    from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
 }

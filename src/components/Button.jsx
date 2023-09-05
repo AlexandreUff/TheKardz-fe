@@ -1,8 +1,10 @@
+import Loading from "./game/Loading";
+
 export default function Button(props){
     return (
         <>
             <button title={props.title} onClick={props.eventClick}>
-                {props.loading ? "XXXX" : props.value}
+                {props.loading ? <Loading /> : props.value}
             </button>
         </>
     )
