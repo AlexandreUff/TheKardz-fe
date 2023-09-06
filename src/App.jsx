@@ -15,7 +15,7 @@ import Help from './components/Help';
 function App() {
   return (
     <div className="App">
-      <Help />
+      {/* <Help /> */}
       <Router>
         <Routes>
           <Route index element={<Home/>}/>

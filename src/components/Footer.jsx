@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { IcoGHBs, IcoLIn, IcoPDF } from "./Icons";
 
-export default function Footer(){
+export default function Footer(props){
     return <>
         <footer>
             <nav>
@@ -24,8 +24,8 @@ export default function Footer(){
                 </ul>
             </nav>
             <div className="how-to-play">
-                <Link to="/howtoplay"/* target="_blank" */ /* onClick={() => window.open("/howtoplay")} */>
-                    <h3>COMO JOGAR!</h3>
+                <Link /* to="/howtoplay" *//* target="_blank" */ /* onClick={() => window.open("/howtoplay")} */>
+                    <h3 onClick={() => {props.isToShowHelp(!props.helpStatus)}}>COMO JOGAR!</h3>
                 </Link>
             </div>
             <div>

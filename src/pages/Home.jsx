@@ -5,12 +5,14 @@ import Main from "../components/Main";
 import APIService from "../services/APIService";
 import { useState } from "react";
 import Button from "../components/Button";
+import Help from "../components/Help";
 
 export default function Home() {
 
   const [hallNumber,setHallNumber] = useState("")
   const [warning,setWarning] = useState("")
   const [loading, setLoading] = useState(false)
+  const [showHelp, setShowHelp] = useState(false)
 
   const navigate = useNavigate()
 
@@ -34,6 +36,9 @@ export default function Home() {
 
   return (
     <>
+      {
+        showHelp && <Help />
+      }
       <Header />
       <Main>
         <form>
@@ -49,7 +54,7 @@ export default function Home() {
           <Link to="/username/crt">Ou crie uma sala</Link>
         </div>
       </Main>
-      <Footer />
+      <Footer helpStatus={showHelp} isToShowHelp={setShowHelp} />
     </>
   );
 }
