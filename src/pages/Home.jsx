@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <>
       {
-        showHelp && <Help />
+        showHelp && <Help closeHelp={()=>{setShowHelp(false)}} />
       }
       <Header />
       <Main>

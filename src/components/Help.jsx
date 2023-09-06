@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IcoLeftArrow, IcoRightArrow } from "./Icons";
 
-export default function Help(){
+export default function Help(props){
 
     const [count,setCount] = useState(0)
 
@@ -35,6 +35,8 @@ export default function Help(){
                     </section>
                 </div>
             </div>
+
+            <input type="button" value="X" onClick={props.closeHelp} />
 
             <div className="count-display">
                 {(count * -1) + 1} / 3
