@@ -10,10 +10,12 @@ import UserName from './pages/UserName';
 import NotFound from './pages/NotFound';
 import HowToPlay from './pages/HowToPlay';
 import Game from './pages/Game';
+import Help from './components/Help';
 
 function App() {
   return (
     <div className="App">
+      <Help />
       <Router>
         <Routes>
           <Route index element={<Home/>}/>

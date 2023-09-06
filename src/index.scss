@@ -19,6 +19,100 @@ $fourthColor: #2B2A4C;
   height: 100vh;
   color: $secondColor;
   font-family: 'Geologica';
+  position: relative;
+
+  .help{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+
+    width: 90%;
+    height: 90%;
+    border-radius: 2%;
+    
+    background-color: #00000075;
+    box-shadow: 4px 4px 10px black;
+    backdrop-filter: blur(5px);
+
+    z-index: 20;
+
+    .caroussel {
+        position: relative;
+        width: 92%;
+        height: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+
+        .frame-container{
+            display: flex;
+
+            position: absolute;
+            top: 0px;
+            left: 0px;
+
+            z-index: 0;
+
+            width: 300%;
+            height: 100%;
+
+            transition: .5s;
+
+            section{
+                width: 33.3%;
+                padding: 5px;
+                color:greenyellow;
+            }
+        }
+    }
+
+    button {
+        position: absolute;
+        top: 45%;
+
+        width: 40px;
+        height: 40px;
+        padding: 2px;
+        border-radius: 50%;
+
+        border: none;
+        background-color: $secondColor;
+        color: $fourthColor;
+        box-shadow: 4px 4px 10px black;
+
+        animation: up-and-down .5s alternate infinite;
+        transition: .3s;
+
+        &.left-button{
+            left: -20px;
+        }
+
+        &.right-button{
+            right: -20px;
+        }
+
+        &:hover{
+            background-color: $thirthColor;
+            color: $secondColor;
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+    }
+
+    .count-display{
+        width: 15%;
+        padding: 4px 0;
+        color: $fourthColor;
+        box-shadow: 4px 4px 10px black;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin: 0 auto;
+        background-color: $firstColor;
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+    }
+
+  }
 
   header{
     display: flex;
@@ -1015,5 +1109,14 @@ $fourthColor: #2B2A4C;
     to {
         box-shadow: 0px 0px 5px orangered;
         transform: scale(1.05);
+    }
+}
+
+@keyframes up-and-down{
+    from {
+        top: 45%
+    }
+    to {
+        top: 47%
     }
 }

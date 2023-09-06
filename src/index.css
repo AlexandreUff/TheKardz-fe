@@ -13,6 +13,80 @@
   height: 100vh;
   color: #EA906C;
   font-family: "Geologica";
+  position: relative;
+}
+.App .help {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  border-radius: 2%;
+  background-color: rgba(0, 0, 0, 0.4588235294);
+  box-shadow: 4px 4px 10px black;
+  backdrop-filter: blur(5px);
+  z-index: 20;
+}
+.App .help .caroussel {
+  position: relative;
+  width: 92%;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.App .help .caroussel .frame-container {
+  display: flex;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 0;
+  width: 300%;
+  height: 100%;
+  transition: 0.5s;
+}
+.App .help .caroussel .frame-container section {
+  width: 33.3%;
+  padding: 5px;
+  color: greenyellow;
+}
+.App .help button {
+  position: absolute;
+  top: 45%;
+  width: 40px;
+  height: 40px;
+  padding: 2px;
+  border-radius: 50%;
+  border: none;
+  background-color: #EA906C;
+  color: #2B2A4C;
+  box-shadow: 4px 4px 10px black;
+  animation: up-and-down 0.5s alternate infinite;
+  transition: 0.3s;
+}
+.App .help button.left-button {
+  left: -20px;
+}
+.App .help button.right-button {
+  right: -20px;
+}
+.App .help button:hover {
+  background-color: #B31312;
+  color: #EA906C;
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.App .help .count-display {
+  width: 15%;
+  padding: 4px 0;
+  color: #2B2A4C;
+  box-shadow: 4px 4px 10px black;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 auto;
+  background-color: #EEE2DE;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
 }
 .App header {
   display: flex;
@@ -793,6 +867,14 @@
   to {
     box-shadow: 0px 0px 5px orangered;
     transform: scale(1.05);
+  }
+}
+@keyframes up-and-down {
+  from {
+    top: 45%;
+  }
+  to {
+    top: 47%;
   }
 }
 
