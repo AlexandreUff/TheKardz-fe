@@ -183,7 +183,7 @@ $fourthColor: #2B2A4C;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 10px 50px;
+    margin: 10px 10px;
     color: $secondColor;
     text-align: center;
     font-family: 'Geologica';
@@ -208,6 +208,15 @@ $fourthColor: #2B2A4C;
     div {
             font-size: 2rem;
             line-height: 1;
+
+            
+            a {
+                text-decoration: none;
+                h3{
+                    font-size: 1.5rem;
+                    color: $secondColor;
+                }
+            }
         }
   }
 
@@ -927,8 +936,12 @@ $fourthColor: #2B2A4C;
 
         footer{
             flex-direction: column;
+
+            nav,div{
+                margin: 5px 0;
+            }
         }
-    }   
+    }
 }
 
 /* KeyFrames */

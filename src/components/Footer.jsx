@@ -23,11 +23,11 @@ export default function Footer(){
                     </li>
                 </ul>
             </nav>
-            <nav>
-                <Link to="/howtoplay" /* target="_blank" */ onClick={() => window.open("/howtoplay")}>
+            <div className="how-to-play">
+                <Link to="/howtoplay"/* target="_blank" */ /* onClick={() => window.open("/howtoplay")} */>
                     <h3>COMO JOGAR!</h3>
                 </Link>
-            </nav>
+            </div>
             <div>
                 <small>
                 &copy; 2023 - Alexandre Magno Dias<br />

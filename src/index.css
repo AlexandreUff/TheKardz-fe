@@ -148,7 +148,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 10px 50px;
+  margin: 10px 10px;
   color: #EA906C;
   text-align: center;
   font-family: "Geologica";
@@ -166,6 +166,13 @@
 .App footer div {
   font-size: 2rem;
   line-height: 1;
+}
+.App footer div a {
+  text-decoration: none;
+}
+.App footer div a h3 {
+  font-size: 1.5rem;
+  color: #EA906C;
 }
 .App .game-area {
   display: flex;
@@ -719,6 +726,9 @@
 @media (max-width: 400px) {
   .App footer {
     flex-direction: column;
+  }
+  .App footer nav, .App footer div {
+    margin: 5px 0;
   }
 }
 /* KeyFrames */
