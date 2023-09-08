@@ -15,7 +15,7 @@ export default function Help(props){
                 )
             }
             {
-                count > -2 && (
+                count > -9 && (
                     <button className="right-button" onClick={()=>{setCount(count-1)}}>
                         <IcoRightArrow />
                     </button>
@@ -33,13 +33,34 @@ export default function Help(props){
                     <section>
                         Teste 3
                     </section>
+                    <section>
+                        Teste 4
+                    </section>
+                    <section>
+                        Teste 5
+                    </section>
+                    <section>
+                        Teste 6
+                    </section>
+                    <section>
+                        Teste 7
+                    </section>
+                    <section>
+                        Teste 8
+                    </section>
+                    <section>
+                        Teste 9
+                    </section>
+                    <section>
+                        Teste 10
+                    </section>
                 </div>
             </div>
 
             <input type="button" value="X" onClick={props.closeHelp} />
 
             <div className="count-display">
-                {(count * -1) + 1} / 3
+                {(count * -1) + 1} / 10
             </div>
         </div>
     )
