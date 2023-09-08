@@ -48,9 +48,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   width: 10%;
   padding: 5px;
-  color: greenyellow;
+}
+.App .help .caroussel .frame-container section p {
+  color: #EEE2DE;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 5px 0;
+}
+.App .help .caroussel .frame-container section img.eff {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  max-width: 100%;
 }
 .App .help button {
   position: absolute;
