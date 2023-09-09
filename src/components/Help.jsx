@@ -9,6 +9,9 @@ import HP03 from "../assets/images/hp-03.png"
 import HP04 from "../assets/images/hp-04.png"
 import HP05 from "../assets/images/hp-05.png"
 import HP06 from "../assets/images/hp-06.png"
+import HP08 from "../assets/images/hp-08.png"
+import HP09 from "../assets/images/hp-09.png"
+import HP10 from "../assets/images/hp-10.png"
 
 export default function Help(props){
 
@@ -36,7 +39,7 @@ export default function Help(props){
                     <section>
                         <p>seja bem-vindo ao The Kardz!</p>
                         <img src={MainIcon} />
-                        <p>passe para o lado para conhecer as regras do jogo e aprender a jogar.</p>
+                        <p>passe para o lado para conhecer as regras e aprender a jogar.</p>
                     </section>
                     <section>
                         <p>na tela inicial, você pode digitar um número de uma sala existente para entrar nela.</p>
@@ -61,13 +64,6 @@ export default function Help(props){
                         </p>
                     </section>
                     <section>
-                        {/* <p>Por fim, se for a sua vez de jogar, sua tela aparecerá dessa forma:</p>
-                        <img src={HP04} className="eff" width={"300px"} />
-                        <p>
-                            Seu nome de usuário e outras informações como número de derrotas e vitórias
-                            sempre aparecerão na parte inferior da tela e do seu adversário sempre aparecerão
-                            na parte superior enquanto for sua vez de jogar.
-                        </p> */}
                         <img src={HP05} className="eff" />
                         <p>
                             Este é o relógio que indica o preparo de uma partida quando encontra-se
@@ -84,10 +80,26 @@ export default function Help(props){
                         </p>
                     </section>
                     <section>
-                        Teste 6
+                        <p>Essa é a sua configuração inicial de cartas quando começa uma partida.</p>
+                        <img src={HP04} className="eff" width={"300px"} />
+                        <p>Repare, também, que você consegue apenas visualizar as suas cartas. Já as do adversário, jamais!</p>
+                        <p>No próximo slide será apresentado o que são e para que servem cada uma das cartas do jogo.</p>
                     </section>
                     <section>
-                        Teste 7
+                        <img src={HP08} className="eff" width={"80px"} />
+                        <p>
+                            <span className="emphasis">carta comum de ataque:</span> é basicamente, como o próprio nome diz, a carta que
+                            você usa para atacar seu adverśario. você incia o jogo com uma unidade e
+                            consegue derrotar seu adversário se ele utilizar, numa mesma rodada, a carta
+                            de recarga. Se o adverśario também usar uma carta de ataque comum, haverá um empate.
+                        </p>
+                        <br />
+                        <img src={HP09} className="eff" width={"80px"} />
+                        <p>
+                            <span className="emphasis">carta comum de defesa:</span> é a carta que te permite
+                            se defender das cartas de ataque comum do adverśario. sua grande vantagem é a quantidade
+                            infinita. existem cartas que são mais fortes que essa defesa. veremos nos pŕoximos slides.
+                        </p>
                     </section>
                     <section>
                         Teste 8

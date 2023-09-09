@@ -20,7 +20,7 @@
   top: 5%;
   left: 5%;
   width: 90%;
-  height: 90%;
+  height: 88%;
   border-radius: 2%;
   background-color: rgba(0, 0, 0, 0.4588235294);
   box-shadow: 4px 4px 10px black;
@@ -59,6 +59,10 @@
   text-transform: uppercase;
   text-align: center;
   padding: 5px 0;
+}
+.App .help .caroussel .frame-container section p .emphasis {
+  color: #B31312;
+  font-size: inherit;
 }
 .App .help .caroussel .frame-container section img.eff {
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);

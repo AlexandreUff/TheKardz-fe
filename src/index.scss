@@ -27,7 +27,7 @@ $fourthColor: #2B2A4C;
     left: 5%;
 
     width: 90%;
-    height: 90%;
+    height: 88%;
     border-radius: 2%;
     
     background-color: #00000075;
@@ -73,6 +73,11 @@ $fourthColor: #2B2A4C;
                     text-transform: uppercase;
                     text-align: center;
                     padding: 5px 0;
+
+                    .emphasis{
+                        color: $thirthColor;
+                        font-size: inherit;
+                    }
                 }
 
                 img.eff{
