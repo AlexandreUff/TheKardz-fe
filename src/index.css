@@ -40,7 +40,7 @@
   top: 0px;
   left: 0px;
   z-index: 0;
-  width: 1000%;
+  width: 1500%;
   height: 100%;
   transition: 0.5s;
 }
@@ -49,7 +49,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 10%;
+  width: 6.58%;
   padding: 5px;
 }
 .App .help .caroussel .frame-container section p {

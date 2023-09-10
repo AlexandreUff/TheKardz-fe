@@ -12,6 +12,12 @@ import HP06 from "../assets/images/hp-06.png"
 import HP08 from "../assets/images/hp-08.png"
 import HP09 from "../assets/images/hp-09.png"
 import HP10 from "../assets/images/hp-10.png"
+import HP11 from "../assets/images/hp-11.png"
+import HP12 from "../assets/images/hp-12.png"
+import HP13 from "../assets/images/hp-13.png"
+import HP14 from "../assets/images/hp-14.png"
+import HP15 from "../assets/images/hp-15.png"
+import HP16 from "../assets/images/hp-16.png"
 
 export default function Help(props){
 
@@ -27,7 +33,7 @@ export default function Help(props){
                 )
             }
             {
-                count > -9 && (
+                count > -14 && (
                     <button className="right-button" onClick={()=>{setCount(count-1)}}>
                         <IcoRightArrow />
                     </button>
@@ -98,17 +104,76 @@ export default function Help(props){
                         <p>
                             <span className="emphasis">carta comum de defesa:</span> é a carta que te permite
                             se defender das cartas de ataque comum do adverśario. sua grande vantagem é a quantidade
-                            infinita. existem cartas que são mais fortes que essa defesa. veremos nos pŕoximos slides.
+                            infinita. existem cartas que são mais fortes que essa defesa, mas isso veremos nos pŕoximos slides.
                         </p>
                     </section>
                     <section>
-                        Teste 8
+                        <img src={HP10} className="eff" width={"80px"} />
+                        <p>
+                            <span className="emphasis">carta comum de recarga:</span> esta é uma carta  que também 
+                            possui quantidade infinita e lhe permite adquirir uma unidade de carta de ataque comum
+                            ao ser usada em uma rodada. o grande perigo desta carta é que ela lhe torna vulnerável
+                            caso o adversário utilize uma carta de ataque.
+                        </p>
+                        <br />
+                        <img src={HP11} className="eff" width={"80px"} />
+                        <p>
+                            <span className="emphasis">carta bronze de ataque (bonus):</span> esta é uma carta de ataque que lhe
+                            garante qubrar a defesa e o ataque do adversário no caso dele utilizar as do tipo comum. se
+                            você e o adversário utilizarem, ao mesmo tempo, carta de ataque bronze, o efeito em ambos
+                            é nulo e, logo, será empate. para adquirir esta carta, basta que utilize quaisquer cartas
+                            de ataque por duas vezes seguidas.
+                        </p>
                     </section>
                     <section>
-                        Teste 9
+                        <img src={HP12} className="eff" width={"80px"} />
+                        <p>
+                            <span className="emphasis">carta bronze de defesa (bonus):</span> esta carta lhe garante se defender
+                            no caso do adversário atacar com ataque do tipo bronze ou inferior. para adquirir esta carta,
+                            basta utilizar por duas vezes seguidas cartas de defesa de quaisquer tipos, mas esta,
+                            diferentemente de sua versão comum, não possui quantidade infinida.
+                        </p>
+                        <br />
+                        <img src={HP13} className="eff" width={"80px"} />
+                        <p>
+                            <span className="emphasis">carta bronze de recarga (bonus):</span> esta carta lhe permite
+                            adquirir, em uma única jogada, duas cartas de ataque do tipo comum. apesar de ser do
+                            tipo bronze, ela não é capaz de barrar nem mesmo o ataque de cartas comuns e , assim
+                            como a carta bronze de defesa, também não é infinita. para adquirí-la, basta usar duas
+                            vezes seguidas a carta de recarga de qualquer tipo.
+                        </p>
                     </section>
                     <section>
-                        Teste 10
+                        <img src={HP14} className="eff" width={"80px"} />
+                        <p>
+                            <span className="emphasis">carta gold de ataque (bonus):</span> é a mais forte de todas as cartas
+                            de ataque, pois possui a capacidade de quebrar as defesas das cartas do tipo bronze e comum.
+                            para adquirí-la, basta utilizar por três vezes seguidas as cartas de ataque de quaisquer tipos.
+                            esta carta, assim como todas de ataque, também possui efeito nulo caso se adversário a utilize ao
+                            mesmo tempo que você.
+                        </p>
+                        <br />
+                        <img src={HP15} className="eff" width={"80px"} />
+                        <p>
+                            <span className="emphasis">carta gold de defesa (bonus):</span> esta carta é a única que lhe garante
+                            uma defesa contra a carta de ataque do tipo gold e também, é claro, de tipos inferiores.
+                            para adquirí-la, basta utilizar por três vezes seguidas as cartas de defesa de quaisquer tipo.
+                            este tipo, assim como a do tipo bronze, também não é infinita.
+                        </p>
+                    </section>
+                    <section>
+                        <img src={HP16} className="eff" width={"80px"} />
+                        <p>
+                            <span className="emphasis">carta gold de recarga (bonus):</span> esta carta lhe permite adquirir,
+                            em uma única jogada, três cartas de ataque do tipo comum. ainda assim, ela é uma carta
+                            vulnerável, podendo ser vencida até mesmo por uma carta de ataque do tipo comum. para adquirí-la,
+                            basta utilizar, por três vezes seguidas cartas de recarga de quaisquer tipos. ela, assim como a de
+                            bronze, não é infinita.
+                        </p>
+                        <br />
+                        <p>
+                            OBSERVAÇÃO!
+                        </p>
                     </section>
                 </div>
             </div>
@@ -116,7 +181,7 @@ export default function Help(props){
             <input type="button" value="X" onClick={props.closeHelp} />
 
             <div className="count-display">
-                {(count * -1) + 1} / 10
+                {(count * -1) + 1} / 15
             </div>
         </div>
     )
