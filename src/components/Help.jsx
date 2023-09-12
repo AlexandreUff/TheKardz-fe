@@ -234,6 +234,20 @@ export default function Help(props){
                             vence e etc.
                         </p>
                     </section>
+                    <section>
+                        <p>
+                            <span className="emphasis">Informações importantes</span>
+                        </p>
+                        <p>
+                            em cada sala, são sempre dois jogadores disputando. quando um é vencedor
+                            ele permanece na partida e o derrotado é jogado ao final da fileira e, então,
+                            começará uma nova disputa entre o vencedor e o primeiro jogador que estava
+                            na de fora na fila.
+                        </p>
+                        <p>
+                            a fileira é organizada por ordem de chegada na sala.
+                        </p>
+                    </section>
                 </div>
             </div>
 
