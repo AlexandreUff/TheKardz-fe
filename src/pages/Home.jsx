@@ -51,7 +51,7 @@ export default function Home() {
           <Button value="ENTRAR" loading={loading} title="Entrar na sala" eventClick={takeHallNumber} />
         </form>
         <div>
-          <Link to="/username/crt">Ou crie uma sala</Link>
+          <Link to="/username/crt" title="Criar uma sala">Ou crie uma sala</Link>
         </div>
       </Main>
       <Footer helpStatus={showHelp} isToShowHelp={setShowHelp} />
