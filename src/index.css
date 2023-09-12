@@ -51,7 +51,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* width: 10%; */
   padding: 10px;
 }
 .App .help .caroussel .frame-container section p {
@@ -73,7 +72,6 @@
 }
 .App .help button {
   position: absolute;
-  /* top: 45%; */
   width: 40px;
   height: 40px;
   padding: 2px;
@@ -82,7 +80,6 @@
   background-color: #EA906C;
   color: #2B2A4C;
   box-shadow: 4px 4px 10px black;
-  /* animation: up-and-down .5s alternate infinite; */
   transition: 0.3s;
   z-index: 5;
 }
@@ -411,10 +408,7 @@
   z-index: 2;
   overflow: hidden;
   animation: scoreboard-appearing 0.3s forwards;
-  /* .title-container{
-      position: relative; */
   margin-right: 20%;
-  /* } */
 }
 .App .game-area main.game-arena .scoreboard.venceu {
   color: green;
@@ -499,7 +493,6 @@
 }
 .App .game-area main.game-arena .player-name {
   display: flex;
-  /* justify-content: space-evenly; */
   align-items: center;
   color: #B31312;
   height: 20%;
@@ -607,7 +600,6 @@
   display: block;
   text-align: left;
   font-size: 1.8rem;
-  /* overflow: visible; */
   width: 100%;
   margin-top: 5px;
 }
@@ -827,7 +819,6 @@
     width: 70px;
     top: -12px;
     transform: scale(0.65);
-    /* left: -12px; */
   }
   .App header .main-ico .card-style[index="1"] {
     left: -5px;

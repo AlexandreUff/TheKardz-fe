@@ -65,7 +65,6 @@ $fourthColor: #2B2A4C;
                 align-items: center;
                 flex-direction: column;
 
-                /* width: 10%; */
                 padding: 10px;
 
                 p{
@@ -93,7 +92,6 @@ $fourthColor: #2B2A4C;
 
     button {
         position: absolute;
-        /* top: 45%; */
 
         width: 40px;
         height: 40px;
@@ -105,7 +103,6 @@ $fourthColor: #2B2A4C;
         color: $fourthColor;
         box-shadow: 4px 4px 10px black;
 
-        /* animation: up-and-down .5s alternate infinite; */
         transition: .3s;
         z-index: 5;
 
@@ -517,9 +514,6 @@ $fourthColor: #2B2A4C;
                 animation: emoji-appearing 10s forwards;
             }
 
-            /* .title-container{
-                position: relative; */
-
                 h1 {
                     position: absolute;
                     top: 30%;
@@ -549,7 +543,6 @@ $fourthColor: #2B2A4C;
                 }
 
             margin-right: 20%;
-            /* } */
         }
 
         .table {
@@ -617,7 +610,6 @@ $fourthColor: #2B2A4C;
 
         .player-name{
             display: flex;
-            /* justify-content: space-evenly; */
             align-items: center;
             color: $thirthColor;
 
@@ -752,7 +744,6 @@ $fourthColor: #2B2A4C;
                 display: block;
                 text-align: left;
                 font-size: 1.8rem;
-                /* overflow: visible; */
 
                 width: 100%;
                 margin-top: 5px;
@@ -1048,7 +1039,6 @@ $fourthColor: #2B2A4C;
                 width: 70px;
                 top: -12px;
                 transform: scale(0.65);
-                /* left: -12px; */
 
                 .card-style{
                     &[index="1"]{

@@ -83,7 +83,6 @@ export default function GameArena() {
 
       } else {
         //Esse reset é feito pois pode o player fica só na sala e não reiniciar suas cartas
-        /* socket.send("reset-my-cards") */
 
         playersFightingRef.current = [...users]
         setPlayersAreFighting([...users]);
@@ -130,7 +129,6 @@ export default function GameArena() {
         if(cardOfPlayerIWithNewAmount.amount === null) cardOfPlayerIWithNewAmount.amount = Infinity
 
         cardsChosenToCompare.current[0] = cardOfPlayerIWithNewAmount
-        /* setDoP1([...cardsOfPlayerIWithNewAmount]) */
 
         //Caso o player que enviou o movimento seja igual ao do índice 1, ele joga...
         //...no useRef movementsToCompare.current[1]
@@ -141,7 +139,6 @@ export default function GameArena() {
         if(cardOfPlayerIIWithNewAmount.amount === null) cardOfPlayerIIWithNewAmount.amount = Infinity
 
         cardsChosenToCompare.current[1] = cardOfPlayerIIWithNewAmount
-        /* setDoP2([...cardsOfPlayerIIWithNewAmount]) */
       }
 
       //Caso o player já tenha escolhido um movimento e o outro player acaba de enviar o seu

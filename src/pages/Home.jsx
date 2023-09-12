@@ -47,7 +47,6 @@ export default function Home() {
           {warning && <p className="warning">
             {warning}
           </p>}
-          {/* <input type="submit" value="ENTRAR" title="Entrar na sala" onClick={takeHallNumber} /> */}
           <Button value="ENTRAR" loading={loading} title="Entrar na sala" eventClick={takeHallNumber} />
         </form>
         <div>

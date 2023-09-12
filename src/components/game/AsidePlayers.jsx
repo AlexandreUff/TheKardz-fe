@@ -1,15 +1,11 @@
 import PlayersScore from "./PlayersScore";
-/* import { Users } from "../../Utils/Mocks/Users"; */
 import { IcoPlayer } from "../Icons";
 import { useContext, useEffect, useState } from "react";
 import SocketContext from "../../context/socketContext";
-/* import SessionService from "../../services/SessionService"; */
 
 export default function AsidePlayers(props){
 
     const [users, setUsers] = useState([])
-
-    /* const ordenedUsers = Users.sort((first, second) => second.wins - first.wins) */
 
     const socket = useContext(SocketContext)
 
@@ -22,16 +18,13 @@ export default function AsidePlayers(props){
         numberOfPlayers.toggleAttribute("show")
     }
 
-    /* const {userName, userId, hall} = SessionService.get("userDatas") */
-
     useEffect(()=>{
-        /* socket.send("credential", {userName, userId, hall}) */
 
         socket.listen("getUsers",(users)=>{
             const ordenedUsers = users.sort((first, second) => second.victories - first.victories)
             setUsers(ordenedUsers)
         })
-    },[socket/* , userName, userId, hall */])
+    },[socket])
 
     return (
         <>

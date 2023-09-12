@@ -74,7 +74,6 @@ export default function UserName() {
           {warning && <p className="warning">
             {warning}
           </p>}
-          {/* <input type="submit" value="CRIAR" title="Criar nome de usuário" onClick={sendDatas} /> */}
           <Button value="CRIAR" loading={loading} title="Criar nome de usuário" eventClick={sendDatas} />
         </form>
       </Main>

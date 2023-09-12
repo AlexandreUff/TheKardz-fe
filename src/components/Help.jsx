@@ -251,7 +251,7 @@ export default function Help(props){
                 </div>
             </div>
 
-            <button /* type="button" */ /* value="X" */ title="Fechar" className="close-button" onClick={props.closeHelp}>
+            <button title="Fechar" className="close-button" onClick={props.closeHelp}>
                 X
             </button>
 

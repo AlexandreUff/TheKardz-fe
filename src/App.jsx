@@ -1,4 +1,3 @@
-/* import logo from './logo.svg'; */
 import {
   BrowserRouter as Router,
   Routes,
@@ -15,7 +14,6 @@ import Help from './components/Help';
 function App() {
   return (
     <div className="App">
-      {/* <Help /> */}
       <Router>
         <Routes>
           <Route index element={<Home/>}/>
