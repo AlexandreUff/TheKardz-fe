@@ -44,7 +44,9 @@ $fourthColor: #2B2A4C;
         overflow: hidden;
 
         .frame-container{
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(15, 6.66%);
+            grid-template-rows: 100%;
 
             position: absolute;
             top: 0px;
@@ -52,8 +54,8 @@ $fourthColor: #2B2A4C;
 
             z-index: 0;
 
-            width: 1000%;
-            height: 100%;
+            width: 1500%;
+            /* height: 100%; */
 
             transition: .5s;
 
@@ -63,7 +65,7 @@ $fourthColor: #2B2A4C;
                 align-items: center;
                 flex-direction: column;
 
-                width: 10%;
+                /* width: 10%; */
                 padding: 5px;
 
                 p{
@@ -91,7 +93,7 @@ $fourthColor: #2B2A4C;
 
     button {
         position: absolute;
-        top: 45%;
+        /* top: 45%; */
 
         width: 40px;
         height: 40px;
@@ -103,15 +105,27 @@ $fourthColor: #2B2A4C;
         color: $fourthColor;
         box-shadow: 4px 4px 10px black;
 
-        animation: up-and-down .5s alternate infinite;
+        /* animation: up-and-down .5s alternate infinite; */
         transition: .3s;
+        z-index: 5;
 
         &.left-button{
+            top: 45%;
             left: -20px;
+            animation: up-and-down .5s alternate infinite;
         }
 
         &.right-button{
+            top: 45%;
             right: -20px;
+            animation: up-and-down .5s alternate infinite;
+        }
+
+        &.close-button{
+            top: -15px;
+            right: -15px;
+            font-size: 3rem;
+            font-weight: 800;
         }
 
         &:hover{

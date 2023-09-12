@@ -27,14 +27,14 @@ export default function Help(props){
         <div className="help">
             {
                 count < 0 && (
-                    <button className="left-button" onClick={()=>{setCount(count+1)}}>
+                    <button title="Voltar" className="left-button" onClick={()=>{setCount(count+1)}}>
                         <IcoLeftArrow />
                     </button>
                 )
             }
             {
                 count > -14 && (
-                    <button className="right-button" onClick={()=>{setCount(count-1)}}>
+                    <button title="Avançar" className="right-button" onClick={()=>{setCount(count-1)}}>
                         <IcoRightArrow />
                     </button>
                 )
@@ -167,20 +167,32 @@ export default function Help(props){
                             <span className="emphasis">carta gold de recarga (bonus):</span> esta carta lhe permite adquirir,
                             em uma única jogada, três cartas de ataque do tipo comum. ainda assim, ela é uma carta
                             vulnerável, podendo ser vencida até mesmo por uma carta de ataque do tipo comum. para adquirí-la,
-                            basta utilizar, por três vezes seguidas cartas de recarga de quaisquer tipos. ela, assim como a de
+                            basta utilizar, por três vezes seguidas, cartas de recarga de quaisquer tipos. ela, assim como a de
                             bronze, não é infinita.
                         </p>
                         <br />
                         <p>
                             OBSERVAÇÃO!
                         </p>
+                        <p>
+                            Todas as cartas bonus, como pode ser observado, são adquiridas apenas uma unidade e 
+                            mediante sucessivos usos de uma mesma carta de qualquer tipo, mas ao ser usada
+                            você já não poderá mais a adquirir novamente numa mesma sequência, a não ser que haja 
+                            uma quebra dessa sequência escolhendo uma carta distinta. Após isso, todo o processo
+                            poderá ser repetido e se tornará possível adquirir, novamente, a(s) carta(s) bonus.
+                        </p>
+                    </section>
+                    <section>
+
                     </section>
                 </div>
             </div>
 
-            <input type="button" value="X" onClick={props.closeHelp} />
+            <button /* type="button" */ /* value="X" */ title="Fechar" className="close-button" onClick={props.closeHelp}>
+                X
+            </button>
 
-            <div className="count-display">
+            <div className="count-display" title={`Slide ${(count * -1) + 1} de 15.`}>
                 {(count * -1) + 1} / 15
             </div>
         </div>
