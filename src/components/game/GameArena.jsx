@@ -16,6 +16,7 @@ export default function GameArena() {
   const sendMovementTimeControll = useRef()
   const cardsChosenToCompare = useRef([])
   const blockSendCard = useRef(false)
+  const randomCardSelect = useRef({})
   const [playersAreFighting, setPlayersAreFighting] = useState([]);
   const [chosenMoviment, setChosenMoviment] = useState();
   const [cardsOfPlayerI, setCardsOfPlayerI] = useState([])
@@ -104,6 +105,9 @@ export default function GameArena() {
           if(card.amount === null) card.amount = Infinity
           return card
         })
+
+        randomCardSelect.current = cardsWithCorretlyAmount[Math.floor(Math.random() * cardsWithCorretlyAmount.length)]
+
         setCardsOfPlayerI([...cardsWithCorretlyAmount])
 
       } else if(data.userCredentials.userId === playersFightingRef.current[1]._id){
@@ -170,7 +174,7 @@ export default function GameArena() {
         //blockSendCard serve para impedir que haja uma escolha posterior ao envio e,...
         //com isso, evitado que hajam cartas escolhidas distintas para ambos players.
         blockSendCard.current = true
-        cardsChosenToCompare.current[0] = new CardModel("recharging", Infinity, 1)
+        cardsChosenToCompare.current[0] = randomCardSelect.current /* new CardModel("recharging", Infinity, 1) */
       }
 
       //É enviado uma estrutura com o nome do fighter e todos os seus movimentos + o selecionado
