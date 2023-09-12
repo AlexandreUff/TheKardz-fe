@@ -43,7 +43,7 @@
   left: 0px;
   z-index: 0;
   width: 1500%;
-  /* height: 100%; */
+  height: 100%;
   transition: 0.5s;
 }
 .App .help .caroussel .frame-container section {
@@ -52,7 +52,7 @@
   align-items: center;
   flex-direction: column;
   /* width: 10%; */
-  padding: 5px;
+  padding: 10px;
 }
 .App .help .caroussel .frame-container section p {
   color: #EEE2DE;
