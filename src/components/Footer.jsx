@@ -24,7 +24,7 @@ export default function Footer(props){
                 </ul>
             </nav>
             <div className="how-to-play">
-                <Link title="Clique aqui para saber como se joga.">
+                <Link title="Clique aqui para saber como jogar.">
                     <h3 onClick={() => {props.isToShowHelp(!props.helpStatus)}}>COMO JOGAR!</h3>
                 </Link>
             </div>

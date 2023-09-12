@@ -19,6 +19,8 @@ import HP14 from "../assets/images/hp-14.png"
 import HP15 from "../assets/images/hp-15.png"
 import HP16 from "../assets/images/hp-16.png"
 import HP17 from "../assets/images/hp-17.png"
+import HP18 from "../assets/images/hp-18.png"
+import HP19 from "../assets/images/hp-19.png"
 
 export default function Help(props){
 
@@ -56,12 +58,14 @@ export default function Help(props){
                     </section>
                     <section>
                         <p>
-                            <span className="emphasis">The Kardz</span> é um jogo de cartas com disputas em turnos onde os
-                            jogadores recebem um conjunto de cartas pré-definidas e confrontam-se entre em uma mesma sala.
+                            <span className="emphasis">The Kardz</span> é um jogo de cartas que roda no navegador com
+                            disputas em turnos onde os jogadores recebem um conjunto de cartas pré-definidas e se
+                            confrontam em uma mesma sala que você pode jogar tanto em seu desktop quanto em seu
+                            dispositivo mobile.
                         </p>
                         <p>
                             Existem várias cartas de vários tipos e cada uma delas possuem uma função específica.
-                            confira nos próximos slides o passo-a-passo  parar criar uma sala, entrar em uma e 
+                            confira nos próximos slides o passo-a-passo para criar uma sala ou entrar em uma e 
                             entender o funcionamento do jogo.
                         </p>
                     </section>
@@ -86,7 +90,7 @@ export default function Help(props){
                         <img src={HP17} className="eff" width={"400px"} />
                         <p>
                             Nesse momento, você copia o número de sala que aparece no canto superior direito e 
-                            envia para outras pessoas para que elas possam entrar em sua sala e jogar.
+                            envia para outras pessoas para que elas possam entrar em sua sala e jogarem com você.
                         </p>
                     </section>
                     <section>
@@ -197,6 +201,37 @@ export default function Help(props){
                             mudará para cor vermelha e terá um intervalo de apenas 5 segundos.
                             Esse é o tempo suficiente para que o jogador escolha umas das cartas
                             disponíveis.
+                        </p>
+                    </section>
+                    <section>
+                        <p>
+                            Quando finalmente os 5 segundos do relógio vermelho acabam, as cartas escolhidas
+                            por ambos jogadores são expostas não apenas entre os participantes da partida, mas
+                            a todos que estão na sala.
+                        </p>
+                        <img src={HP18} className="eff" width={"300px"} />
+                        <p>
+                            para esclarecer ainda mais, lembre-se que só é possível haver vitória em uma partida
+                            caso um dos jogadores use uma carta de ataque e o outro utilize uma carta de recarga
+                            ou de defesa/ataque que sejam mais fracas que as de ataque como expomos na descrição
+                            de cada uma das cartas anteriormente.
+                        </p>
+                    </section>
+                    <section>
+                        <p>
+                            Por fim, como você pode observar, são exibidos dois paneis em sua tela.
+                        </p>
+                        <img src={HP19} className="eff" width={"500px"} />
+                        <p>
+                            O painel indicado pela seta verde na lateral esquerda mostra os jogadores
+                            presentes na sala em ordem de pontuação de vitórias e quais são os jogadores que
+                            atualmente estão disputando com o ícone de duas espadas em um circulo de cor rosa.
+                        </p>
+                        <p>
+                            Já no painel da lateral direita, indicado pela seta vermelha, é o painel que mostra,
+                            além do número da sala, as conversas de chat e os logs do jogo passando informações
+                            como quando um jogador sai, um jogador entra, uma partida se encerra, algum jogador
+                            vence e etc.
                         </p>
                     </section>
                 </div>
