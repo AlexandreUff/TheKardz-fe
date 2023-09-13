@@ -72,7 +72,7 @@ export default function Help(props){
                     <section>
                         <p>na tela inicial, você pode digitar um número de uma sala existente para entrar nela.</p>
                         <img src={HP00} className="eff" />
-                        <p>caso não haja uma sala ou você não tenha o número de nenhuma, pode criar uma.</p>
+                        <p>caso você não possua algum número, poderá criar uma sala.</p>
                         <img src={HP01} className="eff" />
                     </section>
                     <section>
@@ -94,9 +94,13 @@ export default function Help(props){
                         </p>
                     </section>
                     <section>
-                        <p>Se você optou por entrar em uma sala, você será direcionado para esta tela caso só haja você e mais um outro jogador.</p>
+                        <p>
+                            Se você optou por entrar em uma sala, você será direcionado para esta tela caso você seja o segundo jogador
+                            a entrar nela.
+                        </p>
                         <img src={HP03} className="eff" width={"300px"} />
-                        <p>Caso já hajam mais jogadores, provavelmente aparecerá uma mensagem de "carregando dados..."
+                        <p>
+                            Caso já hajam mais jogadores, provavelmente aparecerá uma mensagem de "carregando dados..."
                             que brevemente estarão disponíveis pra você.
                             Nos próximos slides, explicaremos o que são cada um desses elementos presentes na tela.
                         </p>
@@ -137,34 +141,34 @@ export default function Help(props){
                     </section>
                     <section style={specialDisplay}>
                         <img src={HP11} className="eff" width={"80px"} />
-                        <p>
+                        <p className="topic">
                             <span className="emphasis">carta bronze de ataque (bonus):</span> esta é uma carta de ataque que lhe
                             garante qubrar a defesa e o ataque do adversário no caso dele utilizar as do tipo comum. mas se
                             você e o adversário utilizarem, ao mesmo tempo, carta de ataque bronze, o efeito em ambos
-                            é nulo e, logo, será empate. para adquirir esta carta, basta que utilize quaisquer cartas
+                            é nulo e, logo, será empate. para adquirir esta carta, basta que utilize carta comum
                             de ataque por duas vezes seguidas. só é possível adquirir apenas uma unidade deste tipo.
                         </p>
                         <img src={HP12} className="eff" width={"80px"} />
-                        <p>
+                        <p className="topic">
                             <span className="emphasis">carta bronze de defesa (bonus):</span> esta carta lhe garante se defender
                             no caso do adversário atacar com ataque do tipo bronze ou inferior. para adquirir esta carta,
-                            basta utilizar por duas vezes seguidas cartas de defesa de quaisquer tipos, mas esta,
+                            basta utilizar por duas vezes seguidas carta de defesa do tipo comum, mas esta,
                             diferentemente de sua versão comum, não possui quantidade infinida e só é possível adquirir
                             uma unidade deste tipo.
                         </p>
                         <img src={HP13} className="eff" width={"80px"} />
-                        <p>
+                        <p className="topic">
                             <span className="emphasis">carta bronze de recarga (bonus):</span> esta carta lhe permite
                             adquirir, em uma única jogada, duas cartas de ataque do tipo comum. apesar de ser do
                             tipo bronze, ela não é capaz de barrar nem mesmo o ataque de cartas comuns e , assim
                             como a carta bronze de defesa e de ataque, também não é infinita e só é possível adquirir
-                            uma unidade. para adquirí-la, basta usar duas vezes seguidas a carta de recarga de
-                            qualquer tipo.
+                            uma unidade. para adquirí-la, basta usar duas vezes seguidas a carta de recarga do
+                            do tipo comum.
                         </p>
                     </section>
                     <section style={specialDisplay}>
                         <img src={HP14} className="eff" width={"80px"} />
-                        <p>
+                        <p className="topic">
                             <span className="emphasis">carta gold de ataque (bonus):</span> é a mais forte de todas as cartas
                             de ataque, pois possui a capacidade de quebrar as defesas das cartas do tipo bronze e comum.
                             para adquirí-la, basta utilizar por três vezes seguidas as cartas de ataque de quaisquer tipos.
@@ -172,14 +176,14 @@ export default function Help(props){
                             numa mesma rodada que você e só é possível adquirir uma unidade.
                         </p>
                         <img src={HP15} className="eff" width={"80px"} />
-                        <p>
+                        <p className="topic">
                             <span className="emphasis">carta gold de defesa (bonus):</span> esta carta é a única que lhe garante
                             uma defesa contra a carta de ataque do tipo gold e também, é claro, de tipos inferiores.
                             para adquirí-la, basta utilizar por três vezes seguidas as cartas de defesa de quaisquer tipo.
                             este tipo, assim como a do tipo bronze, também não é infinita e só é possível adquirir uma unidade.
                         </p>
                         <img src={HP16} className="eff" width={"80px"} />
-                        <p>
+                        <p className="topic">
                             <span className="emphasis">carta gold de recarga (bonus):</span> esta carta lhe permite adquirir,
                             em uma única jogada, três cartas de ataque do tipo comum. ainda assim, ela é uma carta
                             vulnerável, podendo ser vencida até mesmo por uma carta de ataque do tipo comum. para adquirí-la,
@@ -191,16 +195,18 @@ export default function Help(props){
                         <img src={HP05} className="eff" />
                         <p>
                             Este é o relógio que indica o preparo de uma partida quando encontra-se
-                            na cor verde. Possui um intervalo de 10 segundos para que ambos jogadores
-                            se preparem porque a partida logo irá começar. as cartas nesse momento
-                            econtram-se "viradas".
+                            na cor verde e só será exibido neste momento. Possui um intervalo de 10 segundos
+                            para que ambos jogadores se preparem porque a partida logo irá começar. as
+                            cartas nesse momento econtram-se "viradas".
                         </p>
+                        <br />
                         <img src={HP06} className="eff" />
                         <p>
                             Quando finalmente a partida começa, as cartas são "desvidaras" e o relógio
                             mudará para cor vermelha e terá um intervalo de apenas 5 segundos.
                             Esse é o tempo suficiente para que o jogador escolha umas das cartas
-                            disponíveis.
+                            disponíveis. este relógio sempre aparece para indicar quando as rodadas começam
+                            e os jogadores possam escolher suas cartas.
                         </p>
                     </section>
                     <section>

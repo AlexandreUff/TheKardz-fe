@@ -69,6 +69,7 @@
   font-size: 1.2rem;
   text-align: left;
   width: 100%;
+  padding-left: 5px;
 }
 .App .help .caroussel .frame-container section img.eff {
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
