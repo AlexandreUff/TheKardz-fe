@@ -947,6 +947,34 @@ $fourthColor: #2B2A4C;
 }
 
 /* Media Query */
+@media (max-height: 600px){
+    .App {
+        .help{
+            .caroussel{
+                .frame-container{
+                    section{
+                        transform: scale(0.8);
+                    }
+                }
+            }  
+         }       
+    }
+}
+
+@media (max-height: 500px){
+    .App {
+        .help{
+            .caroussel{
+                .frame-container{
+                    section{
+                        transform: scale(0.7);
+                    }
+                }
+            }  
+         }       
+    }
+}
+
 @media(max-width: 850px){
     .App{
         .game-area{
