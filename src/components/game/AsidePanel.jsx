@@ -81,7 +81,7 @@ export default function AsidePanel(props){
                     <h3>
                         {hall}
                     </h3>
-                    {/* PAINELBUTTONS PROVISORIAMENTE REMOVIDOS */}
+                    {/* REPOR QUANDO HOUVER CERTIFICADO SSL */}
                     {/* <PainelButton
                         ico={<IcoCopyEmpty/>}
                         title="Copiar número da sala"
