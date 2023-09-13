@@ -79,6 +79,12 @@ $fourthColor: #2B2A4C;
                         color: $thirthColor;
                         font-size: inherit;
                     }
+
+                    &.topic{
+                        font-size: 1.2rem;
+                        text-align: left;
+                        width: 100%;
+                    }
                 }
 
                 img.eff{

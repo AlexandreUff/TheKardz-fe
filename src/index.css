@@ -65,6 +65,11 @@
   color: #B31312;
   font-size: inherit;
 }
+.App .help .caroussel .frame-container section p.topic {
+  font-size: 1.2rem;
+  text-align: left;
+  width: 100%;
+}
 .App .help .caroussel .frame-container section img.eff {
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   border-radius: 10px;

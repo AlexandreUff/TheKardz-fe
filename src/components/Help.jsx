@@ -113,7 +113,7 @@ export default function Help(props){
                     </section>
                     <section style={specialDisplay}>
                         <img src={HP08} className="eff" width={"80px"} />
-                        <p>
+                        <p className="topic">
                             <span className="emphasis">carta comum de ataque:</span> é basicamente, como o próprio nome diz, a carta que
                             você usa para atacar seu adverśario. você incia o jogo com uma unidade e
                             consegue derrotar seu adversário se ele utilizar, numa mesma rodada, a carta
@@ -122,13 +122,13 @@ export default function Help(props){
                         </p>
 
                         <img src={HP09} className="eff" width={"80px"} />
-                        <p>
+                        <p className="topic">
                             <span className="emphasis">carta comum de defesa:</span> é a carta que te permite
                             se defender das cartas de ataque comum do adverśario. sua grande vantagem é a quantidade
                             infinita. existem cartas que são mais fortes que essa defesa, mas isso veremos nos pŕoximos slides.
                         </p>
                         <img src={HP10} className="eff" width={"80px"} />
-                        <p>
+                        <p className="topic">
                             <span className="emphasis">carta comum de recarga:</span> esta é uma carta  que também 
                             possui quantidade infinita e lhe permite adquirir uma unidade de carta de ataque comum
                             ao ser usada em uma rodada. o grande perigo desta carta é que ela lhe torna vulnerável
@@ -238,14 +238,52 @@ export default function Help(props){
                         <p>
                             <span className="emphasis">Informações importantes</span>
                         </p>
-                        <p>
-                            em cada sala, são sempre dois jogadores disputando. quando um é vencedor
-                            ele permanece na partida e o derrotado é jogado ao final da fileira e, então,
+                        <p className="topic">
+                            cada sala comporta vários jogadores, mas somente dois jogadores disputam ao mesmo tempo.
+                        </p>
+                        <p className="topic">
+                            é necessário, no mínimo, dois jogadores para que se comece uma partida. a partir do
+                            momento que um segundo jogador entra na sala, a partida começa automaticamente.
+                        </p>
+                        <p className="topic">
+                            quando um é vencedor, ele permanece na partida e o derrotado é jogado ao final da fileira e, então,
                             começará uma nova disputa entre o vencedor e o primeiro jogador que estava
-                            na de fora na fila.
+                            de fora da fileira.
+                        </p>
+                        <p className="topic">
+                            a fileira é organizada por ordem de chegada na sala.
+                        </p>
+                        <p className="topic">
+                            sempre que uma nova partida começa entre dois jogadores, a configuração das cartas é
+                            reiniciada.
+                        </p>
+                        <p className="topic">
+                            se um dos disputantes não escolhe nenhuma carta ao se encerrar o intervalo de 5 segundos
+                            para a escolha, o jogo escolherá automaticamente uma carta. toda rodada precisa ter uma carta
+                            a ser escolhida para garantir o dinamismo do jogo.
+                        </p>
+                        <p className="topic">
+                            como o jogo roda pelo navegador, está sujeito a situações como a possibilidade de
+                            atualizar a página, voltar à pagina anterior, fechamento da guia, fechamento do
+                            próprio navegador e etc.
+                            quando isso ocorre, o jogador é desconectado da sala e, se deseja retornar, precisará
+                            inserir novamente o número da sala e pôr um nome (que pode ser o mesmo que utilizava
+                            antes de se desconectar).
+                        </p>
+                        <p className="topic">
+                            as salas permanecem enquanto houver, pelo menos, um jogador. caso todos os jogadores
+                            resolvam sair da sala, ela é automaticamente excluída e o número deixa de existir.
+                        </p>
+                    </section>
+                    <section>
+                        <p>
+                            Essas foram as informações básicas de funcionamento do jogo.
                         </p>
                         <p>
-                            a fileira é organizada por ordem de chegada na sala.
+                            Aproveite ao máximo e que vença o melhor!
+                        </p>
+                        <p style={{fontSize:"4rem"}}>
+                            🏆
                         </p>
                     </section>
                 </div>
