@@ -16,7 +16,7 @@ export default function UserName() {
 
         <Link to="/">Voltar</Link>
       </Main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

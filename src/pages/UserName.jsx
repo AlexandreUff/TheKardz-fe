@@ -6,12 +6,15 @@ import { useState } from "react";
 import APIService from "../services/APIService";
 import SessionService from "../services/SessionService";
 import Button from "../components/Button";
+import Help from "../components/Help";
 
 export default function UserName() {
 
   const [userName, setUserName] = useState("")
   const [warning, setWarning] = useState("")
   const [loading, setLoading] = useState(false)
+
+  const [showHelp, setShowHelp] = useState(false)
 
   const { act } = useParams()
 
@@ -65,6 +68,9 @@ export default function UserName() {
 
   return (
     <>
+      {
+        showHelp && <Help closeHelp={()=>{setShowHelp(false)}} />
+      }
       <Header />
       <Main>
         {act === "crt" ? <h2>Sua sala já será criada!</h2> : <h2>A sala {act} aguarda sua entrada.</h2>}
@@ -77,7 +83,7 @@ export default function UserName() {
           <Button value="CRIAR" loading={loading} title="Criar nome de usuário" eventClick={sendDatas} />
         </form>
       </Main>
-      <Footer />
+      <Footer helpStatus={showHelp} isToShowHelp={setShowHelp} />
     </>
   );
 }
