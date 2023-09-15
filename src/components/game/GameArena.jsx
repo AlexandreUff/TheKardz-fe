@@ -316,9 +316,20 @@ export default function GameArena() {
           (playersAreFighting.length > 1 ? (
             <h3>Obtendo dados da partida...</h3>
           ) : (
-            <h3>
-              Aguarde a entrada <br /> de mais jogadores.
-            </h3>
+              <h3>
+                Aguarde a entrada
+                <br />
+                de mais jogadores.
+                <br />
+                <br />
+              <small>
+                Você é o único jogador presente nesta sala.
+                <br />
+                Caso saia da página, feche o navegador ou a aba,
+                <br />
+                a sala deixará de existir.
+              </small>
+              </h3>
           ))}
       </div>
       <div className="card-list my-cards">

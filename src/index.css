@@ -494,6 +494,10 @@
   opacity: 0;
   top: -100px;
 }
+.App .game-area main.game-arena .table h3 small {
+  font-weight: 600;
+  font-size: 1rem;
+}
 .App .game-area main.game-arena .card-list {
   display: flex;
 }
