@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { IcoGHBs, IcoLIn, IcoPDF } from "./Icons";
+import ReleaseYear from "../Utils/ReleaseYear";
 
 export default function Footer(props){
     return <>
@@ -30,7 +31,7 @@ export default function Footer(props){
             </div>
             <div>
                 <small>
-                &copy; 2023 - Alexandre Magno Dias<br />
+                &copy; {ReleaseYear("2023")} - Alexandre Magno Dias<br />
                 alexandre_magno@id.uff.br
                 </small>
             </div>
