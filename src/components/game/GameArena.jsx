@@ -325,9 +325,16 @@ export default function GameArena() {
               <small>
                 Você é o único jogador presente nesta sala.
                 <br />
-                Caso saia da página, feche o navegador ou a aba,
+                Sendo assim, caso saia da página, feche o navegador ou a aba,
                 <br />
                 a sala deixará de existir.
+                <br />
+                <br />
+                Copie o número da sala que aparece na sua barra
+                <br />
+                lateral direita e envie para outros jogarem
+                <br />
+                também com você.
               </small>
               </h3>
           ))}
