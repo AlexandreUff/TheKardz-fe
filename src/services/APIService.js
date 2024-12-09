@@ -1,19 +1,19 @@
 class APIService {
-    static baseURL = /* "http://localhost:3001" */ "http://54.207.135.42:3001"
+    static baseURL = "http://localhost:3001" /* "http://54.207.135.42:3001" */
 
-    static async get(endPoint){
+    static async get(endPoint) {
         try {
             let response
             await fetch(`${this.baseURL}${endPoint}`, {
                 method: 'GET'
-              })
+            })
                 .then(response => {
-                  return response.json()
+                    return response.json()
                 })
                 .then(data => {
-                  response = data
+                    response = data
                 })
-                
+
             return response
 
         } catch (error) {
@@ -22,22 +22,22 @@ class APIService {
 
     }
 
-    static async post(endPoint, data){
+    static async post(endPoint, data) {
         try {
             let response
             await fetch(`${this.baseURL}${endPoint}`, {
-              method: 'POST',
-              body: JSON.stringify(data),
-              headers: {
-                'Content-Type': 'application/json'
-              }
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
-              .then(async response => {
-                return response.json()
-              }).then(data => {
-                response = data
-              })
-              
+                .then(async response => {
+                    return response.json()
+                }).then(data => {
+                    response = data
+                })
+
             return response
 
         } catch (error) {
@@ -45,45 +45,45 @@ class APIService {
         }
     }
 
-    static async put(endPoint, data){
-      try {
-        let response
+    static async put(endPoint, data) {
+        try {
+            let response
             await fetch(`${this.baseURL}${endPoint}`, {
-              method: 'PUT',
-              body: JSON.stringify(data),
-              headers: {
-                'Content-Type': 'application/json'
-              }
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
-              .then(async response => {
-                return response.json()
-              }).then(data => {
-                response = data
-              })
-              
+                .then(async response => {
+                    return response.json()
+                }).then(data => {
+                    response = data
+                })
+
             return response
-      } catch (error) {
-        console.log("Erro ao atualizar dado(s) no servidor.", error)
-      }
+        } catch (error) {
+            console.log("Erro ao atualizar dado(s) no servidor.", error)
+        }
     }
 
-    static async delete(endPoint, data){
-      try {
-        let response
+    static async delete(endPoint, data) {
+        try {
+            let response
             await fetch(`${this.baseURL}${endPoint}${data}`, {
                 method: 'DELETE'
-              })
+            })
                 .then(response => {
-                  return response.json()
+                    return response.json()
                 })
                 .then(data => {
-                  response = data
+                    response = data
                 })
-                
+
             return response
-      } catch (error) {
-        console.log("Erro ao remover dado(s) do servidor.", error)
-      }
+        } catch (error) {
+            console.log("Erro ao remover dado(s) do servidor.", error)
+        }
     }
 
 }
