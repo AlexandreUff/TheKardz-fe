@@ -1,5 +1,5 @@
 class APIService {
-    static baseURL = "http://localhost:3001" /* "http://54.207.135.42:3001" */
+    static baseURL = /* "http://localhost:3001" */ "https://thekardz-be.loca.lt"
 
     static async get(endPoint) {
         try {
