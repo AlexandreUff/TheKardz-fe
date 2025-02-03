@@ -81,17 +81,16 @@ export default function AsidePanel(props){
                     <h3>
                         {hall}
                     </h3>
-                    {/* REPOR QUANDO HOUVER CERTIFICADO SSL */}
-                    {/* <PainelButton
+                    <PainelButton
                         ico={<IcoCopyEmpty/>}
                         title="Copiar número da sala"
                         dataToCopy={hall}
-                    /> */}
-                    {/* <PainelButton
+                    />
+                    <PainelButton
                         ico={<IcoLink />}
                         title="Copiar link da sala"
                         dataToCopy={`https://thekardz.netlify.app/username/${hall}`}
-                    /> */}
+                    />
                 </div>
                 <div className="report-area">
                     <div className="hidder-top-messages"></div>
