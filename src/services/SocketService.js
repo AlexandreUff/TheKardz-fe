@@ -5,7 +5,7 @@ export default class SocketService {
     static socket
 
     static startSocketService() {
-        this.socket = io(/* "http://localhost:3002", */"https://thekardz-be-02.loca.lt", {/* host: "http://localhost:3002", */ port: 3002, path: "/tkc/", transports: ['websocket'] });
+        this.socket = io(process.env.REACT_APP_API_PORT_02 || "http://localhost:3002", {/* host: "http://localhost:3002", */ port: 3002, path: "/tkc/", transports: ['websocket'] });
 
         this.socket.on("connect", () => {
             console.log("Conexão estabelecida com o servidor socket.io.");

@@ -1,5 +1,5 @@
 class APIService {
-    static baseURL = /* "http://localhost:3001" */ "https://thekardz-be-01.loca.lt"
+    static baseURL = process.env.REACT_APP_API_PORT_01 || "http://localhost:3001"
 
     static async get(endPoint) {
         try {
