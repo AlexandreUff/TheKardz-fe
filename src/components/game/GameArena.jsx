@@ -7,7 +7,6 @@ import ReadableMovementsNames from "../../Utils/ReadableMovementsNames";
 import HandlerResultsOfRound from "./HandlerResultsOfRound";
 import ShowScoreboard from "./ShowScoreboard";
 import CardModel from "../../Utils/MovementModel";
-//REPOR QUANDO HOUVER CERTIFICADO SSL
 import MyNotification from "../../Utils/MyNotification";
 
 export default function GameArena() {
@@ -91,12 +90,10 @@ export default function GameArena() {
       }
     });
 
-    //REPOR QUANDO HOUVER CERTIFICADO SSL
     socket.listen("notify-next-fight",(player) => {
       if(player._id === userId) MyNotification(`Atenção`, `${userName}, é a sua vez de jogar!`)
     })
 
-    //REPOR QUANDO HOUVER CERTIFICADO SSL
     socket.listen("notify-player-is-waiting", (playerIsWaiting) => {
       if(playerIsWaiting._id === userId) MyNotification("Prepare-se!", `${userName}, você jogará na próxima partida!`)
     })
