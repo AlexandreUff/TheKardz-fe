@@ -89,7 +89,7 @@ export default function AsidePanel(props){
                     <PainelButton
                         ico={<IcoLink />}
                         title="Copiar link da sala"
-                        dataToCopy={`https://thekardz.netlify.app/username/${hall}`}
+                        dataToCopy={`${process.env.REACT_APP_MAIN_URL || "http://localhost:3000"}/username/${hall}`}
                     />
                 </div>
                 <div className="report-area">
